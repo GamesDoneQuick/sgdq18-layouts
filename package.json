@@ -1,0 +1,298 @@
+{
+  "name": "sgdq18-layouts",
+  "description": "The on-stream graphics used during Summer Games Done Quick 2017.",
+  "version": "1.0.0",
+  "contributors": [
+    "Alex Van Camp <email@alexvan.camp>",
+    "Chris Hanel <chrishanel@gmail.com>"
+  ],
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "bower-npm-resolver": "^0.8.2",
+    "casparcg-connection": "^3.0.1",
+    "cheerio": "^1.0.0-rc.1",
+    "clone": "^2.1.1",
+    "deep-diff": "^0.3.4",
+    "deep-equal": "^1.0.1",
+    "firebase-admin": "^5.6.0",
+    "gamepad": "^1.4.2",
+    "json-schema-defaults": "^0.3.0",
+    "livesplit-core": "^0.8.1",
+    "lodash.assign": "^4.0.9",
+    "lodash.debounce": "^4.0.6",
+    "lodash.merge": "^4.4.0",
+    "milliseconds": "^1.0.3",
+    "nodecg-utility-obs": "^4.1.2",
+    "numeral": "^2.0.6",
+    "object-path": "^0.11.3",
+    "osc": "^2.1.0",
+    "parse-ms": "^1.0.1",
+    "q": "^1.4.1",
+    "request": "^2.67.0",
+    "request-promise": "^4.2.1",
+    "socket.io-client": "^2.0.1",
+    "twemoji": "^2.0.5",
+    "twitchps": "^0.5.5",
+    "twitter-stream-api": "^0.5.0",
+    "usb-detection": "^2.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.12.1",
+    "eslint-config-xo": "^0.19.0",
+    "eslint-plugin-html": "^4.0.1",
+    "istanbul": "^0.4.3",
+    "mocha": "^4.0.1"
+  },
+  "homepage": "https://gamesdonequick.com/",
+  "license": "Apache-2.0",
+  "nodecg": {
+    "compatibleRange": "~0.9.0",
+    "dashboardPanels": [
+      {
+        "name": "Stream Tech Dashboard",
+        "title": "Stream Tech Dashboard",
+        "file": "stream-tech-dashboard.html",
+        "headerColor": "#2d4e8a",
+        "fullbleed": true
+      },
+      {
+        "name": "obs",
+        "title": "OBS",
+        "width": 3,
+        "file": "obs.html",
+        "headerColor": "#2d4e8a",
+        "workspace": "Setup"
+      },
+      {
+        "name": "record-tracker",
+        "title": "Milestone Tracker",
+        "width": 2,
+        "file": "record-tracker.html",
+        "headerColor": "#2d4e8a",
+        "workspace": "Setup"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "interview_monitor.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "interview_tablet.html",
+        "width": 768,
+        "height": 1024
+      },
+      {
+        "file": "countdown.html",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "file": "break.html",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "file": "interview.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "standard_1.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "standard_2.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "standard_3.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "standard_4.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "widescreen_1.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "widescreen_2.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "widescreen_4.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "widescreen_4_2.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "gba_1.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "gba_2.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "gameboy_1.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "gameboy_2.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "gameboy_3.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "gameboy_4.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "3ds.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "ds.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "ds_vertical.html",
+        "width": 1600,
+        "height": 845
+      },
+      {
+        "file": "lttp_tracker.html",
+        "width": 300,
+        "height": 469
+      },
+      {
+        "file": "omnibar.html",
+        "width": 1600,
+        "height": 55
+      },
+      {
+        "file": "host.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "audio_dashboard.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "producer_dashboard.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "test_break.html",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "file": "test_tronlines.html",
+        "width": 1280,
+        "height": 720
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "sponsors-3ds",
+        "title": "Sponsors 3DS",
+        "allowedTypes": [
+          "png"
+        ]
+      },
+      {
+        "name": "sponsors-gameboy_1",
+        "title": "Sponsors Gameboy, 1 Player",
+        "allowedTypes": [
+          "png"
+        ]
+      },
+      {
+        "name": "sponsors-gba_1",
+        "title": "Sponsors GBA, 1 Player",
+        "allowedTypes": [
+          "png"
+        ]
+      },
+      {
+        "name": "sponsors-gba_2",
+        "title": "Sponsors GBA, 2 Player",
+        "allowedTypes": [
+          "png"
+        ]
+      },
+      {
+        "name": "sponsors-standard_1",
+        "title": "Sponsors Standard, 1 Player",
+        "allowedTypes": [
+          "png"
+        ]
+      },
+      {
+        "name": "sponsors-standard_2",
+        "title": "Sponsors Standard, 2 Player",
+        "allowedTypes": [
+          "png"
+        ]
+      },
+      {
+        "name": "sponsors-standard_3",
+        "title": "Sponsors Standard, 3 Player",
+        "allowedTypes": [
+          "png"
+        ]
+      },
+      {
+        "name": "sponsors-widescreen_1",
+        "title": "Sponsors Widescreen, 1 Player",
+        "allowedTypes": [
+          "png"
+        ]
+      },
+      {
+        "name": "sponsors-widescreen_2",
+        "title": "Sponsors Widescreen, 2 Player",
+        "allowedTypes": [
+          "png"
+        ]
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/GamesDoneQuick/sgdq18-layouts.git"
+  },
+  "scripts": {
+    "static": "eslint **/*.js **/*.html && polymer lint",
+    "test": "npm run static && istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
+    "mock-donations": "node ./scripts/test_donation_server"
+  }
+}

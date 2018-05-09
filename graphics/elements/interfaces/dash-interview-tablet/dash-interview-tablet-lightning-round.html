@@ -1,0 +1,248 @@
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../../mixins/MapSortMixin.html">
+<link rel="import" href="../ui-dragula-element/ui-dragula-element.html">
+<link rel="import" href="../ui-tweet/ui-tweet.html">
+<link rel="import" href="dash-interview-tablet-scrollbar-styles.html">
+
+<dom-module id="dash-interview-tablet-lightning-round">
+	<template>
+		<style include="dragula-styles iron-flex iron-flex-alignment dash-interview-tablet-scrollbar-styles">
+			:host {
+				box-sizing: border-box;
+				@apply --layout-vertical;
+				@apply --layout-flex;
+			}
+
+			#showQuestions,
+			#hideQuestions,
+			#endInterview {
+				height: 50px;
+				max-width: 314px;
+				text-align: center;
+				font-size: 20px;
+				white-space: nowrap;
+				@apply --layout-flex;
+			}
+
+			#showQuestions {
+				--paper-button: {
+					color: white;
+					background-color: #5BA664;
+				}
+			}
+
+			#hideQuestions {
+				--paper-button: {
+					color: white;
+					background-color: #C9513E;
+				}
+			}
+
+			#endInterview {
+				--paper-button: {
+					background-color: #C9513E;
+				};
+			}
+
+			#placeholder {
+				margin-top: 32px;
+				padding-left: 10px;
+				font-size: 32px;
+				text-align: center;
+			}
+
+			#list {
+				padding: 0 8px 0 0;
+				margin-top: 26px;
+				box-sizing: border-box;
+				overflow-y: auto;
+				overflow-x: hidden;
+				-webkit-overflow-scrolling: touch;
+				@apply --layout-vertical;
+				@apply --layout-flex;
+			}
+
+			.tweet {
+				margin: 6px 0;
+				padding-left: 0;
+				padding-right: 44px;
+				padding-top: 5px;
+				padding-bottom: 7px;
+				background-color: white;
+				box-sizing: border-box;
+				box-shadow:
+					0 2px 2px 0 rgba(0, 0, 0, 0.14),
+					0 1px 5px 0 rgba(0, 0, 0, 0.12),
+					0 3px 1px -2px rgba(0, 0, 0, 0.2);
+				min-height: 104px;
+				@apply --layout-horizontal;
+			}
+
+			#list .tweet:first-of-type {
+				margin-top: 0;
+				background-color: #BFE7C4 !important;
+			}
+
+			.tweet-content {
+				--ui-tweet-avatar-size: 72px;
+				--ui-tweet-font-size: 24px;
+				@apply --layout-flex;
+			}
+
+			.tweet-handle {
+				position: relative;
+				width: 118px;
+				border-right: 3px solid black;
+				cursor: move;
+				@apply --layout-flex-none;
+				@apply --layout-vertical;
+				@apply --layout-center-center;
+			}
+
+			.tweet-handle iron-icon {
+				width: 46px;
+				height: 46px;
+				pointer-events: none;
+			}
+
+			.tweet-buttons {
+				@apply --layout-horizontal;
+				@apply --layout-center-center;
+			}
+
+			.tweet-buttons paper-button {
+				width: 57px;
+				height: 57px;
+				min-width: 57px;
+				margin-right: 0;
+				@apply --layout-horizontal;
+				@apply --layout-center-center;
+				@apply --layout-flex-none;
+			}
+
+			.tweet-buttons-reject {
+				--paper-button: {
+					background-color: #C9513E;
+				};
+			}
+
+			.tweet-buttons-reject iron-icon {
+				width: 32px;
+				height: 32px;
+			}
+
+			.bg-color-transition {
+				transition: background-color 1600ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+			}
+
+			#endInterviewDialog paper-button {
+				color: #00bebe;
+			}
+
+			paper-button {
+				color: white;
+				font-weight: bold;
+			}
+
+			[hidden] {
+				display: none !important;
+			}
+		</style>
+
+		<div class="layout horizontal center-center flex-none">
+			<paper-button
+				id="showQuestions"
+				on-tap="showQuestionsOnMonitor"
+				hidden="[[!prizesShowingOnMonitor]]"
+				raised>
+				Show Q's On Monitor
+			</paper-button>
+
+			<paper-button
+				id="hideQuestions"
+				on-tap="hideQuestionsOnMonitor"
+				hidden="[[prizesShowingOnMonitor]]"
+				raised>
+				Hide Q's On Monitor
+			</paper-button>
+
+			<paper-button id="endInterview" raised on-tap="openEndInterviewDialog">End Interview (Clear Q's)</paper-button>
+		</div>
+
+		<div id="placeholder" hidden="[[replies.length]]">
+			There are no Twitter questions currently approved for use.
+		</div>
+
+		<ui-dragula-element
+			id="list"
+			container-class="container"
+			handle-class="tweet-handle"
+			on-dragula-drag="_handleDrag"
+			on-dragula-dragend="_handleDragEnd">
+			<div id="list-container" class="container">
+				<template
+					id="repeat"
+					is="dom-repeat"
+					items="[[replies]]"
+					as="reply"
+					sort="[[_createMapSort('id_str')]]"
+					mutable-data>
+					<div class="tweet bg-color-transition" tweet-id="[[reply.id_str]]">
+						<div class="tweet-handle">
+							<iron-icon
+								style="pointer-events: none;"
+								icon="editor:drag-handle">
+							</iron-icon>
+						</div>
+
+						<ui-tweet class="tweet-content" tweet="[[reply]]"></ui-tweet>
+
+						<div class="tweet-buttons">
+							<paper-button
+								class="tweet-buttons-reject"
+								raised
+								on-tap="reject"
+								alt="Reject">
+								<iron-icon icon="delete-forever"></iron-icon>
+							</paper-button>
+							<!--<paper-button
+								raised
+								on-tap="promote"
+								alt="Promote"
+								disabled="[[calcPromoteDisabled(reply, _sortMapVal)]]">
+								<iron-icon icon="arrow-drop-up"></iron-icon>
+							</paper-button>
+
+							<paper-button
+								raised
+								on-tap="demote"
+								alt="Demote"
+								disabled="[[calcDemoteDisabled(reply, _sortMapVal)]]">
+								<iron-icon icon="arrow-drop-down"></iron-icon>
+							</paper-button>-->
+						</div>
+					</div>
+				</template>
+			</div>
+		</ui-dragula-element>
+
+		<paper-dialog id="endInterviewDialog" with-backdrop>
+			<h2>End Interview</h2>
+			<p>Are you sure you wish to end this interview?</p>
+			<p>This will clear the current "prompt" tweet and prepare the interface for the next set of questions.</p>
+			<div class="buttons">
+				<paper-button dialog-dismiss>Cancel</paper-button>
+				<paper-button dialog-confirm autofocus on-tap="endInterview">Accept</paper-button>
+			</div>
+		</paper-dialog>
+
+		<paper-toast id="errorToast"></paper-toast>
+	</template>
+
+	<script src="dash-interview-tablet-lightning-round.js"></script>
+</dom-module>

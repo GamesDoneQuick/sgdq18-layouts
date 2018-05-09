@@ -1,0 +1,160 @@
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../../../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../../bower_components/paper-tabs/paper-tab.html">
+<link rel="import" href="../../../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../molecules/gdq-lowerthird/gdq-lowerthird.html">
+<link rel="import" href="dash-interview-tablet-hotbar.html">
+<link rel="import" href="dash-interview-tablet-lightning-round.html">
+<link rel="import" href="dash-interview-tablet-lowerthird-refill-option.html">
+<link rel="import" href="dash-interview-tablet-lowerthird.html">
+<link rel="import" href="dash-interview-tablet-prizes.html">
+
+<dom-module id="dash-interview-tablet">
+	<template>
+		<style>
+			:host {
+				background-color: #B8C0C2;
+				@apply --layout-vertical;
+			}
+
+			#contentTabs {
+				height: 69px;
+				border: 8px solid #5BA664;
+				border-left: none;
+				border-right: none;
+			}
+
+			#pages {
+				padding: 22px 26px;
+				@apply --layout-flex;
+				@apply --layout-vertical;
+			}
+
+			#pages > * {
+				@apply --layout-flex;
+			}
+
+			#lowerthirdPreviewDialog {
+				background: transparent;
+				box-shadow: none;
+			}
+
+			#lowerthirdPreview {
+				position: relative;
+			}
+
+			#lowerthirdRefillDialog {
+				--paper-dialog-scrollable: {
+					@apply --layout-horizontal;
+				}
+			}
+
+			#lowerthirdRefillDialog-close {
+				position: absolute;
+				top: 12px;
+				right: 12px;
+				margin: 0;
+				padding: 0;
+				width: 52px;
+				height: 52px;
+			}
+
+			paper-tabs {
+				background-color: white;
+				--paper-tabs-selection-bar-color: #8162A5;
+				--paper-tab-ink: #8162A5;
+				--paper-tabs-selection-bar: {
+					border-bottom-width: 8px;
+				};
+				--paper-tab: {
+					padding: 0;
+				};
+				--paper-tab-content: {
+					font-size: 24px;
+					font-weight: bold;
+					border-left: 0.5px solid transparent;
+					border-right: 0.5px solid transparent;
+				};
+				--paper-tab-content-unselected: {
+					background-color: #F5F5F5;
+					border-left: 0.5px solid #F5F5F5;
+					border-right: 0.5px solid #F5F5F5;
+				};
+				@apply --layout-flex-none;
+			}
+
+			[hidden] {
+				display: none !important;
+			}
+		</style>
+
+		<dash-interview-tablet-hotbar id="hotbar"
+			lowerthird-showing="[[lowerthirdShowing]]"
+			question-showing="[[questionShowing]]">
+		</dash-interview-tablet-hotbar>
+
+		<paper-tabs id="contentTabs" selected="{{selectedContentTab}}">
+			<paper-tab>Prize Information</paper-tab>
+			<paper-tab>Lower Thirds</paper-tab>
+			<paper-tab>Q&A Moderation</paper-tab>
+		</paper-tabs>
+
+		<iron-pages id="pages" selected="[[selectedContentTab]]">
+			<dash-interview-tablet-prizes
+				id="prizes">
+			</dash-interview-tablet-prizes>
+
+			<dash-interview-tablet-lowerthird
+				id="lowerthirdControls"
+				lowerthird-showing="{{lowerthirdShowing}}"
+				question-showing="[[questionShowing]]">
+			</dash-interview-tablet-lowerthird>
+
+			<dash-interview-tablet-lightning-round
+				id="lightningRound"
+				question-showing="{{questionShowing}}">
+			</dash-interview-tablet-lightning-round>
+		</iron-pages>
+
+		<paper-dialog id="lowerthirdPreviewDialog" with-backdrop>
+			<gdq-lowerthird id="lowerthirdPreview" preview></gdq-lowerthird>
+		</paper-dialog>
+
+		<paper-dialog id="lowerthirdRefillDialog" with-backdrop>
+			<h2 style="text-align: center; margin-bottom: 36px; font-size: 24px; font-weight: bold;">
+				REFILL LOWER THIRD NAMES
+			</h2>
+			<paper-icon-button
+				id="lowerthirdRefillDialog-close"
+				icon="close"
+				on-tap="closeLowerthirdRefillDialog">
+			</paper-icon-button>
+
+			<paper-dialog-scrollable>
+				<dash-interview-tablet-lowerthird-refill-option
+					id="currentLowerthirdRefillOption"
+					on-accepted="_handleLowerthirdRefillOptionAccepted"
+					type="current">
+				</dash-interview-tablet-lowerthird-refill-option>
+
+				<dash-interview-tablet-lowerthird-refill-option
+					id="nextLowerthirdRefillOption"
+					on-accepted="_handleLowerthirdRefillOptionAccepted"
+					type="next">
+				</dash-interview-tablet-lowerthird-refill-option>
+			</paper-dialog-scrollable>
+		</paper-dialog>
+	</template>
+
+	<script src="dash-interview-tablet.js"></script>
+</dom-module>

@@ -1,0 +1,28 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../shared/imports/svgjs.html">
+<link rel="import" href="../gdq-break/gdq-break-loop.html">
+
+<dom-module id="gdq-sponsors">
+	<template>
+		<style>
+			:host {
+				position: absolute;
+				display: block;
+				width: 100%;
+				height: 100%;
+				border: 1px solid #00FFFF;
+				box-sizing: border-box;
+				box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.66);
+			}
+
+			#svgHost {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+
+		<div id="svgHost"></div>
+	</template>
+
+	<script src="gdq-sponsors.js"></script>
+</dom-module>

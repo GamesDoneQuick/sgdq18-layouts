@@ -1,0 +1,21 @@
+{
+	"extends": "xo/esnext",
+	"rules": {
+		"new-cap": [2, {
+			"capIsNewExceptions": [
+				"Polymer",
+				"Polymer.GestureEventListeners",
+				"Polymer.MutableData",
+				"nodecg.Replicant",
+				"CSSReflectionMixin",
+				"MapSortMixin",
+				"SVG"
+			]
+		}],
+		"valid-jsdoc": ["error"],
+		"capitalized-comments": [0]
+	},
+	"plugins": [
+		"html"
+	]
+}

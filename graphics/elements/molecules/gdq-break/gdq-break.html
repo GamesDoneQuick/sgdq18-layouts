@@ -1,0 +1,111 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
+<link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
+<link rel="import" href="../../atoms/atom-text-greeble/atom-text-greeble.html">
+<link rel="import" href="../gdq-tweet/gdq-tweet.html">
+<link rel="import" href="gdq-break-bids.html">
+<link rel="import" href="gdq-break-bottom-frame.html">
+<link rel="import" href="gdq-break-prizes.html">
+<link rel="import" href="gdq-break-schedule.html">
+<link rel="import" href="gdq-break-top-frame.html">
+
+<dom-module id="gdq-break">
+	<template>
+		<style>
+			:host {
+				display: block;
+				width: 1600px;
+				height: 900px;
+				background: url("img/lines_bg.png") no-repeat;
+				font-family: "Source Code Pro";
+			}
+
+			#bids {
+				position: absolute;
+				top: 55px;
+				left: 0;
+			}
+
+			#tweet {
+				position: absolute;
+				top: 548px;
+				left: -1px;
+				width: 816px;
+				height: 231px;
+			}
+
+			#prizes {
+				position: absolute;
+				top: 538px;
+				left: 0;
+			}
+
+			#schedule {
+				position: absolute;
+				top: 383px;
+				right: 0;
+			}
+
+			#topFrame {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			#bottomFrame {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+			}
+
+			atom-text-greeble {
+				position: absolute;
+				bottom: 70px;
+			}
+
+			#crowd-cam {
+				width: 689px;
+				height: 236px;
+				position: absolute;
+				right: 40px;
+				top: 120px;
+				box-sizing: border-box;
+				border-top: 1px solid #00ffff;
+				border-right: 1px solid #00ffff;
+				border-bottom: 1px solid #00ffff;
+				border-left: 49px solid #00ffff;
+			}
+
+			#crowd-cam-label {
+				width: 142px;
+				height: 26px;
+				position: absolute;
+				right: 51px;
+				top: 340px;
+				background-color: #00ffff;
+				text-align: center;
+				font-size: 14px;
+				box-sizing: border-box;
+				padding-top: 3px;
+			}
+		</style>
+
+		<gdq-break-bids id="bids"></gdq-break-bids>
+		<gdq-break-prizes id="prizes"></gdq-break-prizes>
+		<gdq-tweet id="tweet" label="SOCIAL_MEDIA_ENGAGEMENT"></gdq-tweet>
+		<gdq-break-schedule id="schedule"></gdq-break-schedule>
+
+		<div id="crowd-cam"></div>
+		<div id="crowd-cam-label">Herndon, VA</div>
+
+		<atom-text-greeble style="left: 348px;" length="15"></atom-text-greeble>
+		<atom-text-greeble style="left: 532px;" length="11"></atom-text-greeble>
+		<atom-text-greeble style="left: 719px; color: #00FFFF;" length="15"></atom-text-greeble>
+
+		<gdq-break-top-frame id="topFrame"></gdq-break-top-frame>
+		<gdq-break-bottom-frame id="bottomFrame"></gdq-break-bottom-frame>
+	</template>
+
+	<script src="gdq-break.js"></script>
+</dom-module>

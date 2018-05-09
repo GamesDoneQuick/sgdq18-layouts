@@ -1,0 +1,40 @@
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../../../shared/style/gdq-input-style.html">
+<link rel="import" href="../ui-dragula-element/ui-dragula-element.html">
+<link rel="import" href="dash-lowerthird-name-input.html">
+
+<dom-module id="dash-interview-tablet-lowerthird">
+	<template>
+		<style include="gdq-input-style dragula-styles">
+			:host {
+				box-sizing: border-box;
+				@apply --layout-vertical;
+			}
+
+			#nameInputs {
+				@apply --layout-vertical;
+				@apply --layout-flex;
+			}
+
+			paper-button {
+				color: white;
+				font-weight: bold;
+			}
+
+			[hidden] {
+				display: none !important;
+			}
+		</style>
+
+		<ui-dragula-element id="nameInputs" direction="vertical">
+			<dash-lowerthird-name-input items="[[_typeaheadCandidates]]"></dash-lowerthird-name-input>
+			<dash-lowerthird-name-input items="[[_typeaheadCandidates]]"></dash-lowerthird-name-input>
+			<dash-lowerthird-name-input items="[[_typeaheadCandidates]]"></dash-lowerthird-name-input>
+			<dash-lowerthird-name-input items="[[_typeaheadCandidates]]"></dash-lowerthird-name-input>
+			<dash-lowerthird-name-input items="[[_typeaheadCandidates]]"></dash-lowerthird-name-input>
+		</ui-dragula-element>
+	</template>
+
+	<script src="dash-interview-tablet-lowerthird.js"></script>
+</dom-module>
