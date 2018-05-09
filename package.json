@@ -15,7 +15,7 @@
     "deep-diff": "^0.3.4",
     "deep-equal": "^1.0.1",
     "firebase-admin": "^5.6.0",
-    "gamepad": "^1.4.2",
+    "gamepad": "^1.5.2",
     "json-schema-defaults": "^0.3.0",
     "livesplit-core": "^0.8.1",
     "lodash.assign": "^4.0.9",
