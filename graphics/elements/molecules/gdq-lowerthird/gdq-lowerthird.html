@@ -1,0 +1,56 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
+<link rel="import" href="../../../../shared/imports/gsap.html">
+<link rel="import" href="../gdq-nameplate/gdq-nameplate.html">
+
+<dom-module id="gdq-lowerthird">
+	<template>
+		<style>
+			:host {
+				position: absolute;
+				bottom: 20px;
+				left: 20px;
+				width: 300px;
+				font-size: 31px;
+				font-family: "Source Code Pro";
+
+				/* prep for animation */
+				opacity: 0;
+			}
+
+			#header {
+				width: 207px;
+				height: 33px;
+				margin-left: 20px;
+				margin-bottom: 5px;
+				font-size: 24px;
+				font-weight: 700;
+			}
+
+			#names gdq-nameplate {
+				width: 450px;
+				margin-bottom: 5px;
+				font-size: 34px;
+				font-weight: 600;
+				--gdq-nameplate-padding: 8px;
+				--gdq-nameplate-justify: left
+			}
+
+			[hidden] {
+				display: none !important;
+			}
+		</style>
+
+		<gdq-nameplate id="header" name-fade-duration="0"></gdq-nameplate>
+
+		<div id="names">
+			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
+			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
+			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
+			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
+			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
+		</div>
+	</template>
+
+	<script src="gdq-lowerthird.js"></script>
+</dom-module>

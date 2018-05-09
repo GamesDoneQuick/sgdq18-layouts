@@ -1,0 +1,99 @@
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../../../shared/style/gdq-input-style.html">
+
+<dom-module id="dash-lowerthird-name-input">
+	<template>
+		<style include="gdq-input-style">
+			:host {
+				margin: 6px 0;
+				padding-top: 9px;
+				padding-bottom: 9px;
+				padding-left: 0;
+				padding-right: 44px;
+				background-color: white;
+				box-sizing: border-box;
+				font-family: "Roboto", sans-serif;
+				box-shadow:
+					0 2px 2px 0 rgba(0, 0, 0, 0.14),
+					0 1px 5px 0 rgba(0, 0, 0, 0.12),
+					0 3px 1px -2px rgba(0, 0, 0, 0.2);
+				@apply --layout-horizontal;
+				@apply --layout-center;
+				@apply --layout-flex;
+			}
+
+			:host(:first-of-type) {
+				margin-top: 0;
+			}
+
+			:host(:last-of-type) {
+				margin-bottom: 0;
+
+				/* TODO: uncomment this if the new L3 design is implemented */
+				/*background-color: #C9F5FF;*/
+			}
+
+			:host(:last-of-type) #hostIndicator {
+				/* TODO: uncomment this if the new L3 design is implemented */
+				/*opacity: 1;*/
+			}
+
+			#handle {
+				position: relative;
+				width: 118px;
+				border-right: 3px solid black;
+				cursor: move;
+				@apply --layout-flex-none;
+				@apply --layout-vertical;
+				@apply --layout-center-center;
+			}
+
+			#handle iron-icon {
+				width: 46px;
+				height: 46px;
+				pointer-events: none;
+			}
+
+			#input {
+				margin-left: 34px;
+				height: 53px;
+				font-size: 32px;
+				font-weight: 600;
+				@apply --layout-flex;
+			}
+
+			#hostIndicator {
+				opacity: 0;
+				text-align: right;
+				font-size: 32px;
+				font-weight: 600;
+				margin-left: 24px;
+			}
+		</style>
+
+		<div id="handle">
+			<iron-icon icon="editor:drag-handle"></iron-icon>
+		</div>
+
+		<vaadin-combo-box
+			id="input"
+			class="gdq-input-style"
+			placeholder="NAME"
+			no-label-float
+			value="{{value}}"
+			selected-item="{{selectedItem}}"
+			items="[[items]]"
+			allow-custom-value
+			disabled="[[disabled]]">
+			<template>
+				<span style="font-size: 28px">[[item]]</span>
+			</template>
+		</vaadin-combo-box>
+
+		<div id="hostIndicator">HOST</div>
+	</template>
+
+	<script src="dash-lowerthird-name-input.js"></script>
+</dom-module>

@@ -1,0 +1,142 @@
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/sc-fitted-text/sc-fitted-text.html">
+<link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
+<link rel="import" href="../../../../shared/style/gdq-fui-styles.html">
+<link rel="import" href="../../../../shared/style/gdq-text-styles.html">
+<link rel="import" href="gdq-nameplate-twitch-logo.html">
+
+<dom-module id="gdq-nameplate">
+	<template>
+		<style include="gdq-fui-styles gdq-text-styles">
+			:host {
+				display: flex;
+				position: relative;
+				height: 45px;
+				text-transform: uppercase;
+				color: white;
+				font-family: "Source Code Pro", monospace;
+				@apply --fui-glow-rect;
+				@apply --layout-horizontal;
+				@apply --layout-center-center;
+			}
+
+			#wrapper {
+				position: relative;
+				width: calc(100% - 8px);
+				height: calc(100% + 2px);
+				margin: -1px 4px;
+				min-width: 1px; /* needed to prevent overflow */
+				flex: 1;
+				@apply --fui-glow-rect;
+				@apply --layout-horizontal;
+				@apply --layout-center-center;
+			}
+
+			#names {
+				position: relative;
+				top: -1px;
+				display: flex;
+				justify-content: var(--gdq-nameplate-justify, center);
+				flex: 1;
+				white-space: nowrap;
+				padding: 0 var(--gdq-nameplate-padding, 16px);
+				opacity: 0;
+				font-weight: 600;
+				z-index: 1;
+				text-shadow: 0 0 16px rgba(58, 216, 255, 0.8);
+				line-height: 1;
+				min-width: 1px;
+				box-sizing: border-box;
+			}
+
+			#namesTwitch {
+				@apply --layout-horizontal;
+			}
+
+			#twitchLogo {
+				top: 0.5px;
+				margin-right: 1px;
+			}
+
+			.dotGreeble {
+				position: absolute;
+				width: 2px;
+				height: 2px;
+				background: #00ffff;
+			}
+
+			.dotGreeble--top {
+				top: 0;
+			}
+
+			.dotGreeble--bottom {
+				bottom: 0;
+			}
+
+			.dotGreeble--left {
+				left: 0;
+			}
+
+			.dotGreeble--right {
+				right: 0;
+			}
+
+			:host([no-left-cap]) .dotGreeble--left {
+				display: none;
+			}
+
+			:host([no-right-cap]) .dotGreeble--right {
+				display: none;
+			}
+
+			:host([no-left-cap]) #wrapper {
+				border-left: 0;
+				margin-left: 0;
+			}
+
+			:host([no-right-cap]) #wrapper {
+				border-right: 0;
+				margin-right: 0;
+			}
+
+			.hidden {
+				position: absolute;
+				opacity: 0 !important;
+				pointer-events: none;
+			}
+
+			[hidden] {
+				display: none !important;
+			}
+
+			sc-fitted-text {
+				--sc-fitted-text-content: {
+					color: transparent;
+					background-image: var(--atom-gradient-text-gradient, linear-gradient(
+						180deg,
+						#FFFFFF 0%,
+						#CDCDCD 100%
+					));
+					-webkit-background-clip: text;
+				};
+			}
+		</style>
+
+		<div id="wrapper">
+			<div class="dotGreeble dotGreeble--top dotGreeble--left"></div>
+			<div class="dotGreeble dotGreeble--bottom dotGreeble--left"></div>
+			<div class="dotGreeble dotGreeble--top dotGreeble--right"></div>
+			<div class="dotGreeble dotGreeble--bottom dotGreeble--right"></div>
+			<div id="names">
+				<sc-fitted-text id="namesName" text="[[name]]" align="center"></sc-fitted-text>
+				<div id="namesTwitch">
+					<gdq-nameplate-twitch-logo id="twitchLogo"></gdq-nameplate-twitch-logo>
+					<sc-fitted-text text="[[twitch]]" align="left"></sc-fitted-text>
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<script src="gdq-nameplate.js"></script>
+</dom-module>
