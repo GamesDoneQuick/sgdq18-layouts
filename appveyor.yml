@@ -69,6 +69,7 @@ test: off
 
 # Always upload test screenshots even if tests failed.
 on_finish:
+  - 'if not exist %TEST_SCREENSHOT_DIR% mkdir %TEST_SCREENSHOT_DIR%'
   - 7z a test-screenshots.zip %TEST_SCREENSHOT_DIR%\*.png
   - 7z a test-screenshots.zip %TEST_SCREENSHOT_DIR%\*.log
   - ps: Push-AppveyorArtifact test-screenshots.zip
