@@ -220,6 +220,12 @@ class AtomTronlines extends Polymer.Element {
 		this.stage = stage;
 
 		const handleFrame = () => {
+			if (window.__SCREENSHOT_TESTING__) {
+				this.clear();
+				stage.update();
+				return;
+			}
+
 			this.advanceSimulation();
 
 			if (this.debug) {

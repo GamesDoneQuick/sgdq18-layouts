@@ -55,6 +55,11 @@
 			for (let i = 0; i < this.length; i++) {
 				string += Random.pick(Random.engines.browserCrypto, this._charactersArray);
 			}
+
+			if (window.__SCREENSHOT_TESTING__) {
+				string = new Array(this.length).fill('0').join('');
+			}
+
 			this.text = string;
 		}
 
