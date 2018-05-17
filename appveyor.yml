@@ -27,17 +27,25 @@ before_build:
   - npm test
 
 build_script:
-  - npm ci --production
-  - cd ..
-  - git clone https://github.com/nodecg/nodecg.git
-  - cd nodecg
-  - git checkout v0.9.10
-  - npm ci --production && bower install
-  - 'move %APPVEYOR_BUILD_FOLDER% bundles\%APPVEYOR_PROJECT_SLUG%'
-  - pkg . --targets node8-win-x64 --public
-  - if not exist cfg mkdir cfg
-  - 'echo {"logging": {"console": {"level": "info"},"file": {"enabled": true,"level": "debug"},"replicants": false}} >> cfg/nodecg.json'
-  #- ps: Start-FileDownload 'https://redacted.com/sgdq18-layouts-demo-config.json' -FileName 'cfg/sgdq18-layouts.json'
+    - npm ci --production
+    - cd ..
+    - git clone https://github.com/nodecg/nodecg.git
+    - cd nodecg
+    - git checkout v0.9.11
+    - npm ci --production && bower install
+
+    # Delete .git files, so that they aren't added to the package.
+    - del /f/s/q .git %APPVEYOR_BUILD_FOLDER%\.git > nul
+    - rmdir /s/q .git %APPVEYOR_BUILD_FOLDER%\.git
+
+    # Delete test files, so that they aren't added to the package.
+    - del /f/s/q test %APPVEYOR_BUILD_FOLDER%\test > nul
+    - rmdir /s/q test %APPVEYOR_BUILD_FOLDER%\test
+
+    - 'move %APPVEYOR_BUILD_FOLDER% bundles\%APPVEYOR_PROJECT_SLUG%'
+    - pkg . --targets node8-win-x64 --public
+    - if not exist cfg mkdir cfg
+    #- ps: Start-FileDownload 'https://redacted.com/sgdq18-layouts-demo-config.json' -FileName 'cfg/sgdq18-layouts.json'
 
 after_build:
   - ps: '$env:PKG_ZIP_NAME = "$env:APPVEYOR_PROJECT_SLUG-$(-join $env:APPVEYOR_REPO_COMMIT[0..7]).zip"'
