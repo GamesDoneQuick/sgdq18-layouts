@@ -32,7 +32,7 @@ module.exports = {
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/lttp_tracker.html`,
-		additionalDelay: STANDARD_DELAY,
+		additionalDelay: 750,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/omnibar.html`,
