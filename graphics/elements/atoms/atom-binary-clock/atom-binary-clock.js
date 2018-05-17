@@ -61,6 +61,10 @@
 		}
 
 		startRandomFlashing() {
+			if (window.__SCREENSHOT_TESTING__) {
+				return;
+			}
+
 			if (this._randomFlashingInterval) {
 				return this._randomFlashingInterval;
 			}
