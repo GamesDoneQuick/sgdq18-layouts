@@ -1,0 +1,109 @@
+'use strict';
+
+const BUNDLE_NAME = require('../../package.json').name;
+
+const STANDARD_DELAY = 350;
+const STANDARD_REPLICANT_PREFILLS = {
+	allBids: undefined,
+	allPrizes: undefined,
+	currentBids: undefined,
+	currentIntermission: undefined,
+	currentPrizes: undefined,
+	currentRun: undefined,
+	'interview:names': undefined,
+	recordTrackerEnabled: undefined,
+	stopwatch: undefined,
+	total: undefined,
+	tweets: undefined
+};
+
+module.exports = {
+	BUNDLE_CONFIG: {},
+	WIDTH: 1600,
+	HEIGHT: 900,
+	TEST_CASES: [{
+		route: `bundles/${BUNDLE_NAME}/graphics/3ds.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/break.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/ds.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/ds_vertical.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/gameboy_1.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/gameboy_2.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/gameboy_3.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/gameboy_4.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/gba_1.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/gba_2.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/interview.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/lttp_tracker.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/omnibar.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/standard_1.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/standard_2.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/standard_3.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/standard_4.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/widescreen_1.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/widescreen_2.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/widescreen_4.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/widescreen_4_2.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}]
+};

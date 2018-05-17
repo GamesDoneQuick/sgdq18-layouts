@@ -41,5 +41,8 @@
     "vaadin-combo-box": "v2.0.0",
     "polymer": "^2.0.1",
     "webcomponentsjs": "^v1.0.2"
+  },
+  "devDependencies": {
+    "mock-nodecg": "nodecg/mock-nodecg#^1.5.1"
   }
 }
