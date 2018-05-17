@@ -41,7 +41,8 @@ class AtomTronlines extends Polymer.Element {
 				value: '#051113',
 				elementTester: {
 					type: 'color'
-				}
+				},
+				observer: '_backgroundColorChanged'
 			},
 
 			/**
@@ -212,8 +213,11 @@ class AtomTronlines extends Polymer.Element {
 		const stage = new createjs.Stage(this.$.canvas);
 
 		const bg = new createjs.Shape();
+
+		this.bgFillCommand = bg.graphics
+			.beginFill(this.backgroundColor).command;
+
 		this.bgRectCommand = bg.graphics
-			.beginFill(this.backgroundColor)
 			.drawRect(0, 0, this.width, this.height).command;
 
 		stage.addChild(bg);
@@ -293,10 +297,14 @@ class AtomTronlines extends Polymer.Element {
 
 	/**
 	 * Clears all nodes from the canvas.
+	 * @param {boolean} deep - If true, also deletes all created nodes in the freeNodes pool.
 	 * @returns {undefined}
 	 */
-	clear() {
+	clear(deep) {
 		this._freeAllNodes();
+		if (deep) {
+			this._freeNodes = new Set();
+		}
 	}
 
 	_creationRateChanged(newVal) {
@@ -442,6 +450,13 @@ class AtomTronlines extends Polymer.Element {
 
 	_computeInvertDimensions(direction) {
 		return direction === 'left' || direction === 'right';
+	}
+
+	_backgroundColorChanged(newValue) {
+		if (!this.bgFillCommand) {
+			return;
+		}
+		this.bgFillCommand.style = newValue;
 	}
 }
 
