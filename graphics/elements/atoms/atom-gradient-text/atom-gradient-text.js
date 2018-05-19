@@ -17,6 +17,15 @@ class AtromGradientText extends Polymer.Element {
 			maxWidth: Number
 		};
 	}
+
+	ready() {
+		super.ready();
+
+		// Workaround for: https://bugs.chromium.org/p/chromium/issues/detail?id=844880
+		this.shadowRoot.querySelectorAll('sc-fitted-text').forEach(node => {
+			node.$.fittedContent.style.webkitBackgroundClip = 'text';
+		});
+	}
 }
 
 customElements.define(AtromGradientText.is, AtromGradientText);

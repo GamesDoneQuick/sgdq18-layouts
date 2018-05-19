@@ -53,6 +53,11 @@
 		ready() {
 			super.ready();
 
+			// Workaround for: https://bugs.chromium.org/p/chromium/issues/detail?id=844880
+			this.shadowRoot.querySelectorAll('sc-fitted-text').forEach(node => {
+				node.$.fittedContent.style.webkitBackgroundClip = 'text';
+			});
+
 			// Create looping anim for main nameplate.
 			this._nameTL.to(this.$.names, this.nameFadeDuration, {
 				onStart: function () {
