@@ -23,6 +23,11 @@
 
 			svg {
 				position: relative;
+
+				/* Without this, the SVG appears in the wrong location when direction="left",
+				 * because of this commit to Chromium:
+				 * https://chromium.googlesource.com/chromium/src/+/dcb01178e8d36c9567f9b5ae3f7e814d42443327 */
+				transform-origin: 0 0 0;
 				@apply --atom-chevron-chevron;
 			}
 
