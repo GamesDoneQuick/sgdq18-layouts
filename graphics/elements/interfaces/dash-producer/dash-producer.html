@@ -19,6 +19,7 @@
 <link rel="import" href="../dash-host/dash-host-styles.html">
 <link rel="import" href="../dash-host/dash-host-totals.html">
 <link rel="import" href="../dash-host/dash-host-twitch-ads.html">
+<link rel="import" href="../dash-incidents/dash-incidents.html">
 <link rel="import" href="dash-producer-checklist.html">
 
 <dom-module id="dash-producer">
@@ -177,7 +178,7 @@
 			<paper-tab>Dashboard</paper-tab>
 			<paper-tab>Volunteer Schedule</paper-tab>
 			<paper-tab>Volunteer Evals</paper-tab>
-			<paper-tab>Tech Notes</paper-tab>
+			<paper-tab>Incidents</paper-tab>
 			<paper-tab>Full Schedule</paper-tab>
 		</paper-tabs>
 
@@ -219,10 +220,7 @@
 				frameBorder="0">
 			</iframe>
 
-			<iframe
-				src="https://docs.google.com/spreadsheets/d/1-m5WGrE2W5qzMt23SR6yJvfCmnT1jMV9GGxWgiM6KlE/edit"
-				frameBorder="0">
-			</iframe>
+			<dash-incidents></dash-incidents>
 
 			<iframe
 				src="https://gamesdonequick.com/schedule"
