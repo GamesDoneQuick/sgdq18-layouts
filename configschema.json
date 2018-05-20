@@ -222,6 +222,28 @@
 		},
 		"nowPlayingKey": {
 			"type": "string"
+		},
+		"victorOps": {
+			"type": ["object", "null"],
+			"properties": {
+				"enabled": {
+					"type": "boolean",
+					"default": true
+				},
+				"apiId": {
+					"type": "string"
+				},
+				"apiKey": {
+					"type": "string"
+				},
+				"restEndpoint": {
+					"type": "string",
+					"description": "https://help.victorops.com/knowledge-base/victorops-restendpoint-integration/"
+				}
+			},
+			"description": "API credentials for the optional VictorOps integration..",
+			"required": ["enabled", "apiId", "apiKey", "restEndpoint"],
+			"default": null
 		}
 	},
 

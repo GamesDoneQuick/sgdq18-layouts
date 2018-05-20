@@ -71,6 +71,15 @@ module.exports = function (nodecg) {
 			'Twitter integration will be disabled.');
 	}
 
+	if (nodecg.bundleConfig.victorOps && nodecg.bundleConfig.victorOps.apiId && nodecg.bundleConfig.victorOps.apiKey) {
+		if (nodecg.bundleConfig.victorOps.enabled) {
+			require('./victor-ops');
+		}
+	} else {
+		nodecg.log.warn('"victorOps" is not defined in cfg/sgdq18-layouts.json! ' +
+			'VictorOps integration will be disabled.');
+	}
+
 	if (nodecg.bundleConfig.osc && nodecg.bundleConfig.osc.address) {
 		require('./mixer');
 	} else {

@@ -35,7 +35,8 @@
     "html-echo": "Collaborne/html-echo#^1.0.1",
     "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#^2.1.0",
     "polymerfire": "firebase/polymerfire#^2.2.1",
-    "web-animations-js": "^2.3.1"
+    "web-animations-js": "^2.3.1",
+    "paper-spinner": "PolymerElements/paper-spinner#^2.1.0"
   },
   "resolutions": {
     "vaadin-combo-box": "v2.0.0",
