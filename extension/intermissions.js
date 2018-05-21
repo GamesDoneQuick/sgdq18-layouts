@@ -47,6 +47,11 @@ currentRun.on('change', (newVal, oldVal) => {
 		debouncedUpdateCurrentIntermissionContent();
 	}
 });
+
+schedule.on('change', () => {
+	debouncedUpdateCurrentIntermissionContent();
+});
+
 stopwatch.on('change', (newVal, oldVal) => {
 	checkCanSeek();
 
@@ -58,6 +63,7 @@ stopwatch.on('change', (newVal, oldVal) => {
 		debouncedUpdateCurrentIntermissionState();
 	}
 });
+
 caspar.replicants.files.on('change', () => {
 	debouncedUpdateCurrentIntermissionState();
 });
@@ -320,6 +326,11 @@ function playAd(ad) {
  */
 function _updateCurrentIntermissionContent() {
 	if (!currentRun.value || !stopwatch.value || !schedule.value) {
+		return;
+	}
+
+	// If we're in an adBreak right now, bail out.
+	if (currentAdBreak) {
 		return;
 	}
 
