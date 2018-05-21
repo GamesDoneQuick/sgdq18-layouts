@@ -63,12 +63,12 @@
 
 			// Back rects.
 			tl.to(this.$.bottomBackRect, 0.2334, {
-				x: -26,
+				x: 0,
 				y: 323,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'backRects');
 			tl.to(this.$.topBackRect, 0.2334, {
-				x: -10,
+				x: 0,
 				y: -351,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'backRects');
