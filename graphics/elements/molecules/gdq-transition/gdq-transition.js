@@ -19,11 +19,14 @@
 		ready() {
 			super.ready();
 
+			const fromClosedToBreak = this.fromClosedToBreak();
+			const fromBreakToClosed = this.fromClosedToBreak().reverse(0);
+
 			if (!window.__SCREENSHOT_TESTING__) {
 				// TODO: remove this when done developing this particular animation.
-				setTimeout(() => {
-					this.fromClosedToBreak();
-				}, 1000);
+				const tl = new TimelineMax({repeat: -1});
+				tl.add(fromClosedToBreak, '+=1');
+				tl.add(fromBreakToClosed, '+=1');
 			}
 		}
 
