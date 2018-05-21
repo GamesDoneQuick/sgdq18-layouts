@@ -40,6 +40,10 @@
 				});
 				log.info('Incident successfully created.');
 				this._requestStatus = 'success';
+
+				this._routingKey = '';
+				this._subject = '';
+				this.$.details.value = '';
 			} catch (error) {
 				log.warn('Failed to create incident:', error);
 				this._requestStatus = 'failure';
