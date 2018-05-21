@@ -78,7 +78,9 @@ class AtomChevron extends CSSReflectionMixin(Polymer.Element) {
 		super.connectedCallback();
 		if (!this.noAutoRender) {
 			Polymer.RenderStatus.afterNextRender(this, () => {
-				Polymer.RenderStatus.afterNextRender(this, this.render);
+				Polymer.RenderStatus.afterNextRender(this, () => {
+					Polymer.RenderStatus.afterNextRender(this, this.render);
+				});
 			});
 		}
 	}
