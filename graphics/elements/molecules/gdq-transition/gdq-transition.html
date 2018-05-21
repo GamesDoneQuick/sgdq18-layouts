@@ -10,9 +10,17 @@
 
 			img {
 				position: absolute;
-				top: 0;
-				left: 0;
 				will-change: transform;
+			}
+
+			.bottom {
+				bottom: 0;
+				left: 0;
+			}
+
+			.top {
+				top: 0;
+				right: 0;
 			}
 
 			[hidden] {
@@ -20,15 +28,15 @@
 			}
 		</style>
 
-		<img id="bottomBackRect" src="[[importPath]]img/bottomBackRect.png">
-		<img id="bottomBackTrapezoid" src="[[importPath]]img/bottomBackTrapezoid.png">
-		<img id="bottomFrontRect" src="[[importPath]]img/bottomFrontRect.png">
-		<img id="bottomFrontTrapezoid" src="[[importPath]]img/bottomFrontTrapezoid.png">
+		<img id="bottomBackRect" class="bottom" src="[[importPath]]img/bottomBackRect.png">
+		<img id="bottomBackTrapezoid" class="bottom" src="[[importPath]]img/bottomBackTrapezoid.png">
+		<img id="bottomFrontRect" class="bottom" src="[[importPath]]img/bottomFrontRect.png">
+		<img id="bottomFrontTrapezoid" class="bottom" src="[[importPath]]img/bottomFrontTrapezoid.png">
 
-		<img id="topBackRect" src="[[importPath]]img/topBackRect.png">
-		<img id="topBackTrapezoid" src="[[importPath]]img/topBackTrapezoid.png">
-		<img id="topFrontRect" src="[[importPath]]img/topFrontRect.png">
-		<img id="topFrontTrapezoid" src="[[importPath]]img/topFrontTrapezoid.png">
+		<img id="topBackRect" class="top" src="[[importPath]]img/topBackRect.png">
+		<img id="topBackTrapezoid" class="top" src="[[importPath]]img/topBackTrapezoid.png">
+		<img id="topFrontRect" class="top" src="[[importPath]]img/topFrontRect.png">
+		<img id="topFrontTrapezoid" class="top" src="[[importPath]]img/topFrontTrapezoid.png">
 	</template>
 
 	<script src="gdq-transition.js"></script>
