@@ -27,6 +27,10 @@ module.exports = {
 		additionalDelay: STANDARD_DELAY,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/interview.html`,
 		additionalDelay: STANDARD_DELAY,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
