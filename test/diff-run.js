@@ -2,7 +2,7 @@
 'use strict';
 
 const test = require('ava');
-const {calcOriginalValues, mergeChangesFromTracker} = require('../extension/lib/diff-run');
+const {calcOriginalValues, mergeChangesFromTracker} = require('../dist/extension/lib/diff-run');
 
 test('calcOriginalValues - should return undefined if there are no changes', t => {
 	const original = {name: 'a'};
