@@ -1,0 +1,45 @@
+{
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"baseUrl": "./",
+		"declaration": true,
+		"forceConsistentCasingInFileNames": true,
+		"importHelpers": true,
+		"lib": [
+			"dom",
+			"es2017"
+		],
+		"listFiles": false,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"outDir": "./dist",
+		"paths": {
+			"*": [
+				"./node_modules/*",
+				"./src/types/*"
+			]
+		},
+		"pretty": true,
+		"sourceMap": true,
+		"strictNullChecks": true,
+		"target": "es2017",
+		"traceResolution": false,
+		"types": [
+			"node"
+		]
+	},
+	"include": [
+		"./src/**/*.ts"
+	],
+	"exclude": [
+		"node_modules/**",
+		"src/**/*spec.ts"
+	],
+	"compileOnSave": false
+}
