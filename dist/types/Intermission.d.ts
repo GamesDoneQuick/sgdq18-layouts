@@ -43,3 +43,10 @@ export interface Interview {
     type: 'interview';
 }
 export declare type IntermissionContentItem = Interview | AdBreak;
+export declare enum CantStartReasonsEnum {
+    ALREADY_STARTED = "already started",
+    ALREADY_COMPLETED = "already completed",
+    RUN_ACTIVE = "run in progress",
+    PRIOR_BREAK_INCOMPLETE = "a prior ad break is not complete",
+    MUST_ADVANCE_SCHEDULE = "stream tech must go to next run",
+}
