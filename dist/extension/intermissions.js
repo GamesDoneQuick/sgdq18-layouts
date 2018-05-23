@@ -58,7 +58,7 @@ stopwatch.on('change', (newVal, oldVal) => {
 caspar.replicants.files.on('change', () => {
     debouncedUpdateCurrentIntermissionState();
 });
-nodecg.listenFor('intermissions:startAdBreak', (adBreakId) => {
+nodecg.listenFor('intermissions:startAdBreak', async (adBreakId) => {
     const adBreak = currentIntermission.value.content.find((item) => {
         return item.type === 'adBreak' && item.id === adBreakId;
     });
@@ -68,16 +68,18 @@ nodecg.listenFor('intermissions:startAdBreak', (adBreakId) => {
     }
     cancelledAdBreak = false;
     currentAdBreak = adBreak;
-    checkCanSeek();
-    obs.setCurrentScene('Advertisements').then(() => {
-        return playAd(adBreak.ads[0]).then(() => {
-            adBreak.state.canStart = false;
-            adBreak.state.cantStartReason = CANT_START_REASONS.ALREADY_STARTED;
-            adBreak.state.started = true;
-        });
-    }).catch((e) => {
-        log.error('Failed to start ad break:', e);
-    });
+    try {
+        checkCanSeek();
+        await caspar.clear(false);
+        await obs.setCurrentScene('Advertisements');
+        await playAd(adBreak.ads[0]);
+        adBreak.state.canStart = false;
+        adBreak.state.cantStartReason = CANT_START_REASONS.ALREADY_STARTED;
+        adBreak.state.started = true;
+    }
+    catch (error) {
+        log.error('Failed to start ad break:', error);
+    }
 });
 nodecg.listenFor('intermissions:cancelAdBreak', (adBreakId) => {
     const adBreak = currentIntermission.value.content.find((item) => {

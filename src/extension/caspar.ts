@@ -76,8 +76,11 @@ export function loadbgAuto(filename: string) {
 	return connection.loadbgAuto(1, undefined, filename, false, CasparCG.Enum.Transition.CUT);
 }
 
-export function clear() {
-	return connection.clear(1).then(resetState);
+export async function clear(doResetState = true) {
+	await connection.clear(1);
+	if (doResetState) {
+		resetState();
+	}
 }
 
 export function stop() {
