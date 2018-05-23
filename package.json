@@ -326,7 +326,7 @@
     "test": "ava test",
     "prebuild": "npm run test",
     "build": "trash dist && tsc -p tsconfig.json",
-    "build:fast": "trash dist && tsc -p tsconfig.json",
+    "build:fast": "npm run static:ts && trash dist && tsc -p tsconfig.json",
     "generate-fixture-screenshots": "generate-fixture-screenshots",
     "debug-fixture-screenshots": "generate-fixture-screenshots --debug",
     "mock-donations": "node ./scripts/test_donation_server"
