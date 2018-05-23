@@ -17,13 +17,6 @@ import * as TimeUtils from './lib/time';
 import * as GDQTypes from '../types';
 
 const AD_LOG_PATH = 'logs/ad_log.csv';
-const CANT_START_REASONS = {
-	ALREADY_STARTED: 'already started',
-	ALREADY_COMPLETED: 'already completed',
-	RUN_ACTIVE: 'run in progress',
-	PRIOR_BREAK_INCOMPLETE: 'a prior ad break is not complete',
-	MUST_ADVANCE_SCHEDULE: 'stream tech must go to next run'
-};
 
 let currentAdBreak: GDQTypes.AdBreak | null = null;
 let currentlyPlayingAd: GDQTypes.Ad | null = null;
@@ -91,7 +84,7 @@ nodecg.listenFor('intermissions:startAdBreak', async (adBreakId: number) => {
 		await playAd(adBreak.ads[0]);
 
 		adBreak.state.canStart = false;
-		adBreak.state.cantStartReason = CANT_START_REASONS.ALREADY_STARTED;
+		adBreak.state.cantStartReason = GDQTypes.CantStartReasonsEnum.ALREADY_STARTED;
 		adBreak.state.started = true;
 	} catch (error) {
 		log.error('Failed to start ad break:', error);
@@ -292,7 +285,7 @@ function finishAd(ad: GDQTypes.Ad) {
 function finishAdBreak(adBreak: GDQTypes.AdBreak) {
 	adBreak.state.started = true;
 	adBreak.state.canStart = false;
-	adBreak.state.cantStartReason = CANT_START_REASONS.ALREADY_COMPLETED;
+	adBreak.state.cantStartReason = GDQTypes.CantStartReasonsEnum.ALREADY_COMPLETED;
 	adBreak.state.completed = true;
 	adBreak.state.canComplete = false;
 }
@@ -374,25 +367,25 @@ function _updateCurrentIntermissionState() {
 
 		if (item.state.started) {
 			item.state.canStart = false;
-			item.state.cantStartReason = CANT_START_REASONS.ALREADY_STARTED;
+			item.state.cantStartReason = GDQTypes.CantStartReasonsEnum.ALREADY_STARTED;
 		}
 
 		if (item.state.completed) {
 			item.state.canStart = false;
-			item.state.cantStartReason = CANT_START_REASONS.ALREADY_COMPLETED;
+			item.state.cantStartReason = GDQTypes.CantStartReasonsEnum.ALREADY_COMPLETED;
 		}
 
 		if (!allPriorAdBreaksAreComplete) {
 			item.state.canStart = false;
-			item.state.cantStartReason = CANT_START_REASONS.PRIOR_BREAK_INCOMPLETE;
+			item.state.cantStartReason = GDQTypes.CantStartReasonsEnum.PRIOR_BREAK_INCOMPLETE;
 		}
 
 		if (hasRunFinished()) {
 			item.state.canStart = false;
-			item.state.cantStartReason = CANT_START_REASONS.MUST_ADVANCE_SCHEDULE;
+			item.state.cantStartReason = GDQTypes.CantStartReasonsEnum.MUST_ADVANCE_SCHEDULE;
 		} else if (hasRunStarted()) {
 			item.state.canStart = false;
-			item.state.cantStartReason = CANT_START_REASONS.RUN_ACTIVE;
+			item.state.cantStartReason = GDQTypes.CantStartReasonsEnum.RUN_ACTIVE;
 		}
 
 		if (!item.state.completed) {
