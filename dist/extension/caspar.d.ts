@@ -4,7 +4,7 @@ import * as CasparCG from 'casparcg-connection';
 export declare function play(filename: string): Promise<void>;
 export declare function info(): Promise<CasparCG.Command.IAMCPCommand>;
 export declare function loadbgAuto(filename: string): Promise<CasparCG.Command.IAMCPCommand>;
-export declare function clear(): Promise<void>;
+export declare function clear(doResetState?: boolean): Promise<void>;
 export declare function stop(): Promise<void>;
 export declare function resetState(): void;
 export declare const replicants: {
