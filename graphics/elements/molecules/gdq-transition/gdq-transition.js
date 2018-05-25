@@ -58,6 +58,17 @@
 				y: 364,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontTraps');
+
+			tl.to(this.$.bottomFrontAnimation, 0.2667, {
+				x: -503,
+				y: 364,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'frontTraps');
+
+			tl.call(() => {
+				this.$.bottomFrontAnimation.play();
+			}, null, null, 'backRects');
+
 			tl.to(this.$.topFrontTrapezoid, 0.2667, {
 				x: 8,
 				y: -417,
