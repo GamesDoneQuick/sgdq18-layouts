@@ -25,8 +25,8 @@
 			if (!window.__SCREENSHOT_TESTING__) {
 				// TODO: remove this when done developing this particular animation.
 				const tl = new TimelineMax({repeat: -1});
-				tl.add(fromClosedToBreak, '+=1');
-				tl.add(fromBreakToClosed, '+=1');
+				tl.add(fromClosedToBreak, '+=4');
+				tl.add(fromBreakToClosed, '+=4');
 			}
 		}
 
@@ -41,35 +41,32 @@
 			tl.addLabel('backTraps', 0.2334);
 
 			// Front rects.
-			tl.to(this.$.bottomFrontRect, 0.2167, {
+			tl.to([this.$.bottomFrontRect, this.$.bottomRectAnimation], 0.2167, {
 				x: 26,
 				y: 321,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontRects');
-			tl.to(this.$.topFrontRect, 0.2167, {
+			tl.to([this.$.topFrontRect, this.$.topRectAnimation], 0.2167, {
 				x: -10,
 				y: -349,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontRects');
 
 			// Front traps.
-			tl.to(this.$.bottomFrontTrapezoid, 0.2667, {
-				x: -503,
-				y: 364,
-				ease: 'ModifiedPower2EaseInOut'
-			}, 'frontTraps');
-
-			tl.to(this.$.bottomFrontAnimation, 0.2667, {
+			tl.to([this.$.bottomFrontTrapezoid, this.$.bottomTrapAnimation], 0.2667, {
 				x: -503,
 				y: 364,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontTraps');
 
 			tl.call(() => {
-				this.$.bottomFrontAnimation.play();
-			}, null, null, 'backRects');
+				this.$.bottomTrapAnimation.play();
+				this.$.bottomRectAnimation.play();
+				this.$.topTrapAnimation.play();
+				this.$.topRectAnimation.play();
+			}, null, null, 'frontRects');
 
-			tl.to(this.$.topFrontTrapezoid, 0.2667, {
+			tl.to([this.$.topFrontTrapezoid, this.$.topTrapAnimation], 0.2667, {
 				x: 8,
 				y: -417,
 				ease: 'ModifiedPower2EaseInOut'

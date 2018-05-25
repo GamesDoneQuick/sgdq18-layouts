@@ -15,11 +15,18 @@
 
 			.bottom {
 				bottom: 0;
-				left: 0;
 			}
 
 			.top {
 				top: 0;
+				right: 0;
+			}
+
+			.left {
+				left: 0;
+			}
+
+			.right {
 				right: 0;
 			}
 
@@ -28,16 +35,19 @@
 			}
 		</style>
 
-		<img id="bottomBackRect" class="bottom" src="[[importPath]]img/bottomBackRect.png">
-		<img id="bottomBackTrapezoid" class="bottom" src="[[importPath]]img/bottomBackTrapezoid.png">
-		<img id="bottomFrontRect" class="bottom" src="[[importPath]]img/bottomFrontRect.png">
-		<img id="bottomFrontTrapezoid" class="bottom" src="[[importPath]]img/bottomFrontTrapezoid.png">
-		<video id="bottomFrontAnimation" class="bottom" src="[[importPath]]vid/transition_exit_botleft.webm"></video>
+		<img id="bottomBackRect" class="bottom left" src="[[importPath]]img/bottomBackRect.png">
+		<img id="bottomBackTrapezoid" class="bottom left" src="[[importPath]]img/bottomBackTrapezoid.png">
+		<img id="bottomFrontRect" class="bottom left" src="[[importPath]]img/bottomFrontRect.png">
+		<video id="bottomRectAnimation" muted class="bottom right" src="[[importPath]]vid/transition_exit_botright.webm"></video>
+		<img id="bottomFrontTrapezoid" class="bottom left" src="[[importPath]]img/bottomFrontTrapezoid.png">
+		<video id="bottomTrapAnimation" muted class="bottom left" src="[[importPath]]vid/transition_exit_botleft.webm"></video>
 
-		<img id="topBackRect" class="top" src="[[importPath]]img/topBackRect.png">
-		<img id="topBackTrapezoid" class="top" src="[[importPath]]img/topBackTrapezoid.png">
-		<img id="topFrontRect" class="top" src="[[importPath]]img/topFrontRect.png">
-		<img id="topFrontTrapezoid" class="top" src="[[importPath]]img/topFrontTrapezoid.png">
+		<img id="topBackRect" class="top right" src="[[importPath]]img/topBackRect.png">
+		<img id="topBackTrapezoid" class="top right" src="[[importPath]]img/topBackTrapezoid.png">
+		<img id="topFrontRect" class="top right" src="[[importPath]]img/topFrontRect.png">
+		<video id="topRectAnimation" muted class="top left" src="[[importPath]]vid/transition_exit_topleft.webm"></video>
+		<img id="topFrontTrapezoid" class="top right" src="[[importPath]]img/topFrontTrapezoid.png">
+		<video id="topTrapAnimation" muted class="top right" src="[[importPath]]vid/transition_exit_topright.webm"></video>
 	</template>
 
 	<script src="gdq-transition.js"></script>
