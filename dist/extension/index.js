@@ -50,7 +50,7 @@ module.exports = (nodecg) => {
             require('./twitch-title-updater');
         }
     }
-    if (nodecg.bundleConfig.twitter && nodecg.bundleConfig.twitter.userId) {
+    if (nodecg.bundleConfig.twitter) {
         if (nodecg.bundleConfig.twitter.enabled) {
             require('./twitter');
         }

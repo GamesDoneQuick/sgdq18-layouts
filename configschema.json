@@ -59,28 +59,20 @@
 					"type": "boolean",
 					"default": true
 				},
-				"userId": {
+				"websocketUrl": {
 					"type": "string",
-					"description": "The numeric userid of the Twitter account that owns these API keys. http://mytwitterid.com/"
+					"description": "The URL of your deployment of of https://github.com/GamesDoneQuick/twitter-socket.io-adapter."
 				},
-				"consumerKey": {
-					"type": "string"
-				},
-				"consumerSecret": {
-					"type": "string"
-				},
-				"accessTokenKey": {
-					"type": "string"
-				},
-				"accessTokenSecret": {
-					"type": "string"
+				"preSharedKey": {
+					"type": "string",
+					"description": "The password used to authenticate with your deployment of https://github.com/GamesDoneQuick/twitter-socket.io-adapter."
 				},
 				"debug": {
 					"type": "boolean",
 					"default": false
 				}
 			},
-			"required": ["userId", "consumerKey", "consumerSecret", "accessTokenKey", "accessTokenSecret"],
+			"required": ["websocketUrl", "preSharedKey"],
 			"default": null
 		},
 		"twitch": {

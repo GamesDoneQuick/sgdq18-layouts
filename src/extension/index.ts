@@ -63,7 +63,7 @@ module.exports = (nodecg: any) => {
 		}
 	}
 
-	if (nodecg.bundleConfig.twitter && nodecg.bundleConfig.twitter.userId) {
+	if (nodecg.bundleConfig.twitter) {
 		if (nodecg.bundleConfig.twitter.enabled) {
 			require('./twitter');
 		}
