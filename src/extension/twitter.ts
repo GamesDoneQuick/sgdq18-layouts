@@ -2,16 +2,15 @@
 
 // Packages
 import twemoji = require('twemoji');
-import TwitterStream = require('twitter-stream-api');
+import * as io from 'socket.io-client';
 
 // Ours
 import * as nodecgApiContext from './util/nodecg-api-context';
 import * as GDQTypes from '../types';
 
 const nodecg = nodecgApiContext.get();
-const TARGET_USER_ID = nodecg.bundleConfig.twitter.userId;
+const log = new nodecg.Logger(`${nodecg.bundleName}:twitter`);
 const tweets = nodecg.Replicant('tweets', {defaultValue: []});
-let userStream: any;
 
 // Clear queue of tweets when currentRun changes
 nodecg.Replicant('currentRun').on('change', (newVal: GDQTypes.Run, oldVal: GDQTypes.Run | undefined) => {
@@ -19,15 +18,6 @@ nodecg.Replicant('currentRun').on('change', (newVal: GDQTypes.Run, oldVal: GDQTy
 		tweets.value = [];
 	}
 });
-
-buildUserStream();
-
-// Close and re-open the twitter connection every 90 minutes
-setInterval(() => {
-	nodecg.log.info('[twitter] Restarting Twitter connection (done every 90 minutes).');
-	userStream.close();
-	buildUserStream();
-}, 90 * 60 * 1000);
 
 nodecg.listenFor('acceptTweet', (tweet: GDQTypes.Tweet) => {
 	if (!nodecg.bundleConfig.twitter.debug) {
@@ -39,112 +29,57 @@ nodecg.listenFor('acceptTweet', (tweet: GDQTypes.Tweet) => {
 
 nodecg.listenFor('rejectTweet', removeTweetById);
 
-/**
- * Builds the stream. Called once every 90 minutes because sometimes the stream just dies silently.
- */
-function buildUserStream() {
-	userStream = new TwitterStream({
-		consumer_key: nodecg.bundleConfig.twitter.consumerKey,
-		consumer_secret: nodecg.bundleConfig.twitter.consumerSecret,
-		token: nodecg.bundleConfig.twitter.accessTokenKey,
-		token_secret: nodecg.bundleConfig.twitter.accessTokenSecret
+const socket = io.connect(nodecg.bundleConfig.twitter.websocketUrl);
+socket.on('connect', () => {
+	socket.on('authenticated', () => {
+		log.info('Twitter socket authenticated.');
 	});
 
-	userStream.on('data', (data: any) => {
-		if (!data) {
+	socket.on('unauthorized', (err: any) => {
+		log.error('There was an error with the authentication:', (err && err.message) ? err.message : err);
+	});
+
+	socket.on('twitter-webhook-payload', (payload: GDQTypes.TwitterAccountActivityPayload) => {
+		// `payload` will be an object in the format described here:
+		// https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/account-activity-data-objects
+		if (!payload) {
 			return;
 		}
 
-		// We discard quoted statuses because we can't show them.
-		if (data.quoted_status) {
-			return;
+		if (payload.favorite_events) {
+			payload.favorite_events.forEach(favoriteEvent => {
+				if (favoriteEvent.favorited_status) {
+					addTweet(favoriteEvent.favorited_status);
+				}
+			});
 		}
 
-		if (data.event) {
-			switch (data.event) {
-				case 'favorite':
-					if (data.source.id_str !== TARGET_USER_ID) {
-						return;
-					}
+		if (payload.tweet_create_events) {
+			payload.tweet_create_events.forEach(tweetCreateEvent => {
+				// We discard quoted statuses because we can't show them.
+				if (tweetCreateEvent.quoted_status) {
+					return;
+				}
 
-					addTweet(data.target_object);
-					break;
-				case 'unfavorite':
-					if (data.source.id_str !== TARGET_USER_ID) {
-						return;
-					}
+				if (tweetCreateEvent.retweeted_status) {
+					const retweetedStatus = tweetCreateEvent.retweeted_status;
+					retweetedStatus.gdqRetweetId = tweetCreateEvent.id_str;
+					addTweet(retweetedStatus);
+					return;
+				}
 
-					removeTweetById(data.target_object.id_str);
-					break;
-				default:
-				// do nothing
-			}
-		} else if (data.delete) {
-			removeTweetById(data.delete.status.id_str);
-		} else if (data.retweeted_status) {
-			if (data.user.id_str !== TARGET_USER_ID) {
-				return;
-			}
+				// We discard @ replies because we don't want to show them.
+				if (tweetCreateEvent.text.charAt(0) === '@') {
+					return;
+				}
 
-			const retweetedStatus = data.retweeted_status;
-			retweetedStatus.gdqRetweetId = data.id_str;
-			addTweet(retweetedStatus);
-		} else if (data.text) {
-			if (data.user.id_str !== TARGET_USER_ID) {
-				return;
-			}
-
-			// Filter out @ replies
-			if (data.text.charAt(0) === '@') {
-				return;
-			}
-
-			addTweet(data);
+				addTweet(tweetCreateEvent);
+			});
 		}
 	});
 
-	userStream.on('error', (error: Error) => {
-		nodecg.log.error('[twitter]', error.stack);
-	});
-
-	userStream.on('connection success', () => {
-		nodecg.log.info('[twitter] Connection success.');
-	});
-
-	userStream.on('connection aborted', () => {
-		nodecg.log.warn('[twitter] Connection aborted!');
-	});
-
-	userStream.on('connection error network', (error: Error) => {
-		nodecg.log.error('[twitter] Connection error network:', error.stack);
-	});
-
-	userStream.on('connection error stall', () => {
-		nodecg.log.error('[twitter] Connection error stall!');
-	});
-
-	userStream.on('connection error http', (httpStatusCode: number) => {
-		nodecg.log.error('[twitter] Connection error HTTP:', httpStatusCode);
-	});
-
-	userStream.on('connection rate limit', (httpStatusCode: number) => {
-		nodecg.log.error('[twitter] Connection rate limit:', httpStatusCode);
-	});
-
-	userStream.on('connection error unknown', (error: Error) => {
-		nodecg.log.error('[twitter] Connection error unknown:', error.stack);
-		userStream.close();
-		userStream = new TwitterStream({
-			consumer_key: nodecg.bundleConfig.twitter.consumerKey,
-			consumer_secret: nodecg.bundleConfig.twitter.consumerSecret,
-			token: nodecg.bundleConfig.twitter.accessTokenKey,
-			token_secret: nodecg.bundleConfig.twitter.accessTokenSecret
-		});
-		userStream.stream('user', {tweet_mode: 'extended'});
-	});
-
-	userStream.stream('user', {tweet_mode: 'extended'});
-}
+	socket.emit('authentication', {preSharedKey: nodecg.bundleConfig.twitter.preSharedKey});
+});
 
 /**
  * Adds a Tweet to the queue.
@@ -152,7 +87,7 @@ function buildUserStream() {
  */
 function addTweet(tweet: GDQTypes.Tweet) {
 	// Reject tweets with media.
-	if (tweet.extended_entities && tweet.extended_entities.media.length > 0) {
+	if (tweet.extended_tweet && tweet.extended_tweet.entities.media.length > 0) {
 		return;
 	}
 
@@ -162,13 +97,8 @@ function addTweet(tweet: GDQTypes.Tweet) {
 		return;
 	}
 
-	// Don't add truncated tweets.
-	if (tweet.truncated) {
-		return;
-	}
-
 	// Parse emoji.
-	tweet.text = twemoji.parse(tweet.full_text || tweet.text);
+	tweet.text = twemoji.parse(tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text);
 
 	// Replace newlines with spaces
 	tweet.text = tweet.text.replace(/\n/ig, ' ');
