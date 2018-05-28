@@ -4,6 +4,11 @@
 	const currentLayout = nodecg.Replicant('gdq:currentLayout');
 	const tweets = nodecg.Replicant('tweets');
 
+	/**
+	 * @customElement
+	 * @polymer
+	 * @appliesMixin Polymer.MutableData
+	 */
 	class GdqTwitterControls extends Polymer.MutableData(Polymer.Element) {
 		static get is() {
 			return 'gdq-twitter-controls';
