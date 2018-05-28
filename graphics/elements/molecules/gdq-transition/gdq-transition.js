@@ -33,7 +33,6 @@
 		}
 
 		init() {
-			console.log('init. screenshot testing?', window.__SCREENSHOT_TESTING__);
 			if (this._initialized) {
 				throw new Error('already initialized');
 			}
