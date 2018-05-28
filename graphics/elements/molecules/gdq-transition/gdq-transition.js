@@ -1,6 +1,14 @@
 (function () {
 	'use strict';
 
+	const MEDIA_READY_STATES = {
+		HAVE_NOTHING: 0,
+		HAVE_METADATA: 1,
+		HAVE_CURRENT_DATA: 2,
+		HAVE_FUTURE_DATA: 3,
+		HAVE_ENOUGH_DATA: 4
+	};
+
 	CustomEase.create('ModifiedPower2EaseInOut', 'M0,0 C0.66,0 0.339,1 1,1');
 
 	/**
@@ -19,15 +27,55 @@
 		ready() {
 			super.ready();
 
-			const fromClosedToBreak = this.fromClosedToBreak();
-			const fromBreakToClosed = this.fromClosedToBreak().reverse(0);
+			const videos = Array.from(this.shadowRoot.querySelectorAll('video'));
+			const videoLoadPromises = videos.map(this.waitForVideoToLoad);
+			Promise.all(videoLoadPromises).then(() => this.init());
+		}
 
-			if (!window.__SCREENSHOT_TESTING__) {
+		init() {
+			console.log('init. screenshot testing?', window.__SCREENSHOT_TESTING__);
+			if (this._initialized) {
+				throw new Error('already initialized');
+			}
+			this._initialized = true;
+			this.dispatchEvent(new CustomEvent('initialized'));
+
+			if (window.__SCREENSHOT_TESTING__) {
+				this.shadowRoot.querySelectorAll('video').forEach(video => {
+					video.currentTime = video.duration;
+				});
+			} else {
 				// TODO: remove this when done developing this particular animation.
+				const fromClosedToBreak = this.fromClosedToBreak();
+				const fromBreakToClosed = this.fromClosedToBreak().reverse(0);
 				const tl = new TimelineMax({repeat: -1});
 				tl.add(fromClosedToBreak, '+=4');
 				tl.add(fromBreakToClosed, '+=4');
 			}
+		}
+
+		waitForInit() {
+			return new Promise(resolve => {
+				if (this._initialized) {
+					return resolve();
+				}
+
+				this.addEventListener('initialized', () => {
+					resolve();
+				}, {once: true, passive: true});
+			});
+		}
+
+		waitForVideoToLoad(videoElem) {
+			return new Promise(resolve => {
+				if (videoElem.readyState >= MEDIA_READY_STATES.HAVE_ENOUGH_DATA) {
+					return resolve();
+				}
+
+				videoElem.addEventListener('canplaythrough', () => {
+					resolve();
+				}, {once: true, passive: true});
+			});
 		}
 
 		fromClosedToBreak() {
@@ -60,10 +108,12 @@
 			}, 'frontTraps');
 
 			tl.call(() => {
-				this.$.bottomTrapAnimation.play();
-				this.$.bottomRectAnimation.play();
-				this.$.topTrapAnimation.play();
-				this.$.topRectAnimation.play();
+				if (!window.__SCREENSHOT_TESTING__) {
+					this.$.bottomTrapAnimation.play();
+					this.$.bottomRectAnimation.play();
+					this.$.topTrapAnimation.play();
+					this.$.topRectAnimation.play();
+				}
 			}, null, null, 'frontRects');
 
 			tl.to([this.$.topFrontTrapezoid, this.$.topTrapAnimation], 0.2667, {
