@@ -32,9 +32,7 @@ module.exports = {
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
 		before(page) {
 			return page.evaluate(async () => {
-				console.log('waiting...');
 				await document.querySelector('gdq-transition').waitForInit(); // eslint-disable-line no-undef
-				console.log('done!');
 			});
 		}
 	}, {
