@@ -28,6 +28,7 @@ module.exports = {
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
+		additionalDelay: STANDARD_DELAY,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
 		before(page) {
 			return page.evaluate(async () => {
