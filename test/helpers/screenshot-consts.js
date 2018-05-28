@@ -28,8 +28,14 @@ module.exports = {
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
-		additionalDelay: STANDARD_DELAY,
-		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
+		before(page) {
+			return page.evaluate(async () => {
+				console.log('waiting...');
+				await document.querySelector('gdq-transition').waitForInit(); // eslint-disable-line no-undef
+				console.log('done!');
+			});
+		}
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/interview.html`,
 		additionalDelay: STANDARD_DELAY,
