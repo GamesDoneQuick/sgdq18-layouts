@@ -1,0 +1,152 @@
+<link rel="import" href="../../../../bower_components/font-roboto/roboto.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../../../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../shared/style/gdq-ui-theme.html">
+<link rel="import" href="dash-interview-lightning-round.html">
+<link rel="import" href="dash-interview-lowerthird-refill-option.html">
+<link rel="import" href="dash-interview-lowerthird.html">
+<link rel="import" href="dash-interview-prizes.html">
+
+<dom-module id="dash-interview">
+	<template>
+		<style include="gdq-ui-theme">
+			:host {
+				display: grid;
+				font-family: Roboto, sans-serif;
+				grid-gap: 12px;
+				grid-template-columns: 435px auto 649px;
+				grid-template-rows: 69px 57px 109px auto;
+				padding: 22px 12px;
+			}
+
+			#lowerthirdToggle paper-button,
+			#questionToggle paper-button {
+				font-size: 24px;
+				font-weight: 900;
+				height: 100%;
+				margin: 0;
+				width: 100%;
+			}
+
+			#lowerthirdToggle {
+				grid-column: 1;
+				grid-row: 3;
+			}
+
+			#questionToggle {
+				grid-column: 3;
+				grid-row: 3;
+			}
+
+			#lowerthirdControls {
+				grid-column: 1;
+				grid-row: 4;
+			}
+
+			#prizes {
+				grid-column: 2;
+				grid-row: 3 / 5;
+			}
+
+			#lightningRound {
+				grid-column: 3;
+				grid-row: 4;
+			}
+
+			.columnTitle {
+				@apply --layout-center-center;
+				@apply --layout-horizontal;
+				color: white;
+				font-size: 24px;
+				font-weight: 900;
+				grid-row: 2;
+				text-align: center;
+				text-transform: uppercase;
+			}
+
+			.panel {
+				background: #808080;
+				border: 1px solid #000000;
+				box-sizing: border-box;
+				padding: 22px 12px;
+			}
+
+			[hidden] {
+				display: none !important;
+			}
+		</style>
+
+		<div class="columnTitle" style="grid-column: 1;">Lowerthird</div>
+		<div class="columnTitle" style="grid-column: 2;">Prizes List</div>
+		<div class="columnTitle" style="grid-column: 3;">Twitter Questions</div>
+
+		<div id="lowerthirdToggle">
+			<paper-button
+				id="showLowerthird"
+				class="green"
+				on-tap="showLowerthird"
+				hidden="[[lowerthirdShowing]]"
+				disabled="[[questionShowing]]"
+				raised>
+				Show Lowerthird
+			</paper-button>
+
+			<paper-button
+				id="hideLowerthird"
+				class="red"
+				on-tap="hideLowerthird"
+				hidden="[[!lowerthirdShowing]]"
+				raised>
+				Hide Lowerthird ([[lowerthirdTimeRemaining]])
+			</paper-button>
+		</div>
+
+		<dash-interview-lowerthird
+			id="lowerthirdControls"
+			class="panel"
+			lowerthird-showing="{{lowerthirdShowing}}"
+			question-showing="[[questionShowing]]">
+		</dash-interview-lowerthird>
+
+		<dash-interview-prizes id="prizes" class="panel"></dash-interview-prizes>
+
+		<div id="questionToggle">
+			<paper-button
+				id="showQuestion"
+				class="green"
+				on-tap="showQuestion"
+				hidden="[[questionShowing]]"
+				disabled="[[_any(_markingTopQuestionAsDone, lowerthirdShowing)]]"
+				raised>
+				Show Question
+			</paper-button>
+
+			<paper-button
+				id="hideQuestion"
+				class="red"
+				on-tap="hideQuestion"
+				hidden="[[!questionShowing]]"
+				raised>
+				Hide Question ([[questionTimeRemaining]])
+			</paper-button>
+		</div>
+
+		<dash-interview-lightning-round
+			id="lightningRound"
+			class="panel"
+			question-showing="{{questionShowing}}">
+		</dash-interview-lightning-round>
+
+		<paper-toast id="errorToast"></paper-toast>
+	</template>
+
+	<script src="dash-interview.js"></script>
+</dom-module>

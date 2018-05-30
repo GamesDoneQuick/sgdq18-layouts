@@ -7,11 +7,11 @@
 <link rel="import" href="../../../mixins/MapSortMixin.html">
 <link rel="import" href="../ui-dragula-element/ui-dragula-element.html">
 <link rel="import" href="../ui-tweet/ui-tweet.html">
-<link rel="import" href="dash-interview-tablet-scrollbar-styles.html">
+<link rel="import" href="dash-interview-scrollbar-styles.html">
 
-<dom-module id="dash-interview-tablet-lightning-round">
+<dom-module id="dash-interview-lightning-round">
 	<template>
-		<style include="dragula-styles iron-flex iron-flex-alignment dash-interview-tablet-scrollbar-styles">
+		<style include="dragula-styles iron-flex iron-flex-alignment dash-interview-scrollbar-styles">
 			:host {
 				box-sizing: border-box;
 				@apply --layout-vertical;
@@ -240,9 +240,7 @@
 				<paper-button dialog-confirm autofocus on-tap="endInterview">Accept</paper-button>
 			</div>
 		</paper-dialog>
-
-		<paper-toast id="errorToast"></paper-toast>
 	</template>
 
-	<script src="dash-interview-tablet-lightning-round.js"></script>
+	<script src="dash-interview-lightning-round.js"></script>
 </dom-module>

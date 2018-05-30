@@ -11,10 +11,10 @@
 	 * @polymer
 	 * @appliesMixin window.MapSortMixin
 	 */
-	class DashInterviewTabletLightningRound extends
+	class DashInterviewLightningRound extends
 		window.MapSortMixin(Polymer.MutableData(Polymer.GestureEventListeners(Polymer.Element))) {
 		static get is() {
-			return 'dash-interview-tablet-lightning-round';
+			return 'dash-interview-lightning-round';
 		}
 
 		static get properties() {
@@ -113,6 +113,7 @@
 			nodecg.sendMessage('interview:markQuestionAsDone', event.model.reply.id_str, error => {
 				button.disabled = false;
 				if (error) {
+					// TODO: this error toast got moved to the top-level dash-interview element
 					this.$.errorToast.text = 'Failed to reject interview question.';
 					this.$.errorToast.show();
 					nodecg.log.error(error);
@@ -188,7 +189,7 @@
 		*/
 	}
 
-	customElements.define(DashInterviewTabletLightningRound.is, DashInterviewTabletLightningRound);
+	customElements.define(DashInterviewLightningRound.is, DashInterviewLightningRound);
 
 	/**
 	 * Checks if the page is running in mobile Safari.

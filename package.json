@@ -102,9 +102,9 @@
         "height": 1080
       },
       {
-        "file": "interview_tablet.html",
-        "width": 768,
-        "height": 1024
+        "file": "interview_dashboard.html",
+        "width": 1920,
+        "height": 1080
       },
       {
         "file": "countdown.html",

@@ -13,10 +13,10 @@
 	 * @appliesMixin Polymer.MutableData
 	 * @appliesMixin Polymer.GestureEventListeners
 	 */
-	class DashInterviewTabletPrizes extends
+	class DashInterviewPrizes extends
 		window.MapSortMixin(Polymer.MutableData(Polymer.GestureEventListeners(Polymer.Element))) {
 		static get is() {
-			return 'dash-interview-tablet-prizes';
+			return 'dash-interview-prizes';
 		}
 
 		static get properties() {
@@ -230,7 +230,7 @@
 		}
 	}
 
-	customElements.define(DashInterviewTabletPrizes.is, DashInterviewTabletPrizes);
+	customElements.define(DashInterviewPrizes.is, DashInterviewPrizes);
 
 	/**
 	 * Given a prize Object or prize ID Number, will always return a prize ID Number.

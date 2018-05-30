@@ -1,23 +1,36 @@
 (function () {
 	'use strict';
 
+	const lowerthirdTimeRemaining = nodecg.Replicant('interview:lowerthirdTimeRemaining');
 	const questionShowing = nodecg.Replicant('interview:questionShowing');
 	const questionSortMap = nodecg.Replicant('interview:questionSortMap');
 	const questionTimeRemaining = nodecg.Replicant('interview:questionTimeRemaining');
-	const lowerthirdTimeRemaining = nodecg.Replicant('interview:lowerthirdTimeRemaining');
 
-	class DashInterviewTabletHotbar extends Polymer.Element {
+	class DashInterview extends Polymer.MutableData(Polymer.GestureEventListeners(Polymer.Element)) {
 		static get is() {
-			return 'dash-interview-tablet-hotbar';
+			return 'dash-interview';
 		}
 
 		static get properties() {
 			return {
-				lowerthirdShowing: Boolean,
-				lowerthirdTimeRemaining: Number,
-				questionShowing: Boolean,
-				questionTimeRemaining: Number,
-				_markingTopQuestionAsDone: Boolean
+				lowerthirdShowing: {
+					type: Boolean,
+					reflectToAttribute: true
+				},
+				lowerthirdTimeRemaining: {
+					type: Number
+				},
+				questionShowing: {
+					type: Boolean,
+					reflectToAttribute: true
+				},
+				questionTimeRemaining: {
+					type: Boolean
+				},
+				_markingTopQuestionAsDone: {
+					type: Boolean,
+					value: false
+				}
 			};
 		}
 
@@ -34,11 +47,11 @@
 		}
 
 		showLowerthird() {
-			this.dispatchEvent(new CustomEvent('show-lowerthird-clicked'));
+			this.$.lowerthirdControls.autoLowerthird();
 		}
 
 		hideLowerthird() {
-			this.dispatchEvent(new CustomEvent('hide-lowerthird-clicked'));
+			this.$.lowerthirdControls.hideLowerthird();
 		}
 
 		showQuestion() {
@@ -58,18 +71,10 @@
 			this._markingTopQuestionAsDone = false;
 		}
 
-		autoFillNames() {
-			this.dispatchEvent(new CustomEvent('auto-fill-names-clicked'));
-		}
-
-		openLowerthirdPreview() {
-			this.dispatchEvent(new CustomEvent('open-lowerthird-preview-clicked'));
-		}
-
 		_any(...args) {
 			return args.find(arg => Boolean(arg));
 		}
 	}
 
-	customElements.define(DashInterviewTabletHotbar.is, DashInterviewTabletHotbar);
+	customElements.define(DashInterview.is, DashInterview);
 })();
