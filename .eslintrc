@@ -3,12 +3,13 @@
 	"rules": {
 		"new-cap": [2, {
 			"capIsNewExceptions": [
+				"CSSReflectionMixin",
+				"MapSortMixin",
+				"nodecg.Replicant",
 				"Polymer",
 				"Polymer.GestureEventListeners",
 				"Polymer.MutableData",
-				"nodecg.Replicant",
-				"CSSReflectionMixin",
-				"MapSortMixin",
+				"Polymer.NodeCGReplicantTargeting",
 				"SVG"
 			]
 		}],
