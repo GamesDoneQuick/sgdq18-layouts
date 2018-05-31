@@ -46,6 +46,7 @@
 				class="indigo"
 				disabled="[[_calcUpDisabled(index)]]"
 				on-tap="_moveItemUpPressed"
+				tabindex="-1"
 				raised>
 				<iron-icon icon="hardware:keyboard-arrow-up"></iron-icon>
 			</paper-button>
@@ -55,6 +56,7 @@
 				class="indigo"
 				disabled="[[_calcDownDisabled(index, items)]]"
 				on-tap="_moveItemDownPressed"
+				tabindex="-1"
 				raised>
 				<iron-icon icon="hardware:keyboard-arrow-down"></iron-icon>
 			</paper-button>

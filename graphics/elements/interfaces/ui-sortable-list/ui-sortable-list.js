@@ -32,7 +32,21 @@
 				this._templatized = true;
 				const templateElement = this.querySelector('template[slot="item-body"]');
 				if (templateElement) {
-					this._itemTemplateClass = Polymer.Templatize.templatize(templateElement, this, {parentModel: true});
+					this._itemTemplateClass = Polymer.Templatize.templatize(templateElement, this, {
+						forwardHostProp(prop, value) {
+							if (prop === 'item' || prop === 'index') {
+								return;
+							}
+
+							const items = Array.from(this.shadowRoot.querySelectorAll('ui-sortable-list-item'));
+							items.forEach(item => {
+								if (item._itemTemplateInstance) {
+									item._itemTemplateInstance.set(prop, value);
+								}
+							});
+						},
+						parentModel: true
+					});
 				}
 			}
 		}

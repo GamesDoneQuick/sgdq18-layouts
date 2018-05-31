@@ -92,6 +92,7 @@
 			<template slot="item-body">
 				<dash-lowerthird-name-input
 					items="[[_typeaheadCandidates]]"
+					on-change="_handleNameInputChange"
 					value="[[item]]">
 				</dash-lowerthird-name-input>
 			</template>
@@ -104,19 +105,19 @@
 			<paper-icon-button
 				id="lowerthirdRefillDialog-close"
 				icon="close"
-				on-tap="closeLowerthirdRefillDialog">
+				on-tap="closeRefillDialog">
 			</paper-icon-button>
 
 			<paper-dialog-scrollable>
 				<dash-interview-lowerthird-refill-option
 					id="currentLowerthirdRefillOption"
-					on-accepted="_handleLowerthirdRefillOptionAccepted"
+					on-accepted="_handleRefillOptionAccepted"
 					type="current">
 				</dash-interview-lowerthird-refill-option>
 
 				<dash-interview-lowerthird-refill-option
 					id="nextLowerthirdRefillOption"
-					on-accepted="_handleLowerthirdRefillOptionAccepted"
+					on-accepted="_handleRefillOptionAccepted"
 					type="next">
 				</dash-interview-lowerthird-refill-option>
 			</paper-dialog-scrollable>

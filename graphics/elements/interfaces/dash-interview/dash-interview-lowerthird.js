@@ -62,7 +62,7 @@
 
 			runnersRep.on('change', newVal => {
 				if (newVal && newVal.length > 0) {
-					this._typeaheadCandidates = newVal.filter(runner => runner).map(runner => runner.name).sort();
+					this._typeaheadCandidates = newVal.filter(Boolean).map(runner => runner.name).sort();
 				} else {
 					this._typeaheadCandidates = [];
 				}
@@ -113,12 +113,11 @@
 		 * @returns {string[]} - The names.
 		 */
 		getNames() {
-			const inputs = Array.from(this.shadowRoot.querySelectorAll('dash-lowerthird-name-input'));
-			return inputs.map(input => input.value);
+			return this.getInputs().map(input => input.value);
 		}
 
 		setNames(names) {
-			const typeaheads = Array.from(this.shadowRoot.querySelectorAll('dash-lowerthird-name-input'));
+			const typeaheads = this.getInputs();
 
 			if (!names || names.length <= 0) {
 				typeaheads.forEach(input => {
@@ -130,6 +129,15 @@
 			typeaheads.forEach((input, index) => {
 				input.value = names[index] || '';
 			});
+		}
+
+		/**
+		 * Retrieves the name inputs as an array of DOM elements.
+		 * @returns {any[]} - The input elements.
+		 */
+		getInputs() {
+			return Array.from(this.$.nameInputs.shadowRoot.querySelectorAll('ui-sortable-list-item'))
+				.map(uiSortableListItem => uiSortableListItem.shadowRoot.querySelector('dash-lowerthird-name-input'));
 		}
 
 		any(...args) {
@@ -187,9 +195,13 @@
 			this.$.lowerthirdRefillDialog.close();
 		}
 
-		_handleLowerthirdRefillOptionAccepted(e) {
+		_handleRefillOptionAccepted(e) {
 			this.setNames(e.detail.names);
 			this.closeRefillDialog();
+		}
+
+		_handleNameInputChange(event) {
+			interviewNamesRep.value[event.model.index] = event.target.value;
 		}
 	}
 
