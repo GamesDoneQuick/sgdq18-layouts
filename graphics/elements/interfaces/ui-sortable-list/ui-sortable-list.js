@@ -22,7 +22,7 @@
 				},
 				itemIdField: {
 					type: String,
-					value: 'id'
+					value: ''
 				}
 			};
 		}
@@ -46,12 +46,12 @@
 		}
 
 		_sendItemAction(actionName, event) {
-			console.log(event);
 			nodecg.sendMessage(`sortable-list:${actionName}`, {
 				replicantName: this.replicantName,
 				replicantBundle: this.replicantBundle,
 				itemIndex: event.model.index,
-				itemId: event.model.item[this.itemIdField]
+				itemId: this.itemIdField && event.model.item[this.itemIdField],
+				itemIdField: this.itemIdField
 			});
 		}
 	}

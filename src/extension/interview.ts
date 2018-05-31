@@ -342,21 +342,3 @@ function stopInterviewTimer() {
 		interviewTimer.stop();
 	}
 }
-
-/* Disabled for now. Can't get drag sort and button sort to work simultaneously.
-nodecg.listenFor('promoteQuestion', questionID => {
-	const sortIndex = questionSortMap.value.indexOf(questionID);
-	if (sortIndex <= 0) {
-		throw new Error(`Tried to promote tweet with ID "${questionID}", but its sortIndex was "${sortIndex}"`);
-	}
-	questionSortMap.value.splice(sortIndex - 1, 0, questionSortMap.value.splice(sortIndex, 1)[0]);
-});
-
-nodecg.listenFor('demoteQuestion', questionID => {
-	const sortIndex = questionSortMap.value.indexOf(questionID);
-	if (sortIndex >= questionSortMap.value.length - 1) {
-		throw new Error(`Tried to promote tweet with ID "${questionID}", but its sortIndex was "${sortIndex}"`);
-	}
-	questionSortMap.value.splice(sortIndex + 1, 0, questionSortMap.value.splice(sortIndex, 1)[0]);
-});
-*/

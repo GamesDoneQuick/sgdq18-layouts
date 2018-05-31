@@ -73,11 +73,11 @@
 			return index === (items.length - 1);
 		}
 
-		_moveItemUpPressed(event) {
-			this.dispatchEvent(new CustomEvent('move-item-ip'));
+		_moveItemUpPressed() {
+			this.dispatchEvent(new CustomEvent('move-item-up'));
 		}
 
-		_moveItemDownPressed(event) {
+		_moveItemDownPressed() {
 			this.dispatchEvent(new CustomEvent('move-item-down'));
 		}
 	}

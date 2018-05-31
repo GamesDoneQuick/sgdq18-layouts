@@ -9,7 +9,7 @@
     "iron-pages": "PolymerElements/iron-pages#^2.0.0",
     "iron-validator-behavior": "PolymerElements/iron-validator-behavior#^2.0.0",
     "moment": "^2.19.1",
-    "nodecg-replicant": "NodeCGElements/nodecg-replicant#^1.0.1",
+    "nodecg-replicant": "NodeCGElements/nodecg-replicant#^1.0.2",
     "nodecg-toast": "NodeCGElements/nodecg-toast#^1.0.0",
     "nodecg-typeahead-input": "NodeCGElements/nodecg-typeahead-input#v2.0.0",
     "nodecg-widget-obs": "npm:nodecg-widget-obs#^4.0.0",
