@@ -5,8 +5,9 @@
 	 * @customElement
 	 * @polymer
 	 * @appliesMixin Polymer.MutableData
+	 * @appliesMixin window.MapSortMixin
 	 */
-	class UiSortableList extends Polymer.MutableData(Polymer.Element) {
+	class UiSortableList extends window.MapSortMixin(Polymer.MutableData(Polymer.Element)) {
 		static get is() {
 			return 'ui-sortable-list';
 		}
@@ -23,8 +24,34 @@
 				itemIdField: {
 					type: String,
 					value: ''
+				},
+				items: {
+					type: Array
+				},
+				sort: {
+					type: Function
+				},
+				_itemsReplicantValue: {
+					type: Array
+				},
+				_actualItems: {
+					type: Array,
+					computed: '_computeActualItems(items, _itemsReplicantValue)'
 				}
 			};
+		}
+
+		ready() {
+			super.ready();
+			this._flashAddedNodes(this.shadowRoot, 'ui-sortable-list-item');
+		}
+
+		_computeActualItems(items, _itemsReplicantValue) {
+			if (Array.isArray(items)) {
+				return items;
+			}
+
+			return _itemsReplicantValue;
 		}
 
 		_ensureTemplatized() {

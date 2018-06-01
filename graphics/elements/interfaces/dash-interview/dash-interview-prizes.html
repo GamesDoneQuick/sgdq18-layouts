@@ -3,19 +3,20 @@
 <link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../../../../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../../../mixins/MapSortMixin.html">
+<link rel="import" href="../../../../shared/style/gdq-ui-theme.html">
+<link rel="import" href="dash-interview-prize-playlist-item.html">
 
 <dom-module id="dash-interview-prizes">
 	<template>
-		<style include="dragula-styles">
+		<style include="gdq-ui-theme">
 			:host {
 				@apply --layout-flex;
 				@apply --layout-horizontal;
 			}
 
 			#leftColumn {
-				width: 450px;
-				margin-right: 16px;
+				width: 274px;
+				margin-right: 9px;
 			}
 
 			#rightColumn {
@@ -84,27 +85,15 @@
 			}
 
 			#clearPlaylist {
-				margin-left: 0;
-				--paper-button: {
-					color: white;
-					background-color: #645BA6;
-				}
+				margin-right: 0;
 			}
 
 			#showPlaylist {
-				margin-right: 0;
-				--paper-button: {
-					color: white;
-					background-color: #5BA664;
-				}
+				margin-left: 0;
 			}
 
 			#hidePlaylist {
-				margin-right: 0;
-				--paper-button: {
-					color: white;
-					background-color: #C9513E;
-				}
+				margin-left: 0;
 			}
 
 			#playlist {
@@ -137,7 +126,7 @@
 
 			.prizeListing-name {
 				font-weight: 500;
-				font-size: 22px;
+				font-size: 16px;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				margin-right: auto;
@@ -145,114 +134,21 @@
 
 			.prizeListing-add,
 			.prizeListing-remove {
-				padding: 0;
-				min-width: 0;
-				width: 84px;
-				height: 50px;
-				color: white;
-				margin-left: 16px;
-				@apply --layout-horizontal;
 				@apply --layout-center-center;
 				@apply --layout-flex-none;
-			}
-
-			.prizeListing-add {
-				--paper-button: {
-					background-color: #5BA664;
-				}
-			}
-
-			.prizeListing-remove {
-				--paper-button: {
-					background-color: #C9513E;
-				}
+				@apply --layout-horizontal;
+				color: white;
+				height: 40px;
+				margin-left: 10px;
+				min-width: 0;
+				padding: 0;
+				width: 40px;
 			}
 
 			.prizeListing-add-icon,
 			.prizeListing-remove-icon {
-				width: 48px;
-				height: 48px;
-			}
-
-			.playlistPrize {
-				min-height: 90px;
-				margin: 6px 0;
-				padding: 7px 0;
-				background-color: white;
-				box-sizing: border-box;
-				box-shadow:
-					0 2px 2px 0 rgba(0, 0, 0, 0.14),
-					0 1px 5px 0 rgba(0, 0, 0, 0.12),
-					0 3px 1px -2px rgba(0, 0, 0, 0.2);
-				@apply --layout-horizontal;
-				@apply --layout-center;
-			}
-
-			.playlistPrize:first-child {
-				margin-top: 0;
-			}
-
-			.playlistPrize:last-child {
-				margin-bottom: 0;
-			}
-
-			.playlistPrize-handle {
-				position: relative;
-				width: 76px;
-				border-right: 3px solid black;
-				cursor: move;
-				@apply --layout-flex-none;
-				@apply --layout-vertical;
-				@apply --layout-center-center;
-				@apply --layout-self-stretch;
-			}
-
-			.playlistPrize-handle iron-icon {
-				width: 46px;
-				height: 46px;
-				pointer-events: none;
-			}
-
-			.playlistPrize-checkbox {
-				margin: 0 16px;
-				--paper-checkbox-size: 30px;
-				--paper-checkbox-checked-color: #7D7D7D;
-				--paper-checkbox-checkmark-color: #C2C2C2;
-			}
-
-			.playlistPrize-name {
-				font-weight: 500;
-				font-size: 24px;
-				color: black;
-				@apply --layout-flex;
-			}
-
-			.playlistPrize-remove {
-				margin: 0 10px;
-				width: 57px;
-				height: 57px;
-				padding: 0;
-				min-width: 0;
-				--paper-button: {
-					background-color: #C9513E;
-				};
-				@apply --layout-horizontal;
-				@apply --layout-center-center;
-			}
-
-			.playlistPrize-remove-icon {
-				color: white;
 				width: 32px;
 				height: 32px;
-			}
-
-			.playlistPrize[complete] {
-				background-color: #C2C2C2 !important;
-			}
-
-			.playlistPrize[complete] .playlistPrize-name {
-				color: #7D7D7D;
-				text-decoration: line-through;
 			}
 
 			.bg-color-transition {
@@ -285,15 +181,17 @@
 								[[prize.description]]
 							</div>
 							<paper-button
-								class="prizeListing-add"
+								class="prizeListing-add green"
 								hidden="[[_isPrizeInPlaylist(prize, prizePlaylist)]]"
-								on-tap="_handlePrizeListingAddTap">
+								on-tap="_handlePrizeListingAddTap"
+								raised>
 								<iron-icon class="prizeListing-add-icon" icon="add"></iron-icon>
 							</paper-button>
 							<paper-button
-								class="prizeListing-remove"
+								class="prizeListing-remove red"
 								hidden="[[!_isPrizeInPlaylist(prize, prizePlaylist)]]"
-								on-tap="_handlePrizeListingRemoveTap">
+								on-tap="_handlePrizeListingRemoveTap"
+								raised>
 								<iron-icon class="prizeListing-remove-icon" icon="remove"></iron-icon>
 							</paper-button>
 						</div>
@@ -306,15 +204,8 @@
 		<div id="rightColumn" class="column">
 			<div id="rightColumn-buttons">
 				<paper-button
-					id="clearPlaylist"
-					on-tap="clearPlaylist"
-					disabled="[[_calcClearPlaylistDisabled(prizePlaylist)]]"
-					raised>
-					Clear List
-				</paper-button>
-
-				<paper-button
 					id="showPlaylist"
+					class="indigo"
 					on-tap="showPlaylist"
 					hidden="[[prizesShowingOnMonitor]]"
 					raised>
@@ -323,56 +214,35 @@
 
 				<paper-button
 					id="hidePlaylist"
+					class="indigo"
 					on-tap="hidePlaylist"
 					hidden="[[!prizesShowingOnMonitor]]"
 					raised>
 					Hide Prizes On Monitor
 				</paper-button>
+
+				<paper-button
+					id="clearPlaylist"
+					class="indigo"
+					on-tap="clearPlaylist"
+					disabled="[[_calcClearPlaylistDisabled(prizePlaylist)]]"
+					raised>
+					Clear List
+				</paper-button>
 			</div>
 
-			<ui-dragula-element
+			<ui-sortable-list
 				id="playlist"
-				container-class="container"
-				handle-class="playlistPrize-handle"
-				on-dragula-drag="_handleDrag"
-				on-dragula-dragend="_handleDragEnd">
-				<div id="list-container" class="container">
-					<template
-						id="playlist-repeat"
-						is="dom-repeat"
-						items="[[_calcPrizesInPlaylist(allPrizes, prizePlaylist)]]"
-						as="prize"
-						sort="[[_createMapSort('id')]]"
-						mutable-data>
-						<div class="playlistPrize bg-color-transition" prize-id="[[prize.id]]" complete$="[[_calcPlaylistPrizeChecked(prize, prizePlaylist)]]">
-							<div class="playlistPrize-handle">
-								<iron-icon
-									style="pointer-events: none;"
-									icon="editor:drag-handle">
-								</iron-icon>
-							</div>
-
-							<paper-checkbox
-								class="playlistPrize-checkbox"
-								checked="[[_calcPlaylistPrizeChecked(prize, prizePlaylist)]]"
-								on-checked-changed="_handlePlaylistPrizeCheckboxChanged">
-							</paper-checkbox>
-
-							<div class="playlistPrize-name" title="[[prize.description]]">
-								[[prize.description]]
-							</div>
-
-							<paper-button
-								class="playlistPrize-remove"
-								on-tap="_handlePrizeListingRemoveTap"
-								alt="Remove from playlist"
-								raised>
-								<iron-icon icon="remove" class="playlistPrize-remove-icon"></iron-icon>
-							</paper-button>
-						</div>
-					</template>
-				</div>
-			</ui-dragula-element>
+				items="[[_calcPrizesInPlaylist(allPrizes, prizePlaylist)]]"
+				replicant-name="interview:prizePlaylist">
+				<template slot="item-body">
+					<dash-interview-prize-playlist-item
+						class="playlistPrize bg-color-transition"
+						prize="[[item]]"
+						complete$="[[_calcPlaylistPrizeChecked(item, prizePlaylist)]]">
+					</dash-interview-prize-playlist-item>
+				</template>
+			</ui-sortable-list>
 		</div>
 	</template>
 

@@ -4,17 +4,14 @@
 	const allPrizesRep = nodecg.Replicant('allPrizes');
 	const prizePlaylistRep = nodecg.Replicant('interview:prizePlaylist');
 	const showPrizesOnMonitorRep = nodecg.Replicant('interview:showPrizesOnMonitor');
-	const prizePlaylistSortMapRep = nodecg.Replicant('interview:prizePlaylistSortMap');
 
 	/**
 	 * @customElement
 	 * @polymer
 	 * @appliesMixin window.MapSortMixin
 	 * @appliesMixin Polymer.MutableData
-	 * @appliesMixin Polymer.GestureEventListeners
 	 */
-	class DashInterviewPrizes extends
-		window.MapSortMixin(Polymer.MutableData(Polymer.GestureEventListeners(Polymer.Element))) {
+	class DashInterviewPrizes extends Polymer.MutableData(Polymer.Element) {
 		static get is() {
 			return 'dash-interview-prizes';
 		}
@@ -48,45 +45,6 @@
 			showPrizesOnMonitorRep.on('change', newVal => {
 				this.prizesShowingOnMonitor = newVal;
 			});
-
-			prizePlaylistSortMapRep.on('change', (newVal, oldVal, operations) => {
-				// If the new sortMap is equal to the currently rendered sort order, do nothing.
-				if (JSON.stringify(newVal) === JSON.stringify(this._dragListOrder)) {
-					return;
-				}
-
-				this._sortMapVal = newVal;
-				this.notifyPath('prizePlaylist');
-
-				if (newVal.length > 0 && this._shouldFlash(operations)) {
-					this._flashElementBackground(this.$.playlist);
-				}
-
-				this._dragListOrder = newVal.slice(0);
-			});
-
-			if (isMobileSafari()) {
-				let start;
-				Polymer.Gestures.addListener(this.$['list-container'], 'track', e => {
-					if (e.detail.state === 'start') {
-						start = this.$.playlist.scrollTop;
-						return;
-					}
-
-					if (this._dragging) {
-						return;
-					}
-
-					this.$.playlist.scrollTop = Math.max(start - e.detail.dy, 0);
-				});
-			} else {
-				// Hack to get around https://github.com/bevacqua/crossvent/issues/8
-				// I dunno why but this prevents the "auto passive listener" thing.
-				Polymer.Gestures.addListener(this.$['list-container'], 'track', () => {});
-			}
-
-			// Fades new prize nodes from purple to white when added.
-			this._flashAddedNodes(this.$.playlist, '.playlistPrize'); // TODO: not working
 		}
 
 		clearFilter() {
@@ -101,16 +59,6 @@
 		removePrizeFromPlaylist(prizeOrPrizeId) {
 			const prizeId = disambiguatePrizeId(prizeOrPrizeId);
 			nodecg.sendMessage('interview:removePrizeFromPlaylist', prizeId);
-		}
-
-		markPrizeAsDone(prizeOrPrizeId) {
-			const prizeId = disambiguatePrizeId(prizeOrPrizeId);
-			nodecg.sendMessage('interview:markPrizeAsDone', prizeId);
-		}
-
-		markPrizeAsNotDone(prizeOrPrizeId) {
-			const prizeId = disambiguatePrizeId(prizeOrPrizeId);
-			nodecg.sendMessage('interview:markPrizeAsNotDone', prizeId);
 		}
 
 		clearPlaylist() {
@@ -189,45 +137,6 @@
 
 			return playlistEntry.complete;
 		}
-
-		_handlePlaylistPrizeCheckboxChanged(e) {
-			if (e.detail.value) {
-				this.markPrizeAsDone(e.model.prize);
-			} else {
-				this.markPrizeAsNotDone(e.model.prize);
-			}
-		}
-
-		_handleDrag() {
-			this._dragging = true;
-		}
-
-		_handleDragEnd() {
-			this._dragging = false;
-			const items = Array.from(this.$.playlist.querySelectorAll('.playlistPrize'));
-			const newSortOrder = items.map(item => item.prizeId);
-			this._dragListOrder = newSortOrder;
-			this.$['playlist-repeat'].__instances.sort((a, b) => {
-				const aMapIndex = newSortOrder.indexOf(a.__data.id);
-				const bMapIndex = newSortOrder.indexOf(b.__data.id);
-
-				if (aMapIndex >= 0 && bMapIndex < 0) {
-					return -1;
-				}
-
-				if (aMapIndex < 0 && bMapIndex >= 0) {
-					return 1;
-				}
-
-				// If neither of these prizes are in the sort map, just leave them where they are.
-				if (aMapIndex < 0 && bMapIndex < 0) {
-					return 0;
-				}
-
-				return aMapIndex - bMapIndex;
-			});
-			prizePlaylistSortMapRep.value = newSortOrder;
-		}
 	}
 
 	customElements.define(DashInterviewPrizes.is, DashInterviewPrizes);
@@ -241,13 +150,5 @@
 		return typeof prizeOrPrizeId === 'object' ?
 			prizeOrPrizeId.id :
 			prizeOrPrizeId;
-	}
-
-	/**
-	 * Checks if the page is running in mobile Safari.
-	 * @returns {boolean} - True if running in mobile Safari.
-	 */
-	function isMobileSafari() {
-		return /iP(ad|hone|od).+Version\/[\d.]+.*Safari/i.test(navigator.userAgent);
 	}
 })();

@@ -179,9 +179,7 @@
 		<ui-dragula-element
 			id="list"
 			container-class="container"
-			handle-class="tweet-handle"
-			on-dragula-drag="_handleDrag"
-			on-dragula-dragend="_handleDragEnd">
+			handle-class="tweet-handle">
 			<div id="list-container" class="container">
 				<template
 					id="repeat"
@@ -208,21 +206,6 @@
 								alt="Reject">
 								<iron-icon icon="delete-forever"></iron-icon>
 							</paper-button>
-							<!--<paper-button
-								raised
-								on-tap="promote"
-								alt="Promote"
-								disabled="[[calcPromoteDisabled(reply, _sortMapVal)]]">
-								<iron-icon icon="arrow-drop-up"></iron-icon>
-							</paper-button>
-
-							<paper-button
-								raised
-								on-tap="demote"
-								alt="Demote"
-								disabled="[[calcDemoteDisabled(reply, _sortMapVal)]]">
-								<iron-icon icon="arrow-drop-down"></iron-icon>
-							</paper-button>-->
 						</div>
 					</div>
 				</template>

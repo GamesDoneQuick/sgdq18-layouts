@@ -128,65 +128,6 @@
 		endInterview() {
 			nodecg.sendMessage('interview:end');
 		}
-
-		_handleDrag() {
-			this._dragging = true;
-		}
-
-		_handleDragEnd() {
-			this._dragging = false;
-			const items = Array.from(this.$.list.querySelectorAll('.tweet'));
-			const newSortOrder = items.map(item => item.tweetId);
-			this._dragListOrder = newSortOrder;
-			this.$.repeat.__instances.sort((a, b) => {
-				const aMapIndex = newSortOrder.indexOf(a.__data.reply.id_str);
-				const bMapIndex = newSortOrder.indexOf(b.__data.reply.id_str);
-
-				if (aMapIndex >= 0 && bMapIndex < 0) {
-					return -1;
-				}
-
-				if (aMapIndex < 0 && bMapIndex >= 0) {
-					return 1;
-				}
-
-				// If neither of these replies are in the sort map, just leave them where they are.
-				if (aMapIndex < 0 && bMapIndex < 0) {
-					return 0;
-				}
-
-				return aMapIndex - bMapIndex;
-			});
-			questionSortMap.value = newSortOrder;
-		}
-
-		/* Disabled for now. Can't get drag sort and button sort to work simultaneously.
-		calcPromoteDisabled(tweet, _dragListOrder) {
-			const sortIndex = _dragListOrder.indexOf(tweet.id_str);
-			if (sortIndex === -1) {
-				return false;
-			}
-
-			return sortIndex <= 1;
-		}
-
-		calcDemoteDisabled(tweet, _dragListOrder) {
-			const sortIndex = _dragListOrder.indexOf(tweet.id_str);
-			if (sortIndex === -1) {
-				return false;
-			}
-
-			return sortIndex >= _dragListOrder.length - 1;
-		}
-
-		promote(e) {
-			nodecg.sendMessage('promoteQuestion', e.model.reply.id_str);
-		}
-
-		demote(e) {
-			nodecg.sendMessage('demoteQuestion', e.model.reply.id_str);
-		}
-		*/
 	}
 
 	customElements.define(DashInterviewLightningRound.is, DashInterviewLightningRound);

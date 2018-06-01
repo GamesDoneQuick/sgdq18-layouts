@@ -19,14 +19,14 @@
 		<nodecg-replicant
 			replicant-name="[[replicantName]]"
 			replicant-bundle="[[replicantBundle]]"
-			value="{{replicantValue}}">
+			value="{{_itemsReplicantValue}}">
 		</nodecg-replicant>
 
-		<template is="dom-repeat" items="[[replicantValue]]" mutable-data>
+		<template is="dom-repeat" items="[[_actualItems]]" sort="[[sort]]" mutable-data>
 			<ui-sortable-list-item
 				index="[[index]]"
 				item="[[item]]"
-				items="[[replicantValue]]"
+				items="[[_actualItems]]"
 				on-move-item-up="_moveItemUpPressed"
 				on-move-item-Down="_moveItemDownPressed">
 			</ui-sortable-list-item>
