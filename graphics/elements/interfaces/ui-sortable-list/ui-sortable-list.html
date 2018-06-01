@@ -4,6 +4,7 @@
 <link rel="import" href="../../../../bower_components/polymer/lib/utils/templatize.html">
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../shared/style/gdq-ui-theme.html">
+<link rel="import" href="../../../mixins/MapSortMixin.html">
 <link rel="import" href="ui-sortable-list-item.html">
 
 <dom-module id="ui-sortable-list">
@@ -17,12 +18,13 @@
 		</style>
 
 		<nodecg-replicant
+			id="replicant"
 			replicant-name="[[replicantName]]"
 			replicant-bundle="[[replicantBundle]]"
 			value="{{_itemsReplicantValue}}">
 		</nodecg-replicant>
 
-		<template is="dom-repeat" items="[[_actualItems]]" sort="[[sort]]" mutable-data>
+		<template id="repeat" is="dom-repeat" items="[[_actualItems]]" mutable-data>
 			<ui-sortable-list-item
 				index="[[index]]"
 				item="[[item]]"

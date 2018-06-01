@@ -44,6 +44,10 @@
 			questionTimeRemaining.on('change', newVal => {
 				this.questionTimeRemaining = newVal;
 			});
+
+			this.addEventListener('error-toast', event => {
+				this.$.errorToast.show(event.detail.text);
+			});
 		}
 
 		showLowerthird() {

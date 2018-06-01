@@ -12,6 +12,7 @@ interface SortableListMoveArgs {
 	itemIndex: number;
 	itemId: string | number;
 	itemIdField: string;
+	useSortMap: boolean;
 }
 
 nodecg.listenFor('sortable-list:moveItemUp', (data: SortableListMoveArgs) => {
@@ -32,7 +33,13 @@ function moveItem(data: SortableListMoveArgs, direction: 'up' | 'down') {
 
 	// Error if the item is not found.
 	if (data.itemIdField.length > 0) {
-		const actualItemIndex = replicant.value.findIndex((item: any) => item && item[data.itemIdField] === data.itemId);
+		const actualItemIndex = replicant.value.findIndex((item: any) => {
+			if (data.useSortMap) {
+				return item === data.itemId;
+			}
+
+			return item && item[data.itemIdField] === data.itemId;
+		});
 		if (typeof actualItemIndex !== 'number' || actualItemIndex < 0 || isNaN(actualItemIndex)) {
 			log.error('Item not found with these args:', data);
 			return;

@@ -4,6 +4,7 @@
 <link rel="import" href="../../../../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../../../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../../../shared/style/gdq-ui-theme.html">
+<link rel="import" href="../ui-sortable-list/ui-sortable-list.html">
 <link rel="import" href="dash-interview-prize-playlist-item.html">
 
 <dom-module id="dash-interview-prizes">
@@ -81,19 +82,22 @@
 			#rightColumn-buttons > paper-button {
 				height: 50px;
 				font-weight: bold;
-				@apply --layout-flex;
 			}
 
 			#clearPlaylist {
 				margin-right: 0;
+				width: 180px;
+				@apply --layout-flex-none;
 			}
 
 			#showPlaylist {
 				margin-left: 0;
+				@apply --layout-flex;
 			}
 
 			#hidePlaylist {
 				margin-left: 0;
+				@apply --layout-flex;
 			}
 
 			#playlist {
@@ -149,10 +153,6 @@
 			.prizeListing-remove-icon {
 				width: 32px;
 				height: 32px;
-			}
-
-			.bg-color-transition {
-				transition: background-color 1600ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 			}
 
 			[hidden] {
@@ -237,7 +237,6 @@
 				replicant-name="interview:prizePlaylist">
 				<template slot="item-body">
 					<dash-interview-prize-playlist-item
-						class="playlistPrize bg-color-transition"
 						prize="[[item]]"
 						complete$="[[_calcPlaylistPrizeChecked(item, prizePlaylist)]]">
 					</dash-interview-prize-playlist-item>

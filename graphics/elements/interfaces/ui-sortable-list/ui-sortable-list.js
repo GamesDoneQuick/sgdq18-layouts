@@ -31,6 +31,11 @@
 				sort: {
 					type: Function
 				},
+				useSortMap: {
+					type: Boolean,
+					reflectToAttribute: true,
+					value: false
+				},
 				_itemsReplicantValue: {
 					type: Array
 				},
@@ -41,9 +46,22 @@
 			};
 		}
 
+		static get observers() {
+			return [
+				'_updateSortFunction(useSortMap, itemIdField)'
+			];
+		}
+
 		ready() {
 			super.ready();
 			this._flashAddedNodes(this.shadowRoot, 'ui-sortable-list-item');
+			this.$.replicant.addEventListener('value-changed', () => {
+				if (this.useSortMap) {
+					this._sortMapVal = this.$.replicant.value;
+				} else {
+					this._sortMapVal = null;
+				}
+			});
 		}
 
 		_computeActualItems(items, _itemsReplicantValue) {
@@ -92,8 +110,17 @@
 				replicantBundle: this.replicantBundle,
 				itemIndex: event.model.index,
 				itemId: this.itemIdField && event.model.item[this.itemIdField],
-				itemIdField: this.itemIdField
+				itemIdField: this.itemIdField,
+				useSortMap: this.useSortMap
 			});
+		}
+
+		_updateSortFunction(useSortMap, itemIdField) {
+			if (useSortMap && itemIdField) {
+				this.$.repeat.sort = this._createMapSort(itemIdField);
+			} else {
+				this.$.repeat.sort = null;
+			}
 		}
 	}
 

@@ -1,0 +1,50 @@
+<link rel="import" href="../../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../ui-tweet/ui-tweet.html">
+
+<dom-module id="dash-interview-lightning-round-tweet">
+	<template>
+		<style include="gdq-ui-theme">
+			:host {
+				@apply --layout-horizontal;
+				@apply --layout-flex;
+			}
+
+			#content {
+				--ui-tweet-avatar-size: 50px;
+				--ui-tweet-font-size: 18px;
+				@apply --layout-flex;
+			}
+
+			#reject {
+				@apply --layout-center-center;
+				@apply --layout-flex-none;
+				@apply --layout-horizontal;
+				@apply --layout-self-center;
+				height: 40px;
+				margin-right: 0;
+				min-width: 0;
+				padding: 0;
+				width: 40px;
+			}
+
+			#reject iron-icon {
+				width: 24px;
+				height: 24px;
+			}
+		</style>
+
+		<ui-tweet id="content" tweet="[[tweet]]"></ui-tweet>
+
+		<paper-button
+			id="reject"
+			class="red"
+			on-tap="reject"
+			alt="Reject"
+			raised>
+			<iron-icon icon="delete-forever"></iron-icon>
+		</paper-button>
+	</template>
+
+	<script src="dash-interview-lightning-round-tweet.js"></script>
+</dom-module>

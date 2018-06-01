@@ -8,7 +8,6 @@
 	/**
 	 * @customElement
 	 * @polymer
-	 * @appliesMixin window.MapSortMixin
 	 * @appliesMixin Polymer.MutableData
 	 */
 	class DashInterviewPrizes extends Polymer.MutableData(Polymer.Element) {

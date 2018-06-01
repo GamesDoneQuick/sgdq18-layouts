@@ -19,7 +19,12 @@ function moveItem(data, direction) {
     }
     // Error if the item is not found.
     if (data.itemIdField.length > 0) {
-        const actualItemIndex = replicant.value.findIndex((item) => item && item[data.itemIdField] === data.itemId);
+        const actualItemIndex = replicant.value.findIndex((item) => {
+            if (data.useSortMap) {
+                return item === data.itemId;
+            }
+            return item && item[data.itemIdField] === data.itemId;
+        });
         if (typeof actualItemIndex !== 'number' || actualItemIndex < 0 || isNaN(actualItemIndex)) {
             log.error('Item not found with these args:', data);
             return;
