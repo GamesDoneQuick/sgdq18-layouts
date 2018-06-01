@@ -36,7 +36,7 @@ if (interviewStopwatch.value.running) {
     interviewStopwatch.value.running = false;
     startInterviewTimer(offset);
 }
-nodecg.Replicant('interview:names', { defaultValue: [] });
+nodecg.Replicant('interview:names');
 lowerthirdShowing.on('change', (newVal) => {
     if (!newVal) {
         clearTimerFromMap(lowerthirdShowing, pulseIntervalMap);

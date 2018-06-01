@@ -43,7 +43,7 @@ if (interviewStopwatch.value.running) {
 	startInterviewTimer(offset);
 }
 
-nodecg.Replicant('interview:names', {defaultValue: []});
+nodecg.Replicant('interview:names');
 
 lowerthirdShowing.on('change', (newVal: boolean) => {
 	if (!newVal) {
