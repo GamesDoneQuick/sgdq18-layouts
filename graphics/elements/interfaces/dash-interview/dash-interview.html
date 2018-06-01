@@ -50,6 +50,19 @@
 				grid-row: 4;
 			}
 
+			#transitionControls {
+				@apply --layout-horizontal;
+				grid-column: 2;
+				grid-row: 1;
+			}
+
+			#transitionControls paper-button {
+				@apply --layout-flex;
+				font-size: 24px;
+				font-weight: 900;
+				text-align: center;
+			}
+
 			#prizes {
 				grid-column: 2;
 				grid-row: 3 / 5;
@@ -58,6 +71,23 @@
 			#lightningRound {
 				grid-column: 3;
 				grid-row: 4;
+			}
+
+			#errorToast iron-icon {
+				color: #C9513E;
+			}
+
+			#successToast iron-icon {
+				color: #5BA664;
+			}
+
+			paper-toast iron-icon:first-child {
+				margin-right: 6px;
+			}
+
+			paper-toast {
+				@apply --layout-horizontal;
+				@apply --layout-center;
 			}
 
 			.columnTitle {
@@ -115,6 +145,24 @@
 			question-showing="[[questionShowing]]">
 		</dash-interview-lowerthird>
 
+		<div id="transitionControls">
+			<paper-button
+				class="green"
+				on-tap="transitionToInterview"
+				disabled="[[_any(_sendingTransitionCommand, _transitioning)]]"
+				raised>
+				TRANSITION TO INTERVIEW
+			</paper-button>
+
+			<paper-button
+				class="red"
+				on-tap="transitionToBreak"
+				disabled="[[_any(_sendingTransitionCommand, _transitioning)]]"
+				raised>
+				BACK TO BREAK SCENE
+			</paper-button>
+		</div>
+
 		<dash-interview-prizes id="prizes" class="panel"></dash-interview-prizes>
 
 		<div id="questionToggle">
@@ -144,7 +192,15 @@
 			question-showing="{{questionShowing}}">
 		</dash-interview-lightning-round>
 
-		<paper-toast id="errorToast"></paper-toast>
+		<paper-toast id="errorToast">
+			<iron-icon icon="error-outline"></iron-icon>
+			[[_errorToastText]]
+		</paper-toast>
+
+		<paper-toast id="successToast">
+			<iron-icon icon="done"></iron-icon>
+			[[_successToastText]]
+		</paper-toast>
 	</template>
 
 	<script src="dash-interview.js"></script>
