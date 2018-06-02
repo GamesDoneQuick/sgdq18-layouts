@@ -1,11 +1,14 @@
 (function () {
 	'use strict';
 
+	const questionSortMapRep = nodecg.Replicant('interview:questionSortMap');
+
 	/**
 	 * @customElement
 	 * @polymer
+	 * @appliesMixin Polymer.MutableData
 	 */
-	class DashInterviewLightningRoundTweet extends Polymer.Element {
+	class DashInterviewLightningRoundTweet extends Polymer.MutableData(Polymer.Element) {
 		static get is() {
 			return 'dash-interview-lightning-round-tweet';
 		}
@@ -19,8 +22,28 @@
 					type: String,
 					reflectToAttribute: true,
 					computed: '_computeTweetId(tweet.id_str)'
+				},
+				first: {
+					type: Boolean,
+					reflectToAttribute: true,
+					computed: '_computeFirst(tweet, _questionSortMap)',
+					observer: '_firstChanged'
+				},
+				_questionSortMap: {
+					type: Array
 				}
 			};
+		}
+
+		connectedCallback() {
+			super.connectedCallback();
+
+			if (!this._initialized) {
+				this._initialized = true;
+				questionSortMapRep.on('change', newVal => {
+					this._questionSortMap = newVal;
+				});
+			}
 		}
 
 		promote() {
@@ -67,6 +90,19 @@
 
 		_computeTweetId(prizeId) {
 			return prizeId;
+		}
+
+		_computeFirst(tweet, questionSortMap) {
+			if (!tweet || !Array.isArray(questionSortMap)) {
+				return;
+			}
+
+			const sortMapIndex = questionSortMap.findIndex(entry => entry === this.tweet.id_str);
+			return sortMapIndex === 0;
+		}
+
+		_firstChanged(newVal) {
+			this.parentNode.host.style.backgroundColor = newVal ? '#BDE7C4' : '';
 		}
 	}
 
