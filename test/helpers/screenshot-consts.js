@@ -2,7 +2,7 @@
 
 const BUNDLE_NAME = require('../../package.json').name;
 
-const STANDARD_DELAY = 350;
+const STANDARD_DELAY = 375;
 const FINISHED_DELAY = 2000;
 const STANDARD_REPLICANT_PREFILLS = {
 	allBids: undefined,
