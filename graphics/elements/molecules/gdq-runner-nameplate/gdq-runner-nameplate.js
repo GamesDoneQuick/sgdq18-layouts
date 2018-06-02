@@ -16,7 +16,7 @@
 
 		static get properties() {
 			return {
-				/* gdq-nameplate forwarded props */
+				/* atom-nameplate forwarded props */
 				noLeftCap: {
 					type: Boolean,
 					reflectToAttribute: true,

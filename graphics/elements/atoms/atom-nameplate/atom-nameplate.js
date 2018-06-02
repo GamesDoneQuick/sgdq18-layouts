@@ -4,9 +4,9 @@
 	const NAME_FADE_IN_EASE = Power1.easeOut;
 	const NAME_FADE_OUT_EASE = Power1.easeIn;
 
-	class GdqNameplate extends Polymer.Element {
+	class AtomNameplate extends Polymer.Element {
 		static get is() {
-			return 'gdq-nameplate';
+			return 'atom-nameplate';
 		}
 
 		static get properties() {
@@ -124,5 +124,5 @@
 		}
 	}
 
-	customElements.define(GdqNameplate.is, GdqNameplate);
+	customElements.define(AtomNameplate.is, AtomNameplate);
 })();
