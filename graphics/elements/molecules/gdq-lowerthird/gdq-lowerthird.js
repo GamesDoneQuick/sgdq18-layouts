@@ -30,7 +30,7 @@
 			super.ready();
 
 			this.$.header.updateName({alias: '#SGDQ2018', twitchAlias: null, rotate: false});
-			this._$nameElements = Array.from(this.$.names.querySelectorAll('gdq-nameplate'));
+			this._$nameElements = Array.from(this.$.names.querySelectorAll('atom-nameplate'));
 
 			if (!this.preview) {
 				lowerthirdShowing.on('change', newVal => {

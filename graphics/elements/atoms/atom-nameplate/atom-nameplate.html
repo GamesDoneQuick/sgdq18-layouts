@@ -4,9 +4,9 @@
 <link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
 <link rel="import" href="../../../../shared/style/gdq-fui-styles.html">
 <link rel="import" href="../../../../shared/style/gdq-text-styles.html">
-<link rel="import" href="gdq-nameplate-twitch-logo.html">
+<link rel="import" href="atom-nameplate-twitch-logo.html">
 
-<dom-module id="gdq-nameplate">
+<dom-module id="atom-nameplate">
 	<template>
 		<style include="gdq-fui-styles gdq-text-styles">
 			:host {
@@ -37,10 +37,10 @@
 				position: relative;
 				top: -1px;
 				display: flex;
-				justify-content: var(--gdq-nameplate-justify, center);
+				justify-content: var(--atom-nameplate-justify, center);
 				flex: 1;
 				white-space: nowrap;
-				padding: 0 var(--gdq-nameplate-padding, 16px);
+				padding: 0 var(--atom-nameplate-padding, 16px);
 				opacity: 0;
 				font-weight: 600;
 				z-index: 1;
@@ -48,6 +48,7 @@
 				line-height: 1;
 				min-width: 1px;
 				box-sizing: border-box;
+				@apply --atom-nameplate-names;
 			}
 
 			#namesTwitch {
@@ -100,6 +101,17 @@
 				margin-right: 0;
 			}
 
+			sc-fitted-text {
+				--sc-fitted-text-content: {
+					color: var(--atom-nameplate-name-color, transparent);
+					background-image: var(--atom-gradient-text-gradient, linear-gradient(
+						180deg,
+						#FFFFFF 0%,
+						#CDCDCD 100%
+					));
+				};
+			}
+
 			.hidden {
 				position: absolute;
 				opacity: 0 !important;
@@ -108,17 +120,6 @@
 
 			[hidden] {
 				display: none !important;
-			}
-
-			sc-fitted-text {
-				--sc-fitted-text-content: {
-					color: transparent;
-					background-image: var(--atom-gradient-text-gradient, linear-gradient(
-						180deg,
-						#FFFFFF 0%,
-						#CDCDCD 100%
-					));
-				};
 			}
 		</style>
 
@@ -130,12 +131,12 @@
 			<div id="names">
 				<sc-fitted-text id="namesName" text="[[name]]" align="center"></sc-fitted-text>
 				<div id="namesTwitch">
-					<gdq-nameplate-twitch-logo id="twitchLogo"></gdq-nameplate-twitch-logo>
+					<atom-nameplate-twitch-logo id="twitchLogo"></atom-nameplate-twitch-logo>
 					<sc-fitted-text text="[[twitch]]" align="left"></sc-fitted-text>
 				</div>
 			</div>
 		</div>
 	</template>
 
-	<script src="gdq-nameplate.js"></script>
+	<script src="atom-nameplate.js"></script>
 </dom-module>

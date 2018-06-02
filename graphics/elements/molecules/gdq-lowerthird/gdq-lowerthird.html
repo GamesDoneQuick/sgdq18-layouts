@@ -1,7 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
 <link rel="import" href="../../../../shared/imports/gsap.html">
-<link rel="import" href="../gdq-nameplate/gdq-nameplate.html">
+<link rel="import" href="../../atoms/atom-nameplate/atom-nameplate.html">
 
 <dom-module id="gdq-lowerthird">
 	<template>
@@ -27,13 +27,13 @@
 				font-weight: 700;
 			}
 
-			#names gdq-nameplate {
+			#names atom-nameplate {
 				width: 450px;
 				margin-bottom: 5px;
 				font-size: 34px;
 				font-weight: 600;
-				--gdq-nameplate-padding: 8px;
-				--gdq-nameplate-justify: left
+				--atom-nameplate-padding: 8px;
+				--atom-nameplate-justify: left
 			}
 
 			[hidden] {
@@ -41,14 +41,14 @@
 			}
 		</style>
 
-		<gdq-nameplate id="header" name-fade-duration="0"></gdq-nameplate>
+		<atom-nameplate id="header" name-fade-duration="0"></atom-nameplate>
 
 		<div id="names">
-			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
-			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
-			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
-			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
-			<gdq-nameplate name-fade-duration="0"></gdq-nameplate>
+			<atom-nameplate name-fade-duration="0"></atom-nameplate>
+			<atom-nameplate name-fade-duration="0"></atom-nameplate>
+			<atom-nameplate name-fade-duration="0"></atom-nameplate>
+			<atom-nameplate name-fade-duration="0"></atom-nameplate>
+			<atom-nameplate name-fade-duration="0"></atom-nameplate>
 		</div>
 	</template>
 
