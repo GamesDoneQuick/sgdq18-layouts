@@ -23,6 +23,27 @@
 			};
 		}
 
+		promote() {
+			if (!this.tweet) {
+				return;
+			}
+
+			const button = this.$.promote;
+			button.disabled = true;
+			nodecg.sendMessage('interview:promoteQuestionToTop', this.tweet.id_str, error => {
+				button.disabled = false;
+				if (error) {
+					this.dispatchEvent(new CustomEvent('error-toast', {
+						detail: {
+							text: 'Failed to promote interview question.'
+						},
+						bubbles: true,
+						composed: true
+					}));
+				}
+			});
+		}
+
 		reject() {
 			if (!this.tweet) {
 				return;
