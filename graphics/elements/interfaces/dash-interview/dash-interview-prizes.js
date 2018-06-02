@@ -129,6 +129,8 @@
 				return false;
 			}
 
+			console.log(prize, prizePlaylist);
+
 			const playlistEntry = prizePlaylist.find(pe => pe.id === prize.id);
 			if (!playlistEntry) {
 				return false;

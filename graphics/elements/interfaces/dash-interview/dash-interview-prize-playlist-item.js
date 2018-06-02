@@ -1,11 +1,14 @@
 (function () {
 	'use strict';
 
+	const prizePlaylistRep = nodecg.Replicant('interview:prizePlaylist');
+
 	/**
 	 * @customElement
 	 * @polymer
+	 * @appliesMixin Polymer.MutableData
 	 */
-	class DashInterviewPrizePlaylistItem extends Polymer.Element {
+	class DashInterviewPrizePlaylistItem extends Polymer.MutableData(Polymer.Element) {
 		static get is() {
 			return 'dash-interview-prize-playlist-item';
 		}
@@ -23,9 +26,24 @@
 				complete: {
 					type: Boolean,
 					reflectToAttribute: true,
-					value: false
+					computed: '_computeComplete(prize, _prizePlaylist)',
+					observer: '_completeChanged'
+				},
+				_prizePlaylist: {
+					type: Array
 				}
 			};
+		}
+
+		connectedCallback() {
+			super.connectedCallback();
+
+			if (!this._initialized) {
+				this._initialized = true;
+				prizePlaylistRep.on('change', newVal => {
+					this._prizePlaylist = newVal;
+				});
+			}
 		}
 
 		markAsDone() {
@@ -53,7 +71,27 @@
 			return prizeId;
 		}
 
+		_computeComplete(prize, prizePlaylist) {
+			if (!prize || !Array.isArray(prizePlaylist)) {
+				return;
+			}
+
+			const playlistEntry = prizePlaylist.find(entry => entry.id === this.prize.id);
+			return playlistEntry.complete;
+		}
+
+		_completeChanged(newVal) {
+			this.parentNode.host.style.backgroundColor = newVal ? '#C2C2C2' : '';
+		}
+
 		_handleCheckboxChanged(e) {
+			if (!this._handledFirstCheckboxChange) {
+				this._handledFirstCheckboxChange = true;
+				if (e.detail.value === false) {
+					return;
+				}
+			}
+
 			if (e.detail.value) {
 				this.markAsDone();
 			} else {
