@@ -197,6 +197,7 @@
 
 		_handleRefillOptionAccepted(e) {
 			this.setNames(e.detail.names);
+			this.takeNames();
 			this.closeRefillDialog();
 		}
 
