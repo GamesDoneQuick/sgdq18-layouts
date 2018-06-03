@@ -1,7 +1,7 @@
 'use strict';
 
 const BUNDLE_NAME = require('../../package.json').name;
-
+const MAX_LOWERTHIRD_NAMES = 5;
 const STANDARD_DELAY = 375;
 const FINISHED_DELAY = 2000;
 const STANDARD_REPLICANT_PREFILLS = {
@@ -37,6 +37,7 @@ module.exports = {
 		}
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/interview.html`,
+		nameAppendix: 'blank',
 		additionalDelay: STANDARD_DELAY,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}, {
@@ -224,3 +225,21 @@ gameplayLayoutTestCases.forEach(testCase => {
 		}
 	});
 });
+
+// Interview lowerthird tests.
+for (let i = 1; i <= MAX_LOWERTHIRD_NAMES; i++) {
+	module.exports.TEST_CASES.push({
+		route: `bundles/${BUNDLE_NAME}/graphics/interview.html`,
+		nameAppendix: `lowerthird-${i}`,
+		selector: 'gdq-lowerthird',
+		entranceMethodName: 'show',
+		entranceMethodArgs: [[
+			'one wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW',
+			'two wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW',
+			'three wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW',
+			'four wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW',
+			'five wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW'
+		].slice(0, i)],
+		additionalDelay: STANDARD_DELAY
+	});
+}
