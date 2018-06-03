@@ -104,14 +104,11 @@
 			return this.transitionToScene('Break');
 		}
 
-		async transitionToScene(sceneName, transitionName = 'Blank Stinger') {
+		async transitionToScene(sceneName) {
 			this._sendingTransitionCommand = true;
 
 			try {
-				await nodecg.sendMessage('streamingOBS:transition', {
-					name: transitionName,
-					sceneName
-				});
+				await nodecg.sendMessage('streamingOBS:transition', {sceneName});
 				this.showSuccessToast(`Successfully started transition to "${sceneName}".`);
 			} catch (error) {
 				let errorString = error;
