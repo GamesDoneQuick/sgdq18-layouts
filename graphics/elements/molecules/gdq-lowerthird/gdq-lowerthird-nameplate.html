@@ -1,0 +1,59 @@
+<link rel="import" href="../../atoms/atom-nameplate/atom-nameplate.html">
+
+<dom-module id="gdq-lowerthird-nameplate">
+	<template>
+		<style>
+			:host {
+				display: block;
+				height: 45px;
+			}
+
+			#clipped {
+				height: 100%;
+				will-change: clip-path;
+			}
+
+			#nameplate {
+				height: 100%;
+			}
+
+			#occluder-clip {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				filter: drop-shadow(0 0 16px rgba(58, 216, 255, 0.8));
+			}
+
+			#occluder {
+				background-color: white;
+				height: 100%;
+				width: 40%;
+				will-change: transform;
+			}
+
+			#headerText {
+				position: absolute;
+				top: 8px;
+				left: 40px;
+			}
+
+			:host(:not([header])) #headerText {
+				display: none;
+			}
+		</style>
+
+		<div id="clipped">
+			<atom-nameplate id="nameplate" name-fade-duration="0"></atom-nameplate>
+			<img id="headerText" src="[[importPath]]img/header-text.png">
+		</div>
+
+		<div id="occluder-clip">
+			<div id="occluder"></div>
+		</div>
+	</template>
+
+	<script src="gdq-lowerthird-nameplate.js"></script>
+</dom-module>
