@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	const ENTRANCE_ANIM_DURATION = 1;
+	const ENTRANCE_ANIM_DURATION = 0.5;
 	const ENTRANCE_ANIM_EASE = Power2.easeInOut;
 
 	/**

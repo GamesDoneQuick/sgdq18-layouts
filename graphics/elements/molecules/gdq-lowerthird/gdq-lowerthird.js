@@ -2,7 +2,7 @@
 (function () {
 	'use strict';
 
-	const NAME_ELEMENT_ENTRANCE_STAGGER = 0.1;
+	const NAME_ELEMENT_ENTRANCE_STAGGER = 0.15;
 	const interviewNames = nodecg.Replicant('interview:names');
 	const lowerthirdShowing = nodecg.Replicant('interview:lowerthirdShowing');
 
@@ -118,7 +118,7 @@
 			const tl = new TimelineLite();
 			tl.to(this, 0.5, {
 				y: '100%',
-				ease: Power1.easeIn
+				ease: Power3.easeIn
 			});
 			return tl;
 		}
