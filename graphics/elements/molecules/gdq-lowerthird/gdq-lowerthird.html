@@ -33,6 +33,14 @@
 				z-index: -1;
 			}
 
+			#header {
+				width: 208px;
+				height: 33px;
+				margin-bottom: 12px;
+				font-size: 24px;
+				font-weight: 700;
+			}
+
 			#mainNames {
 				@apply --layout-horizontal;
 			}
@@ -89,7 +97,7 @@
 
 			/* Begin 5-name styles. */
 			:host([num-names="5"]) {
-				height: 161px;
+				height: 207px;
 			}
 
 			:host([num-names="5"]) #background {
@@ -100,22 +108,24 @@
 				margin: 0 4px;
 				width: 367px;
 			}
+
 			/* End 5-name styles. */
 
 			/* Begin 4-name styles. */
 			:host([num-names="4"]) {
-				height: 110px;
+				height: 156px;
 			}
 
 			:host([num-names="4"]) #mainNames gdq-lowerthird-nameplate {
 				margin: 0 4px;
 				width: 367px;
 			}
+
 			/* End 4-name styles. */
 
 			/* Begin 3-name styles. */
 			:host([num-names="3"]) {
-				height: 120px;
+				height: 166px;
 			}
 
 			:host([num-names="3"]) #mainNames gdq-lowerthird-nameplate {
@@ -123,11 +133,16 @@
 				margin: 0 5px;
 				width: 467px;
 			}
+
 			/* End 3-name styles. */
 
 			/* Begin 2-name styles. */
 			:host([num-names="2"]) {
-				height: 125px;
+				height: 175px;
+			}
+
+			:host([num-names="1"]) #header {
+				margin-bottom: 16px;
 			}
 
 			:host([num-names="2"]) #mainNames gdq-lowerthird-nameplate {
@@ -135,23 +150,26 @@
 				margin: 0 6px;
 				width: 608px;
 			}
+
 			/* End 2-name styles. */
 
 			/* Begin 1-name styles. */
 			:host([num-names="1"]) {
-				height: 121px;
+				@apply --layout-start;
+				height: 165px;
+				padding-left: 36px;
 			}
 
-			:host([num-names="1"]) #mainNames {
-				@apply --layout-self-start;
-				padding-left: 36px;
+			:host([num-names="1"]) #header {
+				margin-bottom: 10px;
 			}
 
 			:host([num-names="1"]) #mainNames gdq-lowerthird-nameplate {
 				height: 80px;
-				margin: 0 6px;
+				margin: 0;
 				width: 667px;
 			}
+
 			/* End 1-name styles. */
 
 			[hidden] {
@@ -160,6 +178,8 @@
 		</style>
 
 		<div id="background"></div>
+
+		<gdq-lowerthird-nameplate id="header" header></gdq-lowerthird-nameplate>
 
 		<div id="mainNames">
 			<gdq-lowerthird-nameplate></gdq-lowerthird-nameplate>

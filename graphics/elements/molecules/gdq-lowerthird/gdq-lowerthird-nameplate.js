@@ -14,7 +14,14 @@
 		}
 
 		static get properties() {
-			return {};
+			return {
+				importPath: String, // https://github.com/Polymer/polymer-linter/issues/71
+				header: {
+					type: Boolean,
+					reflectToAttribute: true,
+					value: false
+				}
+			};
 		}
 
 		updateName(...args) {
@@ -29,7 +36,7 @@
 				ease: ENTRANCE_ANIM_EASE
 			}, 0);
 
-			tl.to(this.$.nameplate, ENTRANCE_ANIM_DURATION, {
+			tl.to(this.$.clipped, ENTRANCE_ANIM_DURATION, {
 				clipPath: 'inset(0 0% 0 0)',
 				ease: ENTRANCE_ANIM_EASE
 			}, 0);
@@ -39,7 +46,7 @@
 
 		reset() {
 			TweenLite.set(this.$.occluder, {x: '-100%'});
-			TweenLite.set(this.$.nameplate, {clipPath: 'inset(0 100% 0 0)'});
+			TweenLite.set(this.$.clipped, {clipPath: 'inset(0 100% 0 0)'});
 		}
 	}
 

@@ -8,9 +8,13 @@
 				height: 45px;
 			}
 
-			#nameplate {
+			#clipped {
 				height: 100%;
 				will-change: clip-path;
+			}
+
+			#nameplate {
+				height: 100%;
 			}
 
 			#occluder-clip {
@@ -29,9 +33,22 @@
 				width: 40%;
 				will-change: transform;
 			}
+
+			#headerText {
+				position: absolute;
+				top: 8px;
+				left: 40px;
+			}
+
+			:host(:not([header])) #headerText {
+				display: none;
+			}
 		</style>
 
-		<atom-nameplate id="nameplate" name-fade-duration="0"></atom-nameplate>
+		<div id="clipped">
+			<atom-nameplate id="nameplate" name-fade-duration="0"></atom-nameplate>
+			<img id="headerText" src="[[importPath]]img/header-text.png">
+		</div>
 
 		<div id="occluder-clip">
 			<div id="occluder"></div>

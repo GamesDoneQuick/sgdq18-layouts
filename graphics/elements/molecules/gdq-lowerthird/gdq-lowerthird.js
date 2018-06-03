@@ -39,9 +39,7 @@
 
 		ready() {
 			super.ready();
-
 			this._$nameElements = Array.from(this.shadowRoot.querySelectorAll('#mainNames gdq-lowerthird-nameplate, #hostName gdq-lowerthird-nameplate'));
-
 			this.reset();
 
 			if (!this.preview && !window.__SCREENSHOT_TESTING__) {
@@ -69,7 +67,10 @@
 			}
 
 			const nameElementsToShow = this._$nameElements.slice(0, names.length);
-			const randomizedNameElements = Random.shuffle(Random.engines.browserCrypto, nameElementsToShow.slice(0));
+			const randomizedNameElements = Random.shuffle(
+				Random.engines.browserCrypto,
+				nameElementsToShow.slice(0).concat([this.$.header])
+			);
 
 			this.reset();
 
@@ -123,6 +124,7 @@
 		}
 
 		reset() {
+			this.$.header.reset();
 			this._$nameElements.forEach(nameElem => nameElem.reset());
 			TweenLite.set(this.$.background, {y: '100%'});
 			TweenLite.set(this.$['hostName-label'], {y: '-100%', opacity: 0});
