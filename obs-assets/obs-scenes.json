@@ -26,9 +26,9 @@
         "sync": 0,
         "volume": 0.0
     },
-    "current_program_scene": "Standard 1",
-    "current_scene": "Break",
-    "current_transition": "Blank Stinger",
+    "current_program_scene": "Interview",
+    "current_scene": "Countdown",
+    "current_transition": "Fade",
     "modules": {
         "auto-scene-switcher": {
             "active": false,
@@ -437,6 +437,7 @@
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
                 "libobs.hide_scene_item.Right Tracker": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -448,7 +449,8 @@
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
                 "libobs.show_scene_item.PC Camera": [],
-                "libobs.show_scene_item.Right Tracker": []
+                "libobs.show_scene_item.Right Tracker": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -463,7 +465,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 14,
+                "id_counter": 15,
                 "items": [
                     {
                         "align": 5,
@@ -800,6 +802,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 15,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -877,6 +907,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.hide_scene_item.∨∨∨ BOTTOM CAMERA ∨∨∨": [],
                 "libobs.hide_scene_item.∨∨∨ TOP CAMERA ∨∨∨": [],
                 "libobs.show_scene_item.Crowd Camera": [],
@@ -889,6 +920,7 @@
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
                 "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.∨∨∨ BOTTOM CAMERA ∨∨∨": [],
                 "libobs.show_scene_item.∨∨∨ TOP CAMERA ∨∨∨": []
             },
@@ -905,7 +937,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 17,
+                "id_counter": 18,
                 "items": [
                     {
                         "align": 5,
@@ -1354,6 +1386,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 18,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -1467,12 +1527,14 @@
                 "libobs.hide_scene_item.Layout Countdown": [],
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Crowd Gradient Overlay": [],
                 "libobs.show_scene_item.Interview Camera": [],
                 "libobs.show_scene_item.Layout Countdown": [],
                 "libobs.show_scene_item.Main Camera": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -1487,7 +1549,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "items": [
                     {
                         "align": 5,
@@ -1656,6 +1718,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -1701,6 +1791,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.hide_scene_item.∨∨∨ BOTTOM CAMERA ∨∨∨": [],
                 "libobs.hide_scene_item.∨∨∨ TOP CAMERA ∨∨∨": [],
                 "libobs.show_scene_item.Crowd Camera": [],
@@ -1713,6 +1804,7 @@
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
                 "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.∨∨∨ BOTTOM CAMERA ∨∨∨": [],
                 "libobs.show_scene_item.∨∨∨ TOP CAMERA ∨∨∨": []
             },
@@ -1729,7 +1821,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 16,
+                "id_counter": 17,
                 "items": [
                     {
                         "align": 5,
@@ -2178,6 +2270,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 17,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -2201,6 +2321,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.hide_scene_item.∨∨∨ BOTTOM CAMERA ∨∨∨": [],
                 "libobs.hide_scene_item.∨∨∨ TOP CAMERA ∨∨∨": [],
                 "libobs.show_scene_item.Crowd Camera": [],
@@ -2213,6 +2334,7 @@
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
                 "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.∨∨∨ BOTTOM CAMERA ∨∨∨": [],
                 "libobs.show_scene_item.∨∨∨ TOP CAMERA ∨∨∨": []
             },
@@ -2229,7 +2351,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 16,
+                "id_counter": 17,
                 "items": [
                     {
                         "align": 5,
@@ -2678,6 +2800,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 17,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -2701,6 +2851,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -2710,7 +2861,8 @@
                 "libobs.show_scene_item.Layout Gameboy 2": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -2725,7 +2877,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 12,
+                "id_counter": 13,
                 "items": [
                     {
                         "align": 5,
@@ -3006,6 +3158,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 13,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -3264,12 +3444,14 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Interview Camera": [],
                 "libobs.show_scene_item.Layout Interview": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -3284,7 +3466,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 8,
+                "id_counter": 9,
                 "items": [
                     {
                         "align": 5,
@@ -3453,6 +3635,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 9,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -3529,6 +3739,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -3538,7 +3749,8 @@
                 "libobs.show_scene_item.Layout Gameboy 4": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -3553,7 +3765,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "items": [
                     {
                         "align": 5,
@@ -3822,6 +4034,34 @@
                         "id": 10,
                         "locked": true,
                         "name": "Layout Gameboy 4",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Transition Graphic",
                         "pos": {
                             "x": 0.0,
                             "y": 0.0
@@ -4175,6 +4415,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -4184,7 +4425,8 @@
                 "libobs.show_scene_item.Layout GBA 1": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -4199,7 +4441,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "items": [
                     {
                         "align": 5,
@@ -4480,6 +4722,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -4556,6 +4826,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -4565,7 +4836,8 @@
                 "libobs.show_scene_item.Layout Standard 4": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -4580,7 +4852,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 12,
+                "id_counter": 13,
                 "items": [
                     {
                         "align": 5,
@@ -4861,6 +5133,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 13,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -4937,6 +5237,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -4946,7 +5247,8 @@
                 "libobs.show_scene_item.Layout Standard 3": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -4961,7 +5263,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "items": [
                     {
                         "align": 5,
@@ -5242,6 +5544,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -5290,6 +5620,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -5299,7 +5630,8 @@
                 "libobs.show_scene_item.Layout Widescreen 2": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -5314,7 +5646,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "items": [
                     {
                         "align": 5,
@@ -5595,6 +5927,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -5671,6 +6031,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -5680,7 +6041,8 @@
                 "libobs.show_scene_item.Layout Widescreen 1": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -5695,7 +6057,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 11,
+                "id_counter": 12,
                 "items": [
                     {
                         "align": 5,
@@ -5964,6 +6326,34 @@
                         "id": 10,
                         "locked": true,
                         "name": "Layout Widescreen 1",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 12,
+                        "locked": false,
+                        "name": "Transition Graphic",
                         "pos": {
                             "x": 0.0,
                             "y": 0.0
@@ -6935,6 +7325,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -6944,7 +7335,8 @@
                 "libobs.show_scene_item.Layout GBA 2": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -6959,7 +7351,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "items": [
                     {
                         "align": 5,
@@ -7240,6 +7632,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -7316,6 +7736,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -7325,7 +7746,8 @@
                 "libobs.show_scene_item.Layout Gameboy": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -7340,7 +7762,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 11,
+                "id_counter": 12,
                 "items": [
                     {
                         "align": 5,
@@ -7621,6 +8043,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 12,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -7697,6 +8147,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -7706,7 +8157,8 @@
                 "libobs.show_scene_item.Layout 3DS": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -7721,7 +8173,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "items": [
                     {
                         "align": 5,
@@ -8002,6 +8454,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -8078,6 +8558,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -8087,7 +8568,8 @@
                 "libobs.show_scene_item.Layout DS": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -8102,7 +8584,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "items": [
                     {
                         "align": 5,
@@ -8383,6 +8865,34 @@
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
                     }
                 ]
             },
@@ -8459,6 +8969,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -8468,7 +8979,8 @@
                 "libobs.show_scene_item.Layout Gameboy 3": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -8483,7 +8995,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 10,
+                "id_counter": 11,
                 "items": [
                     {
                         "align": 5,
@@ -8752,6 +9264,34 @@
                         "id": 10,
                         "locked": true,
                         "name": "Layout Gameboy 3",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Transition Graphic",
                         "pos": {
                             "x": 0.0,
                             "y": 0.0
@@ -9474,6 +10014,7 @@
                 "libobs.hide_scene_item.Main Camera": [],
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -9483,7 +10024,8 @@
                 "libobs.show_scene_item.Layout DS Vertical": [],
                 "libobs.show_scene_item.Main Camera": [],
                 "libobs.show_scene_item.Omnibar": [],
-                "libobs.show_scene_item.PC Camera": []
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": []
             },
             "id": "scene",
             "mixers": 0,
@@ -9498,7 +10040,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 12,
+                "id_counter": 13,
                 "items": [
                     {
                         "align": 5,
@@ -9767,6 +10309,34 @@
                         "id": 11,
                         "locked": true,
                         "name": "Layout DS Vertical",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 13,
+                        "locked": false,
+                        "name": "Transition Graphic",
                         "pos": {
                             "x": 0.0,
                             "y": 0.0

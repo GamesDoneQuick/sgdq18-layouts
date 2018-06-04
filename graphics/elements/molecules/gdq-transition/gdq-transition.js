@@ -4,6 +4,7 @@
 	const GAME_SCENE_NAME_REGEX = /^(Standard|Widescreen|GBA|Gameboy|3DS|DS|LttP|OoT|Mario)/;
 	const HOME_POSITION = {x: 0, y: 0};
 	const HERO_HOLD_TIME = 1.5;
+	const GENERIC_HOLD_TIME = 0.5;
 	const MEDIA_READY_STATES = {
 		HAVE_NOTHING: 0,
 		HAVE_METADATA: 1,
@@ -118,35 +119,65 @@
 		}
 
 		genericNone() {
-			const tl = new TimelineLite();
-			return tl;
+			console.log('genericNone');
+			return this.genericBase({startPartial: false, endPartial: false});
 		}
 
 		genericEnter() {
-			const tl = new TimelineLite();
-			return tl;
+			console.log('genericEnter');
+			return this.genericBase({startPartial: false, endPartial: true});
 		}
 
 		genericExit() {
-			const tl = new TimelineLite();
-			return tl;
+			console.log('genericExit');
+			return this.genericBase({startPartial: true, endPartial: false});
 		}
 
 		genericBoth() {
-			const tl = new TimelineLite();
+			console.log('genericBoth');
+			return this.genericBase({startPartial: true, endPartial: true});
+		}
+
+		genericBase({startPartial, endPartial}) {
+			const tl = new TimelineLite({
+				callbackScope: this,
+				onStart() {
+					this.$.genericAnimation.style.display = '';
+					this.$['bottomTrapAnimation-exit'].style.display = 'none';
+					this.$['bottomTrapAnimation-enter'].style.display = 'none';
+				}
+			});
+
+			const closingAnim = startPartial ? this.fromPartialToClosed() : this.fromOpenToClosed();
+			closingAnim.call(() => {
+				if (window.__SCREENSHOT_TESTING__) {
+					return;
+				}
+				this.$.genericAnimation.play();
+			}, null, null, 'frontRects');
+
+			tl.add(closingAnim);
+			tl.add(endPartial ? this.fromClosedToPartial() : this.fromClosedToOpen(), `+=${GENERIC_HOLD_TIME}`);
 			return tl;
 		}
 
 		heroEnter() {
 			console.log('heroEnter');
-			const tl = new TimelineLite();
-			const closingAnim = this.fromOpenToClosed();
+			const tl = new TimelineLite({
+				callbackScope: this,
+				onStart() {
+					this.$.genericAnimation.style.display = 'none';
+					this.$['bottomTrapAnimation-exit'].style.display = 'none';
+					this.$['bottomTrapAnimation-enter'].style.display = '';
+				}
+			});
 
+			const closingAnim = this.fromOpenToClosed();
 			closingAnim.call(() => {
 				if (window.__SCREENSHOT_TESTING__) {
 					return;
 				}
-				this.$.bottomTrapAnimation.play();
+				this.$['bottomTrapAnimation-enter'].play();
 				this.$.bottomRectAnimation.play();
 				this.$.topTrapAnimation.play();
 				this.$.topRectAnimation.play();
@@ -159,14 +190,22 @@
 
 		heroExit() {
 			console.log('heroExit');
-			const tl = new TimelineLite();
-			const closingAnim = this.fromPartialToClosed();
+			const tl = new TimelineLite({
+				callbackScope: this,
+				onStart() {
+					this.$.genericAnimation.style.display = 'none';
+					this.$['bottomTrapAnimation-enter'].style.display = 'none';
+					this.$['bottomTrapAnimation-exit'].style.display = '';
+				}
+			});
 
+			const closingAnim = this.fromPartialToClosed();
 			closingAnim.call(() => {
 				if (window.__SCREENSHOT_TESTING__) {
 					return;
 				}
-				this.$.bottomTrapAnimation.play();
+
+				this.$['bottomTrapAnimation-exit'].play();
 				this.$.bottomRectAnimation.play();
 				this.$.topTrapAnimation.play();
 				this.$.topRectAnimation.play();
@@ -178,12 +217,10 @@
 		}
 
 		fromOpenToClosed() {
-			console.log('fromOpenToClosed');
 			return this.fromClosedToOpen().reverse(0);
 		}
 
 		fromClosedToOpen() {
-			console.log('fromClosedToOpen');
 			return this.tweenGeometry({
 				bottomFrontRect: {x: 26, y: 413},
 				topFrontRect: {x: -10, y: -418},
@@ -197,12 +234,10 @@
 		}
 
 		fromPartialToClosed() {
-			console.log('fromPartialToClosed');
 			return this.fromClosedToPartial().reverse(0);
 		}
 
 		fromClosedToPartial() {
-			console.log('fromClosedToPartial');
 			return this.tweenGeometry({
 				bottomFrontRect: {x: 26, y: 321},
 				topFrontRect: {x: -10, y: -349},
