@@ -179,31 +179,29 @@
 
 		fromOpenToClosed() {
 			console.log('fromOpenToClosed');
-			return this.fromClosedToOpen({zeroOut: true}).reverse(0);
+			return this.fromClosedToOpen().reverse(0);
 		}
 
-		fromClosedToOpen(opts) {
+		fromClosedToOpen() {
 			console.log('fromClosedToOpen');
-			// @TODO: these values are currently just copy/pasted from `fromClosedToPartial`.
 			return this.tweenGeometry({
-				bottomFrontRect: {x: 26, y: 321},
-				topFrontRect: {x: -10, y: -349},
-				bottomFrontTrapezoid: {x: -503, y: 364},
-				topFrontTrapezoid: {x: 8, y: -417},
-				bottomBackRect: {x: 0, y: 323},
-				topBackRect: {x: 0, y: -351},
-				bottomBackTrapezoid: {x: -490, y: 374},
-				topBackTrapezoid: {x: 0, y: -426},
-				...opts
+				bottomFrontRect: {x: 26, y: 413},
+				topFrontRect: {x: -10, y: -418},
+				bottomFrontTrapezoid: {x: -667, y: 488},
+				topFrontTrapezoid: {x: 14, y: -521},
+				bottomBackRect: {x: 0, y: 421},
+				topBackRect: {x: -10, y: -437},
+				bottomBackTrapezoid: {x: -666, y: 510},
+				topBackTrapezoid: {x: 0, y: -543}
 			});
 		}
 
 		fromPartialToClosed() {
 			console.log('fromPartialToClosed');
-			return this.fromClosedToPartial({zeroOut: true}).reverse(0);
+			return this.fromClosedToPartial().reverse(0);
 		}
 
-		fromClosedToPartial(opts) {
+		fromClosedToPartial() {
 			console.log('fromClosedToPartial');
 			return this.tweenGeometry({
 				bottomFrontRect: {x: 26, y: 321},
@@ -213,8 +211,7 @@
 				bottomBackRect: {x: 0, y: 323},
 				topBackRect: {x: 0, y: -351},
 				bottomBackTrapezoid: {x: -490, y: 374},
-				topBackTrapezoid: {x: 0, y: -426},
-				...opts
+				topBackTrapezoid: {x: 0, y: -426}
 			});
 		}
 

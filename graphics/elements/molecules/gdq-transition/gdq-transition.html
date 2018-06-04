@@ -8,9 +8,18 @@
 				display: block;
 			}
 
-			:host > img, video, div {
+			:host > img,
+			:host > div {
 				position: absolute;
 				will-change: transform;
+			}
+
+			:host > div {
+				display: flex;
+			}
+
+			video {
+				position: absolute;
 			}
 
 			.bottom {
