@@ -1,0 +1,8 @@
+{
+    "settings": {
+        "key": "live_124911810_1cFWXNCqxlEIQHND58RrCTdL4Fre6w",
+        "server": "rtmp://live-iad.twitch.tv/app",
+        "service": "Twitch"
+    },
+    "type": "rtmp_common"
+}
