@@ -38,7 +38,9 @@
 		ready() {
 			super.ready();
 
-			this.fromClosedToOpen().progress(1);
+			if (!window.__SCREENSHOT_TESTING__) {
+				this.fromClosedToOpen().progress(1);
+			}
 
 			const videos = Array.from(this.shadowRoot.querySelectorAll('video'));
 			const videoLoadPromises = videos.map(this.waitForVideoToLoad);
@@ -138,26 +140,39 @@
 		heroEnter() {
 			console.log('heroEnter');
 			const tl = new TimelineLite();
-			tl.add(this.fromOpenToClosed());
-			tl.add(this.fromClosedToPartial(), `+=${HERO_HOLD_TIME}`);
+			const closingAnim = this.fromOpenToClosed();
 
-			/*tl.call(() => {
-				if (!window.__SCREENSHOT_TESTING__) {
+			closingAnim.call(() => {
+				if (window.__SCREENSHOT_TESTING__) {
 					return;
 				}
 				this.$.bottomTrapAnimation.play();
 				this.$.bottomRectAnimation.play();
 				this.$.topTrapAnimation.play();
 				this.$.topRectAnimation.play();
-			}, null, null, 'frontRects');*/
+			}, null, null, 'frontRects');
 
+			tl.add(closingAnim);
+			tl.add(this.fromClosedToPartial(), `+=${HERO_HOLD_TIME}`);
 			return tl;
 		}
 
 		heroExit() {
 			console.log('heroExit');
 			const tl = new TimelineLite();
-			tl.add(this.fromPartialToClosed());
+			const closingAnim = this.fromPartialToClosed();
+
+			closingAnim.call(() => {
+				if (window.__SCREENSHOT_TESTING__) {
+					return;
+				}
+				this.$.bottomTrapAnimation.play();
+				this.$.bottomRectAnimation.play();
+				this.$.topTrapAnimation.play();
+				this.$.topRectAnimation.play();
+			}, null, null, 'frontRects');
+
+			tl.add(closingAnim);
 			tl.add(this.fromClosedToOpen(), `+=${HERO_HOLD_TIME}`);
 			return tl;
 		}
@@ -222,21 +237,21 @@
 			tl.addLabel('backTraps', 'start+=0.2334');
 
 			// Front rects.
-			tl.fromTo([this.$.bottomFrontRect, this.$.bottomRectAnimation], 0.2167, HOME_POSITION, {
+			tl.fromTo(this.$.bottomFrontRect, 0.2167, HOME_POSITION, {
 				...bottomFrontRect,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontRects');
-			tl.fromTo([this.$.topFrontRect, this.$.topRectAnimation], 0.2167, HOME_POSITION, {
+			tl.fromTo(this.$.topFrontRect, 0.2167, HOME_POSITION, {
 				...topFrontRect,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontRects');
 
 			// Front traps.
-			tl.fromTo([this.$.bottomFrontTrapezoid, this.$.bottomTrapAnimation], 0.2667, HOME_POSITION, {
+			tl.fromTo(this.$.bottomFrontTrapezoid, 0.2667, HOME_POSITION, {
 				...bottomFrontTrapezoid,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontTraps');
-			tl.fromTo([this.$.topFrontTrapezoid, this.$.topTrapAnimation], 0.2667, HOME_POSITION, {
+			tl.fromTo(this.$.topFrontTrapezoid, 0.2667, HOME_POSITION, {
 				...topFrontTrapezoid,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontTraps');
