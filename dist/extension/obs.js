@@ -62,6 +62,40 @@ streamingOBS.replicants.programScene.on('change', (newVal) => {
         return false;
     });
 });
+streamingOBS.replicants.previewScene.on('change', (newVal) => {
+    if (!newVal || !newVal.name) {
+        return;
+    }
+    // Show the Transition Graphic if the scene is NOT the Break scene.
+    if (newVal.name !== 'Break') {
+        streamingOBS.setSceneItemRender({
+            'scene-name': newVal.name,
+            source: 'Transition Graphic',
+            render: false
+        }).catch((error) => {
+            nodecg.log.error(`Failed to hide Transition Graphic on scene "${newVal.name}":`, error);
+        });
+    }
+});
+streamingOBS.on('TransitionBegin', (data) => {
+    if (data.name !== 'Blank Stinger') {
+        return;
+    }
+    const previewSceneName = streamingOBS.replicants.previewScene.value ?
+        streamingOBS.replicants.previewScene.value.name :
+        undefined;
+    if (!previewSceneName) {
+        return;
+    }
+    // Show the Transition Graphic on the scene which is being transitioned to.
+    streamingOBS.setSceneItemRender({
+        'scene-name': previewSceneName,
+        source: 'Transition Graphic',
+        render: true
+    }).catch((error) => {
+        nodecg.log.error(`Failed to show Transition Graphic on scene "${previewSceneName}":`, error);
+    });
+});
 function cycleRecording(obs) {
     return new Promise((resolve, reject) => {
         let rejected = false;
