@@ -67,6 +67,10 @@
 					return;
 				}
 
+				if (data.name !== 'Blank Stinger') {
+					return;
+				}
+
 				let animationTimeline;
 				if (data.fromScene === 'Break') {
 					if (data.toScene === 'Break') {
@@ -142,18 +146,19 @@
 			const tl = new TimelineLite({
 				callbackScope: this,
 				onStart() {
-					this.$.genericAnimation.style.display = '';
-					this.$['bottomTrapAnimation-exit'].style.display = 'none';
-					this.$['bottomTrapAnimation-enter'].style.display = 'none';
+					this.hideVideos(
+						this.$['bottomTrapAnimation-enter'],
+						this.$['bottomTrapAnimation-exit'],
+						this.$.bottomRectAnimation,
+						this.$.topTrapAnimation,
+						this.$.topRectAnimation
+					);
 				}
 			});
 
 			const closingAnim = startPartial ? this.fromPartialToClosed() : this.fromOpenToClosed();
 			closingAnim.call(() => {
-				if (window.__SCREENSHOT_TESTING__) {
-					return;
-				}
-				this.$.genericAnimation.play();
+				this.playVideos(this.$.genericAnimation);
 			}, null, null, 'frontRects');
 
 			tl.add(closingAnim);
@@ -166,25 +171,27 @@
 			const tl = new TimelineLite({
 				callbackScope: this,
 				onStart() {
-					this.$.genericAnimation.style.display = 'none';
-					this.$['bottomTrapAnimation-exit'].style.display = 'none';
-					this.$['bottomTrapAnimation-enter'].style.display = '';
+					this.hideVideos(
+						this.$.genericAnimation,
+						this.$['bottomTrapAnimation-exit']
+					);
+					this.showVideos(this.$['bottomTrapAnimation-enter']);
 				}
 			});
 
 			const closingAnim = this.fromOpenToClosed();
 			closingAnim.call(() => {
-				if (window.__SCREENSHOT_TESTING__) {
-					return;
-				}
-				this.$['bottomTrapAnimation-enter'].play();
-				this.$.bottomRectAnimation.play();
-				this.$.topTrapAnimation.play();
-				this.$.topRectAnimation.play();
+				this.playVideos(
+					this.$['bottomTrapAnimation-enter'],
+					this.$.bottomRectAnimation,
+					this.$.topTrapAnimation,
+					this.$.topRectAnimation
+				);
 			}, null, null, 'frontRects');
 
 			tl.add(closingAnim);
-			tl.add(this.fromClosedToPartial(), `+=${HERO_HOLD_TIME}`);
+			tl.add(this.fromClosedToPartial({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
+			console.log(tl.duration());
 			return tl;
 		}
 
@@ -193,34 +200,41 @@
 			const tl = new TimelineLite({
 				callbackScope: this,
 				onStart() {
-					this.$.genericAnimation.style.display = 'none';
-					this.$['bottomTrapAnimation-enter'].style.display = 'none';
-					this.$['bottomTrapAnimation-exit'].style.display = '';
+					this.hideVideos(
+						this.$.genericAnimation,
+						this.$['bottomTrapAnimation-enter']
+					);
+
+					this.showVideos(
+						this.$['bottomTrapAnimation-exit'],
+						this.$.bottomRectAnimation,
+						this.$.topTrapAnimation,
+						this.$.topRectAnimation,
+					);
 				}
 			});
 
 			const closingAnim = this.fromPartialToClosed();
 			closingAnim.call(() => {
-				if (window.__SCREENSHOT_TESTING__) {
-					return;
-				}
-
-				this.$['bottomTrapAnimation-exit'].play();
-				this.$.bottomRectAnimation.play();
-				this.$.topTrapAnimation.play();
-				this.$.topRectAnimation.play();
+				this.playVideos(
+					this.$['bottomTrapAnimation-exit'],
+					this.$.bottomRectAnimation,
+					this.$.topTrapAnimation,
+					this.$.topRectAnimation,
+				);
 			}, null, null, 'frontRects');
 
 			tl.add(closingAnim);
-			tl.add(this.fromClosedToOpen(), `+=${HERO_HOLD_TIME}`);
+			tl.add(this.fromClosedToOpen({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
+			console.log(tl.duration());
 			return tl;
 		}
 
-		fromOpenToClosed() {
-			return this.fromClosedToOpen().reverse(0);
+		fromOpenToClosed(...args) {
+			return this.fromClosedToOpen(...args).reverse(0);
 		}
 
-		fromClosedToOpen() {
+		fromClosedToOpen({fadeOutVideos} = {}) {
 			return this.tweenGeometry({
 				bottomFrontRect: {x: 26, y: 413},
 				topFrontRect: {x: -10, y: -418},
@@ -229,15 +243,16 @@
 				bottomBackRect: {x: 0, y: 421},
 				topBackRect: {x: -10, y: -437},
 				bottomBackTrapezoid: {x: -666, y: 510},
-				topBackTrapezoid: {x: 0, y: -543}
+				topBackTrapezoid: {x: 0, y: -543},
+				fadeOutVideos
 			});
 		}
 
-		fromPartialToClosed() {
-			return this.fromClosedToPartial().reverse(0);
+		fromPartialToClosed(...args) {
+			return this.fromClosedToPartial(...args).reverse(0);
 		}
 
-		fromClosedToPartial() {
+		fromClosedToPartial({fadeOutVideos} = {}) {
 			return this.tweenGeometry({
 				bottomFrontRect: {x: 26, y: 321},
 				topFrontRect: {x: -10, y: -349},
@@ -246,7 +261,8 @@
 				bottomBackRect: {x: 0, y: 323},
 				topBackRect: {x: 0, y: -351},
 				bottomBackTrapezoid: {x: -490, y: 374},
-				topBackTrapezoid: {x: 0, y: -426}
+				topBackTrapezoid: {x: 0, y: -426},
+				fadeOutVideos
 			});
 		}
 
@@ -258,7 +274,8 @@
 			bottomBackRect,
 			topBackRect,
 			bottomBackTrapezoid,
-			topBackTrapezoid
+			topBackTrapezoid,
+			fadeOutVideos = false
 		}) {
 			const tl = new TimelineLite();
 
@@ -308,6 +325,14 @@
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'backTraps');
 
+			if (fadeOutVideos) {
+				const videos = this.shadowRoot.querySelectorAll('video');
+				tl.to(videos, 0.25, {
+					opacity: 0,
+					ease: Sine.easeInOut
+				}, tl.duration() / 2);
+			}
+
 			return tl;
 		}
 
@@ -332,6 +357,39 @@
 				videoElem.addEventListener('canplaythrough', () => {
 					resolve();
 				}, {once: true, passive: true});
+			});
+		}
+
+		playVideos(...videoElems) {
+			if (window.__SCREENSHOT_TESTING__) {
+				return;
+			}
+
+			this.showVideos(...videoElems);
+			videoElems.forEach(videoElem => {
+				videoElem.play();
+			});
+		}
+
+		showVideos(...videoElems) {
+			if (window.__SCREENSHOT_TESTING__) {
+				return;
+			}
+
+			videoElems.forEach(videoElem => {
+				videoElem.style.display = '';
+				videoElem.style.opacity = '';
+			});
+		}
+
+		hideVideos(...videoElems) {
+			if (window.__SCREENSHOT_TESTING__) {
+				return;
+			}
+
+			videoElems.forEach(videoElem => {
+				videoElem.style.display = 'none';
+				videoElem.style.opacity = '0';
 			});
 		}
 	}
