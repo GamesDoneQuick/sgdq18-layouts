@@ -9,7 +9,7 @@ export interface Tweet {
     gdqRetweetId?: string;
 }
 export interface TweetEntities {
-    media: {
+    media?: {
         [key: string]: any;
     }[];
 }

@@ -43,7 +43,7 @@ if (interviewStopwatch.value.running) {
 	startInterviewTimer(offset);
 }
 
-nodecg.Replicant('interview:names', {defaultValue: []});
+nodecg.Replicant('interview:names');
 
 lowerthirdShowing.on('change', (newVal: boolean) => {
 	if (!newVal) {
@@ -151,6 +151,26 @@ allPrizes.on('change', (newVal: any) => {
 nodecg.listenFor('interview:updateQuestionSortMap', updateQuestionSortMap);
 
 nodecg.listenFor('interview:markQuestionAsDone', markQuestionAsDone);
+
+nodecg.listenFor('interview:promoteQuestionToTop', (id: string, cb: Function) => {
+	if (!_repliesRef) {
+		return cb(new Error('_repliesRef not ready!'));
+	}
+
+	if (!id) {
+		return cb();
+	}
+
+	const itemIndex = questionSortMap.value.findIndex((sortId: string) => sortId === id);
+	if (itemIndex < 0) {
+		return cb(new Error('Tweet ID not found in sort map!'));
+	}
+
+	const newArray = questionSortMap.value.slice(0);
+	newArray.splice(0, 0, newArray.splice(itemIndex, 1)[0]);
+	questionSortMap.value = newArray;
+	cb();
+});
 
 nodecg.listenFor('interview:end', () => {
 	database.ref('/active_tweet_id').set(0);
@@ -342,21 +362,3 @@ function stopInterviewTimer() {
 		interviewTimer.stop();
 	}
 }
-
-/* Disabled for now. Can't get drag sort and button sort to work simultaneously.
-nodecg.listenFor('promoteQuestion', questionID => {
-	const sortIndex = questionSortMap.value.indexOf(questionID);
-	if (sortIndex <= 0) {
-		throw new Error(`Tried to promote tweet with ID "${questionID}", but its sortIndex was "${sortIndex}"`);
-	}
-	questionSortMap.value.splice(sortIndex - 1, 0, questionSortMap.value.splice(sortIndex, 1)[0]);
-});
-
-nodecg.listenFor('demoteQuestion', questionID => {
-	const sortIndex = questionSortMap.value.indexOf(questionID);
-	if (sortIndex >= questionSortMap.value.length - 1) {
-		throw new Error(`Tried to promote tweet with ID "${questionID}", but its sortIndex was "${sortIndex}"`);
-	}
-	questionSortMap.value.splice(sortIndex + 1, 0, questionSortMap.value.splice(sortIndex, 1)[0]);
-});
-*/

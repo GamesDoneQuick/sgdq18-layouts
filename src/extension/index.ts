@@ -31,6 +31,7 @@ module.exports = (nodecg: any) => {
 	require('./obs');
 	require('./nowplaying');
 	require('./countdown');
+	require('./sortable-list');
 
 	// This is a hack.
 	require('./caspar').oscEvents.once('initialized', () => {
