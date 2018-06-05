@@ -12,7 +12,7 @@ export interface Tweet {
 }
 
 export interface TweetEntities {
-	media: {[key: string]: any}[];
+	media?: {[key: string]: any}[];
 }
 
 export interface TwitterAccountActivityPayload {

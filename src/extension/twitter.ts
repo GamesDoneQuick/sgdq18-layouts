@@ -87,7 +87,9 @@ socket.on('connect', () => {
  */
 function addTweet(tweet: GDQTypes.Tweet) {
 	// Reject tweets with media.
-	if (tweet.extended_tweet && tweet.extended_tweet.entities.media.length > 0) {
+	if (tweet.extended_tweet &&
+		tweet.extended_tweet.entities.media &&
+		tweet.extended_tweet.entities.media.length > 0) {
 		return;
 	}
 

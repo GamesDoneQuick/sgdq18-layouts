@@ -1,6 +1,6 @@
-class DashInterviewTabletLowerthirdRefillOption extends Polymer.Element {
+class DashInterviewLowerthirdRefillOption extends Polymer.Element {
 	static get is() {
-		return 'dash-interview-tablet-lowerthird-refill-option';
+		return 'dash-interview-lowerthird-refill-option';
 	}
 
 	static get properties() {
@@ -22,4 +22,4 @@ class DashInterviewTabletLowerthirdRefillOption extends Polymer.Element {
 	}
 }
 
-customElements.define(DashInterviewTabletLowerthirdRefillOption.is, DashInterviewTabletLowerthirdRefillOption);
+customElements.define(DashInterviewLowerthirdRefillOption.is, DashInterviewLowerthirdRefillOption);

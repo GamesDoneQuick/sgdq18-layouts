@@ -36,7 +36,7 @@ if (interviewStopwatch.value.running) {
     interviewStopwatch.value.running = false;
     startInterviewTimer(offset);
 }
-nodecg.Replicant('interview:names', { defaultValue: [] });
+nodecg.Replicant('interview:names');
 lowerthirdShowing.on('change', (newVal) => {
     if (!newVal) {
         clearTimerFromMap(lowerthirdShowing, pulseIntervalMap);
@@ -127,6 +127,22 @@ allPrizes.on('change', (newVal) => {
 });
 nodecg.listenFor('interview:updateQuestionSortMap', updateQuestionSortMap);
 nodecg.listenFor('interview:markQuestionAsDone', markQuestionAsDone);
+nodecg.listenFor('interview:promoteQuestionToTop', (id, cb) => {
+    if (!_repliesRef) {
+        return cb(new Error('_repliesRef not ready!'));
+    }
+    if (!id) {
+        return cb();
+    }
+    const itemIndex = questionSortMap.value.findIndex((sortId) => sortId === id);
+    if (itemIndex < 0) {
+        return cb(new Error('Tweet ID not found in sort map!'));
+    }
+    const newArray = questionSortMap.value.slice(0);
+    newArray.splice(0, 0, newArray.splice(itemIndex, 1)[0]);
+    questionSortMap.value = newArray;
+    cb();
+});
 nodecg.listenFor('interview:end', () => {
     database.ref('/active_tweet_id').set(0);
 });
