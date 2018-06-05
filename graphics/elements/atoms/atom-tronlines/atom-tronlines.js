@@ -154,7 +154,7 @@ class AtomTronlines extends Polymer.Element {
 			 */
 			tailEndColor: {
 				type: String,
-				value: '#eefa05',
+				value: '#fa00f9',
 				elementTester: {
 					type: 'color'
 				}
@@ -351,11 +351,12 @@ class AtomTronlines extends Polymer.Element {
 	 */
 	_createNode() {
 		const shape = new createjs.Shape();
+		const tailMidColor = createjs.Graphics.getRGB(parseInt(this.tailEndColor.slice(1), 16), 0.5);
 		const tailEndColor = createjs.Graphics.getRGB(parseInt(this.tailEndColor.slice(1), 16), 0);
 		const maxTailLength = this.tailLength + this.tailLengthRandomness;
 
 		shape.tailGradientCommand = shape.graphics
-			.beginLinearGradientFill([this.tailStartColor, tailEndColor], [0, 1], 0, 0, 0, maxTailLength).command;
+			.beginLinearGradientFill([this.tailStartColor, tailMidColor, tailEndColor], [0, 0.5, 1], 0, 0, 0, maxTailLength).command;
 
 		shape.tailRectCommand = shape.graphics
 			.drawRect(0, 0, this.nodeSize, 0).command;
