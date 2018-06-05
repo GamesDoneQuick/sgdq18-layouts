@@ -377,6 +377,7 @@
 			}
 
 			videoElems.forEach(videoElem => {
+				videoElem.currentTime = 0;
 				videoElem.style.display = '';
 				videoElem.style.opacity = '';
 			});
@@ -390,6 +391,7 @@
 			videoElems.forEach(videoElem => {
 				videoElem.style.display = 'none';
 				videoElem.style.opacity = '0';
+				videoElem.currentTime = 0;
 			});
 		}
 	}
