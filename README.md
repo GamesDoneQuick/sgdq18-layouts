@@ -4,8 +4,24 @@
 
 This is a [NodeCG](http://github.com/nodecg/nodecg) v0.9 bundle. You will need to have NodeCG v0.9 installed to run it.
 
+## Table of Contents
+- [Video Breakdown](#video-breakdown)
+- [Automated Builds](#automated-builds)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Setting up OBS](#setting-up-obs)
+- [Usage](#usage)
+  - [Running a mock donation server](#running-a-mock-donation-server)
+  - [Lightning Round](#lightning-round)
+- [License](#license)
+- [Credits](#credits)
+
 ## Video Breakdown
 We unfortunately do not have time to make a video breakdown for this event's bundle. However, [we did make one for the last year's SGDQ](https://www.youtube.com/watch?v=vBAZXchbI3U&list=PLTEhlYdONYxv1wk2FsIpEz92X3x2E7bSx), which still has a few similarities with this one.
+
+## Automated Builds
+If you are using an automated build (which includes everything in one zip file with a single exe), skip to [Setting up OBS](#markdown-header-setting-up-obs).
 
 ## Requirements
 - [Node.js v7 or greater (v8 recommended)](https://nodejs.org/)
@@ -25,11 +41,6 @@ We unfortunately do not have time to make a video breakdown for this event's bun
 - [SplitText](https://greensock.com/SplitText): `shared/lib/vendor/SplitText.min.js`
 - [CustomEase](https://greensock.com/customease): `shared/lib/vendor/CustomEase.min.js`
 - [DrawSVGPlugin](https://greensock.com/drawSVG): `shared/lib/vendor/DrawSVGPlugin.min.js`
-
-## Usage
-This bundle is not intended to be used verbatim. Some of the assets have been replaced with placeholders, and most of the data sources are hardcoded. We are open-sourcing this bundle in hopes that people will use it as a learning tool and base to build from, rather than just taking and using it wholesale in their own productions.
-
-To reiterate, please don't just download and use this bundle as-is. Build something new from it.
 
 ### Running a mock donation server
 `sgdq18-layouts` listens for donations in realtime, rather than polling the donation tracker for a new donation total. To facilitate testing,
@@ -54,10 +65,37 @@ Refer to [configschema.json](configschema.json) for the structure of this file.
 
 If you have [nodecg-cli](https://github.com/nodecg/nodecg-cli) installed, you can run `nodecg defaultconfig` from the `nodecg/bundles/sgdq18-layouts/` folder to generate a `cfg/sgdq18-layouts.json` file with default values derived from the schema.
 
+## Setting up OBS
+`sgdq18-layouts` has a deep, complex integration with OBS Studio. As such, it expects your OBS to be fairly precisely configured.
+
+1. Install the latest release of [OBS Studio](https://obsproject.com/), which also comes with the latest release of the `obs-browser` plugin.
+2. Insatll the [latest release of the `obs-websocket` plugin](https://github.com/Palakis/obs-websocket/releases).
+3. Go to "Profile > Import", and import the `obs-assets/obs-profile` directory from this repository. Then, ensure that the "SGDQ2018" profile is selected in OBS.  
+4. Go to "Scene Collection > Import", and import the `obs-assets/obs-scenes.json` file from this repository. Then, ensure that the "SGDQ2018 - Localhost" scene collection is selected in OBS.  
+5. Locate the "Scene Transitions" dropdown menu in the main interface of OBS (it will be near the bottom right by default). Select "Blank Stinger". Click the gear icon below the dropdown, and select "Properties". Update the "Video File" path to point to your `sgdq18-layouts/obs-assets/BlankTransition.mov` path. 
+
+## Usage
+This bundle is not intended to be used verbatim. Some of the assets have been replaced with placeholders, and most of the data sources are hardcoded. We are open-sourcing this bundle in hopes that people will use it as a learning tool and base to build from, rather than just taking and using it wholesale in their own productions.
+
+To reiterate, please don't just download and use this bundle as-is. Build something new from it.
+
+1. Start NodeCG
+	```bash
+	# From the `nodecg` dir:
+	node index.js
+	```
+	- If you're using an automated build, just run `nodecg.exe`.
+2. Open [http://localhost:9090](http://localhost:9090)
+3. Click on the "Setup" tab of the dashboard, and connect to OBS using the "OBS" panel.
+	- By default, `obs-websocket` uses port 4444 and has no password.
+	- The `1` tab is for the "compositor" OBS, where the graphics are running.
+	- The `2` tab is for the "recording" OBS, where the primary recordings are running.
+		- You do not need to have `2` connected, it is optional.
+
 ## License
 sgdq18-layouts is provided under the Apache v2 license, which is available to read in the [LICENSE](LICENSE) file.
 
-### Credits
+## Credits
 Designed & developed by [Support Class](http://supportclass.net/)
  - [Alex "Lange" Van Camp](https://twitter.com/VanCamp/)  
  - [Chris Hanel](https://twitter.com/ChrisHanel)
