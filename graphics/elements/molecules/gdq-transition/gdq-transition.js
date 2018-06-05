@@ -175,7 +175,12 @@
 						this.$.genericAnimation,
 						this.$['bottomTrapAnimation-exit']
 					);
-					this.showVideos(this.$['bottomTrapAnimation-enter']);
+					this.showVideos(
+						this.$['bottomTrapAnimation-enter'],
+						this.$.bottomRectAnimation,
+						this.$.topTrapAnimation,
+						this.$.topRectAnimation
+					);
 				}
 			});
 
@@ -329,7 +334,11 @@
 				const videos = this.shadowRoot.querySelectorAll('video');
 				tl.to(videos, 0.25, {
 					opacity: 0,
-					ease: Sine.easeInOut
+					ease: Sine.easeInOut,
+					callbackScope: this,
+					onComplete() {
+						this.hideVideos(...videos);
+					}
 				}, tl.duration() / 2);
 			}
 
