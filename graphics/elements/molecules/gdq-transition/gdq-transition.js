@@ -386,7 +386,6 @@
 			}
 
 			videoElems.forEach(videoElem => {
-				videoElem.currentTime = 0;
 				videoElem.style.display = '';
 				videoElem.style.opacity = '';
 			});
