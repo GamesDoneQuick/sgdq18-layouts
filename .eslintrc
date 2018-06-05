@@ -10,6 +10,7 @@
 				"Polymer.GestureEventListeners",
 				"Polymer.MutableData",
 				"Polymer.NodeCGReplicantTargeting",
+				"Polymer.SCDataBindingHelpers",
 				"SVG"
 			]
 		}],

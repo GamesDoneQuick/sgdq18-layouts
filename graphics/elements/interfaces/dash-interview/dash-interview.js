@@ -6,8 +6,16 @@
 	const questionSortMap = nodecg.Replicant('interview:questionSortMap');
 	const questionTimeRemaining = nodecg.Replicant('interview:questionTimeRemaining');
 	const streamingOBSTransitioning = nodecg.Replicant('streamingOBS:transitioning');
+	const programScene = nodecg.Replicant('streamingOBS:programScene');
+	const streamingOBSStatus = nodecg.Replicant('streamingOBS:websocket');
 
-	class DashInterview extends Polymer.MutableData(Polymer.GestureEventListeners(Polymer.Element)) {
+	/**
+	 * @customElement
+	 * @polymer
+	 * @appliesMixin Polymer.MutableData
+	 * @appliesMixin Polymer.SCDataBindingHelpers
+	 */
+	class DashInterview extends Polymer.SCDataBindingHelpers(Polymer.MutableData(Polymer.Element)) {
 		static get is() {
 			return 'dash-interview';
 		}
@@ -28,6 +36,10 @@
 				questionTimeRemaining: {
 					type: Boolean
 				},
+				_programSceneName: {
+					type: String,
+					value: ''
+				},
 				_markingTopQuestionAsDone: {
 					type: Boolean,
 					value: false
@@ -38,7 +50,12 @@
 				},
 				_errorToastText: String,
 				_successToastText: String,
-				_transitioning: Boolean
+				_transitioning: Boolean,
+				_disconnectedFromOBS: Boolean,
+				_transitionToBreakDisabled: {
+					type: Boolean,
+					computed: '_computeTransitionToBreakDisabled(_sendingTransitionCommand, _transitioning, _disconnectedFromOBS, _programSceneName)'
+				}
 			};
 		}
 
@@ -55,6 +72,14 @@
 
 			streamingOBSTransitioning.on('change', newVal => {
 				this._transitioning = newVal;
+			});
+
+			programScene.on('change', newVal => {
+				this._programSceneName = newVal ? newVal.name : '';
+			});
+
+			streamingOBSStatus.on('change', newVal => {
+				this._disconnectedFromOBS = Boolean(!newVal || newVal.status !== 'connected');
 			});
 
 			this.addEventListener('error-toast', event => {
@@ -96,6 +121,10 @@
 			this._markingTopQuestionAsDone = false;
 		}
 
+		openInterviewTransitionConfirmation() {
+			this.$.interviewTransitionConfirmation.open();
+		}
+
 		transitionToInterview() {
 			return this.transitionToScene('Interview');
 		}
@@ -124,6 +153,13 @@
 			}
 
 			this._sendingTransitionCommand = false;
+		}
+
+		_computeTransitionToBreakDisabled(_sendingTransitionCommand, _transitioning, _disconnectedFromOBS, _programSceneName) {
+			return _sendingTransitionCommand ||
+				_transitioning ||
+				_disconnectedFromOBS ||
+				_programSceneName === 'Break';
 		}
 
 		_any(...args) {
