@@ -26,8 +26,8 @@
         "sync": 0,
         "volume": 0.0
     },
-    "current_program_scene": "Interview",
-    "current_scene": "Break",
+    "current_program_scene": "Break",
+    "current_scene": "LttP Randomizer",
     "current_transition": "Blank Stinger",
     "modules": {
         "auto-scene-switcher": {
@@ -362,33 +362,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -1407,33 +1380,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -1818,33 +1764,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -2229,33 +2148,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -2640,33 +2532,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -3051,33 +2916,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -3462,33 +3300,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -3904,33 +3715,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -4345,33 +4129,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -4756,33 +4513,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -5550,33 +5280,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -5961,33 +5664,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": false,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -6372,33 +6048,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -6652,7 +6301,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -7048,33 +6697,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -7525,33 +7147,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -9256,33 +8851,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -9880,33 +9448,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -10352,33 +9893,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
@@ -10406,33 +9920,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "shader_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Chromatic Aberration",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "b_offset_x": 1.0,
-                        "from_file": true,
-                        "r_offset_x": -1.0,
-                        "shader_file_name": "F:/Dropbox/endofline/SGDQ2018/Shaders/teal_avoiding_chromatic_aberration_shader.effect"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                }
-            ],
             "flags": 0,
             "hotkeys": {},
             "id": "browser_source",
