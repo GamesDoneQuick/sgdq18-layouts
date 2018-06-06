@@ -82,6 +82,11 @@ streamingOBS.replicants.previewScene.on('change', (newVal: any) => {
 
 	// Show the Transition Graphic if the scene is NOT the Break scene.
 	if (newVal.name !== 'Break') {
+		// Abort if the PVW scene is also the PGM scene.
+		if (newVal.name === streamingOBS.replicants.programScene.value.name) {
+			return;
+		}
+
 		streamingOBS.setSceneItemRender({
 			'scene-name': newVal.name,
 			source: 'Transition Graphic',
