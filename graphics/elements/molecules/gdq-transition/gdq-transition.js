@@ -61,6 +61,9 @@
 				});
 			}
 
+			// Hide all videos to start.
+			this.hideVideos(...this.shadowRoot.querySelectorAll('video'));
+
 			nodecg.listenFor('streamingOBS:transitioning', data => {
 				console.log('streamingOBS:transitioning |', data);
 				if (!data || !data.fromScene || !data.toScene) {
@@ -168,31 +171,23 @@
 
 		heroEnter() {
 			console.log('heroEnter');
+			const videos = [
+				this.$['bottomTrapAnimation-enter'],
+				this.$.bottomRectAnimation,
+				this.$.topTrapAnimation,
+				this.$.topRectAnimation
+			];
+
 			const tl = new TimelineLite({
 				callbackScope: this,
 				onStart() {
-					this.hideVideos(
-						this.$.genericAnimation,
-						this.$['bottomTrapAnimation-exit']
-					);
-
-					this.showVideos(
-						this.$['bottomTrapAnimation-enter'],
-						this.$.bottomRectAnimation,
-						this.$.topTrapAnimation,
-						this.$.topRectAnimation
-					);
+					this.showVideos(...videos);
 				}
 			});
 
 			const closingAnim = this.fromOpenToClosed();
 			closingAnim.call(() => {
-				this.playVideos(
-					this.$['bottomTrapAnimation-enter'],
-					this.$.bottomRectAnimation,
-					this.$.topTrapAnimation,
-					this.$.topRectAnimation
-				);
+				this.playVideos(...videos);
 			}, null, null, 'frontRects');
 
 			tl.add(closingAnim);
@@ -202,31 +197,23 @@
 
 		heroExit() {
 			console.log('heroExit');
+			const videos = [
+				this.$['bottomTrapAnimation-exit'],
+				this.$.bottomRectAnimation,
+				this.$.topTrapAnimation,
+				this.$.topRectAnimation,
+			];
+
 			const tl = new TimelineLite({
 				callbackScope: this,
 				onStart() {
-					this.hideVideos(
-						this.$.genericAnimation,
-						this.$['bottomTrapAnimation-enter']
-					);
-
-					this.showVideos(
-						this.$['bottomTrapAnimation-exit'],
-						this.$.bottomRectAnimation,
-						this.$.topTrapAnimation,
-						this.$.topRectAnimation,
-					);
+					this.showVideos(...videos);
 				}
 			});
 
 			const closingAnim = this.fromPartialToClosed();
 			closingAnim.call(() => {
-				this.playVideos(
-					this.$['bottomTrapAnimation-exit'],
-					this.$.bottomRectAnimation,
-					this.$.topTrapAnimation,
-					this.$.topRectAnimation,
-				);
+				this.playVideos(...videos);
 			}, null, null, 'frontRects');
 
 			tl.add(closingAnim);
@@ -283,7 +270,7 @@
 		}) {
 			const tl = new TimelineLite();
 
-			tl.addLabel('start');
+			tl.addLabel('start', 0.03);
 			tl.addLabel('frontRects', 'start');
 			tl.addLabel('frontTraps', 'start+=0.1');
 			tl.addLabel('backRects', 'start+=0.1667');
@@ -396,9 +383,9 @@
 			}
 
 			videoElems.forEach(videoElem => {
+				videoElem.currentTime = 0;
 				videoElem.style.display = 'none';
 				videoElem.style.opacity = '0';
-				videoElem.currentTime = 0;
 			});
 		}
 	}
