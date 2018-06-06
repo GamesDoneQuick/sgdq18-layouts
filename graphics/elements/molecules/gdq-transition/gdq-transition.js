@@ -175,6 +175,7 @@
 						this.$.genericAnimation,
 						this.$['bottomTrapAnimation-exit']
 					);
+
 					this.showVideos(
 						this.$['bottomTrapAnimation-enter'],
 						this.$.bottomRectAnimation,
@@ -196,7 +197,6 @@
 
 			tl.add(closingAnim);
 			tl.add(this.fromClosedToPartial({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
-			console.log(tl.duration());
 			return tl;
 		}
 
@@ -231,7 +231,6 @@
 
 			tl.add(closingAnim);
 			tl.add(this.fromClosedToOpen({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
-			console.log(tl.duration());
 			return tl;
 		}
 
