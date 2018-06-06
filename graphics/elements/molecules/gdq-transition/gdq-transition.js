@@ -201,7 +201,7 @@
 				this.$['bottomTrapAnimation-exit'],
 				this.$.bottomRectAnimation,
 				this.$.topTrapAnimation,
-				this.$.topRectAnimation,
+				this.$.topRectAnimation
 			];
 
 			const tl = new TimelineLite({
@@ -222,7 +222,9 @@
 		}
 
 		fromOpenToClosed(...args) {
-			return this.fromClosedToOpen(...args).reverse(0);
+			const tl = new TimelineLite();
+			tl.add(this.fromClosedToOpen(...args).reverse(0));
+			return tl;
 		}
 
 		fromClosedToOpen({fadeOutVideos} = {}) {
@@ -240,7 +242,9 @@
 		}
 
 		fromPartialToClosed(...args) {
-			return this.fromClosedToPartial(...args).reverse(0);
+			const tl = new TimelineLite();
+			tl.add(this.fromClosedToPartial(...args).reverse(0));
+			return tl;
 		}
 
 		fromClosedToPartial({fadeOutVideos} = {}) {
