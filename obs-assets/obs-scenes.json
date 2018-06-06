@@ -37,12 +37,6 @@
             "switch_if_not_matching": false,
             "switches": []
         },
-        "captions": {
-            "enabled": false,
-            "lang_id": 1033,
-            "provider": "mssapi",
-            "source": ""
-        },
         "output-timer": {
             "autoStartRecordTimer": false,
             "autoStartStreamTimer": false,
@@ -52,8 +46,7 @@
             "streamTimerHours": 0,
             "streamTimerMinutes": 0,
             "streamTimerSeconds": 0
-        },
-        "scripts-tool": []
+        }
     },
     "name": "SGDQ2018 - Localhost",
     "preview_locked": false,
@@ -77,134 +70,7 @@
             "name": "Blank Stinger"
         }
     ],
-    "saved_multiview_projectors": [
-        {
-            "saved_multiview_projectors": 0
-        },
-        {
-            "saved_multiview_projectors": 0
-        },
-        {
-            "saved_multiview_projectors": 0
-        },
-        {
-            "saved_multiview_projectors": 0
-        },
-        {
-            "saved_multiview_projectors": 0
-        },
-        {
-            "saved_multiview_projectors": 0
-        },
-        {
-            "saved_multiview_projectors": 0
-        },
-        {
-            "saved_multiview_projectors": 0
-        },
-        {
-            "saved_multiview_projectors": 0
-        },
-        {
-            "saved_multiview_projectors": 0
-        }
-    ],
-    "saved_preview_projectors": [
-        {
-            "saved_preview_projectors": 0
-        },
-        {
-            "saved_preview_projectors": 0
-        },
-        {
-            "saved_preview_projectors": 0
-        },
-        {
-            "saved_preview_projectors": 0
-        },
-        {
-            "saved_preview_projectors": 0
-        },
-        {
-            "saved_preview_projectors": 0
-        },
-        {
-            "saved_preview_projectors": 0
-        },
-        {
-            "saved_preview_projectors": 0
-        },
-        {
-            "saved_preview_projectors": 0
-        },
-        {
-            "saved_preview_projectors": 0
-        }
-    ],
-    "saved_projectors": [
-        {
-            "saved_projectors": ""
-        },
-        {
-            "saved_projectors": ""
-        },
-        {
-            "saved_projectors": ""
-        },
-        {
-            "saved_projectors": ""
-        },
-        {
-            "saved_projectors": ""
-        },
-        {
-            "saved_projectors": ""
-        },
-        {
-            "saved_projectors": ""
-        },
-        {
-            "saved_projectors": ""
-        },
-        {
-            "saved_projectors": ""
-        },
-        {
-            "saved_projectors": ""
-        }
-    ],
-    "saved_studio_preview_projectors": [
-        {
-            "saved_studio_preview_projectors": 0
-        },
-        {
-            "saved_studio_preview_projectors": 0
-        },
-        {
-            "saved_studio_preview_projectors": 0
-        },
-        {
-            "saved_studio_preview_projectors": 0
-        },
-        {
-            "saved_studio_preview_projectors": 0
-        },
-        {
-            "saved_studio_preview_projectors": 0
-        },
-        {
-            "saved_studio_preview_projectors": 0
-        },
-        {
-            "saved_studio_preview_projectors": 0
-        },
-        {
-            "saved_studio_preview_projectors": 0
-        },
-        {
-            "saved_studio_preview_projectors": 0
-        }
-    ],
+    "saved_projectors": [],
     "scaling_enabled": false,
     "scaling_level": 0,
     "scaling_off_x": 0.0,
@@ -4944,7 +4810,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -5328,7 +5194,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -6135,7 +6001,6 @@
             "flags": 0,
             "hotkeys": {
                 "OBSBasic.SelectScene": [],
-                "libobs.hide_scene_item.1 Placeholder": [],
                 "libobs.hide_scene_item.Crowd Camera": [],
                 "libobs.hide_scene_item.Game Feed 1": [],
                 "libobs.hide_scene_item.Game Feed 2": [],
@@ -6147,7 +6012,6 @@
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
                 "libobs.hide_scene_item.Transition Graphic": [],
-                "libobs.show_scene_item.1 Placeholder": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -6175,34 +6039,6 @@
             "settings": {
                 "id_counter": 14,
                 "items": [
-                    {
-                        "align": 5,
-                        "bounds": {
-                            "x": 1600.0,
-                            "y": 900.0
-                        },
-                        "bounds_align": 0,
-                        "bounds_type": 2,
-                        "crop_bottom": 0,
-                        "crop_left": 0,
-                        "crop_right": 0,
-                        "crop_top": 0,
-                        "id": 14,
-                        "locked": false,
-                        "name": "1 Placeholder",
-                        "pos": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "private_settings": {},
-                        "rot": 0.0,
-                        "scale": {
-                            "x": 1.0,
-                            "y": 1.0
-                        },
-                        "scale_filter": "disable",
-                        "visible": true
-                    },
                     {
                         "align": 5,
                         "bounds": {
@@ -6509,7 +6345,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -6549,7 +6385,6 @@
             "flags": 0,
             "hotkeys": {
                 "OBSBasic.SelectScene": [],
-                "libobs.hide_scene_item.2 Placeholder": [],
                 "libobs.hide_scene_item.Crowd Camera": [],
                 "libobs.hide_scene_item.Game Feed 1": [],
                 "libobs.hide_scene_item.Game Feed 2": [],
@@ -6561,7 +6396,6 @@
                 "libobs.hide_scene_item.Omnibar": [],
                 "libobs.hide_scene_item.PC Camera": [],
                 "libobs.hide_scene_item.Transition Graphic": [],
-                "libobs.show_scene_item.2 Placeholder": [],
                 "libobs.show_scene_item.Crowd Camera": [],
                 "libobs.show_scene_item.Game Feed 1": [],
                 "libobs.show_scene_item.Game Feed 2": [],
@@ -6589,34 +6423,6 @@
             "settings": {
                 "id_counter": 13,
                 "items": [
-                    {
-                        "align": 5,
-                        "bounds": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "bounds_align": 0,
-                        "bounds_type": 0,
-                        "crop_bottom": 0,
-                        "crop_left": 0,
-                        "crop_right": 0,
-                        "crop_top": 0,
-                        "id": 13,
-                        "locked": false,
-                        "name": "2 Placeholder",
-                        "pos": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "private_settings": {},
-                        "rot": 0.0,
-                        "scale": {
-                            "x": 1.25,
-                            "y": 1.25
-                        },
-                        "scale_filter": "disable",
-                        "visible": true
-                    },
                     {
                         "align": 5,
                         "bounds": {
@@ -6923,7 +6729,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -9322,6 +9128,29 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
+            "flags": 0,
+            "hotkeys": {},
+            "id": "obs-stream-effects-filter-blur",
+            "mixers": 0,
+            "monitoring_type": 0,
+            "muted": false,
+            "name": "Blur",
+            "private_settings": {},
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "settings": {
+                "Filter.Blur.Size": 16,
+                "Filter.Blur.Type": 1
+            },
+            "sync": 0,
+            "volume": 1.0
+        },
+        {
+            "deinterlace_field_order": 0,
+            "deinterlace_mode": 0,
+            "enabled": true,
             "filters": [
                 {
                     "deinterlace_field_order": 0,
@@ -9924,50 +9753,6 @@
             },
             "sync": 0,
             "volume": 0.57178699970245361
-        },
-        {
-            "deinterlace_field_order": 0,
-            "deinterlace_mode": 0,
-            "enabled": true,
-            "flags": 0,
-            "hotkeys": {},
-            "id": "image_source",
-            "mixers": 0,
-            "monitoring_type": 0,
-            "muted": false,
-            "name": "2 Placeholder",
-            "private_settings": {},
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "settings": {
-                "file": "F:/Dropbox/endofline/TESPA/wow-dungeonrace/OBS Setup/Observer 2.png"
-            },
-            "sync": 0,
-            "volume": 1.0
-        },
-        {
-            "deinterlace_field_order": 0,
-            "deinterlace_mode": 0,
-            "enabled": true,
-            "flags": 0,
-            "hotkeys": {},
-            "id": "image_source",
-            "mixers": 0,
-            "monitoring_type": 0,
-            "muted": false,
-            "name": "1 Placeholder",
-            "private_settings": {},
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "settings": {
-                "file": "F:/Dropbox/endofline/TESPA/wow-dungeonrace/OBS Setup/Observer 1.png"
-            },
-            "sync": 0,
-            "volume": 1.0
         }
     ],
     "transition_duration": 300,
