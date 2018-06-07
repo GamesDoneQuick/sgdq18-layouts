@@ -382,6 +382,7 @@
 			}
 
 			videoElems.forEach(videoElem => {
+				videoElem.pause();
 				videoElem.currentTime = 0;
 				requestAnimationFrame(() => {
 					videoElem.style.display = 'none';
