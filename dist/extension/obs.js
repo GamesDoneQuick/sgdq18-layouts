@@ -62,6 +62,62 @@ streamingOBS.replicants.programScene.on('change', (newVal) => {
         return false;
     });
 });
+streamingOBS.replicants.previewScene.on('change', (newVal) => {
+    if (!newVal || !newVal.name) {
+        return;
+    }
+    // Show the Transition Graphic if the scene is NOT the Break scene.
+    if (newVal.name !== 'Break') {
+        // Abort if the PVW scene is also the PGM scene.
+        if (newVal.name === streamingOBS.replicants.programScene.value.name) {
+            return;
+        }
+        streamingOBS.setSceneItemRender({
+            'scene-name': newVal.name,
+            source: 'Transition Graphic',
+            render: false
+        }).catch((error) => {
+            nodecg.log.error(`Failed to hide Transition Graphic on scene "${newVal.name}":`, error);
+        });
+    }
+});
+streamingOBS.on('TransitionBegin', (data) => {
+    if (data.name !== 'Blank Stinger') {
+        return;
+    }
+    const pvwSceneName = streamingOBS.replicants.previewScene.value && streamingOBS.replicants.previewScene.value.name;
+    if (!pvwSceneName) {
+        return;
+    }
+    // Show the Transition Graphic on the scene which is being transitioned to.
+    streamingOBS.setSceneItemRender({
+        'scene-name': pvwSceneName,
+        source: 'Transition Graphic',
+        render: true
+    }).catch((error) => {
+        nodecg.log.error(`Failed to show Transition Graphic on scene "${pvwSceneName}":`, error);
+    });
+});
+streamingOBS.on('SwitchScenes', (data) => {
+    const actualPgmSceneName = data['scene-name'];
+    const pvwSceneName = streamingOBS.replicants.previewScene.value && streamingOBS.replicants.previewScene.value.name;
+    const pgmSceneName = streamingOBS.replicants.programScene.value && streamingOBS.replicants.programScene.value.name;
+    const actualPvwSceneName = actualPgmSceneName === pvwSceneName ? pgmSceneName : pvwSceneName;
+    if (actualPvwSceneName === 'Break') {
+        return;
+    }
+    // Abort if the PVW scene is also the PGM scene.
+    if (actualPvwSceneName === actualPgmSceneName) {
+        return;
+    }
+    streamingOBS.setSceneItemRender({
+        'scene-name': actualPvwSceneName,
+        source: 'Transition Graphic',
+        render: false
+    }).catch((error) => {
+        nodecg.log.error(`Failed to hide Transition Graphic on scene "${actualPvwSceneName}":`, error);
+    });
+});
 function cycleRecording(obs) {
     return new Promise((resolve, reject) => {
         let rejected = false;
