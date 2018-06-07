@@ -108,7 +108,6 @@ streamingOBS.on('TransitionBegin', (data: {name: string; duration: number}) => {
 	}
 
 	// Show the Transition Graphic on the scene which is being transitioned to.
-	console.log('showing on', pvwSceneName);
 	streamingOBS.setSceneItemRender({
 		'scene-name': pvwSceneName,
 		source: 'Transition Graphic',
@@ -123,8 +122,6 @@ streamingOBS.on('SwitchScenes', (data: any) => {
 	const pvwSceneName = streamingOBS.replicants.previewScene.value && streamingOBS.replicants.previewScene.value.name;
 	const pgmSceneName = streamingOBS.replicants.programScene.value && streamingOBS.replicants.programScene.value.name;
 	const actualPvwSceneName = actualPgmSceneName === pvwSceneName ? pgmSceneName : pvwSceneName;
-	console.log('SwitchScenes:', data['scene-name']);
-	console.log('PVW: %s, PGM: %s', actualPvwSceneName, actualPgmSceneName);
 
 	if (actualPvwSceneName === 'Break') {
 		return;
@@ -135,7 +132,6 @@ streamingOBS.on('SwitchScenes', (data: any) => {
 		return;
 	}
 
-	console.log('hiding on', actualPvwSceneName);
 	streamingOBS.setSceneItemRender({
 		'scene-name': actualPvwSceneName,
 		source: 'Transition Graphic',

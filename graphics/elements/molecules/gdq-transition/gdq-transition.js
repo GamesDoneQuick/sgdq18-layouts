@@ -46,6 +46,7 @@
 			const videos = Array.from(this.shadowRoot.querySelectorAll('video'));
 			const videoLoadPromises = videos.map(this.waitForVideoToLoad);
 			Promise.all(videoLoadPromises).then(() => this.init());
+			this._$videos = videos;
 		}
 
 		init() {
@@ -56,13 +57,13 @@
 			this.dispatchEvent(new CustomEvent('initialized'));
 
 			if (window.__SCREENSHOT_TESTING__) {
-				this.shadowRoot.querySelectorAll('video').forEach(video => {
+				this._$videos.forEach(video => {
 					video.currentTime = video.duration;
 				});
 			}
 
 			// Hide all videos to start.
-			this.hideVideos(...this.shadowRoot.querySelectorAll('video'));
+			this.hideVideos(...this._$videos);
 
 			nodecg.listenFor('streamingOBS:transitioning', data => {
 				console.log('streamingOBS:transitioning |', data);
@@ -181,16 +182,11 @@
 			const tl = new TimelineLite({
 				callbackScope: this,
 				onStart() {
-					this.showVideos(...videos);
+					this.playVideos(...videos);
 				}
 			});
 
-			const closingAnim = this.fromOpenToClosed();
-			closingAnim.call(() => {
-				this.playVideos(...videos);
-			}, null, null, 'frontRects');
-
-			tl.add(closingAnim);
+			tl.add(this.fromOpenToClosed());
 			tl.add(this.fromClosedToPartial({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
 			return tl;
 		}
@@ -207,16 +203,11 @@
 			const tl = new TimelineLite({
 				callbackScope: this,
 				onStart() {
-					this.showVideos(...videos);
+					this.playVideos(...videos);
 				}
 			});
 
-			const closingAnim = this.fromPartialToClosed();
-			closingAnim.call(() => {
-				this.playVideos(...videos);
-			}, null, null, 'frontRects');
-
-			tl.add(closingAnim);
+			tl.add(this.fromPartialToClosed());
 			tl.add(this.fromClosedToOpen({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
 			return tl;
 		}
@@ -321,13 +312,13 @@
 			}, 'backTraps');
 
 			if (fadeOutVideos) {
-				const videos = this.shadowRoot.querySelectorAll('video');
-				tl.to(videos, 0.25, {
+				tl.to(this._$videos, 0.25, {
 					opacity: 0,
 					ease: Sine.easeInOut,
 					callbackScope: this,
 					onComplete() {
-						this.hideVideos(...videos);
+						console.log('hide all videos');
+						this.hideVideos(...this._$videos);
 					}
 				}, tl.duration() / 2);
 			}
@@ -366,7 +357,11 @@
 
 			this.showVideos(...videoElems);
 			videoElems.forEach(videoElem => {
-				videoElem.play();
+				videoElem.play().then(() => {
+					console.log('started playing', videoElem.id);
+				}).catch(() => {
+					console.error('failed to play', videoElem.id);
+				});
 			});
 		}
 
@@ -388,8 +383,10 @@
 
 			videoElems.forEach(videoElem => {
 				videoElem.currentTime = 0;
-				videoElem.style.display = 'none';
-				videoElem.style.opacity = '0';
+				requestAnimationFrame(() => {
+					videoElem.style.display = 'none';
+					videoElem.style.opacity = '0';
+				});
 			});
 		}
 	}
