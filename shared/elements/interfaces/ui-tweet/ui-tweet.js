@@ -16,6 +16,11 @@ class UiTweet extends Polymer.Element {
 			tweetUrl: {
 				type: String,
 				computed: 'computeTweetUrl(profileUrl, tweet)'
+			},
+			noAvatar: {
+				type: Boolean,
+				reflectToAttribute: true,
+				value: false
 			}
 		};
 	}

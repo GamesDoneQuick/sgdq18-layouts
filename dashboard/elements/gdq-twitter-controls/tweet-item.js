@@ -19,14 +19,6 @@
 			};
 		}
 
-		computePhotoOrPhotos(numPhotos) {
-			return numPhotos > 1 ? 'photos' : 'photo';
-		}
-
-		computeIndexPlusOne(index) {
-			return index + 1;
-		}
-
 		accept() {
 			nodecg.sendMessage('acceptTweet', this.value);
 		}
