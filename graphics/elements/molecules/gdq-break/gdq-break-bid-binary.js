@@ -97,8 +97,8 @@ class GdqBreakBidBinary extends Polymer.Element {
 		svgDoc.viewbox(-1, -1, 2, 2);
 		this._svgDoc = svgDoc;
 
-		svgDoc.circle(2).fill({color: '#03F0FF'}).move(-1, -1);
-		this._magentaSlice = svgDoc.path().fill({color: '#FF0388'});
+		svgDoc.circle(2).fill({color: '#FF0099', opacity: '0.25'}).move(-1, -1);
+		this._magentaSlice = svgDoc.path().fill({color: '#FFB800'});
 	}
 
 	drawMagentaSlice(percent) {

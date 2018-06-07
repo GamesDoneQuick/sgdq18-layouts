@@ -18,12 +18,12 @@
 			#name {
 				width: 100%;
 				height: 38px;
-				background: rgba(196, 251, 255, 0.15);
+				background: rgba(255, 0, 153, 0.2);
 				border-style: solid;
 				border-width: 1px;
 				border-image: linear-gradient(
 					to bottom,
-					rgba(255, 255, 255, 1) 0%,
+					rgba(224, 58, 104, 1) 0%,
 					rgba(255, 255, 255, 0) 100%
 				) 1;
 				box-sizing: border-box;
@@ -35,7 +35,8 @@
 				line-height: 1;
 				font-size: 22px;
 				color: #FFFFFF;
-				text-shadow: 0 0 18px #56CCF2;
+				text-shadow: 0 0 18px #56CCF2,
+							 2px 2px 0 #000000;
 				margin-left: 15px;
 				margin-right: auto;
 				text-transform: uppercase;
@@ -58,7 +59,7 @@
 				width: 632px;
 				height: 23px;
 				box-sizing: border-box;
-				border: 1px solid #00FFFF;
+				border: 1px solid #fdd853;
 				border-top: 0;
 				border-right: 0;
 				margin-top: 14px;
@@ -91,7 +92,7 @@
 			.info-divider {
 				width: 1px;
 				height: 22px;
-				background: #00FFFF;
+				background: #fdd853;
 				@apply --layout-flex-none;
 			}
 
@@ -115,7 +116,8 @@
 
 			:host([up-next]) #name-text {
 				font-size: 36px;
-				text-shadow: 0 0 18px rgba(255, 223, 58, 0.8);
+				text-shadow: 0 0 18px rgba(255, 223, 58, 0.8),
+				2px 2px 0px #000000;
 			}
 
 			:host([up-next]) #name-greeble {
