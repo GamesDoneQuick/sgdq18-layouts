@@ -3,7 +3,6 @@
 
 	const cashTotal = nodecg.Replicant('total');
 	const autoUpdateTotal = nodecg.Replicant('autoUpdateTotal');
-	const recordTrackerEnabled = nodecg.Replicant('recordTrackerEnabled');
 
 	class GdqTotals extends Polymer.Element {
 		static get is() {
@@ -33,9 +32,6 @@
 			autoUpdateTotal.on('change', newVal => {
 				this.autoUpdateTotal = newVal;
 			});
-			recordTrackerEnabled.on('change', newVal => {
-				this.recordTrackerEnabled = newVal;
-			});
 		}
 
 		editCashTotal() {
@@ -46,10 +42,6 @@
 
 		_handleAutoUpdateToggleChange(e) {
 			autoUpdateTotal.value = e.target.checked;
-		}
-
-		_handleMiletoneTrackerToggleChange(e) {
-			recordTrackerEnabled.value = e.target.checked;
 		}
 
 		_handleEditDialogConfirmed() {

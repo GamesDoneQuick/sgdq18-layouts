@@ -7,12 +7,11 @@
 	<link rel="import" href="../shared/elements/interfaces/ui-rundown/ui-rundown.html">
 	<link rel="import" href="elements/gdq-checklist/gdq-checklist.html">
 	<link rel="import" href="elements/gdq-countdown/gdq-countdown.html">
+	<link rel="import" href="elements/gdq-misc-toggles/gdq-misc-toggles.html">
 	<link rel="import" href="elements/gdq-schedule/gdq-schedule.html">
 	<link rel="import" href="elements/gdq-timekeeper/gdq-timekeeper.html">
 	<link rel="import" href="elements/gdq-totals/gdq-totals.html">
 	<link rel="import" href="elements/gdq-twitter-controls/gdq-twitter-controls.html">
-	<link rel="import" href="elements/gdq-throw/gdq-throw.html">
-	<link rel="import" href="elements/gdq-recordings/gdq-recordings.html">
 
 	<custom-style>
 		<style include="iron-flex iron-flex-alignment">
@@ -30,27 +29,15 @@
 			}
 
 			#container {
-				padding: 15px 20px;
 				box-sizing: border-box;
-				flex-shrink: 0;
+				column-gap: 10px;
+				display: grid;
 				flex-grow: 1;
-				@apply --layout-horizontal;
-				@apply --layout-center-justified;
-			}
-
-			.column {
-				width: 560px;
-				margin: 0 20px;
-				@apply --layout-vertical;
-				@apply --layout-flex-none;
-			}
-
-			#leftColumn {
-				margin-left: 0;
-			}
-
-			#rightColumn {
-				margin-right: 0;
+				flex-shrink: 0;
+				grid-row-gap: 10px;
+				grid-template-columns: 350px 484px 514px 484px;
+				grid-template-rows: 360px 467px 92px;
+				padding: 15px 20px;
 			}
 
 			.bordered {
@@ -59,29 +46,48 @@
 				border: 1px solid black;
 			}
 
+			gdq-fanart {
+				grid-column: 1;
+				grid-row: 1 / 4;
+			}
+
+			gdq-twitter-controls {
+				grid-column: 2;
+				grid-row: 1;
+			}
+
+			ui-rundown {
+				grid-column: 2;
+				grid-row: 2;
+			}
+
+			gdq-misc-toggles {
+				grid-column: 2;
+				grid-row: 3;
+			}
+
+			#timekeeperAndChecklist {
+				grid-column: 3;
+				grid-row: 1 / 3;
+			}
+
+			gdq-countdown {
+				grid-column: 3;
+				grid-row: 3;
+			}
+
 			gdq-totals {
 				margin-bottom: 20px;
 			}
 
-			gdq-countdown {
-				margin-top: 14px;
-				@apply --layout-flex-none;
+			#totalsAndSchedule {
+				/*@apply --layout-vertical;*/
+				grid-column: 4;
+				grid-row: 1 / 3;
 			}
 
-			gdq-twitter-controls {
-				@apply --layout-flex-none;
-			}
-
-			ui-rundown {
-				margin-top: 14px;
-				height: 424px;
-				@apply --layout-flex;
-			}
-
-			gdq-throw {
-				margin-top: 15px;
-				padding: 12px 15px;
-				@apply --layout-flex;
+			gdq-schedule {
+				/*@apply --layout-flex;*/
 			}
 		</style>
 	</custom-style>
@@ -89,24 +95,19 @@
 <body>
 	<div id="wrapper">
 		<div id="container">
-			<div id="leftColumn" class="column">
+			<gdq-twitter-controls class="bordered"></gdq-twitter-controls>
+			<ui-rundown class="bordered"></ui-rundown>
+			<gdq-misc-toggles class="bordered"></gdq-misc-toggles>
+
+			<div id="timekeeperAndChecklist">
 				<gdq-timekeeper class="bordered"></gdq-timekeeper>
 				<gdq-checklist class="bordered" style="border-top: 0;"></gdq-checklist>
-				<div class="layout horizontal center justified">
-					<gdq-recordings></gdq-recordings>
-					<gdq-throw class="bordered"></gdq-throw>
-				</div>
 			</div>
+			<gdq-countdown class="bordered"></gdq-countdown>
 
-			<div id="centerColumn" class="column">
+			<div id="totalsAndSchedule">
 				<gdq-totals></gdq-totals>
 				<gdq-schedule class="bordered"></gdq-schedule>
-				<gdq-countdown class="bordered"></gdq-countdown>
-			</div>
-
-			<div id="rightColumn" class="column">
-				<gdq-twitter-controls class="bordered"></gdq-twitter-controls>
-				<ui-rundown class="bordered"></ui-rundown>
 			</div>
 		</div>
 	</div>

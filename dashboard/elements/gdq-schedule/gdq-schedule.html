@@ -11,7 +11,7 @@
 	<template>
 		<style>
 			:host {
-				padding: 22px 24px;
+				padding: 22px 21px;
 				@apply --layout-vertical;
 			}
 
@@ -50,7 +50,7 @@
 			}
 
 			#runs-spacer {
-				width: 24px;
+				width: 18px;
 			}
 
 			#edit-ctrls {
@@ -90,13 +90,14 @@
 			}
 
 			paper-button {
+				white-space: nowrap;
 				@apply --layout-horizontal;
 				@apply --layout-center-center;
 			}
 
 			gdq-schedule-runinfo {
 				/* lol */
-				width: 253px;
+				width: 211px;
 			}
 
 			gdq-schedule-runinfo:last-of-type {
@@ -140,7 +141,7 @@
 
 		<div id="edit-ctrls">
 			<paper-button id="editCurrent" raised on-tap="editCurrent">EDIT CURRENT</paper-button>
-			<paper-button id="fetchLatestSchedule" raised on-tap="fetchLatestSchedule">FETCH LATEST SCHEDULE</paper-button>
+			<paper-button id="fetchLatestSchedule" raised on-tap="fetchLatestSchedule">FETCH SCHEDULE</paper-button>
 			<paper-button id="editNext" raised on-tap="editNext">EDIT NEXT</paper-button>
 		</div>
 
