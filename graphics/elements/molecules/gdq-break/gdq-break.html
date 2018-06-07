@@ -5,10 +5,8 @@
 <link rel="import" href="../../atoms/atom-text-greeble/atom-text-greeble.html">
 <link rel="import" href="../gdq-tweet/gdq-tweet.html">
 <link rel="import" href="gdq-break-bids.html">
-<link rel="import" href="gdq-break-bottom-frame.html">
 <link rel="import" href="gdq-break-prizes.html">
 <link rel="import" href="gdq-break-schedule.html">
-<link rel="import" href="gdq-break-top-frame.html">
 
 <dom-module id="gdq-break">
 	<template>
@@ -45,18 +43,6 @@
 				position: absolute;
 				top: 383px;
 				right: 0;
-			}
-
-			#topFrame {
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-
-			#bottomFrame {
-				position: absolute;
-				bottom: 0;
-				left: 0;
 			}
 
 			atom-text-greeble {
@@ -110,9 +96,6 @@
 		<atom-text-greeble style="left: 348px;" length="15"></atom-text-greeble>
 		<atom-text-greeble style="left: 532px;" length="11"></atom-text-greeble>
 		<atom-text-greeble style="left: 719px; color: #00FFFF;" length="15"></atom-text-greeble>
-
-		<gdq-break-top-frame id="topFrame"></gdq-break-top-frame>
-		<gdq-break-bottom-frame id="bottomFrame"></gdq-break-bottom-frame>
 	</template>
 
 	<script src="gdq-break.js"></script>

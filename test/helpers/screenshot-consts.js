@@ -53,6 +53,7 @@ module.exports = {
 		nameAppendix: 'fromClosedToOpen',
 		selector: 'gdq-transition',
 		entranceMethodName: 'fromClosedToOpen',
+		entranceMethodArgs: [{fadeOutVideos: true}],
 		additionalDelay: STANDARD_DELAY,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
 		before: transitionBefore
@@ -69,8 +70,13 @@ module.exports = {
 		nameAppendix: 'fromClosedToPartial',
 		selector: 'gdq-transition',
 		entranceMethodName: 'fromClosedToPartial',
+		entranceMethodArgs: [{fadeOutVideos: true}],
 		additionalDelay: STANDARD_DELAY,
-		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
+		replicantPrefills: {
+			...STANDARD_REPLICANT_PREFILLS,
+			currentHost: undefined,
+			nowPlaying: undefined
+		},
 		before: transitionBefore
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/interview.html`,

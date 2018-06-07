@@ -26,8 +26,8 @@
         "sync": 0,
         "volume": 0.0
     },
-    "current_program_scene": "Break",
-    "current_scene": "Standard 1",
+    "current_program_scene": "Interview",
+    "current_scene": "Break",
     "current_transition": "Blank Stinger",
     "modules": {
         "auto-scene-switcher": {
@@ -3846,7 +3846,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 13,
+                "id_counter": 14,
                 "items": [
                     {
                         "align": 5,
