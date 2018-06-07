@@ -63,7 +63,7 @@ after_build:
   - 7z a %PKG_ZIP_NAME% .\bundles\%APPVEYOR_PROJECT_SLUG%\README.md "GitHub Repo.URL"
 
   # Make the obs-assets folder available in the root of the archive as well.
-  #- 7z a %PKG_ZIP_NAME% .\bundles\%APPVEYOR_PROJECT_SLUG%\obs-assets
+  - 7z a %PKG_ZIP_NAME% .\bundles\%APPVEYOR_PROJECT_SLUG%\obs-assets
 
   # Add any compiled native dependency files to the archive.
   - ps: 'Get-ChildItem -Recurse -ErrorAction SilentlyContinue bundles\$env:APPVEYOR_PROJECT_SLUG\node_modules\*.node | % { 7z a $env:PKG_ZIP_NAME $_.FullName }'

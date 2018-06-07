@@ -18,6 +18,12 @@ const STANDARD_REPLICANT_PREFILLS = {
 	tweets: undefined
 };
 
+const transitionBefore = function (page) {
+	return page.evaluate(async () => {
+		await document.querySelector('gdq-transition').waitForInit(); // eslint-disable-line no-undef
+	});
+};
+
 module.exports = {
 	BUNDLE_CONFIG: {},
 	WIDTH: 1600,
@@ -28,13 +34,44 @@ module.exports = {
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
+		nameAppendix: 'initial',
+		selector: 'gdq-transition',
+		entranceMethodName: null,
 		additionalDelay: STANDARD_DELAY,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
-		before(page) {
-			return page.evaluate(async () => {
-				await document.querySelector('gdq-transition').waitForInit(); // eslint-disable-line no-undef
-			});
-		}
+		before: transitionBefore
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
+		nameAppendix: 'fromOpenToClosed',
+		selector: 'gdq-transition',
+		entranceMethodName: 'fromOpenToClosed',
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
+		before: transitionBefore
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
+		nameAppendix: 'fromClosedToOpen',
+		selector: 'gdq-transition',
+		entranceMethodName: 'fromClosedToOpen',
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
+		before: transitionBefore
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
+		nameAppendix: 'fromPartialToClosed',
+		selector: 'gdq-transition',
+		entranceMethodName: 'fromPartialToClosed',
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
+		before: transitionBefore
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
+		nameAppendix: 'fromClosedToPartial',
+		selector: 'gdq-transition',
+		entranceMethodName: 'fromClosedToPartial',
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
+		before: transitionBefore
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/interview.html`,
 		nameAppendix: 'blank',

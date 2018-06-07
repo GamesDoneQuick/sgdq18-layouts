@@ -8,9 +8,18 @@
 				display: block;
 			}
 
-			img, video {
+			:host > img,
+			:host > div {
 				position: absolute;
 				will-change: transform;
+			}
+
+			:host > div {
+				display: flex;
+			}
+
+			video {
+				position: absolute;
 			}
 
 			.bottom {
@@ -19,7 +28,6 @@
 
 			.top {
 				top: 0;
-				right: 0;
 			}
 
 			.left {
@@ -30,6 +38,10 @@
 				right: 0;
 			}
 
+			#genericAnimation {
+				left: 513px;
+			}
+
 			[hidden] {
 				display: none !important;
 			}
@@ -37,17 +49,28 @@
 
 		<img id="bottomBackRect" class="bottom left" src="[[importPath]]img/bottomBackRect.png">
 		<img id="bottomBackTrapezoid" class="bottom left" src="[[importPath]]img/bottomBackTrapezoid.png">
-		<img id="bottomFrontRect" class="bottom left" src="[[importPath]]img/bottomFrontRect.png">
-		<video id="bottomRectAnimation" preload="auto" muted class="bottom right" src="[[importPath]]vid/transition_exit_botright.webm"></video>
-		<img id="bottomFrontTrapezoid" class="bottom left" src="[[importPath]]img/bottomFrontTrapezoid.png">
-		<video id="bottomTrapAnimation" preload="auto" muted class="bottom left" src="[[importPath]]vid/transition_exit_botleft.webm"></video>
+		<div id="bottomFrontRect" class="bottom left">
+			<img src="[[importPath]]img/bottomFrontRect.png">
+			<video id="bottomRectAnimation" class="bottom right" preload="auto" muted src="[[importPath]]vid/transition_exit_botright.webm"></video>
+		</div>
+		<div id="bottomFrontTrapezoid" class="bottom left">
+			<img src="[[importPath]]img/bottomFrontTrapezoid.png">
+			<video id="bottomTrapAnimation-exit" class="bottom left" preload="auto" muted src="[[importPath]]vid/transition_exit_botleft.webm"></video>
+			<video id="bottomTrapAnimation-enter" class="bottom left" preload="auto" muted src="[[importPath]]vid/transition_enter_botleft.webm"></video>
+		</div>
 
 		<img id="topBackRect" class="top right" src="[[importPath]]img/topBackRect.png">
 		<img id="topBackTrapezoid" class="top right" src="[[importPath]]img/topBackTrapezoid.png">
-		<img id="topFrontRect" class="top right" src="[[importPath]]img/topFrontRect.png">
-		<video id="topRectAnimation" preload="auto" muted class="top left" src="[[importPath]]vid/transition_exit_topleft.webm"></video>
-		<img id="topFrontTrapezoid" class="top right" src="[[importPath]]img/topFrontTrapezoid.png">
-		<video id="topTrapAnimation" preload="auto" muted class="top right" src="[[importPath]]vid/transition_exit_topright.webm"></video>
+		<div id="topFrontRect" class="top right">
+			<img src="[[importPath]]img/topFrontRect.png">
+			<video id="topRectAnimation" class="top left" preload="auto" muted src="[[importPath]]vid/transition_exit_topleft.webm"></video>
+		</div>
+		<div id="topFrontTrapezoid" class="top right">
+			<img src="[[importPath]]img/topFrontTrapezoid.png">
+			<video id="topTrapAnimation" class="top right" preload="auto" muted src="[[importPath]]vid/transition_exit_topright.webm"></video>
+		</div>
+
+		<video id="genericAnimation" preload="auto" muted src="[[importPath]]vid/transition_generic.webm"></video>
 	</template>
 
 	<script src="gdq-transition.js"></script>

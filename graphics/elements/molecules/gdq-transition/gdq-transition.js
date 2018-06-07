@@ -1,6 +1,10 @@
 (function () {
 	'use strict';
 
+	const GAME_SCENE_NAME_REGEX = /^(Standard|Widescreen|GBA|Gameboy|3DS|DS|LttP|OoT|Mario)/;
+	const HOME_POSITION = {x: 0, y: 0};
+	const HERO_HOLD_TIME = 1.5;
+	const GENERIC_HOLD_TIME = 0.5;
 	const MEDIA_READY_STATES = {
 		HAVE_NOTHING: 0,
 		HAVE_METADATA: 1,
@@ -21,15 +25,28 @@
 		}
 
 		static get properties() {
-			return {};
+			return {
+				masterTimeline: {
+					type: TimelineLite,
+					readOnly: true,
+					value() {
+						return new TimelineLite({autoRemoveChildren: true});
+					}
+				}
+			};
 		}
 
 		ready() {
 			super.ready();
 
+			if (!window.__SCREENSHOT_TESTING__) {
+				this.fromClosedToOpen().progress(1);
+			}
+
 			const videos = Array.from(this.shadowRoot.querySelectorAll('video'));
 			const videoLoadPromises = videos.map(this.waitForVideoToLoad);
 			Promise.all(videoLoadPromises).then(() => this.init());
+			this._$videos = videos;
 		}
 
 		init() {
@@ -40,17 +57,273 @@
 			this.dispatchEvent(new CustomEvent('initialized'));
 
 			if (window.__SCREENSHOT_TESTING__) {
-				this.shadowRoot.querySelectorAll('video').forEach(video => {
+				this._$videos.forEach(video => {
 					video.currentTime = video.duration;
 				});
-			} else {
-				// TODO: remove this when done developing this particular animation.
-				const fromClosedToBreak = this.fromClosedToBreak();
-				const fromBreakToClosed = this.fromClosedToBreak().reverse(0);
-				const tl = new TimelineMax({repeat: -1});
-				tl.add(fromClosedToBreak, '+=4');
-				tl.add(fromBreakToClosed, '+=4');
 			}
+
+			// Hide all videos to start.
+			this.hideVideos(...this._$videos);
+
+			nodecg.listenFor('streamingOBS:transitioning', data => {
+				console.log('streamingOBS:transitioning |', data);
+				if (!data || !data.fromScene || !data.toScene) {
+					return;
+				}
+
+				if (data.name !== 'Blank Stinger') {
+					return;
+				}
+
+				let animationTimeline;
+				if (data.fromScene === 'Break') {
+					if (data.toScene === 'Break') {
+						animationTimeline = this.genericBoth();
+					} else if (isGameScene(data.toScene)) {
+						animationTimeline = this.heroExit();
+					} else if (data.toScene === 'Interview') {
+						animationTimeline = this.genericExit();
+					}
+				} else if (isGameScene(data.fromScene)) {
+					if (data.toScene === 'Break') {
+						animationTimeline = this.heroEnter();
+					} else if (isGameScene(data.toScene)) {
+						animationTimeline = this.genericNone();
+					} else if (data.toScene === 'Interview') {
+						animationTimeline = this.genericNone();
+					}
+				} else if (data.fromScene === 'Interview') {
+					if (data.toScene === 'Break') {
+						this.genericEnter();
+					} else if (isGameScene(data.toScene)) {
+						animationTimeline = this.genericNone();
+					} else if (data.toScene === 'Interview') {
+						animationTimeline = this.genericNone();
+					}
+				} else if (data.fromScene === 'Countdown') {
+					if (data.toScene === 'Break') {
+						animationTimeline = this.heroEnter();
+					} else if (isGameScene(data.toScene)) {
+						animationTimeline = this.genericNone();
+					} else if (data.toScene === 'Interview') {
+						animationTimeline = this.genericNone();
+					}
+				} else if (data.fromScene === 'Technical Difficulties') {
+					if (data.toScene === 'Break') {
+						animationTimeline = this.genericNone();
+					} else if (isGameScene(data.toScene)) {
+						animationTimeline = this.genericNone();
+					} else if (data.toScene === 'Interview') {
+						animationTimeline = this.genericNone();
+					}
+				}
+
+				if (animationTimeline) {
+					this.masterTimeline.clear();
+					this.masterTimeline.add(animationTimeline);
+				}
+			});
+			console.log('listening for transition events...');
+		}
+
+		genericNone() {
+			console.log('genericNone');
+			return this.genericBase({startPartial: false, endPartial: false});
+		}
+
+		genericEnter() {
+			console.log('genericEnter');
+			return this.genericBase({startPartial: false, endPartial: true});
+		}
+
+		genericExit() {
+			console.log('genericExit');
+			return this.genericBase({startPartial: true, endPartial: false});
+		}
+
+		genericBoth() {
+			console.log('genericBoth');
+			return this.genericBase({startPartial: true, endPartial: true});
+		}
+
+		genericBase({startPartial, endPartial}) {
+			const tl = new TimelineLite({
+				callbackScope: this,
+				onStart() {
+					this.hideVideos(
+						this.$['bottomTrapAnimation-enter'],
+						this.$['bottomTrapAnimation-exit'],
+						this.$.bottomRectAnimation,
+						this.$.topTrapAnimation,
+						this.$.topRectAnimation
+					);
+				}
+			});
+
+			const closingAnim = startPartial ? this.fromPartialToClosed() : this.fromOpenToClosed();
+			closingAnim.call(() => {
+				this.playVideos(this.$.genericAnimation);
+			}, null, null, 'frontRects');
+
+			tl.add(closingAnim);
+			tl.add(endPartial ? this.fromClosedToPartial() : this.fromClosedToOpen(), `+=${GENERIC_HOLD_TIME}`);
+			return tl;
+		}
+
+		heroEnter() {
+			console.log('heroEnter');
+			const videos = [
+				this.$['bottomTrapAnimation-enter'],
+				this.$.bottomRectAnimation,
+				this.$.topTrapAnimation,
+				this.$.topRectAnimation
+			];
+
+			const tl = new TimelineLite({
+				callbackScope: this,
+				onStart() {
+					this.playVideos(...videos);
+				}
+			});
+
+			tl.add(this.fromOpenToClosed());
+			tl.add(this.fromClosedToPartial({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
+			return tl;
+		}
+
+		heroExit() {
+			console.log('heroExit');
+			const videos = [
+				this.$['bottomTrapAnimation-exit'],
+				this.$.bottomRectAnimation,
+				this.$.topTrapAnimation,
+				this.$.topRectAnimation
+			];
+
+			const tl = new TimelineLite({
+				callbackScope: this,
+				onStart() {
+					this.playVideos(...videos);
+				}
+			});
+
+			tl.add(this.fromPartialToClosed());
+			tl.add(this.fromClosedToOpen({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
+			return tl;
+		}
+
+		fromOpenToClosed(...args) {
+			const tl = new TimelineLite();
+			tl.add(this.fromClosedToOpen(...args).reverse(0));
+			return tl;
+		}
+
+		fromClosedToOpen({fadeOutVideos} = {}) {
+			return this.tweenGeometry({
+				bottomFrontRect: {x: 26, y: 413},
+				topFrontRect: {x: -10, y: -418},
+				bottomFrontTrapezoid: {x: -667, y: 488},
+				topFrontTrapezoid: {x: 14, y: -521},
+				bottomBackRect: {x: 0, y: 421},
+				topBackRect: {x: -10, y: -437},
+				bottomBackTrapezoid: {x: -666, y: 510},
+				topBackTrapezoid: {x: 0, y: -543},
+				fadeOutVideos
+			});
+		}
+
+		fromPartialToClosed(...args) {
+			const tl = new TimelineLite();
+			tl.add(this.fromClosedToPartial(...args).reverse(0));
+			return tl;
+		}
+
+		fromClosedToPartial({fadeOutVideos} = {}) {
+			return this.tweenGeometry({
+				bottomFrontRect: {x: 26, y: 321},
+				topFrontRect: {x: -10, y: -349},
+				bottomFrontTrapezoid: {x: -503, y: 364},
+				topFrontTrapezoid: {x: 8, y: -417},
+				bottomBackRect: {x: 0, y: 323},
+				topBackRect: {x: 0, y: -351},
+				bottomBackTrapezoid: {x: -490, y: 374},
+				topBackTrapezoid: {x: 0, y: -426},
+				fadeOutVideos
+			});
+		}
+
+		tweenGeometry({
+			bottomFrontRect,
+			topFrontRect,
+			bottomFrontTrapezoid,
+			topFrontTrapezoid,
+			bottomBackRect,
+			topBackRect,
+			bottomBackTrapezoid,
+			topBackTrapezoid,
+			fadeOutVideos = false
+		}) {
+			const tl = new TimelineLite();
+
+			tl.addLabel('start', 0.03);
+			tl.addLabel('frontRects', 'start');
+			tl.addLabel('frontTraps', 'start+=0.1');
+			tl.addLabel('backRects', 'start+=0.1667');
+			tl.addLabel('backTraps', 'start+=0.2334');
+
+			// Front rects.
+			tl.fromTo(this.$.bottomFrontRect, 0.2167, HOME_POSITION, {
+				...bottomFrontRect,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'frontRects');
+			tl.fromTo(this.$.topFrontRect, 0.2167, HOME_POSITION, {
+				...topFrontRect,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'frontRects');
+
+			// Front traps.
+			tl.fromTo(this.$.bottomFrontTrapezoid, 0.2667, HOME_POSITION, {
+				...bottomFrontTrapezoid,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'frontTraps');
+			tl.fromTo(this.$.topFrontTrapezoid, 0.2667, HOME_POSITION, {
+				...topFrontTrapezoid,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'frontTraps');
+
+			// Back rects.
+			tl.fromTo(this.$.bottomBackRect, 0.2334, HOME_POSITION, {
+				...bottomBackRect,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'backRects');
+			tl.fromTo(this.$.topBackRect, 0.2334, HOME_POSITION, {
+				...topBackRect,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'backRects');
+
+			// Back traps.
+			tl.fromTo(this.$.bottomBackTrapezoid, 0.2334, HOME_POSITION, {
+				...bottomBackTrapezoid,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'backTraps');
+			tl.fromTo(this.$.topBackTrapezoid, 0.2334, HOME_POSITION, {
+				...topBackTrapezoid,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'backTraps');
+
+			if (fadeOutVideos) {
+				tl.to(this._$videos, 0.25, {
+					opacity: 0,
+					ease: Sine.easeInOut,
+					callbackScope: this,
+					onComplete() {
+						console.log('hide all videos');
+						this.hideVideos(...this._$videos);
+					}
+				}, tl.duration() / 2);
+			}
+
+			return tl;
 		}
 
 		waitForInit() {
@@ -77,77 +350,51 @@
 			});
 		}
 
-		fromClosedToBreak() {
-			const tl = new TimelineLite();
+		playVideos(...videoElems) {
+			if (window.__SCREENSHOT_TESTING__) {
+				return;
+			}
 
-			// Start frame = 211
+			this.showVideos(...videoElems);
+			videoElems.forEach(videoElem => {
+				videoElem.play().then(() => {
+					console.log('started playing', videoElem.id);
+				}).catch(() => {
+					console.error('failed to play', videoElem.id);
+				});
+			});
+		}
 
-			tl.addLabel('frontRects', 0);
-			tl.addLabel('frontTraps', 0.1);
-			tl.addLabel('backRects', 0.1667);
-			tl.addLabel('backTraps', 0.2334);
+		showVideos(...videoElems) {
+			if (window.__SCREENSHOT_TESTING__) {
+				return;
+			}
 
-			// Front rects.
-			tl.to([this.$.bottomFrontRect, this.$.bottomRectAnimation], 0.2167, {
-				x: 26,
-				y: 321,
-				ease: 'ModifiedPower2EaseInOut'
-			}, 'frontRects');
-			tl.to([this.$.topFrontRect, this.$.topRectAnimation], 0.2167, {
-				x: -10,
-				y: -349,
-				ease: 'ModifiedPower2EaseInOut'
-			}, 'frontRects');
+			videoElems.forEach(videoElem => {
+				videoElem.style.display = '';
+				videoElem.style.opacity = '';
+			});
+		}
 
-			// Front traps.
-			tl.to([this.$.bottomFrontTrapezoid, this.$.bottomTrapAnimation], 0.2667, {
-				x: -503,
-				y: 364,
-				ease: 'ModifiedPower2EaseInOut'
-			}, 'frontTraps');
+		hideVideos(...videoElems) {
+			if (window.__SCREENSHOT_TESTING__) {
+				return;
+			}
 
-			tl.call(() => {
-				if (!window.__SCREENSHOT_TESTING__) {
-					this.$.bottomTrapAnimation.play();
-					this.$.bottomRectAnimation.play();
-					this.$.topTrapAnimation.play();
-					this.$.topRectAnimation.play();
-				}
-			}, null, null, 'frontRects');
-
-			tl.to([this.$.topFrontTrapezoid, this.$.topTrapAnimation], 0.2667, {
-				x: 8,
-				y: -417,
-				ease: 'ModifiedPower2EaseInOut'
-			}, 'frontTraps');
-
-			// Back rects.
-			tl.to(this.$.bottomBackRect, 0.2334, {
-				x: 0,
-				y: 323,
-				ease: 'ModifiedPower2EaseInOut'
-			}, 'backRects');
-			tl.to(this.$.topBackRect, 0.2334, {
-				x: 0,
-				y: -351,
-				ease: 'ModifiedPower2EaseInOut'
-			}, 'backRects');
-
-			// Back traps.
-			tl.to(this.$.bottomBackTrapezoid, 0.2334, {
-				x: -490,
-				y: 374,
-				ease: 'ModifiedPower2EaseInOut'
-			}, 'backTraps');
-			tl.to(this.$.topBackTrapezoid, 0.2334, {
-				x: 0,
-				y: -426,
-				ease: 'ModifiedPower2EaseInOut'
-			}, 'backTraps');
-
-			return tl;
+			videoElems.forEach(videoElem => {
+				videoElem.pause();
+				videoElem.currentTime = 0;
+				requestAnimationFrame(() => {
+					videoElem.style.display = 'none';
+					videoElem.style.opacity = '0';
+				});
+			});
 		}
 	}
 
 	customElements.define(GdqTransition.is, GdqTransition);
+
+	function isGameScene(sceneName) {
+		return Boolean(sceneName.match(GAME_SCENE_NAME_REGEX));
+	}
 })();

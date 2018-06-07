@@ -24,7 +24,7 @@
     "lodash.debounce": "^4.0.6",
     "lodash.merge": "^4.4.0",
     "milliseconds": "^1.0.3",
-    "nodecg-utility-obs": "^4.3.1",
+    "nodecg-utility-obs": "^4.4.0",
     "numeral": "^2.0.6",
     "object-path": "^0.11.3",
     "osc": "^2.2.1",
