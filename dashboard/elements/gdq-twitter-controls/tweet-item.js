@@ -14,30 +14,9 @@
 		static get properties() {
 			return {
 				value: {
-					type: Object,
-					observer: '_valueChanged'
-				},
-				profileUrl: {
-					type: String,
-					computed: 'computeProfileUrl(value)'
-				},
-				tweetUrl: {
-					type: String,
-					computed: 'computeTweetUrl(profileUrl, value)'
+					type: Object
 				}
 			};
-		}
-
-		_valueChanged(newValue) {
-			Polymer.dom(this.$.body).innerHTML = newValue.text;
-		}
-
-		computeProfileUrl(value) {
-			return `https://twitter.com/${value.user.screen_name}`;
-		}
-
-		computeTweetUrl(profileUrl, value) {
-			return `${profileUrl}/status/${value.id_str}`;
 		}
 
 		computePhotoOrPhotos(numPhotos) {
