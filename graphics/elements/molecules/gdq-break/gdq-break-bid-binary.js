@@ -73,7 +73,7 @@
 					TypeAnims.type(this.$.losingOptionName);
 				},
 				onUpdate() {
-					this.drawMagentaSlice(proxy.percent);
+					this.drawWinningSlice(proxy.percent);
 				}
 			});
 
@@ -122,7 +122,7 @@
 			this._winningSlice = svgDoc.path().fill(gradient);
 		}
 
-		drawMagentaSlice(percent) {
+		drawWinningSlice(percent) {
 			// Note the svg viewBox is offset so the center of the SVG is 0,0.
 			const arcLength = 2 * Math.PI * percent;
 
