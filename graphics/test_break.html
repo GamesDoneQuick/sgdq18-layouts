@@ -14,13 +14,15 @@
 	<link rel="import" href="../shared/imports/gsap.html">
 	<link rel="import" href="elements/molecules/gdq-break/gdq-break-bids.html">
 	<link rel="import" href="elements/molecules/gdq-break/gdq-break-prizes.html">
-	<style>
-		body {
-			opacity: 1;
-		}
-	</style>
+	<custom-style>
+		<style include="iron-positioning">
+			body {
+				opacity: 1;
+			}
+		</style>
+	</custom-style>
 </head>
-<body>
+<body class="fullbleed">
 	<test-app></test-app>
 
 	<dom-module id="test-app">
