@@ -42,6 +42,16 @@
 				bindToMessage: {
 					type: String,
 					value: 'showTweet'
+				},
+
+				/**
+				 * If true, it means that we're currently showing a tweet,
+				 * and are at a point in the animation where we can show another one
+				 * without performing a full exit/enter cycle again.
+				 */
+				_canExtend: {
+					type: Boolean,
+					value: false
 				}
 			};
 		}
@@ -51,7 +61,7 @@
 			this._initBackgroundSVG();
 			this._addReset();
 
-			if (this.bindToMessage && this.bindToMessage.length > 0) {
+			if (this.bindToMessage && this.bindToMessage.length > 0 && this.bindToMessage !== 'false') {
 				nodecg.listenFor(this.bindToMessage, this.playTweet.bind(this));
 			}
 
@@ -77,31 +87,49 @@
 		 * @returns {TimelineLite} - A GSAP TimelineLite instance.
 		 */
 		playTweet(tweet) {
+			console.log('playTweet', tweet);
 			const tl = this.timeline;
 
-			this._addReset();
+			if (this._canExtend) {
+				console.log('extending');
+				const newAnim = new TimelineLite();
+				newAnim.add(this._createTweetChangeAnim(tweet));
+				newAnim.add(this._createHold());
+				tl.add(newAnim, 'exit-=0.01');
+				tl.shiftChildren(newAnim.duration(), true, tl.getLabelTime('exit'));
+			} else {
+				console.log('not extending');
+				this._addReset();
 
-			// Wait for prizes to hide, if applicable.
-			tl.call(() => {
-				if (this.companionElement && typeof this.companionElement.hide === 'function') {
-					tl.pause();
+				// Wait for prizes to hide, if applicable.
+				tl.call(() => {
+					this._canExtend = true;
+					if (this.companionElement && typeof this.companionElement.hide === 'function') {
+						tl.pause();
 
-					const hidePrizeTl = this.companionElement.hide();
-					hidePrizeTl.call(() => {
-						tl.resume();
-					});
+						const hidePrizeTl = this.companionElement.hide();
+						console.log('waiting for companion element to hide');
+						hidePrizeTl.call(() => {
+							console.log('companion element hidden');
+							tl.resume();
+						});
+					}
+				}, null, null, '+=0.03');
+
+				tl.add(this._createEntranceAnim(tweet));
+				tl.add(this._createHold());
+				tl.addLabel('exit');
+				tl.add(this._createExitAnim());
+
+				if (this.companionElement && typeof this.companionElement.show === 'function') {
+					tl.add(this.companionElement.show());
 				}
-			}, null, null, '+=0.03');
 
-			this._addEntranceAnim(tweet);
-			this._addExitAnim();
-
-			if (this.companionElement && typeof this.companionElement.show === 'function') {
-				tl.add(this.companionElement.show());
+				// Padding
+				tl.to(EMPTY_OBJ, 0.1, EMPTY_OBJ);
 			}
 
-			// Padding
-			tl.to(EMPTY_OBJ, 0.1, EMPTY_OBJ);
+			return tl;
 		}
 
 		/**
@@ -121,13 +149,13 @@
 		}
 
 		/**
-		 * Adds an entrance animation to the master timeline.
+		 * Creates an entrance animation timeline.
 		 * @private
 		 * @param {Object} tweet - The tweet to enter.
-		 * @returns {undefined}
+		 * @returns {TimelineLite} - A GSAP animation timeline.
 		 */
-		_addEntranceAnim(tweet) {
-			const tl = this.timeline;
+		_createEntranceAnim(tweet) {
+			const tl = new TimelineLite();
 
 			tl.addLabel('start', '+=0.03');
 
@@ -169,18 +197,81 @@
 				this.$['body-actual'].innerHTML = tweet.text;
 				TypeAnims.type(this.$['body-actual'], {typeInterval: 0.01});
 			});
+
+			return tl;
 		}
 
 		/**
-		 * Adds an exit animation to the master timeline.
+		 * Creates a dummy tween which can be used to hold something as-is for
+		 * a given time.
 		 * @private
-		 * @param {Number} delay - How long, in seconds, to delay the start of this animation.
-		 * @returns {undefined}
+		 * @param {Number} duration - How long, in seconds, to hold for.
+		 * @returns {TimelineLite} - A GSAP animation timeline.
 		 */
-		_addExitAnim(delay = TWEET_DISPLAY_DURATION) {
-			const tl = this.timeline;
+		_createHold(duration = TWEET_DISPLAY_DURATION) {
+			const tl = new TimelineLite();
+			tl.to(EMPTY_OBJ, duration, EMPTY_OBJ);
+			return tl;
+		}
 
-			tl.add('exit', `+=${delay}`);
+		/**
+		 * Creates an animation for changing the currently displayed tweet.
+		 * This is only used when hot-swapping tweets
+		 * (i.e., changing tweets while the graphic is already showing).
+		 * @param {Object} tweet - The new tweet to show.
+		 * @returns {TimelineLite} - A GSAP animation timeline.
+		 * @private
+		 */
+		_createTweetChangeAnim(tweet) {
+			const tl = new TimelineLite();
+			let exitedPreviousTweet = false;
+
+			tl.addLabel('start', '+=0.03');
+
+			tl.call(() => {
+				if (exitedPreviousTweet) {
+					return;
+				}
+
+				console.log('pausing');
+				tl.pause();
+				const exitTextTl = new TimelineLite();
+				exitTextTl.add(TypeAnims.untype(this.$.name, 0.01), 0);
+				exitTextTl.add(TypeAnims.untype(this.$['body-actual'], 0.01), 0.08);
+				exitTextTl.call(() => {
+					console.log('resuming');
+					exitedPreviousTweet = true;
+					tl.resume();
+				});
+			});
+
+			tl.call(() => {
+				console.log('replacing body');
+				this.$.name.innerText = `@${tweet.user.screen_name}`;
+				this.$['body-actual'].innerHTML = tweet.text;
+
+				const enterTextTl = new TimelineLite();
+				enterTextTl.add(TypeAnims.type(this.$.name, {typeInterval: 0.01}), 0);
+				enterTextTl.add(TypeAnims.type(this.$['body-actual'], {typeInterval: 0.01}), 0.08);
+			}, null, null, '+=0.03');
+
+			return tl;
+		}
+
+		/**
+		 * Creates an exit animation timeline.
+		 * @private
+		 * @returns {TimelineLite} - A GSAP animation timeline.
+		 */
+		_createExitAnim() {
+			const tl = new TimelineLite({
+				callbackScope: this,
+				onStart() {
+					this._canExtend = false;
+				}
+			});
+
+			tl.add('exit');
 
 			tl.add(MaybeRandom.createTween({
 				target: this.$['body-actual'].style,
@@ -213,6 +304,8 @@
 				clipPath: 'inset(0 0 0 100%)',
 				ease: Sine.easeInOut
 			}, 'exit+=1.3');
+
+			return tl;
 		}
 
 		_initBackgroundSVG() {
