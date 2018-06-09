@@ -12,6 +12,7 @@
 				box-sizing: border-box;
 				font-size: 16px;
 				@apply --layout-horizontal;
+				filter: drop-shadow(0 0 20px rgba(255, 184, 0, 0.5))
 			}
 
 			#line {
@@ -20,7 +21,7 @@
 				left: 0;
 				height: 1px;
 				width: 100%;
-				background: #00FFFF;
+				background: #FFB800;
 			}
 
 
@@ -45,9 +46,10 @@
 			#text {
 				--atom-gradient-text-gradient: linear-gradient(
 					180deg,
-					rgba(255, 255, 255, 0.66) 0%,
-					rgba(211, 210, 112, 0.66) 100%
-				)
+					rgba(0, 0, 0, 1) 0%,
+					rgba(0, 0, 0, 1) 100%
+				);
+				--atom-gradient-text-shadow: rgba(255, 105, 58, 0.8);
 			}
 
 			.wing {
@@ -64,10 +66,10 @@
 
 			.wingBody {
 				height: 100%;
-				border: 1px solid #00FFFF;
+				border: 1px solid #FFB800;
 				border-left: 0;
 				border-right: 0;
-				background: #051113;
+				background: #FFDE8B;
 				box-sizing: border-box;
 				@apply --layout-flex;
 			}
@@ -75,9 +77,9 @@
 			atom-chevron {
 				width: 16px;
 				height: 100%;
-				--atom-chevron-background: #051113;
-				--atom-chevron-fill-color: #116978;
-				--atom-chevron-stroke-color: #00FFFF;
+				--atom-chevron-background: #FFDE8B;
+				--atom-chevron-fill-color: #412413;
+				--atom-chevron-stroke-color: #FFB800;
 				@apply --layout-flex-none;
 			}
 

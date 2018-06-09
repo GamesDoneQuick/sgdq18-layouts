@@ -1,11 +1,16 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../shared/imports/gsap-CustomEase.html">
+<link rel="import" href="../gdq-break/gdq-break-bottom-frame.html">
+<link rel="import" href="../gdq-break/gdq-break-top-frame.html">
 
 <dom-module id="gdq-transition">
 	<template>
 		<style>
 			:host {
 				display: block;
+				font-family: "Source Code Pro", sans-serif;
+				height: 900px;
+				width: 1600px;
 			}
 
 			:host > img,
@@ -42,6 +47,13 @@
 				left: 513px;
 			}
 
+			#topFrameContent,
+			#bottomFrameContent {
+				position: absolute;
+				opacity: 0;
+				will-change: opacity;
+			}
+
 			[hidden] {
 				display: none !important;
 			}
@@ -69,6 +81,9 @@
 			<img src="[[importPath]]img/topFrontTrapezoid.png">
 			<video id="topTrapAnimation" class="top right" preload="auto" muted src="[[importPath]]vid/transition_exit_topright.webm"></video>
 		</div>
+
+		<gdq-break-top-frame id="topFrameContent" class="top left"></gdq-break-top-frame>
+		<gdq-break-bottom-frame id="bottomFrameContent" class="bottom left"></gdq-break-bottom-frame>
 
 		<video id="genericAnimation" preload="auto" muted src="[[importPath]]vid/transition_generic.webm"></video>
 	</template>

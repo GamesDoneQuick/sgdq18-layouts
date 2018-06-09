@@ -1,4 +1,5 @@
 <link rel="import" href="../../../../bower_components/sc-fitted-text/sc-fitted-text.html">
+<link rel="import" href="../../../../shared/fonts/letter-gothic-std/import.html">
 
 <dom-module id="gdq-break-bottom-frame">
 	<template>
@@ -7,7 +8,6 @@
 				display: block;
 				width: 1600px;
 				height: 119px;
-				background: url("img/bottom_bg.png") no-repeat;
 			}
 
 			.logo {
@@ -20,15 +20,20 @@
 			#host,
 			#music {
 				position: absolute;
-				bottom: -14px;
+				bottom: -11px;
 				@apply --layout-horizontal;
 				@apply --layout-center;
+			}
+
+			#host-icon,
+			#music-icon {
+				height: 70px;
 			}
 
 			#host-text,
 			#music-text {
 				position: relative;
-				top: 1px;
+				top: 3px;
 				font-family: "Letter Gothic Std";
 				font-size: 20px;
 				font-weight: bold;

@@ -27,8 +27,8 @@
 			}
 
 			#center-content {
-				background-color: #1D1020;
-				border: 1px solid #EE0693;
+				background-color: #201010;
+				border: 1px solid #963B08;
 				border-left: none;
 				border-right: none;
 				@apply --layout-flex;
@@ -61,10 +61,10 @@
 
 			.wingBody {
 				height: 100%;
-				border: 1px solid #EE0693;
+				border: 1px solid #963B08;
 				border-left: 0;
 				border-right: 0;
-				background: #1D1020;
+				background: #201010;
 				box-sizing: border-box;
 				@apply --layout-flex;
 				@apply --layout-horizontal;
@@ -75,8 +75,8 @@
 				width: 16px;
 				height: 100%;
 				--atom-chevron-background: #1D1020;
-				--atom-chevron-fill-color: #6B0E41;
-				--atom-chevron-stroke-color: #EE0693;
+				--atom-chevron-fill-color: #FE8627;
+				--atom-chevron-stroke-color: #963B08;
 				@apply --layout-flex-none;
 			}
 
@@ -84,8 +84,8 @@
 				background-color: #1D1020;
 				height: 100%;
 				z-index: 1;
-				--atom-greeble-fill-color: #FF64C0;
-				--atom-greeble-stroke-color: #EE0693;
+				--atom-greeble-fill-color: #FFDF79;
+				--atom-greeble-stroke-color: #FE8022;
 			}
 
 			atom-gradient-text {
@@ -105,8 +105,8 @@
 				color: transparent;
 				background-image: linear-gradient(
 					to bottom,
-					#E6E6E6 0%,
-					#CF70D3 100%
+					#FFDF8C 0%,
+					#FFB800 100%
 				);
 				-webkit-background-clip: text;
 			}
@@ -135,6 +135,12 @@
 			atom-gradient-text {
 				position: relative;
 				top: var(--gdq-runinfo-misc-voffset, -1px);
+				--atom-gradient-text-gradient: linear-gradient(
+					180deg,
+					#FFFB93 0%,
+					#FD5B00 100%
+				);
+				--atom-gradient-text-shadow: 0 0 18px rgba(255, 82, 58, 0.8);
 			}
 		</style>
 
