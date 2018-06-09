@@ -1,14 +1,11 @@
 (function () {
 	'use strict';
 
-	const TWEET_DISPLAY_DURATION = 9;
-	const EMPTY_OBJ = {};
-
 	/**
 	 * @customElement
 	 * @polymer
 	 */
-	class GdqTweet extends Polymer.Element {
+	class GdqTweet extends window.AtomInterrupt {
 		static get is() {
 			return 'gdq-tweet';
 		}
@@ -25,33 +22,13 @@
 						return document.querySelector('gdq-sponsors');
 					}
 				},
-				timeline: {
-					type: TimelineLite,
-					value() {
-						return new TimelineLite({autoRemoveChildren: true});
-					}
-				},
 				backgroundOpacity: {
 					type: Number,
 					value: 0.25
 				},
-
-				/**
-				 * The message name to bind to.
-				 */
 				bindToMessage: {
 					type: String,
 					value: 'showTweet'
-				},
-
-				/**
-				 * If true, it means that we're currently showing a tweet,
-				 * and are at a point in the animation where we can show another one
-				 * without performing a full exit/enter cycle again.
-				 */
-				_canExtend: {
-					type: Boolean,
-					value: false
 				}
 			};
 		}
@@ -61,10 +38,6 @@
 			this._initBackgroundSVG();
 			this._addReset();
 
-			if (this.bindToMessage && this.bindToMessage.length > 0 && this.bindToMessage !== 'false') {
-				nodecg.listenFor(this.bindToMessage, this.playTweet.bind(this));
-			}
-
 			Polymer.RenderStatus.beforeNextRender(this, () => {
 				if (!this.companionElement) {
 					if (document.querySelector('layout-app')) {
@@ -73,63 +46,6 @@
 					}
 				}
 			});
-		}
-
-		/**
-		 * Plays the entrance animation for this element.
-		 * Then, holds it for TWEET_DISPLAY_DURATION seconds.
-		 * Then, plays the exit animation for this element.
-		 *
-		 * If this.companionElement is defined, this method will run this.companionElement.hide()
-		 * before playing the entrance animation for this element.
-		 *
-		 * @param {Object} tweet - The tweet to show.
-		 * @returns {TimelineLite} - A GSAP TimelineLite instance.
-		 */
-		playTweet(tweet) {
-			console.log('playTweet', tweet);
-			const tl = this.timeline;
-
-			if (this._canExtend) {
-				console.log('extending');
-				const newAnim = new TimelineLite();
-				newAnim.add(this._createTweetChangeAnim(tweet));
-				newAnim.add(this._createHold());
-				tl.add(newAnim, 'exit-=0.01');
-				tl.shiftChildren(newAnim.duration(), true, tl.getLabelTime('exit'));
-			} else {
-				console.log('not extending');
-				this._addReset();
-
-				// Wait for prizes to hide, if applicable.
-				tl.call(() => {
-					this._canExtend = true;
-					if (this.companionElement && typeof this.companionElement.hide === 'function') {
-						tl.pause();
-
-						const hidePrizeTl = this.companionElement.hide();
-						console.log('waiting for companion element to hide');
-						hidePrizeTl.call(() => {
-							console.log('companion element hidden');
-							tl.resume();
-						});
-					}
-				}, null, null, '+=0.03');
-
-				tl.add(this._createEntranceAnim(tweet));
-				tl.add(this._createHold());
-				tl.addLabel('exit');
-				tl.add(this._createExitAnim());
-
-				if (this.companionElement && typeof this.companionElement.show === 'function') {
-					tl.add(this.companionElement.show());
-				}
-
-				// Padding
-				tl.to(EMPTY_OBJ, 0.1, EMPTY_OBJ);
-			}
-
-			return tl;
 		}
 
 		/**
@@ -202,19 +118,6 @@
 		}
 
 		/**
-		 * Creates a dummy tween which can be used to hold something as-is for
-		 * a given time.
-		 * @private
-		 * @param {Number} duration - How long, in seconds, to hold for.
-		 * @returns {TimelineLite} - A GSAP animation timeline.
-		 */
-		_createHold(duration = TWEET_DISPLAY_DURATION) {
-			const tl = new TimelineLite();
-			tl.to(EMPTY_OBJ, duration, EMPTY_OBJ);
-			return tl;
-		}
-
-		/**
 		 * Creates an animation for changing the currently displayed tweet.
 		 * This is only used when hot-swapping tweets
 		 * (i.e., changing tweets while the graphic is already showing).
@@ -222,7 +125,7 @@
 		 * @returns {TimelineLite} - A GSAP animation timeline.
 		 * @private
 		 */
-		_createTweetChangeAnim(tweet) {
+		_createChangeAnim(tweet) {
 			const tl = new TimelineLite();
 			let exitedPreviousTweet = false;
 
@@ -233,20 +136,17 @@
 					return;
 				}
 
-				console.log('pausing');
 				tl.pause();
 				const exitTextTl = new TimelineLite();
 				exitTextTl.add(TypeAnims.untype(this.$.name, 0.01), 0);
 				exitTextTl.add(TypeAnims.untype(this.$['body-actual'], 0.01), 0.08);
 				exitTextTl.call(() => {
-					console.log('resuming');
 					exitedPreviousTweet = true;
 					tl.resume();
 				});
 			});
 
 			tl.call(() => {
-				console.log('replacing body');
 				this.$.name.innerText = `@${tweet.user.screen_name}`;
 				this.$['body-actual'].innerHTML = tweet.text;
 
@@ -264,12 +164,7 @@
 		 * @returns {TimelineLite} - A GSAP animation timeline.
 		 */
 		_createExitAnim() {
-			const tl = new TimelineLite({
-				callbackScope: this,
-				onStart() {
-					this._canExtend = false;
-				}
-			});
+			const tl = new TimelineLite();
 
 			tl.add('exit');
 
