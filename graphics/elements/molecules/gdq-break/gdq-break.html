@@ -5,10 +5,8 @@
 <link rel="import" href="../../atoms/atom-text-greeble/atom-text-greeble.html">
 <link rel="import" href="../gdq-tweet/gdq-tweet.html">
 <link rel="import" href="gdq-break-bids.html">
-<link rel="import" href="gdq-break-bottom-frame.html">
 <link rel="import" href="gdq-break-prizes.html">
 <link rel="import" href="gdq-break-schedule.html">
-<link rel="import" href="gdq-break-top-frame.html">
 
 <dom-module id="gdq-break">
 	<template>
@@ -23,7 +21,7 @@
 
 			#bids {
 				position: absolute;
-				top: 55px;
+				top: 85px;
 				left: 0;
 			}
 
@@ -47,18 +45,6 @@
 				right: 0;
 			}
 
-			#topFrame {
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-
-			#bottomFrame {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-			}
-
 			atom-text-greeble {
 				position: absolute;
 				bottom: 70px;
@@ -71,19 +57,27 @@
 				right: 40px;
 				top: 120px;
 				box-sizing: border-box;
-				border-top: 1px solid #00ffff;
-				border-right: 1px solid #00ffff;
-				border-bottom: 1px solid #00ffff;
-				border-left: 49px solid #00ffff;
+				border-top: 1px solid #e9d75e;
+				border-right: 1px solid #e9d75e;
+				border-bottom: 1px solid #e9d75e;
+				border-left: 49px solid #e9d75e;
+				border-image: linear-gradient(
+					to bottom,
+					#fdd853 10%,
+					#ef965e 30%,
+					#e56469 60%,
+					#e03a68 100%
+				) 1;
+				box-shadow: 0 0 75px rgba(255, 0, 214, 0.26);
 			}
 
 			#crowd-cam-label {
-				width: 142px;
+				width: 172px;
 				height: 26px;
 				position: absolute;
 				right: 51px;
 				top: 340px;
-				background-color: #00ffff;
+				background-color: #fdd853;
 				text-align: center;
 				font-size: 14px;
 				box-sizing: border-box;
@@ -97,14 +91,11 @@
 		<gdq-break-schedule id="schedule"></gdq-break-schedule>
 
 		<div id="crowd-cam"></div>
-		<div id="crowd-cam-label">Herndon, VA</div>
+		<div id="crowd-cam-label">Minneapolis, MN</div>
 
 		<atom-text-greeble style="left: 348px;" length="15"></atom-text-greeble>
 		<atom-text-greeble style="left: 532px;" length="11"></atom-text-greeble>
 		<atom-text-greeble style="left: 719px; color: #00FFFF;" length="15"></atom-text-greeble>
-
-		<gdq-break-top-frame id="topFrame"></gdq-break-top-frame>
-		<gdq-break-bottom-frame id="bottomFrame"></gdq-break-bottom-frame>
 	</template>
 
 	<script src="gdq-break.js"></script>

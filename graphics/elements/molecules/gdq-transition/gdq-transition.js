@@ -234,12 +234,27 @@
 
 		fromPartialToClosed(...args) {
 			const tl = new TimelineLite();
-			tl.add(this.fromClosedToPartial(...args).reverse(0));
+
+			tl.to([
+				this.$.topFrameContent,
+				this.$.bottomFrameContent
+			], 0.333, {
+				opacity: 0,
+				ease: Sine.easeInOut
+			}, 0);
+
+			tl.add(this.fromClosedToPartial({
+				fadeInFrameContent: false,
+				...args
+			}).reverse(0), 0);
+
 			return tl;
 		}
 
-		fromClosedToPartial({fadeOutVideos} = {}) {
-			return this.tweenGeometry({
+		fromClosedToPartial({fadeOutVideos, fadeInFrameContent = true} = {}) {
+			const tl = new TimelineLite();
+
+			tl.add(this.tweenGeometry({
 				bottomFrontRect: {x: 26, y: 321},
 				topFrontRect: {x: -10, y: -349},
 				bottomFrontTrapezoid: {x: -503, y: 364},
@@ -249,7 +264,19 @@
 				bottomBackTrapezoid: {x: -490, y: 374},
 				topBackTrapezoid: {x: 0, y: -426},
 				fadeOutVideos
-			});
+			}));
+
+			if (fadeInFrameContent) {
+				tl.to([
+					this.$.topFrameContent,
+					this.$.bottomFrameContent
+				], 0.333, {
+					opacity: 1,
+					ease: Sine.easeInOut
+				});
+			}
+
+			return tl;
 		}
 
 		tweenGeometry({
