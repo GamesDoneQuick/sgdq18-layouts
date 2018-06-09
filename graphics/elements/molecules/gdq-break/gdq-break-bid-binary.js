@@ -116,8 +116,7 @@
 					stop.at(1, '#fdd853');
 				})
 				.from(gradientCoords.x1, gradientCoords.y1)
-				.to(gradientCoords.x2, gradientCoords.y2)
-				.attr({gradientTransform: `rotate(${ROTATION_FACTOR}turn)`});
+				.to(gradientCoords.x2, gradientCoords.y2);
 
 			this._winningSlice = svgDoc.path().fill(gradient);
 		}
