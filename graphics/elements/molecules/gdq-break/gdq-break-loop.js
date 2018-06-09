@@ -42,7 +42,7 @@ class GdqBreakLoop extends Polymer.Element { // eslint-disable-line no-unused-va
 			return;
 		}
 
-		// If there's no prizes, do nothing and try again in one second.
+		// If there's no items, do nothing and try again in one second.
 		if (!this.availableItems || this.availableItems.length <= 0) {
 			clearTimeout(this._loopRetryTimeout);
 			this._loopRetryTimeout = setTimeout(() => {
