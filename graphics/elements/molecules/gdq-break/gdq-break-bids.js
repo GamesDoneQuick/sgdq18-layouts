@@ -51,15 +51,16 @@
 				return tl;
 			}
 
+			const previousElement = this._previousBidElement;
 			const element = document.createElement(elementTagName);
 			element.bid = bid;
+			this._previousBidElement = element;
 
 			this.$.content.appendChild(element);
-			if (this.$.content.selectedItem) {
-				const currentlyDisplayingElement = this.$.content.selectedItem;
-				tl.add(currentlyDisplayingElement.exit());
+			if (previousElement) {
+				tl.add(previousElement.exit());
 				tl.call(() => {
-					currentlyDisplayingElement.remove();
+					previousElement.remove();
 				});
 			}
 
