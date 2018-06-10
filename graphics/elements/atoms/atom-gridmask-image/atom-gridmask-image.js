@@ -26,6 +26,10 @@
 					type: Number,
 					value: 21
 				},
+				cellStagger: {
+					type: Number,
+					value: 0.002
+				},
 				fallbackSrc: {
 					type: String
 				},
@@ -82,7 +86,7 @@
 					didImageEntranceOnStart = true;
 					this.entering = true;
 				}
-			}, 0.002, 0, () => {
+			}, this.cellStagger, 0, () => {
 				this.entering = false;
 				this.dispatchEvent(new CustomEvent('entered'));
 			});
@@ -111,7 +115,7 @@
 					didOnStart = true;
 					this.exiting = true;
 				}
-			}, 0.002, 0, () => {
+			}, this.cellStagger, 0, () => {
 				if (typeof onComplete === 'function') {
 					onComplete();
 				}
