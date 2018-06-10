@@ -34,6 +34,38 @@
 			});
 		}
 
+		show() {
+			const tl = new TimelineLite();
+
+			tl.to(this, 0.333, {
+				opacity: 1,
+				ease: Sine.easeInOut
+			}, 0);
+
+			tl.to(this, 1, {
+				x: '0%',
+				ease: Power2.easeOut
+			}, 0);
+
+			return tl;
+		}
+
+		hide() {
+			const tl = new TimelineLite();
+
+			tl.to(this, 1, {
+				x: '-100%',
+				ease: Power2.easeIn
+			});
+
+			tl.to(this, 0.333, {
+				opacity: 0,
+				ease: Sine.easeInOut
+			}, '-=0.333');
+
+			return tl;
+		}
+
 		_showItem(bid) {
 			let elementTagName;
 			if (bid.type === 'choice-many') {

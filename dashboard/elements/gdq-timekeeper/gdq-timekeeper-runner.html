@@ -67,7 +67,7 @@
 			}
 
 			#buttons paper-button {
-				width: 98px;
+				width: 90px;
 				height: 52px;
 			}
 
@@ -84,7 +84,7 @@
 				--paper-button: {
 					color: white;
 					padding: 0;
-					font-size: 16px;
+					font-size: 14px;
 					font-weight: bold;
 					background-color: var(--bg-color);
 				}
@@ -93,7 +93,13 @@
 
 		<template is="dom-if" if="[[runner]]">
 			<div id="info">
-				<sc-fitted-text id="info-name" align="left" max-width="202" text="[[runner.name]]"></sc-fitted-text>
+				<sc-fitted-text
+					id="info-name"
+					align="left"
+					max-width="180"
+					text="[[runner.name]]"
+					title="[[runner.name]]">
+				</sc-fitted-text>
 				<div id="info-status" class$="[[calcRunnerStatusClass(results, index)]]">
 					[[calcRunnerStatus(results, index)]]
 				</div>

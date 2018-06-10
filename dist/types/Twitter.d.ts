@@ -2,11 +2,16 @@ export interface Tweet {
     id_str: string;
     truncated: boolean;
     text: string;
+    entities: TweetEntities;
+    extended_entities: TweetEntities;
     extended_tweet?: {
         full_text: string;
-        entities: TweetEntities;
+        extended_entities: TweetEntities;
     };
     gdqRetweetId?: string;
+    gdqMedia?: {
+        [key: string]: any;
+    }[];
 }
 export interface TweetEntities {
     media?: {
