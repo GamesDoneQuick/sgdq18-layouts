@@ -37,7 +37,7 @@
 				}
 
 				this._queue.add(() => {
-					return this._promisifyTimeline(this.$.tweet.playItem(tweet))
+					return this._promisifyTimeline(this.$.tweet.playItem(tweet));
 				});
 			});
 
