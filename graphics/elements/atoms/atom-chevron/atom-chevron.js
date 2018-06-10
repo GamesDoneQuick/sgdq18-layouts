@@ -77,13 +77,13 @@ class AtomChevron extends CSSReflectionMixin(Polymer.Element) {
 	connectedCallback() {
 		super.connectedCallback();
 		if (!this.noAutoRender) {
-			Polymer.RenderStatus.afterNextRender(this, () => {
-				Polymer.RenderStatus.afterNextRender(this, () => {
-					Polymer.RenderStatus.afterNextRender(this, () => {
-						Polymer.RenderStatus.afterNextRender(this, this.render);
-					});
+			if (document.readyState === 'complete') {
+				Polymer.RenderStatus.afterNextRender(this, this.render);
+			} else {
+				window.addEventListener('load', () => {
+					Polymer.RenderStatus.afterNextRender(this, this.render);
 				});
-			});
+			}
 		}
 	}
 
