@@ -74,6 +74,17 @@
 		playItem(tweet) {
 			const tl = this.timeline;
 
+			let companionElementsArray;
+			if (Array.isArray(this.companionElement)) {
+				companionElementsArray = this.companionElement;
+			} else {
+				companionElementsArray = [this.companionElement];
+			}
+
+			companionElementsArray.filter(companionElement => {
+				return companionElement && typeof companionElement.hide === 'function';
+			});
+
 			if (this.canExtend) {
 				const newAnim = new TimelineLite();
 				newAnim.add(this._createChangeAnim(tweet));
@@ -86,14 +97,21 @@
 				// Wait for prizes to hide, if applicable.
 				tl.call(() => {
 					this._setCanExtend(true);
-					if (this.companionElement && typeof this.companionElement.hide === 'function') {
-						tl.pause();
-
-						const hidePrizeTl = this.companionElement.hide();
-						hidePrizeTl.call(() => {
-							tl.resume();
-						});
+					if (companionElementsArray.length <= 0) {
+						return;
 					}
+
+
+					tl.pause();
+
+					const companionExitTl = new TimelineLite();
+					companionElementsArray.forEach(companionElement => {
+						companionExitTl.add(companionElement.hide(), 0);
+					});
+
+					companionExitTl.call(() => {
+						tl.resume();
+					});
 				}, null, null, '+=0.03');
 
 				tl.add(this._createEntranceAnim(tweet));
@@ -109,8 +127,11 @@
 				exitAnim.add(this._createExitAnim());
 				tl.add(exitAnim);
 
-				if (this.companionElement && typeof this.companionElement.show === 'function') {
-					tl.add(this.companionElement.show());
+				if (companionElementsArray.length > 0) {
+					tl.addLabel('companionEnter');
+					companionElementsArray.forEach(companionElement => {
+						tl.add(companionElement.show(), 'companionEnter');
+					});
 				}
 
 				// Padding

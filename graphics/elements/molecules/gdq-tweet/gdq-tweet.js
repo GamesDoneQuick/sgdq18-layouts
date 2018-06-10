@@ -129,8 +129,6 @@
 			const tl = new TimelineLite();
 			let exitedPreviousTweet = false;
 
-			tl.addLabel('start', '+=0.03');
-
 			tl.call(() => {
 				if (exitedPreviousTweet) {
 					return;
@@ -144,7 +142,7 @@
 					exitedPreviousTweet = true;
 					tl.resume();
 				});
-			});
+			}, null, null, '+=0.03');
 
 			tl.call(() => {
 				this.$.name.innerText = `@${tweet.user.screen_name}`;

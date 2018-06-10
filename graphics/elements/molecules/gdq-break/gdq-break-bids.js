@@ -34,6 +34,28 @@
 			});
 		}
 
+		show() {
+			const tl = new TimelineLite();
+
+			tl.to(this, 0.333, {
+				opacity: 1,
+				ease: Sine.easeInOut
+			});
+
+			return tl;
+		}
+
+		hide() {
+			const tl = new TimelineLite();
+
+			tl.to(this, 0.333, {
+				opacity: 0,
+				ease: Sine.easeInOut
+			});
+
+			return tl;
+		}
+
 		_showItem(bid) {
 			let elementTagName;
 			if (bid.type === 'choice-many') {

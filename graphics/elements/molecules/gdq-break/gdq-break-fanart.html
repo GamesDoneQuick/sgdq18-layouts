@@ -1,0 +1,45 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
+<link rel="import" href="../../../../shared/imports/gsap-DrawSVG.html">
+<link rel="import" href="../../../../shared/imports/MaybeRandom.html">
+<link rel="import" href="../../../../shared/imports/svgjs.html">
+<link rel="import" href="../../atoms/atom-interrupt/atom-interrupt.html">
+<link rel="import" href="../gdq-tweet/gdq-tweet.html">
+
+<dom-module id="gdq-break-fanart">
+	<template>
+		<style>
+			:host {
+				@apply --layout-vertical;
+				box-sizing: border-box;
+				font-weight: 400;
+				position: absolute;
+			}
+
+			#foo {
+				background: rgba(0, 0, 0, 0.25);
+				border: 1px solid #FFFFFF;
+				box-sizing: border-box;
+				height: 502px;
+				width: 797px;
+			}
+
+			#tweet {
+				height: 164px;
+				margin-top: 11px;
+				position: relative;
+				width: 816px;
+			}
+
+			[hidden] {
+				display: none !important;
+			}
+		</style>
+
+		<div id="foo"></div>
+
+		<gdq-tweet id="tweet" bind-to-message="false"></gdq-tweet>
+	</template>
+
+	<script src="gdq-break-fanart.js"></script>
+</dom-module>

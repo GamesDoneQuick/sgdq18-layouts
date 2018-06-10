@@ -2,9 +2,11 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
 <link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
+<link rel="import" href="../../../../shared/imports/p-queue.html">
 <link rel="import" href="../../atoms/atom-text-greeble/atom-text-greeble.html">
 <link rel="import" href="../gdq-tweet/gdq-tweet.html">
 <link rel="import" href="gdq-break-bids.html">
+<link rel="import" href="gdq-break-fanart.html">
 <link rel="import" href="gdq-break-prizes.html">
 <link rel="import" href="gdq-break-schedule.html">
 
@@ -23,6 +25,12 @@
 				position: absolute;
 				top: 85px;
 				left: 0;
+			}
+
+			#fanart {
+				position: absolute;
+				top: 100px;
+				left: -1px;
 			}
 
 			#tweet {
@@ -87,7 +95,8 @@
 
 		<gdq-break-bids id="bids"></gdq-break-bids>
 		<gdq-break-prizes id="prizes"></gdq-break-prizes>
-		<gdq-tweet id="tweet" label="SOCIAL_MEDIA_ENGAGEMENT"></gdq-tweet>
+		<gdq-break-fanart id="fanart"></gdq-break-fanart>
+		<gdq-tweet id="tweet" label="SOCIAL_MEDIA_ENGAGEMENT" bind-to-message="false"></gdq-tweet>
 		<gdq-break-schedule id="schedule"></gdq-break-schedule>
 
 		<div id="crowd-cam"></div>
