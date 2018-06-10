@@ -3,10 +3,15 @@
 
 	const autoCycleRecordings = nodecg.Replicant('autoCycleRecordings');
 	const autoUploadRecordings = nodecg.Replicant('autoUploadRecordings');
+	const recordTrackerEnabled = nodecg.Replicant('recordTrackerEnabled');
 
-	class GdqRecordings extends Polymer.Element {
+	/**
+	 * @customElement
+	 * @polymer
+	 */
+	class GdqMiscToggles extends Polymer.Element {
 		static get is() {
-			return 'gdq-recordings';
+			return 'gdq-misc-toggles';
 		}
 
 		static get properties() {
@@ -16,6 +21,10 @@
 		ready() {
 			super.ready();
 			Polymer.RenderStatus.beforeNextRender(this, () => {
+				recordTrackerEnabled.on('change', newVal => {
+					this.$.milestoneToggle.checked = newVal;
+				});
+
 				autoCycleRecordings.on('change', newVal => {
 					this.$.cycleToggle.checked = newVal;
 					this._checkUploadToggleDisable();
@@ -37,6 +46,10 @@
 			}
 		}
 
+		_handleMiletoneTrackerToggleChange(e) {
+			recordTrackerEnabled.value = e.target.checked;
+		}
+
 		_handleCycleToggleChange(e) {
 			autoCycleRecordings.value = e.target.checked;
 		}
@@ -46,5 +59,5 @@
 		}
 	}
 
-	customElements.define(GdqRecordings.is, GdqRecordings);
+	customElements.define(GdqMiscToggles.is, GdqMiscToggles);
 })();

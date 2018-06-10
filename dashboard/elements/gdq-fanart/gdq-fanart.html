@@ -1,15 +1,13 @@
-<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../../bower_components/nodecg-replicant/nodecg-replicant.html">
-<link rel="import" href="../../../bower_components/polymer/lib/mixins/mutable-data.html">
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="tweet-item.html">
+<link rel="import" href="fanart-item.html">
+<link rel="import" href="gdq-fanart-preview.html">
 
-<dom-module id="gdq-twitter-controls">
+<dom-module id="gdq-fanart">
 	<template>
 		<style>
 			:host {
-				position: relative;
 				@apply --layout-vertical;
+				position: relative;
 			}
 
 			#label {
@@ -75,21 +73,26 @@
 			}
 		</style>
 
-		<div id="label">Twitter Overlay</div>
+		<div id="label">Fan Art</div>
 
 		<div id="scrollWrapper">
 			<div id="tweets">
 				<template is="dom-repeat" items="[[tweets]]" as="tweet" sort="_sortTweets" mutable-data>
-					<tweet-item value="[[tweet]]"></tweet-item>
+					<fanart-item
+						value="[[tweet]]"
+						on-preview="_handlePreviewEvent">
+					</fanart-item>
 				</template>
 			</div>
 			<div id="empty">There are no tweets in the queue.</div>
 		</div>
 
 		<div id="cover">
-			<p>This layout does not have a Twitter graphic.</p>
+			<p>Fan Art is only available on the Break scene.</p>
 		</div>
+
+		<gdq-fanart-preview id="previewDialog"></gdq-fanart-preview>
 	</template>
 
-	<script src="gdq-twitter-controls.js"></script>
+	<script src="gdq-fanart.js"></script>
 </dom-module>

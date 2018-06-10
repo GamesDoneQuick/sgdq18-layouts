@@ -7,7 +7,8 @@ const io = require("socket.io-client");
 const nodecgApiContext = require("./util/nodecg-api-context");
 const nodecg = nodecgApiContext.get();
 const log = new nodecg.Logger(`${nodecg.bundleName}:twitter`);
-const tweets = nodecg.Replicant('tweets', { defaultValue: [] });
+const tweets = nodecg.Replicant('tweets');
+const fanartTweets = nodecg.Replicant('fanartTweets');
 // Clear queue of tweets when currentRun changes
 nodecg.Replicant('currentRun').on('change', (newVal, oldVal) => {
     if (oldVal && newVal.pk !== oldVal.pk) {
@@ -19,6 +20,12 @@ nodecg.listenFor('acceptTweet', (tweet) => {
         removeTweetById(tweet.id_str);
     }
     nodecg.sendMessage('showTweet', tweet);
+});
+nodecg.listenFor('acceptFanart', (tweet) => {
+    if (!nodecg.bundleConfig.twitter.debug) {
+        removeTweetById(tweet.id_str);
+    }
+    nodecg.sendMessage('showFanart', tweet);
 });
 nodecg.listenFor('rejectTweet', removeTweetById);
 const socket = io.connect(nodecg.bundleConfig.twitter.websocketUrl);
@@ -69,14 +76,9 @@ socket.on('connect', () => {
  * @param tweet - The tweet to add.
  */
 function addTweet(tweet) {
-    // Reject tweets with media.
-    if (tweet.extended_tweet &&
-        tweet.extended_tweet.entities.media &&
-        tweet.extended_tweet.entities.media.length > 0) {
-        return;
-    }
     // Don't add the tweet if we already have it
-    const isDupe = tweets.value.find((t) => t.id_str === tweet.id_str);
+    const isDupe = tweets.value.find((t) => t.id_str === tweet.id_str) ||
+        fanartTweets.value.find((t) => t.id_str === tweet.id_str);
     if (isDupe) {
         return;
     }
@@ -86,8 +88,32 @@ function addTweet(tweet) {
     tweet.text = tweet.text.replace(/\n/ig, ' ');
     // Highlight the #SGDQ2018 hashtag.
     tweet.text = tweet.text.replace(/#sgdq2018/ig, '<span class="hashtag">#SGDQ2018</span>');
-    // Add the tweet to the list
-    tweets.value.push(tweet);
+    if (tweet.extended_tweet &&
+        tweet.extended_tweet.extended_entities &&
+        tweet.extended_tweet.extended_entities.media &&
+        tweet.extended_tweet.extended_entities.media.length > 0) {
+        tweet.gdqMedia = tweet.extended_tweet.extended_entities.media;
+        delete tweet.extended_tweet.extended_entities.media;
+    }
+    else if (tweet.extended_entities &&
+        tweet.extended_entities.media &&
+        tweet.extended_entities.media.length > 0) {
+        tweet.gdqMedia = tweet.extended_entities.media;
+        delete tweet.extended_entities.media;
+    }
+    else if (tweet.entities.media &&
+        tweet.entities.media.length > 0) {
+        tweet.gdqMedia = tweet.entities.media;
+        delete tweet.entities.media;
+    }
+    // If the tweet has media, place it into the Fanart queue.
+    // Else, place it into the normal tweet queue.
+    if (tweet.gdqMedia) {
+        fanartTweets.value.push(tweet);
+    }
+    else {
+        tweets.value.push(tweet);
+    }
 }
 /**
  * Removes a Tweet (by id) from the queue.

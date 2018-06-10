@@ -81,6 +81,14 @@
 				white-space: nowrap;
 				@apply --layout-horizontal;
 			}
+
+			:host([no-avatar]) {
+				padding-left: 8px;
+			}
+
+			:host([no-avatar]) #avatar {
+				display: none;
+			}
 		</style>
 
 		<header>
