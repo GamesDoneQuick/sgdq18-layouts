@@ -6,8 +6,6 @@
 	const DISPLAY_DURATION = nodecg.bundleConfig.displayDuration;
 
 	const currentPrizes = nodecg.Replicant('currentPrizes');
-	const preloadedImages = new Set();
-	const preloaderPromises = new Map();
 
 	/**
 	 * @customElement
@@ -151,7 +149,7 @@
 
 			tl.call(() => {
 				tl.pause();
-				this._preloadImage(prize.image).then(() => {
+				gdqUtils.preloadImage(prize.image).then(() => {
 					tl.resume();
 				}).catch(error => {
 					nodecg.log.error(error);
@@ -232,57 +230,6 @@
 			tl.to(EMPTY_OBJ, DISPLAY_DURATION, EMPTY_OBJ);
 
 			return tl;
-		}
-
-		/**
-		 * Preloads an image.
-		 * @param {string} src - The URL of the new image to load.
-		 * @returns {Promise} - A promise that is resolved if the load succeeds, and rejected it the load fails.
-		 */
-		_preloadImage(src) {
-			if (preloadedImages.has(src)) {
-				return Promise.resolve();
-			}
-
-			if (preloaderPromises.has(src)) {
-				return preloaderPromises.get(src);
-			}
-
-			const preloadPromise = new Promise((resolve, reject) => {
-				if (!src) {
-					resolve();
-					return;
-				}
-
-				const preloader = document.createElement('img');
-				preloader.classList.add('image-preloader');
-
-				const listeners = {
-					load: null,
-					error: null
-				};
-
-				listeners.load = function (event) {
-					event.target.removeEventListener('error', listeners.error);
-					event.target.removeEventListener('load', listeners.load);
-					preloadedImages.add(src);
-					resolve();
-				};
-
-				listeners.error = function (event) {
-					event.target.removeEventListener('error', listeners.error);
-					event.target.removeEventListener('load', listeners.load);
-					reject(new Error(`Image failed to load: ${src}`));
-				};
-
-				preloader.addEventListener('load', listeners.load);
-				preloader.addEventListener('error', listeners.error);
-
-				preloader.src = src;
-			});
-
-			preloaderPromises.set(src, preloadPromise);
-			return preloadPromise;
 		}
 
 		_resetState() {
