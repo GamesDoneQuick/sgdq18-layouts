@@ -36,11 +36,8 @@
 					return;
 				}
 
-				this._queue.add(() => this._promisifyTimeline(this.$.tweet.playItem(tweet)));
 				this._queue.add(() => {
-					return Promise.resolve().then(() => {
-						console.log('queue empty');
-					});
+					return this._promisifyTimeline(this.$.tweet.playItem(tweet))
 				});
 			});
 
@@ -50,18 +47,15 @@
 					return;
 				}
 
-				this._queue.add(() => this._promisifyTimeline(this.$.fanart.playItem(fanartTweet)));
 				this._queue.add(() => {
-					return Promise.resolve().then(() => {
-						console.log('queue empty');
-					});
+					return this._promisifyTimeline(this.$.fanart.playItem(fanartTweet));
 				});
 			});
 		}
 
 		_promisifyTimeline(tl) {
 			return new Promise(resolve => {
-				tl.call(resolve);
+				tl.call(resolve, null, null, '+=0.03');
 			});
 		}
 	}
