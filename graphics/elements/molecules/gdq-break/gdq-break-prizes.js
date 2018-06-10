@@ -86,7 +86,13 @@
 		hide() {
 			const tl = new TimelineLite();
 
+			let handledCall = false; // GSAP likes to run .calls again when you .resume
 			tl.call(() => {
+				if (handledCall) {
+					return;
+				}
+				handledCall = true;
+
 				tl.pause();
 				if (this.$['photo-actual'].exiting) {
 					this.$['photo-actual'].addEventListener('exited', () => {
@@ -112,7 +118,7 @@
 				}
 			}, null, null, '+=0.1');
 
-			tl.addLabel('start', '+=0.03');
+			tl.addLabel('start', '+=0.5');
 
 			tl.to(this.$['photo-actual'].$svg.bgRect.node, 0.5, {
 				'fill-opacity': 0,
