@@ -62,6 +62,7 @@
 			super.ready();
 			Polymer.RenderStatus.beforeNextRender(this, () => {
 				this._initSVG();
+				TweenLite.set(this.$svg.imageMaskCells, {opacity: 0});
 			});
 		}
 
