@@ -101,7 +101,6 @@
 						return;
 					}
 
-
 					tl.pause();
 
 					const companionExitTl = new TimelineLite();

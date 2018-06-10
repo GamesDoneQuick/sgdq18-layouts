@@ -3,6 +3,7 @@
 <link rel="import" href="../../../../shared/imports/gsap-DrawSVG.html">
 <link rel="import" href="../../../../shared/imports/MaybeRandom.html">
 <link rel="import" href="../../../../shared/imports/svgjs.html">
+<link rel="import" href="../../atoms/atom-gridmask-image/atom-gridmask-image.html">
 <link rel="import" href="../../atoms/atom-interrupt/atom-interrupt.html">
 <link rel="import" href="../gdq-tweet/gdq-tweet.html">
 
@@ -16,12 +17,19 @@
 				position: absolute;
 			}
 
-			#foo {
-				background: rgba(0, 0, 0, 0.25);
-				border: 1px solid #FFFFFF;
+			#fanart {
+				@apply --layout-center-center;
+				@apply --layout-horizontal;
 				box-sizing: border-box;
 				height: 502px;
+				position: relative;
 				width: 797px;
+			}
+
+			#background {
+				position: absolute;
+				width: 100%;
+				height: 100%;
 			}
 
 			#tweet {
@@ -31,12 +39,24 @@
 				width: 816px;
 			}
 
+			#image {
+				height: 457px;
+				width: 696px;
+				z-index: 1;
+			}
+
 			[hidden] {
 				display: none !important;
 			}
 		</style>
 
-		<div id="foo"></div>
+		<div id="fanart">
+			<div id="background"></div>
+			<atom-gridmask-image
+				id="image"
+				cell-stagger="0.001">
+			</atom-gridmask-image>
+		</div>
 
 		<gdq-tweet id="tweet" bind-to-message="false"></gdq-tweet>
 	</template>
