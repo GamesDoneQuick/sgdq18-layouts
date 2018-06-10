@@ -30,7 +30,7 @@ module.exports = {
 	HEIGHT: 900,
 	TEST_CASES: [{
 		route: `bundles/${BUNDLE_NAME}/graphics/break.html`,
-		additionalDelay: STANDARD_DELAY,
+		additionalDelay: 1000,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
