@@ -1,4 +1,4 @@
-/* global Random GdqBreakLoop */
+/* global GdqBreakLoop */
 (function () {
 	'use strict';
 
@@ -20,16 +20,7 @@
 
 		static get properties() {
 			return {
-				_photoExiting: {
-					type: Boolean,
-					value: false,
-					notify: true
-				},
-				_photoEntering: {
-					type: Boolean,
-					value: false,
-					notify: true
-				}
+				importPath: String // https://github.com/Polymer/polymer-linter/issues/71
 			};
 		}
 
@@ -39,9 +30,6 @@
 			currentPrizes.on('change', newVal => {
 				this.availableItems = newVal;
 			});
-
-			this._fallbackImageUrl = `${this.importPath}img/prize-fallback.png`;
-			this._initPhotoSVG();
 		}
 
 		/**
@@ -57,12 +45,12 @@
 				this.$['info-description-text'].innerText = '';
 				this.$['info-minimumBid-text'].innerText = '';
 				this.$.provider.innerText = '';
-				this._image.load('');
+				this.$['photo-actual'].$svg.image.load('');
 			}, null, null, '+=0.03');
 
 			tl.addLabel('start');
 
-			tl.to(this._photoBgRect.node, 1.5, {
+			tl.to(this.$['photo-actual'].$svg.bgRect.node, 1.5, {
 				drawSVG: '100%',
 				ease: Power2.easeOut
 			}, 'start');
@@ -78,7 +66,7 @@
 				ease: Sine.easeOut
 			}, 'start+=1');
 
-			tl.to(this._photoBgRect.node, 0.5, {
+			tl.to(this.$['photo-actual'].$svg.bgRect.node, 0.5, {
 				'fill-opacity': 0.25,
 				ease: Sine.easeOut
 			}, 'start+=1');
@@ -102,30 +90,24 @@
 
 			tl.call(() => {
 				tl.pause();
-				if (this._photoExiting) {
-					this.addEventListener('_photo-exiting-changed', function listener(e) {
-						if (e.detail.value === false) {
-							this.removeEventListener('_photo-exiting-changed', listener);
-							this._killLoop();
-							tl.resume();
-						}
-					});
-				} else if (this._photoEntering) {
-					this.addEventListener('_photo-entering-changed', function listener(e) {
-						if (e.detail.value === false) {
-							this.removeEventListener('_photo-entering-changed', listener);
-							this._killLoop();
-							this._exitPhoto({
-								onComplete() {
-									tl.resume();
-								}
-							});
-						}
-					});
+				if (this.$['photo-actual'].exiting) {
+					this.$['photo-actual'].addEventListener('exited', () => {
+						this._killLoop();
+						tl.resume();
+					}, {once: true, passive: true});
+				} else if (this.$['photo-actual'].entering) {
+					this.$['photo-actual'].addEventListener('entered', () => {
+						this._killLoop();
+						this.$['photo-actual'].exit({
+							onComplete: () => {
+								tl.resume();
+							}
+						});
+					}, {once: true, passive: true});
 				} else {
 					this._killLoop();
-					this._exitPhoto({
-						onComplete() {
+					this.$['photo-actual'].exit({
+						onComplete: () => {
 							tl.resume();
 						}
 					});
@@ -134,7 +116,7 @@
 
 			tl.addLabel('start', '+=0.03');
 
-			tl.to(this._photoBgRect.node, 0.5, {
+			tl.to(this.$['photo-actual'].$svg.bgRect.node, 0.5, {
 				'fill-opacity': 0,
 				ease: Sine.easeIn
 			}, 'start');
@@ -150,7 +132,7 @@
 				ease: Power2.easeIn
 			}, 'start');
 
-			tl.to(this._photoBgRect.node, 1.5, {
+			tl.to(this.$['photo-actual'].$svg.bgRect.node, 1.5, {
 				drawSVG: '0%',
 				ease: Power2.easeIn
 			}, 'start');
@@ -158,67 +140,10 @@
 			return tl;
 		}
 
-		_initPhotoSVG() {
-			const STROKE_SIZE = 1;
-			const ELEMENT_WIDTH = this.$.photo.clientWidth;
-			const ELEMENT_HEIGHT = this.$.photo.clientHeight;
-			const IMAGE_MASK_CELL_SIZE = 21;
-			const IMAGE_MASK_ROWS = Math.ceil(ELEMENT_HEIGHT / IMAGE_MASK_CELL_SIZE);
-			const IMAGE_MASK_COLUMNS = Math.ceil(ELEMENT_WIDTH / IMAGE_MASK_CELL_SIZE);
-
-			const svgDoc = SVG(this.$.photo);
-			const bgRect = svgDoc.rect();
-			const mask = svgDoc.mask();
-			const image = svgDoc.image(this._fallbackImageUrl);
-
-			this._photoBgRect = bgRect;
-			this._image = image;
-			this._imageMaskCells = [];
-
-			svgDoc.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
-			svgDoc.style('position', 'absolute');
-			svgDoc.style('top', '0px');
-			svgDoc.style('left', '0px');
-
-			bgRect.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
-			bgRect.stroke({
-				color: 'white',
-
-				// Makes it effectively STROKE_SIZE, because all SVG strokes
-				// are center strokes, and the outer half is cut off.
-				width: STROKE_SIZE * 2
-			});
-			bgRect.fill({color: 'black', opacity: 0.25});
-
-			// Mirror such that drawSVG anims start from the top right
-			// and move clockwise to un-draw, counter-clockwise to draw.
-			bgRect.transform({scaleX: -1, x: ELEMENT_WIDTH});
-
-			image.size(ELEMENT_WIDTH - (STROKE_SIZE * 2), ELEMENT_HEIGHT - (STROKE_SIZE * 2));
-			image.move(STROKE_SIZE, STROKE_SIZE);
-			image.attr({preserveAspectRatio: 'xMidYMid slice'});
-
-			// Generate the exitMask rects
-			for (let r = 0; r < IMAGE_MASK_ROWS; r++) {
-				const y = r * IMAGE_MASK_CELL_SIZE;
-				for (let c = 0; c < IMAGE_MASK_COLUMNS; c++) {
-					const x = c * IMAGE_MASK_CELL_SIZE;
-					const rect = svgDoc.rect(IMAGE_MASK_CELL_SIZE, IMAGE_MASK_CELL_SIZE);
-					rect.move(x, y);
-					rect.fill({color: '#FFFFFF'});
-					mask.add(rect);
-					this._imageMaskCells.push(rect);
-				}
-			}
-
-			image.maskWith(mask);
-		}
-
 		_showItem(prize) {
 			let useFallbackImage = !prize.image.trim();
 			let changingProvider = true;
 			let changingMinimumBid = true;
-			const imageEntranceCells = Random.shuffle(Random.engines.browserCrypto, this._imageMaskCells.slice(0));
 			const tl = new TimelineLite();
 			const minimumBidText = prize.sumdonations ?
 				`${prize.minimumbid} in Total Donations` :
@@ -237,11 +162,11 @@
 
 			tl.addLabel('exit');
 
-			tl.add(this._exitPhoto({
-				onComplete() {
-					const newSrc = useFallbackImage ? this._fallbackImageUrl : prize.image;
+			tl.add(this.$['photo-actual'].exit({
+				onComplete: () => {
+					const newSrc = useFallbackImage ? this.$['photo-actual'].fallbackSrc : prize.image;
 					tl.pause();
-					this._image.load(newSrc).loaded(() => {
+					this.$['photo-actual'].$svg.image.load(newSrc).loaded(() => {
 						tl.resume();
 					});
 				}
@@ -285,23 +210,7 @@
 				TweenLite.set(this.$.provider, {opacity: 1});
 			}, null, null, 'enter');
 
-			let didImageEntranceOnStart;
-			tl.staggerTo(imageEntranceCells, 0.224, {
-				opacity: 1,
-				ease: Sine.easeInOut,
-				callbackScope: this,
-				onStart() {
-					// We only want this onStart handler to run once.
-					// There is no "onStartAll" equivalent, only an "onCompleteAll".
-					if (didImageEntranceOnStart) {
-						return;
-					}
-					didImageEntranceOnStart = true;
-					this._photoEntering = true;
-				}
-			}, 0.002, 'enter+=0.1', () => {
-				this._photoEntering = false;
-			});
+			tl.add(this.$['photo-actual'].enter(), 'enter+=0.1');
 
 			tl.call(() => {
 				this.$['info-description-text'].innerText = prize.description;
@@ -321,34 +230,6 @@
 
 			// Give the prize some time to show.
 			tl.to(EMPTY_OBJ, DISPLAY_DURATION, EMPTY_OBJ);
-
-			return tl;
-		}
-
-		_exitPhoto({onComplete} = {}) {
-			const tl = new TimelineLite();
-			const imageExitCells = Random.shuffle(Random.engines.browserCrypto, this._imageMaskCells.slice(0));
-			let didOnStart = false;
-
-			tl.staggerTo(imageExitCells, 0.224, {
-				opacity: 0,
-				ease: Sine.easeInOut,
-				callbackScope: this,
-				onStart() {
-					// We only want this onStart handler to run once.
-					// There is no "onStartAll" equivalent, only an "onCompleteAll".
-					if (didOnStart) {
-						return;
-					}
-					didOnStart = true;
-					this._photoExiting = true;
-				}
-			}, 0.002, 0, () => {
-				if (typeof onComplete === 'function') {
-					onComplete.call(this);
-				}
-				this._photoExiting = false;
-			});
 
 			return tl;
 		}
@@ -405,7 +286,7 @@
 		}
 
 		_resetState() {
-			this._photoExiting = false;
+			this.$['photo-actual'].exiting = false;
 		}
 	}
 
