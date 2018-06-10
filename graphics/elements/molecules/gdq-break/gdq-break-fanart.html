@@ -26,6 +26,28 @@
 				width: 797px;
 			}
 
+			#label {
+				@apply --layout-center;
+				@apply --layout-horizontal;
+				background: #00FFFF;
+				box-sizing: border-box;
+				color: black;
+				font-size: 12px;
+				font-weight: 400;
+				height: 16px;
+				left: 21px;
+				line-height: 1;
+				padding: 0 4px;
+				position: absolute;
+				text-transform: uppercase;
+				top: -8px;
+				transform-origin: left;
+				white-space: nowrap;
+				width: 225px;
+				will-change: transform, clip-path;
+				z-index: 1;
+			}
+
 			#background {
 				position: absolute;
 				width: 100%;
@@ -52,6 +74,7 @@
 
 		<div id="fanart">
 			<div id="background"></div>
+			<div id="label">FAN_ART_AND_OTHER_MEDIA</div>
 			<atom-gridmask-image
 				id="image"
 				cell-stagger="0.001">

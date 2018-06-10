@@ -35,6 +35,7 @@
 		_addReset() {
 			const tl = this.timeline;
 			tl.set(this._bgRect.node, {drawSVG: '0%', 'fill-opacity': 0});
+			tl.set(this.$.label, {scaleX: 0, color: 'transparent', clipPath: ''});
 			tl.call(this.$.tweet._addReset, null, this.$.tweet);
 		}
 
@@ -74,6 +75,16 @@
 
 			tl.add(this.$.image.enter(), 'start');
 			tl.add(this.$.tweet._createEntranceAnim(tweet), 'start+=0.1');
+
+			tl.to(this.$.label, 0.334, {
+				scaleX: 1,
+				ease: Sine.easeInOut,
+				callbackScope: this,
+				onComplete() {
+					this.$.label.style.color = '';
+					TypeAnims.type(this.$.label);
+				}
+			}, 'start+=0.4');
 
 			tl.to(this._bgRect.node, 0.5, {
 				'fill-opacity': this.backgroundOpacity,
@@ -171,6 +182,13 @@
 				drawSVG: '0%',
 				ease: Power2.easeIn
 			}, 'exit');
+
+			tl.fromTo(this.$.label, 0.334, {
+				clipPath: 'inset(0 0% 0 0)'
+			}, {
+				clipPath: 'inset(0 100% 0 0)',
+				ease: Sine.easeInOut
+			}, 'exit+=0.9');
 
 			tl.add(this.$.tweet._createExitAnim(), 'exit');
 			tl.add(this.$.image.exit(), 'exit+=0.1');
