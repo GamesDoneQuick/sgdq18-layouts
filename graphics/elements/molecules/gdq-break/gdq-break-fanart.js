@@ -72,8 +72,8 @@
 				ease: Linear.easeNone
 			}, 'start');
 
-			tl.add(this.$.tweet._createEntranceAnim(tweet), 'start');
 			tl.add(this.$.image.enter(), 'start');
+			tl.add(this.$.tweet._createEntranceAnim(tweet), 'start+=0.1');
 
 			tl.to(this._bgRect.node, 0.5, {
 				'fill-opacity': this.backgroundOpacity,
@@ -173,7 +173,7 @@
 			}, 'exit');
 
 			tl.add(this.$.tweet._createExitAnim(), 'exit');
-			tl.add(this.$.image.exit(), 'exit');
+			tl.add(this.$.image.exit(), 'exit+=0.1');
 
 			return tl;
 		}
@@ -201,9 +201,9 @@
 			});
 			bgRect.fill({color: 'black', opacity: this.backgroundOpacity});
 
-			// Rotate and translate such that drawSVG anims start from the top right
-			// and move clockwise to un-draw, counter-clockwise to un-draw.
-			bgRect.style({transform: `rotate(90deg) translateY(${-ELEMENT_WIDTH}px)`});
+			// Rotate and translate such that drawSVG anims start from the bottom right
+			// and move counter-clockwise to draw, clockwise to un-draw.
+			bgRect.style({transform: `rotate(90deg) scaleX(-1) translateX(${-ELEMENT_HEIGHT}px) translateY(${-ELEMENT_WIDTH}px)`});
 		}
 	}
 
