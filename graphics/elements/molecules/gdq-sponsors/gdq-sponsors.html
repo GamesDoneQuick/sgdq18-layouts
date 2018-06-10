@@ -1,5 +1,5 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../../../shared/imports/svgjs.html">
+<link rel="import" href="../../atoms/atom-gridmask-image/atom-gridmask-image.html">
 <link rel="import" href="../gdq-break/gdq-break-loop.html">
 
 <dom-module id="gdq-sponsors">
@@ -34,13 +34,13 @@
 				);
 			}
 
-			#svgHost {
+			#image {
 				width: 100%;
 				height: 100%;
 			}
 		</style>
 
-		<div id="svgHost"></div>
+		<atom-gridmask-image id="image"></atom-gridmask-image>
 	</template>
 
 	<script src="gdq-sponsors.js"></script>
