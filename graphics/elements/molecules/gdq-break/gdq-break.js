@@ -30,26 +30,41 @@
 				this.$.prizes
 			];
 
-			nodecg.listenFor('showTweet', tweet => {
-				if (this.$.tweet.canExtend) {
-					this.$.tweet.playItem(tweet);
-					return;
-				}
-
-				this._queue.add(() => {
-					return this._promisifyTimeline(this.$.tweet.playItem(tweet));
-				});
+			this._setupInterrupt({
+				messageName: 'showTweet',
+				interruptElement: this.$.tweet
 			});
 
-			nodecg.listenFor('showFanart', fanartTweet => {
-				if (this.$.fanart.canExtend) {
-					this.$.fanart.playItem(fanartTweet);
+			this._setupInterrupt({
+				messageName: 'showFanart',
+				interruptElement: this.$.fanart
+			});
+		}
+
+		_setupInterrupt({messageName, interruptElement}) {
+			let queued = false;
+			let queue = [];
+			nodecg.listenFor(messageName, payload => {
+				if (interruptElement.canExtend) {
+					interruptElement.playItem(payload);
 					return;
 				}
 
-				this._queue.add(() => {
-					return this._promisifyTimeline(this.$.fanart.playItem(fanartTweet));
-				});
+				if (queued) {
+					queue.push(payload);
+				} else {
+					queued = true;
+					this._queue.add(async () => {
+						interruptElement.addEventListener('can-extend', () => {
+							queue.forEach(queuedFanart => {
+								interruptElement.playItem(queuedFanart);
+							});
+							queued = false;
+							queue = [];
+						}, {once: true, passive: true});
+						return this._promisifyTimeline(interruptElement.playItem(payload));
+					});
+				}
 			});
 		}
 

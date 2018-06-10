@@ -46,8 +46,10 @@
 				 */
 				canExtend: {
 					type: Boolean,
-					value: false,
-					readOnly: true
+					readOnly: true,
+					notify: true,
+					observer: '_canExtendChanged',
+					value: false
 				}
 			};
 		}
@@ -150,6 +152,12 @@
 			const tl = new TimelineLite();
 			tl.to(EMPTY_OBJ, this.itemDisplayDuration, EMPTY_OBJ);
 			return tl;
+		}
+
+		_canExtendChanged(newVal) {
+			if (newVal) {
+				this.dispatchEvent(new CustomEvent('can-extend'));
+			}
 		}
 	}
 
