@@ -36,8 +36,8 @@
 					const gradient = new SVG.Gradient('linear');
 					gradient.from(0, 0).to(0, 1);
 					gradient.update(stop => {
-						stop.at(0, '#052B33');
-						stop.at(1, '#040F10');
+						stop.at(0, '#300734');
+						stop.at(1, '#090c12');
 					});
 					bgChevron.svgDoc.add(gradient);
 					bgChevron.chevron.fill(gradient.fill());
