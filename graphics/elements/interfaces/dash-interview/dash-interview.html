@@ -7,11 +7,11 @@
 <link rel="import" href="../../../../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/sc-data-binding-helpers/sc-data-binding-helpers.html">
+<link rel="import" href="../../../../shared/elements/interfaces/ui-toast/ui-toast.html">
 <link rel="import" href="../../../../shared/style/gdq-ui-theme.html">
 <link rel="import" href="dash-interview-lightning-round.html">
 <link rel="import" href="dash-interview-lowerthird.html">
@@ -74,23 +74,6 @@
 			#lightningRound {
 				grid-column: 3;
 				grid-row: 4;
-			}
-
-			#errorToast iron-icon {
-				color: #C9513E;
-			}
-
-			#successToast iron-icon {
-				color: #5BA664;
-			}
-
-			paper-toast iron-icon:first-child {
-				margin-right: 6px;
-			}
-
-			paper-toast {
-				@apply --layout-horizontal;
-				@apply --layout-center;
 			}
 
 			.columnTitle {
@@ -214,15 +197,7 @@
 			</div>
 		</paper-dialog>
 
-		<paper-toast id="errorToast">
-			<iron-icon icon="error-outline"></iron-icon>
-			[[_errorToastText]]
-		</paper-toast>
-
-		<paper-toast id="successToast">
-			<iron-icon icon="done"></iron-icon>
-			[[_successToastText]]
-		</paper-toast>
+		<ui-toast id="toast"></ui-toast>
 	</template>
 
 	<script src="dash-interview.js"></script>

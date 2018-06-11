@@ -48,6 +48,9 @@
 		},
 		"cardHidden": {
 			"type": "boolean"
+		},
+		"embiggen": {
+			"type": "boolean"
 		}
 	},
 
@@ -55,6 +58,7 @@
 		"selectedLine": "none",
 		"lineFocused": false,
 		"cardHidden": true,
+		"embiggen": false,
 		"cells": [{
 			"slot": "slot1",
 			"name": "?",

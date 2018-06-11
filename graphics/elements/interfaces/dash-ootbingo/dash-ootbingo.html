@@ -5,6 +5,7 @@
 <link rel="import" href="../../../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../shared/elements/interfaces/ui-toast/ui-toast.html">
 <link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
 <link rel="import" href="../../../../shared/style/gdq-ui-theme.html">
 <link rel="import" href="../../atoms/atom-ootbingo-board/atom-ootbingo-board.html">
@@ -63,11 +64,6 @@
 				color: #FFEB00;
 			}
 
-			#submit,
-			#defaults {
-				margin: 5px 0;
-			}
-
 			.lineSelector {
 				margin: 0;
 				min-width: 0;
@@ -83,6 +79,23 @@
 					color: white;
 					background-color: #FF7522;
 				}
+			}
+
+			.buttonRow {
+				@apply --layout-horizontal;
+				margin: 5px 0;
+			}
+
+			.buttonRow > * {
+				@apply --layout-flex;
+			}
+
+			.buttonRow > :first-child {
+				margin-left: 0;
+			}
+
+			.buttonRow > :last-child {
+				margin-right: 0;
 			}
 		</style>
 
@@ -151,24 +164,46 @@
 				disabled="[[_submitting]]">
 			</paper-input>
 
-			<paper-button
-				id="submit"
-				class="green"
-				on-tap="submit"
-				disabled="[[_submitting]]"
-				raised>
-				Submit
-			</paper-button>
+			<div class="buttonRow">
+				<paper-button
+					id="submit"
+					class="green"
+					on-tap="submit"
+					disabled="[[_submitting]]"
+					raised>
+					Submit
+				</paper-button>
 
-			<paper-button
-				id="defaults"
-				class="green"
-				on-tap="defaults"
-				disabled="[[_submitting]]"
-				raised>
-				Defaults
-			</paper-button>
+				<paper-button
+					id="defaults"
+					class="green"
+					on-tap="defaults"
+					disabled="[[_submitting]]"
+					raised>
+					Defaults
+				</paper-button>
+			</div>
+
+			<div class="buttonRow">
+				<paper-button
+					id="toggleCard"
+					class$="[[_calcToggleClass(board.cardHidden)]]"
+					on-tap="toggleCard"
+					raised>
+					[[_calcToggleCardText(board.cardHidden)]]
+				</paper-button>
+
+				<paper-button
+					id="toggleEmbiggen"
+					class$="[[_calcToggleClass(board.embiggen)]]"
+					on-tap="toggleEmbiggen"
+					raised>
+					[[_calcToggleEmbiggenText(board.embiggen)]]
+				</paper-button>
+			</div>
 		</div>
+
+		<ui-toast id="toast"></ui-toast>
 	</template>
 
 	<script src="dash-ootbingo.js"></script>

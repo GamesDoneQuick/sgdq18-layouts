@@ -23,6 +23,8 @@
 					reflectToAttribute: true,
 					computed: '_computeStatus(socket)'
 				},
+
+				// Private state
 				_submitting: {
 					type: Boolean,
 					value: false
@@ -58,6 +60,14 @@
 			nodecg.sendMessage('ootBingo:toggleLineFocus');
 		}
 
+		toggleCard() {
+			nodecg.sendMessage('ootBingo:toggleCard');
+		}
+
+		toggleEmbiggen() {
+			nodecg.sendMessage('ootBingo:toggleEmbiggen');
+		}
+
 		async submit() {
 			this._submitting = true;
 			await nodecg.sendMessage('ootBingo:joinRoom', {
@@ -82,10 +92,22 @@
 			return socket.status;
 		}
 
+		_calcToggleClass(cardHidden) {
+			return cardHidden ? 'green' : 'red';
+		}
+
 		_calcFocusToggleText(lineFocused) {
 			return lineFocused ?
 				'See whole board' :
 				'Focus on selected group';
+		}
+
+		_calcToggleCardText(cardHidden) {
+			return cardHidden ? 'Show Card' : 'Hide Card';
+		}
+
+		_calcToggleEmbiggenText(embiggen) {
+			return embiggen ? 'Debiggen Card' : 'Embiggen Card';
 		}
 	}
 

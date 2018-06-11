@@ -68,6 +68,26 @@ nodecg.listenFor('ootBingo:toggleLineFocus', (_data, callback) => {
         callback(error);
     }
 });
+nodecg.listenFor('ootBingo:toggleCard', (_data, callback) => {
+    callback = callback || noop; // tslint:disable-line:no-parameter-reassignment
+    try {
+        boardRep.value.cardHidden = !boardRep.value.cardHidden;
+        callback();
+    }
+    catch (error) {
+        callback(error);
+    }
+});
+nodecg.listenFor('ootBingo:toggleEmbiggen', (_data, callback) => {
+    callback = callback || noop; // tslint:disable-line:no-parameter-reassignment
+    try {
+        boardRep.value.embiggen = !boardRep.value.embiggen;
+        callback();
+    }
+    catch (error) {
+        callback(error);
+    }
+});
 recover().catch(error => {
     log.error(`Failed to recover connection to room ${socketRep.value.roomCode}:`, error);
 });

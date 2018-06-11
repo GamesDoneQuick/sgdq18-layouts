@@ -1,6 +1,5 @@
 (function () {
 	'use strict';
-
 	/**
 	 * @customElement
 	 * @polymer
@@ -46,8 +45,7 @@
 				case 'col3':
 				case 'col4':
 				case 'col5': {
-					const columnIndex = parseInt(selectedLine.slice(3), 10) - 1;
-					const columnStart = columnIndex;
+					const columnStart = parseInt(selectedLine.slice(3), 10) - 1;
 					return [
 						cells[columnStart],
 						cells[columnStart + 5],

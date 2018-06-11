@@ -1,0 +1,40 @@
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../shared/imports/gsap.html">
+<link rel="import" href="../../atoms/atom-ootbingo-board/atom-ootbingo-board.html">
+
+<dom-module id="gdq-ootbingo-board">
+	<template>
+		<style>
+			:host {
+				@apply --layout-horizontal;
+				background-color: black;
+			}
+
+			#board {
+				@apply --layout-flex;
+				@apply --layout-self-stretch;
+			}
+
+			:host([embiggened]) {
+				padding: 28px 32px;
+			}
+
+			:host(:not([embiggened])) {
+				padding: 5px 6px;
+				font-size: 12px;
+				--atom-ootbingo-board-cell-line-clamp: 6;
+			}
+
+			:host(:not([embiggened])) #board {
+				font-size: 13px;
+				grid-gap: 1px;
+				--atom-ootbingo-board-cell-line-clamp: 3;
+				--atom-ootbingo-board-cell-padding: 4px;
+			}
+		</style>
+
+		<atom-ootbingo-board id="board"></atom-ootbingo-board>
+	</template>
+
+	<script src="gdq-ootbingo-board.js"></script>
+</dom-module>
