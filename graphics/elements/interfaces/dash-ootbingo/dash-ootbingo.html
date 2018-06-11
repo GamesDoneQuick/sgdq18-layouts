@@ -28,8 +28,8 @@
 				box-sizing: border-box;
 				display: grid;
 				grid-auto-flow: row;
-				grid-template: repeat(5, 1fr) / repeat(5, 1fr);
 				grid-gap: 4px;
+				grid-template: repeat(5, 1fr) / repeat(5, 1fr);
 				height: 547px;
 				width: 735px;
 			}
@@ -94,7 +94,7 @@
 		</style>
 
 		<nodecg-replicant replicant-name="ootBingo:board" value="{{boardCells}}"></nodecg-replicant>
-		<nodecg-replicant replicant-name="ootBingo:socketStatus" value="{{socketStatus}}"></nodecg-replicant>
+		<nodecg-replicant replicant-name="ootBingo:socket" value="{{socket}}"></nodecg-replicant>
 
 		<div id="board">
 			<template is="dom-repeat" items="[[boardCells]]" as="cell" mutable-data>
@@ -112,21 +112,21 @@
 			<paper-input
 				id="siteUrl"
 				label="Site URL"
-				value="[[socketStatus.siteUrl]]"
+				value="[[socket.siteUrl]]"
 				disabled="[[_submitting]]">
 			</paper-input>
 
 			<paper-input
 				id="socketUrl"
 				label="Socket URL"
-				value="[[socketStatus.socketUrl]]"
+				value="[[socket.socketUrl]]"
 				disabled="[[_submitting]]">
 			</paper-input>
 
 			<paper-input
 				id="roomCode"
 				label="Room Code"
-				value="[[socketStatus.roomCode]]"
+				value="[[socket.roomCode]]"
 				disabled="[[_submitting]]">
 			</paper-input>
 
@@ -134,7 +134,7 @@
 				id="passphrase"
 				label="Password"
 				type="password"
-				value="[[socketStatus.passphrase]]"
+				value="[[socket.passphrase]]"
 				disabled="[[_submitting]]">
 			</paper-input>
 

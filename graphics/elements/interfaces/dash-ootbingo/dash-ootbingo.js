@@ -13,13 +13,13 @@
 
 		static get properties() {
 			return {
-				socketStatus: {
+				socket: {
 					type: String
 				},
 				status: {
 					type: String,
 					reflectToAttribute: true,
-					computed: '_computeStatus(socketStatus)'
+					computed: '_computeStatus(socket)'
 				},
 				_submitting: {
 					type: Boolean,
@@ -44,12 +44,12 @@
 			this.$.socketUrl.value = 'wss://sockets.bingosync.com';
 		}
 
-		_computeStatus(socketStatus) {
-			if (!socketStatus) {
+		_computeStatus(socket) {
+			if (!socket) {
 				return 'disconnected';
 			}
 
-			return socketStatus.status;
+			return socket.status;
 		}
 
 		_calcComplete(cell) {
