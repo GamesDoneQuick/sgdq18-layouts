@@ -1,4 +1,5 @@
 <link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
 <link rel="import" href="../../../../shared/style/gdq-input-style.html">
@@ -7,29 +8,30 @@
 	<template>
 		<style include="gdq-input-style">
 			:host {
-				position: relative;
-				@apply --layout-horizontal;
-				@apply --layout-center;
 				@apply --layout-flex;
+				@apply --layout-vertical;
+				box-sizing: border-box;
+				padding: 0 12px;
 			}
 
-			#input {
-				margin-left: 23px;
-				margin-right: 15px;
-				margin-bottom: 0;
-				height: 53px;
-				font-weight: 600;
+			#name {
 				font-family: Roboto, sans-serif;
-				@apply --layout-flex;
+				font-weight: 600;
+				height: 53px;
+			}
+
+			#title {
+				height: 40px;
+				margin-bottom: 0;
 			}
 		</style>
 
 		<vaadin-combo-box
-			id="input"
+			id="name"
 			class="gdq-input-style"
 			placeholder="NAME"
 			no-label-float
-			value="{{value}}"
+			value="{{name}}"
 			selected-item="{{selectedItem}}"
 			items="[[items]]"
 			allow-custom-value
@@ -38,6 +40,15 @@
 				<span style="font-size: 28px">[[item]]</span>
 			</template>
 		</vaadin-combo-box>
+
+		<paper-input
+			id="title"
+			class="gdq-input-style"
+			placeholder="TITLE"
+			no-label-float
+			value="{{title}}"
+			disabled="[[disabled]]">
+		</paper-input>
 	</template>
 
 	<script src="dash-lowerthird-name-input.js"></script>

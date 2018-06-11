@@ -34,11 +34,12 @@
 			}
 
 			#header {
-				width: 208px;
-				height: 33px;
-				margin-bottom: 12px;
+				--gdq-lowerthird-nameplate-height: 33px;
+				@apply --layout-flex-none;
 				font-size: 24px;
 				font-weight: 700;
+				margin-bottom: 12px;
+				width: 208px;
 			}
 
 			#mainNames {
@@ -61,28 +62,12 @@
 			}
 
 			#hostName {
-				@apply --layout-center;
-				@apply --layout-vertical;
 				margin-top: 12px;
 				width: 450px;
 			}
 
 			:host(:not[num-names="5"]) #hostName {
 				display: none;
-			}
-
-			#hostName-label {
-				@apply --layout-center-center;
-				@apply --layout-horizontal;
-				background: #00FFFF;
-				color: black;
-				font-size: 18px;
-				font-weight: 500;
-				height: 22px;
-				text-align: center;
-				text-shadow: 0 0 12px #00FFFF;
-				width: 208px;
-				will-change: transform;
 			}
 
 			#hostName gdq-lowerthird-nameplate {
@@ -113,7 +98,7 @@
 
 			/* Begin 4-name styles. */
 			:host([num-names="4"]) {
-				height: 156px;
+				height: 155px;
 			}
 
 			:host([num-names="4"]) #mainNames gdq-lowerthird-nameplate {
@@ -125,11 +110,11 @@
 
 			/* Begin 3-name styles. */
 			:host([num-names="3"]) {
-				height: 166px;
+				height: 165px;
 			}
 
 			:host([num-names="3"]) #mainNames gdq-lowerthird-nameplate {
-				height: 64px;
+				--gdq-lowerthird-nameplate-height: 64px;
 				margin: 0 5px;
 				width: 467px;
 			}
@@ -146,7 +131,7 @@
 			}
 
 			:host([num-names="2"]) #mainNames gdq-lowerthird-nameplate {
-				height: 73px;
+				--gdq-lowerthird-nameplate-height: 73px;
 				margin: 0 6px;
 				width: 608px;
 			}
@@ -165,7 +150,7 @@
 			}
 
 			:host([num-names="1"]) #mainNames gdq-lowerthird-nameplate {
-				height: 80px;
+				--gdq-lowerthird-nameplate-height: 80px;
 				margin: 0;
 				width: 667px;
 			}
@@ -188,12 +173,7 @@
 			<gdq-lowerthird-nameplate></gdq-lowerthird-nameplate>
 		</div>
 
-		<div id="hostName">
-			<gdq-lowerthird-nameplate id="hostName-actual"></gdq-lowerthird-nameplate>
-			<div id="hostName-label">
-				<span style="display: block; position: relative; top: -2px;">YOUR_HOST</span>
-			</div>
-		</div>
+		<gdq-lowerthird-nameplate id="hostName"></gdq-lowerthird-nameplate>
 	</template>
 
 	<script src="gdq-lowerthird.js"></script>
