@@ -34,6 +34,11 @@
 					type: Boolean,
 					value: false,
 					observer: '_embiggenStateChanged'
+				},
+				_hiddenState: {
+					type: Boolean,
+					value: false,
+					observer: '_hiddenStateChanged'
 				}
 			};
 		}
@@ -46,6 +51,7 @@
 				}
 
 				this._embiggenState = newVal.embiggen;
+				this._hiddenState = newVal.cardHidden;
 			});
 		}
 
@@ -63,6 +69,20 @@
 				TweenLite.to(this, 0.3, {
 					opacity: 0,
 					ease: Sine.easeInOut
+				});
+			}
+		}
+
+		_hiddenStateChanged(newVal) {
+			if (newVal) {
+				TweenLite.to(this.$.cover, 0.3, {
+					y: '0%',
+					ease: Power2.easeOut
+				});
+			} else {
+				TweenLite.to(this.$.cover, 0.3, {
+					y: '-100%',
+					ease: Power2.easeIn
 				});
 			}
 		}
