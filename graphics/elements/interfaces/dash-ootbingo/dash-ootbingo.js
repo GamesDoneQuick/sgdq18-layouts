@@ -77,14 +77,6 @@
 
 			return socket.status;
 		}
-
-		_calcComplete(cell) {
-			if (!cell) {
-				return false;
-			}
-
-			return cell.colors.length > 0 && cell.colors !== 'none' && cell.colors !== 'blank';
-		}
 	}
 
 	customElements.define(DashOotbingo.is, DashOotbingo);
