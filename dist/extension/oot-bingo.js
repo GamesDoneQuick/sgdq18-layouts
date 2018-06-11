@@ -128,10 +128,10 @@ async function joinRoom({ siteUrl = 'https://bingosync.com', socketUrl = 'wss://
             return;
         }
         // Bail if nothing has changed.
-        if (equal(boardRep.value, newBoardState)) {
+        if (equal(boardRep.value.cells, newBoardState)) {
             return;
         }
-        boardRep.value = newBoardState;
+        boardRep.value.cells = newBoardState;
     }
 }
 function createWebsocket(socketUrl, socketKey) {
@@ -171,7 +171,7 @@ function createWebsocket(socketUrl, socketKey) {
             }
             if (json.type === 'goal') {
                 const index = parseInt(json.square.slot.slice(4), 10) - 1;
-                boardRep.value[index] = json.square;
+                boardRep.value.cells[index] = json.square;
             }
         };
         websocket.onclose = (event) => {

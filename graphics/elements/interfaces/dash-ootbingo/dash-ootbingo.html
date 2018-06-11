@@ -93,11 +93,11 @@
 			}
 		</style>
 
-		<nodecg-replicant replicant-name="ootBingo:board" value="{{boardCells}}"></nodecg-replicant>
+		<nodecg-replicant replicant-name="ootBingo:board" value="{{board}}"></nodecg-replicant>
 		<nodecg-replicant replicant-name="ootBingo:socket" value="{{socket}}"></nodecg-replicant>
 
 		<div id="board">
-			<template is="dom-repeat" items="[[boardCells]]" as="cell" mutable-data>
+			<template is="dom-repeat" items="[[board.cells]]" as="cell" mutable-data>
 				<div class="cell" complete$="[[_calcComplete(cell)]]" title="[[cell.name]]">
 					[[cell.name]]
 				</div>
