@@ -35,7 +35,8 @@
     "tslib": "^1.9.1",
     "twemoji": "^2.0.5",
     "twitchps": "^0.5.5",
-    "usb-detection": "^3.0.3"
+    "usb-detection": "^3.0.3",
+    "ws": "^5.2.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
@@ -53,6 +54,7 @@
     "@types/parse-ms": "^1.0.0",
     "@types/request-promise": "^4.1.41",
     "@types/socket.io-client": "^1.4.32",
+    "@types/ws": "^5.1.2",
     "ava": "^1.0.0-beta.4",
     "chai": "^4.1.2",
     "eslint": "^4.12.1",
@@ -238,6 +240,16 @@
       },
       {
         "file": "producer_dashboard.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "oot_bingo.html",
+        "width": 474,
+        "height": 355
+      },
+      {
+        "file": "oot_bingo_dashboard.html",
         "width": 1920,
         "height": 1080
       },

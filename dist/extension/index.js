@@ -26,6 +26,7 @@ module.exports = (nodecg) => {
     require('./nowplaying');
     require('./countdown');
     require('./sortable-list');
+    require('./oot-bingo');
     // This is a hack.
     require('./caspar').oscEvents.once('initialized', () => {
         require('./intermissions');
