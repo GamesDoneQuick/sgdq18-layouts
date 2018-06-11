@@ -73,6 +73,7 @@
 			await nodecg.sendMessage('ootBingo:joinRoom', {
 				siteUrl: this.$.siteUrl.value,
 				socketUrl: this.$.socketUrl.value,
+				playerName: this.$.playerName.value,
 				roomCode: this.$.roomCode.value,
 				passphrase: this.$.passphrase.value
 			});
@@ -82,6 +83,7 @@
 		defaults() {
 			this.$.siteUrl.value = 'https://bingosync.com';
 			this.$.socketUrl.value = 'wss://sockets.bingosync.com';
+			this.$.playerName.value = 'NodeCG';
 		}
 
 		_computeStatus(socket) {

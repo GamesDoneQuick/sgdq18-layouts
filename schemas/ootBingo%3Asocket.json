@@ -16,6 +16,10 @@
 			"type": "string",
 			"default": "wss://sockets.bingosync.com"
 		},
+		"playerName": {
+			"type": "string",
+			"default": "NodeCG"
+		},
 		"roomCode": {
 			"type": "string"
 		},

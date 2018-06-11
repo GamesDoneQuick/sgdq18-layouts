@@ -24,7 +24,8 @@ nodecg.listenFor('ootBingo:joinRoom', async (data, callback) => {
             siteUrl: data.siteUrl,
             socketUrl: data.socketUrl,
             roomCode: data.roomCode,
-            passphrase: data.passphrase
+            passphrase: data.passphrase,
+            playerName: data.playerName
         });
         log.info(`Successfully joined room ${data.roomCode}.`);
         callback();

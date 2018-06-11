@@ -150,6 +150,14 @@
 			</paper-input>
 
 			<paper-input
+				id="playerName"
+				label="Player Name"
+				type="playerName"
+				value="[[socket.playerName]]"
+				disabled="[[_submitting]]">
+			</paper-input>
+
+			<paper-input
 				id="roomCode"
 				label="Room Code"
 				value="[[socket.roomCode]]"
