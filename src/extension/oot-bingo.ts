@@ -22,6 +22,7 @@ let websocket: WebSocket | null = null;
 const noop = () => {}; // tslint:disable-line:no-empty
 
 nodecg.listenFor('ootBingo:joinRoom', async (data: any, callback: Function) => {
+	callback = callback || noop; // tslint:disable-line:no-parameter-reassignment
 	try {
 		socketRep.value = {
 			...socketRep.value,
@@ -43,6 +44,7 @@ nodecg.listenFor('ootBingo:joinRoom', async (data: any, callback: Function) => {
 });
 
 nodecg.listenFor('ootBingo:leaveRoom', (_data: any, callback: Function) => {
+	callback = callback || noop; // tslint:disable-line:no-parameter-reassignment
 	try {
 		clearInterval(fullUpdateInterval);
 		destroyWebsocket();
@@ -50,6 +52,16 @@ nodecg.listenFor('ootBingo:leaveRoom', (_data: any, callback: Function) => {
 		callback();
 	} catch (error) {
 		log.error('Failed to leave room:', error);
+		callback(error);
+	}
+});
+
+nodecg.listenFor('ootBingo:selectLine', (lineString: string, callback: Function) => {
+	callback = callback || noop; // tslint:disable-line:no-parameter-reassignment
+	try {
+		boardRep.value.selectedLine = lineString;
+		callback();
+	} catch (error) {
 		callback(error);
 	}
 });

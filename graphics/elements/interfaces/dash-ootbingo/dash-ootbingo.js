@@ -1,6 +1,8 @@
 (function () {
 	'use strict';
 
+	const boardRep = nodecg.Replicant('ootBingo:board');
+
 	/**
 	 * @customElement
 	 * @polymer
@@ -26,6 +28,30 @@
 					value: false
 				}
 			};
+		}
+
+		ready() {
+			super.ready();
+			this._$lineSelectors = Array.from(this.shadowRoot.querySelectorAll('.lineSelector'));
+			this._$lineSelectors.forEach(button => {
+				button.addEventListener('click', event => {
+					nodecg.sendMessage('ootBingo:selectLine', event.target.innerText.toLowerCase());
+				});
+			});
+
+			boardRep.on('change', newVal => {
+				if (!newVal) {
+					return;
+				}
+
+				this._$lineSelectors.forEach(button => {
+					if (button.innerText.toLowerCase() === newVal.selectedLine) {
+						button.setAttribute('selected', 'true');
+					} else {
+						button.removeAttribute('selected');
+					}
+				});
+			});
 		}
 
 		async submit() {
