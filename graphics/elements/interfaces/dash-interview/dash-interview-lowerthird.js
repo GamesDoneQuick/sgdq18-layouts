@@ -39,27 +39,6 @@
 		ready() {
 			super.ready();
 
-			// Hack to get around https://github.com/bevacqua/crossvent/issues/8
-			// I dunno why but this prevents the "auto passive listener" thing.
-			Polymer.Gestures.addListener(this.$.nameInputs, 'track', () => {});
-
-			this.$.nameInputs.moves = function (element, source, handle) {
-				return handle.id === 'handle';
-			};
-
-			this.$.nameInputs.createMirror = originalElement => {
-				const rect = originalElement.getBoundingClientRect();
-				const mirror = originalElement.cloneNode(true);
-				mirror.style.width = rect.width + 'px';
-				mirror.style.height = rect.height + 'px';
-				mirror.allowCustomValue = true;
-				mirror.value = originalElement.value;
-				Polymer.RenderStatus.beforeNextRender(mirror, () => {
-					mirror.$.input.$.input.value = originalElement.value;
-				});
-				return mirror;
-			};
-
 			runnersRep.on('change', newVal => {
 				if (newVal && newVal.length > 0) {
 					this._typeaheadCandidates = newVal.filter(Boolean).map(runner => runner.name).sort();
@@ -110,10 +89,15 @@
 
 		/**
 		 * Returns an array of the names currently entered into the inputs.
-		 * @returns {string[]} - The names.
+		 * @returns {{name: string, title: string}[]} - The names.
 		 */
 		getNames() {
-			return this.getInputs().map(input => input.value);
+			return this.getInputs().map(input => {
+				return {
+					name: input.name,
+					title: input.title
+				};
+			});
 		}
 
 		setNames(names) {
@@ -121,13 +105,15 @@
 
 			if (!names || names.length <= 0) {
 				typeaheads.forEach(input => {
-					input.value = '';
+					input.name = '';
+					input.title = '';
 				});
 				return;
 			}
 
 			typeaheads.forEach((input, index) => {
-				input.value = names[index] || '';
+				input.name = names[index] ? names[index].name : '';
+				input.title = names[index] ? names[index].title : '';
 			});
 		}
 
@@ -202,7 +188,10 @@
 		}
 
 		_handleNameInputChange(event) {
-			interviewNamesRep.value[event.model.index] = event.target.value;
+			interviewNamesRep.value[event.model.index] = {
+				name: event.target.name,
+				title: event.target.title
+			};
 		}
 	}
 

@@ -39,7 +39,7 @@
 
 		ready() {
 			super.ready();
-			this._$nameElements = Array.from(this.shadowRoot.querySelectorAll('#mainNames gdq-lowerthird-nameplate, #hostName gdq-lowerthird-nameplate'));
+			this._$nameElements = Array.from(this.shadowRoot.querySelectorAll('#mainNames gdq-lowerthird-nameplate, #hostName'));
 			this.reset();
 
 			if (!this.preview && !window.__SCREENSHOT_TESTING__) {
@@ -61,7 +61,9 @@
 			const tl = new TimelineLite();
 			const names = prefilledNames ?
 				prefilledNames :
-				interviewNames.value.filter(name => Boolean(name) && name.trim().length > 0);
+				interviewNames.value.filter(({name}) => {
+					return Boolean(name) && name.trim().length > 0;
+				});
 			if (names.length <= 0) {
 				return tl;
 			}
@@ -81,8 +83,11 @@
 			// Set names
 			tl.call(() => {
 				this._$nameElements.forEach((nameElement, index) => {
-					nameElement.updateName({alias: names[index], twitchAlias: null, rotate: false});
-					nameElement.hidden = !names[index];
+					nameElement.hidden = !names[index] || !names[index].name;
+					if (!nameElement.hidden) {
+						nameElement.name = names[index].name;
+						nameElement.title = names[index].title;
+					}
 				});
 			}, null, null, '+=0.3'); // Give time for interviewNames replicant to update.
 
@@ -99,16 +104,6 @@
 
 			randomizedNameElements.forEach((nameElem, index) => {
 				tl.add(nameElem.enter(), `nameElementsEnter+=${NAME_ELEMENT_ENTRANCE_STAGGER * index}`);
-				if (nameElem.id === 'hostName-actual') {
-					tl.to(this.$['hostName-label'], 0.4, {
-						y: '0%',
-						ease: Power2.easeOut,
-						callbackScope: this,
-						onStart() {
-							this.$['hostName-label'].style.opacity = 1;
-						}
-					}, '-=0.1');
-				}
 			});
 
 			return tl;
@@ -127,7 +122,6 @@
 			this.$.header.reset();
 			this._$nameElements.forEach(nameElem => nameElem.reset());
 			TweenLite.set(this.$.background, {y: '100%'});
-			TweenLite.set(this.$['hostName-label'], {y: '-100%', opacity: 0});
 			TweenLite.set(this, {y: '0%', opacity: 1});
 		}
 	}

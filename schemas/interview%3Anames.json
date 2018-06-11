@@ -5,7 +5,32 @@
 	"minItems": 5,
 	"maxItems": 5,
 	"items": {
-		"type": "string"
+		"type": "object",
+		"additionalProperties": false,
+		"properties": {
+			"name": {
+				"type": "string"
+			},
+			"title": {
+				"type": "string"
+			}
+		}
 	},
-	"default": ["", "", "", "", ""]
+
+	"default": [{
+		"name": "",
+		"title": ""
+	}, {
+		"name": "",
+		"title": ""
+	}, {
+		"name": "",
+		"title": ""
+	}, {
+		"name": "",
+		"title": ""
+	}, {
+		"name": "",
+		"title": "YOUR_HOST"
+	}]
 }

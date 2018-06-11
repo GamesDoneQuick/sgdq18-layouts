@@ -94,7 +94,8 @@
 				<dash-lowerthird-name-input
 					items="[[_typeaheadCandidates]]"
 					on-change="_handleNameInputChange"
-					value="[[item]]">
+					name="[[item.name]]"
+					title="[[item.title]]">
 				</dash-lowerthird-name-input>
 			</template>
 		</ui-sortable-list>
