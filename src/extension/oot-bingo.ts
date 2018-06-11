@@ -66,6 +66,16 @@ nodecg.listenFor('ootBingo:selectLine', (lineString: string, callback: Function)
 	}
 });
 
+nodecg.listenFor('ootBingo:toggleLineFocus', (_data: string, callback: Function) => {
+	callback = callback || noop; // tslint:disable-line:no-parameter-reassignment
+	try {
+		boardRep.value.lineFocused = !boardRep.value.lineFocused;
+		callback();
+	} catch (error) {
+		callback(error);
+	}
+});
+
 recover().catch(error => {
 	log.error(`Failed to recover connection to room ${socketRep.value.roomCode}:`, error);
 });

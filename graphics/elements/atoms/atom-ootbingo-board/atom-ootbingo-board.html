@@ -13,7 +13,13 @@
 				display: grid;
 				grid-auto-flow: row;
 				grid-gap: 4px;
-				grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+				grid-template-rows: repeat(5, 1fr);
+				grid-template-columns: repeat(5, 1fr);
+			}
+
+			:host([line-focused]) {
+				grid-auto-flow: column;
+				grid-template-columns: 1fr;
 			}
 
 			.cell {
@@ -42,7 +48,7 @@
 
 		<nodecg-replicant id="boardRep" replicant-name="ootBingo:board" value="{{board}}"></nodecg-replicant>
 
-		<template is="dom-repeat" items="[[board.cells]]" as="cell" mutable-data>
+		<template is="dom-repeat" items="[[_calcCells(board.cells, board.selectedLine, board.lineFocused)]]" as="cell" mutable-data>
 			<div class="cell" complete$="[[_calcComplete(cell)]]" title="[[cell.name]]">
 				[[cell.name]]
 			</div>

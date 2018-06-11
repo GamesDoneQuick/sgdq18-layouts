@@ -54,6 +54,10 @@
 			});
 		}
 
+		toggleLineFocus() {
+			nodecg.sendMessage('ootBingo:toggleLineFocus');
+		}
+
 		async submit() {
 			this._submitting = true;
 			await nodecg.sendMessage('ootBingo:joinRoom', {
@@ -76,6 +80,12 @@
 			}
 
 			return socket.status;
+		}
+
+		_calcFocusToggleText(lineFocused) {
+			return lineFocused ?
+				'See whole board' :
+				'Focus on selected group';
 		}
 	}
 

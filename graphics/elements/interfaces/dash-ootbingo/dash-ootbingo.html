@@ -103,12 +103,19 @@
 			<paper-button style="grid-row: 6; grid-column: 1" class="lineSelector" raised>ROW5</paper-button>
 			<paper-button style="grid-row: 7; grid-column: 1" class="lineSelector" raised>BL-TR</paper-button>
 
+			<paper-button
+				style="grid-row: 7; grid-column: 3 / 6"
+				class="green"
+				on-tap="toggleLineFocus"
+				raised>
+				[[_calcFocusToggleText(board.lineFocused)]]
+			</paper-button>
+
 			<atom-ootbingo-board
 				id="board"
 				style="grid-row: 2 / 7; grid-column: 2 / 7">
 			</atom-ootbingo-board>
 		</div>
-
 
 		<div id="form">
 			<div id="status">
