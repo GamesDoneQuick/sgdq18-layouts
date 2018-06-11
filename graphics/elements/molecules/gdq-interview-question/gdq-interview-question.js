@@ -57,7 +57,7 @@
 
 			this._timeline.call(() => {
 				this.$.tweet._addReset();
-				this.$.tweet._addEntranceAnim(this.onScreenTweet);
+				this.$.tweet._createEntranceAnim(this.onScreenTweet);
 			}, null, null, '+=0.5');
 		}
 
@@ -67,7 +67,7 @@
 			}
 
 			this._timeline.call(() => {
-				this.$.tweet._addExitAnim(0);
+				this.$.tweet._createExitAnim(0);
 			}, null, null, '+=0.5');
 		}
 
