@@ -26,9 +26,9 @@
         "sync": 0,
         "volume": 0.0
     },
-    "current_program_scene": "Interview",
-    "current_scene": "Break",
-    "current_transition": "Blank Stinger",
+    "current_program_scene": "OoT Bingo",
+    "current_scene": "OoT Bingo",
+    "current_transition": "Cut",
     "modules": {
         "auto-scene-switcher": {
             "active": false,
@@ -143,6 +143,9 @@
             "name": "DS Vertical"
         },
         {
+            "name": "OoT Bingo"
+        },
+        {
             "name": "LttP Randomizer"
         },
         {
@@ -150,6 +153,33 @@
         }
     ],
     "sources": [
+        {
+            "deinterlace_field_order": 0,
+            "deinterlace_mode": 0,
+            "enabled": true,
+            "flags": 0,
+            "hotkeys": {},
+            "id": "browser_source",
+            "mixers": 0,
+            "monitoring_type": 0,
+            "muted": false,
+            "name": "OoT Bingo - Large",
+            "private_settings": {},
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "settings": {
+                "css": "",
+                "fps": 60,
+                "height": 845,
+                "shutdown": true,
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/oot_bingo.html?embiggen=true",
+                "width": 1125
+            },
+            "sync": 0,
+            "volume": 1.0
+        },
         {
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
@@ -641,7 +671,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -1198,7 +1228,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -2055,7 +2085,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -2585,7 +2615,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -2943,7 +2973,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -3393,7 +3423,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -3777,7 +3807,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -4426,7 +4456,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -5577,7 +5607,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -5961,7 +5991,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -6421,7 +6451,7 @@
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 13,
+                "id_counter": 14,
                 "items": [
                     {
                         "align": 5,
@@ -7114,7 +7144,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -7498,7 +7528,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -7882,7 +7912,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -8266,7 +8296,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -8650,7 +8680,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -9128,29 +9158,6 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "flags": 0,
-            "hotkeys": {},
-            "id": "obs-stream-effects-filter-blur",
-            "mixers": 0,
-            "monitoring_type": 0,
-            "muted": false,
-            "name": "Blur",
-            "private_settings": {},
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "settings": {
-                "Filter.Blur.Size": 16,
-                "Filter.Blur.Type": 1
-            },
-            "sync": 0,
-            "volume": 1.0
-        },
-        {
-            "deinterlace_field_order": 0,
-            "deinterlace_mode": 0,
-            "enabled": true,
             "filters": [
                 {
                     "deinterlace_field_order": 0,
@@ -9170,29 +9177,6 @@
                     "push-to-talk-delay": 0,
                     "settings": {
                         "color": 9464619
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                },
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "obs-stream-effects-filter-blur",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Blur",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "Filter.Blur.Size": 16,
-                        "Filter.Blur.Type": 1
                     },
                     "sync": 0,
                     "volume": 1.0
@@ -9691,7 +9675,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -9753,6 +9737,623 @@
             },
             "sync": 0,
             "volume": 0.57178699970245361
+        },
+        {
+            "deinterlace_field_order": 0,
+            "deinterlace_mode": 0,
+            "enabled": true,
+            "flags": 0,
+            "hotkeys": {
+                "OBSBasic.SelectScene": [],
+                "libobs.hide_scene_item.Crowd Camera": [],
+                "libobs.hide_scene_item.Game Feed 1": [],
+                "libobs.hide_scene_item.Game Feed 2": [],
+                "libobs.hide_scene_item.Game Feed 3": [],
+                "libobs.hide_scene_item.Game Feed 4": [],
+                "libobs.hide_scene_item.Interview Camera": [],
+                "libobs.hide_scene_item.Layout DS": [],
+                "libobs.hide_scene_item.Main Camera": [],
+                "libobs.hide_scene_item.Omnibar": [],
+                "libobs.hide_scene_item.OoT Bingo - Large": [],
+                "libobs.hide_scene_item.OoT Bingo - Small": [],
+                "libobs.hide_scene_item.PC Camera": [],
+                "libobs.hide_scene_item.Transition Graphic": [],
+                "libobs.hide_scene_item.∨∨∨ BOTTOM CAMERA ∨∨∨": [],
+                "libobs.hide_scene_item.∨∨∨ TOP CAMERA ∨∨∨": [],
+                "libobs.show_scene_item.Crowd Camera": [],
+                "libobs.show_scene_item.Game Feed 1": [],
+                "libobs.show_scene_item.Game Feed 2": [],
+                "libobs.show_scene_item.Game Feed 3": [],
+                "libobs.show_scene_item.Game Feed 4": [],
+                "libobs.show_scene_item.Interview Camera": [],
+                "libobs.show_scene_item.Layout DS": [],
+                "libobs.show_scene_item.Main Camera": [],
+                "libobs.show_scene_item.Omnibar": [],
+                "libobs.show_scene_item.OoT Bingo - Large": [],
+                "libobs.show_scene_item.OoT Bingo - Small": [],
+                "libobs.show_scene_item.PC Camera": [],
+                "libobs.show_scene_item.Transition Graphic": [],
+                "libobs.show_scene_item.∨∨∨ BOTTOM CAMERA ∨∨∨": [],
+                "libobs.show_scene_item.∨∨∨ TOP CAMERA ∨∨∨": []
+            },
+            "id": "scene",
+            "mixers": 0,
+            "monitoring_type": 0,
+            "muted": false,
+            "name": "OoT Bingo",
+            "private_settings": {
+                "transition": "Blank Stinger"
+            },
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "settings": {
+                "id_counter": 23,
+                "items": [
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 474.0,
+                            "y": 328.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 3,
+                        "crop_bottom": 0,
+                        "crop_left": 176,
+                        "crop_right": 176,
+                        "crop_top": 0,
+                        "id": 1,
+                        "locked": false,
+                        "name": "Interview Camera",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 517.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "lanczos",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 474.0,
+                            "y": 328.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 3,
+                        "crop_bottom": 0,
+                        "crop_left": 176,
+                        "crop_right": 176,
+                        "crop_top": 0,
+                        "id": 2,
+                        "locked": false,
+                        "name": "Crowd Camera",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 517.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "lanczos",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 474.0,
+                            "y": 328.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 3,
+                        "crop_bottom": 0,
+                        "crop_left": 176,
+                        "crop_right": 176,
+                        "crop_top": 0,
+                        "id": 3,
+                        "locked": false,
+                        "name": "PC Camera",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 517.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "lanczos",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 474.0,
+                            "y": 328.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 3,
+                        "crop_bottom": 0,
+                        "crop_left": 176,
+                        "crop_right": 176,
+                        "crop_top": 0,
+                        "id": 4,
+                        "locked": false,
+                        "name": "Main Camera",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 517.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "lanczos",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 5,
+                        "locked": false,
+                        "name": "∨∨∨ BOTTOM CAMERA ∨∨∨",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 474.0,
+                            "y": 355.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 3,
+                        "crop_bottom": 0,
+                        "crop_left": 237,
+                        "crop_right": 237,
+                        "crop_top": 0,
+                        "id": 22,
+                        "locked": false,
+                        "name": "Game Feed 4",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 474.0,
+                            "y": 355.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 3,
+                        "crop_bottom": 0,
+                        "crop_left": 237,
+                        "crop_right": 237,
+                        "crop_top": 0,
+                        "id": 21,
+                        "locked": false,
+                        "name": "Game Feed 3",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 474.0,
+                            "y": 355.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 3,
+                        "crop_bottom": 0,
+                        "crop_left": 237,
+                        "crop_right": 237,
+                        "crop_top": 0,
+                        "id": 20,
+                        "locked": false,
+                        "name": "Game Feed 2",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 474.0,
+                            "y": 355.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 3,
+                        "crop_bottom": 0,
+                        "crop_left": 237,
+                        "crop_right": 237,
+                        "crop_top": 0,
+                        "id": 19,
+                        "locked": false,
+                        "name": "Game Feed 1",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 18,
+                        "locked": false,
+                        "name": "OoT Bingo - Small",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 10,
+                        "locked": false,
+                        "name": "∨∨∨ TOP CAMERA ∨∨∨",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 1125.0,
+                            "y": 845.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 2,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 11,
+                        "locked": false,
+                        "name": "Game Feed 4",
+                        "pos": {
+                            "x": 475.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "bicubic",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 1125.0,
+                            "y": 845.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 2,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 12,
+                        "locked": false,
+                        "name": "Game Feed 3",
+                        "pos": {
+                            "x": 475.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "bicubic",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 1125.0,
+                            "y": 845.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 2,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 13,
+                        "locked": false,
+                        "name": "Game Feed 2",
+                        "pos": {
+                            "x": 475.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "bicubic",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 1125.0,
+                            "y": 845.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 2,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 14,
+                        "locked": false,
+                        "name": "Game Feed 1",
+                        "pos": {
+                            "x": 475.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "scale_filter": "bicubic",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 23,
+                        "locked": false,
+                        "name": "OoT Bingo - Large",
+                        "pos": {
+                            "x": 515.0,
+                            "y": 31.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 15,
+                        "locked": false,
+                        "name": "Omnibar",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 845.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 16,
+                        "locked": false,
+                        "name": "Layout DS",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 17,
+                        "locked": false,
+                        "name": "Transition Graphic",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "private_settings": {},
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    }
+                ]
+            },
+            "sync": 0,
+            "volume": 1.0
+        },
+        {
+            "deinterlace_field_order": 0,
+            "deinterlace_mode": 0,
+            "enabled": true,
+            "flags": 0,
+            "hotkeys": {},
+            "id": "browser_source",
+            "mixers": 0,
+            "monitoring_type": 0,
+            "muted": false,
+            "name": "OoT Bingo - Small",
+            "private_settings": {},
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "settings": {
+                "css": "",
+                "fps": 60,
+                "height": 355,
+                "shutdown": true,
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/oot_bingo.html?embiggen=false",
+                "width": 474
+            },
+            "sync": 0,
+            "volume": 1.0
         }
     ],
     "transition_duration": 300,

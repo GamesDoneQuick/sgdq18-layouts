@@ -2,12 +2,12 @@
 	'use strict';
 
 	const lowerthirdTimeRemaining = nodecg.Replicant('interview:lowerthirdTimeRemaining');
+	const programScene = nodecg.Replicant('streamingOBS:programScene');
 	const questionShowing = nodecg.Replicant('interview:questionShowing');
 	const questionSortMap = nodecg.Replicant('interview:questionSortMap');
 	const questionTimeRemaining = nodecg.Replicant('interview:questionTimeRemaining');
-	const streamingOBSTransitioning = nodecg.Replicant('streamingOBS:transitioning');
-	const programScene = nodecg.Replicant('streamingOBS:programScene');
 	const streamingOBSStatus = nodecg.Replicant('streamingOBS:websocket');
+	const streamingOBSTransitioning = nodecg.Replicant('streamingOBS:transitioning');
 
 	/**
 	 * @customElement
@@ -83,18 +83,8 @@
 			});
 
 			this.addEventListener('error-toast', event => {
-				this.showErrorToast(event.detail.text);
+				this.$.toast.showErrorToast(event.detail.text);
 			});
-		}
-
-		showSuccessToast(text) {
-			this._successToastText = text;
-			this.$.successToast.show();
-		}
-
-		showErrorToast(text) {
-			this._errorToastText = text;
-			this.$.errorToast.show();
 		}
 
 		showLowerthird() {
@@ -141,7 +131,7 @@
 					name: transitionName,
 					sceneName
 				});
-				this.showSuccessToast(`Successfully started transition to "${sceneName}".`);
+				this.$.toast.showSuccessToast(`Successfully started transition to "${sceneName}".`);
 			} catch (error) {
 				let errorString = error;
 				if (error.message) {
@@ -149,7 +139,7 @@
 				} else if (error.error) {
 					errorString = error.error;
 				}
-				this.showErrorToast('Failed to transition: ' + errorString);
+				this.$.toast.showErrorToast('Failed to transition: ' + errorString);
 			}
 
 			this._sendingTransitionCommand = false;
