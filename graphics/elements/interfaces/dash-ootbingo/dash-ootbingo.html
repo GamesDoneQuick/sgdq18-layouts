@@ -1,0 +1,162 @@
+<link rel="import" href="../../../../bower_components/font-roboto/roboto.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/nodecg-replicant/nodecg-replicant.html">
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
+<link rel="import" href="../../../../shared/style/gdq-ui-theme.html">
+
+<dom-module id="dash-ootbingo">
+	<template>
+		<style include="gdq-ui-theme">
+			:host {
+				@apply --layout-horizontal;
+				font-family: Roboto, sans-serif;
+				--paper-input-container: {
+					--paper-input-container-color: #64FF6C;
+					--paper-input-container-focus-color: white;
+					--paper-input-container-input-color: white;
+				};
+			}
+
+			#board {
+				@apply --layout-flex-none;
+				background: #434343;
+				border: 1px solid #00FFFF;
+				box-sizing: border-box;
+				display: grid;
+				grid-auto-flow: row;
+				grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+				grid-gap: 4px;
+				height: 547px;
+				width: 735px;
+			}
+
+			#form {
+				@apply --layout-vertical;
+				width: 549px;
+				margin-left: 20px;
+			}
+
+			#status {
+				color: white;
+				font-size: 16px;
+				font-weight: 500;
+				margin-left: 9px;
+			}
+
+			#status-actual {
+				text-transform: uppercase;
+			}
+
+			:host([status="connected"]) #status-actual {
+				color: #33FF00;
+			}
+
+			:host([status="disconnected"]) #status-actual,
+			:host([status="error"]) #status-actual {
+				color: #FF9393;
+			}
+
+			:host([status="connecting"]) #status-actual {
+				color: #FFEB00;
+			}
+
+			#submit,
+			#defaults {
+				margin: 5px 0;
+			}
+
+			.cell {
+				@apply --layout-center-center;
+				@apply --layout-vertical;
+				background: #1D0013;
+				box-shadow: inset 0 0 25px rgba(95, 95, 95, 0.75);
+				color: white;
+				font-family: 'Source Code Pro', monospace;
+				font-size: 16px;
+				font-weight: bold;
+				letter-spacing: -0.04em;
+				overflow: hidden;
+				padding: 8px;
+				text-align: center;
+				text-overflow: ellipsis;
+				word-break: break-word;
+				word-wrap: break-word;
+			}
+
+			.cell[complete] {
+				background: #005B1A;
+				box-shadow: inset 0 0 25px rgba(0, 199, 163, 0.75);
+			}
+		</style>
+
+		<nodecg-replicant replicant-name="ootBingo:board" value="{{boardCells}}"></nodecg-replicant>
+		<nodecg-replicant replicant-name="ootBingo:socketStatus" value="{{socketStatus}}"></nodecg-replicant>
+
+		<div id="board">
+			<template is="dom-repeat" items="[[boardCells]]" as="cell" mutable-data>
+				<div class="cell" complete$="[[_calcComplete(cell)]]" title="[[cell.name]]">
+					[[cell.name]]
+				</div>
+			</template>
+		</div>
+
+		<div id="form">
+			<div id="status">
+				Current Status: <span id="status-actual">[[status]]</span>
+			</div>
+
+			<paper-input
+				id="siteUrl"
+				label="Site URL"
+				value="[[socketStatus.siteUrl]]"
+				disabled="[[_submitting]]">
+			</paper-input>
+
+			<paper-input
+				id="socketUrl"
+				label="Socket URL"
+				value="[[socketStatus.socketUrl]]"
+				disabled="[[_submitting]]">
+			</paper-input>
+
+			<paper-input
+				id="roomCode"
+				label="Room Code"
+				value="[[socketStatus.roomCode]]"
+				disabled="[[_submitting]]">
+			</paper-input>
+
+			<paper-input
+				id="passphrase"
+				label="Password"
+				type="password"
+				value="[[socketStatus.passphrase]]"
+				disabled="[[_submitting]]">
+			</paper-input>
+
+			<paper-button
+				id="submit"
+				class="green"
+				on-tap="submit"
+				disabled="[[_submitting]]"
+				raised>
+				Submit
+			</paper-button>
+
+			<paper-button
+				id="defaults"
+				class="green"
+				on-tap="defaults"
+				disabled="[[_submitting]]"
+				raised>
+				Defaults
+			</paper-button>
+		</div>
+	</template>
+
+	<script src="dash-ootbingo.js"></script>
+</dom-module>

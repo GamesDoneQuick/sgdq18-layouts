@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const RequestPromise = require("request-promise");
 const WebSocket = require("ws");
 const cheerio = require("cheerio");
+const equal = require("deep-equal");
 // Ours
 const nodecgApiContext = require("./util/nodecg-api-context");
 const SOCKET_KEY_REGEX = /temporarySocketKey\s+=\s+"(\S+)"/;
@@ -11,11 +12,13 @@ const nodecg = nodecgApiContext.get();
 const log = new nodecg.Logger(`${nodecg.bundleName}:oot-bingo`);
 const request = RequestPromise.defaults({ jar: true }); // <= Automatically saves and re-uses cookies.
 const boardRep = nodecg.Replicant('ootBingo:board');
+const socketStatusRep = nodecg.Replicant('ootBingo:socketStatus');
 let fullUpdateInterval;
 let websocket = null;
 const noop = () => { }; // tslint:disable-line:no-empty
 nodecg.listenFor('ootBingo:joinRoom', async (data, callback) => {
     try {
+        socketStatusRep.value = Object.assign({}, socketStatusRep.value, data);
         await joinRoom({
             siteUrl: data.siteUrl,
             socketUrl: data.socketUrl,
@@ -26,20 +29,36 @@ nodecg.listenFor('ootBingo:joinRoom', async (data, callback) => {
         callback();
     }
     catch (error) {
+        socketStatusRep.value.status = 'error';
         log.error(`Failed to join room ${data.roomCode}:`, error);
+        callback(error);
     }
 });
 nodecg.listenFor('ootBingo:leaveRoom', (_data, callback) => {
     try {
         clearInterval(fullUpdateInterval);
         destroyWebsocket();
+        socketStatusRep.value.status = 'disconnected';
         callback();
     }
     catch (error) {
         log.error('Failed to leave room:', error);
+        callback(error);
     }
 });
+recover().catch(error => {
+    log.error(`Failed to recover connection to room ${socketStatusRep.value.roomCode}:`, error);
+});
+async function recover() {
+    // Restore previous connection on startup.
+    if (socketStatusRep.value.roomCode && socketStatusRep.value.passphrase) {
+        log.info(`Recovering connection to room ${socketStatusRep.value.roomCode}`);
+        await joinRoom(socketStatusRep.value);
+        log.info(`Successfully recovered connection to room ${socketStatusRep.value.roomCode}`);
+    }
+}
 async function joinRoom({ siteUrl = 'https://bingosync.com', socketUrl = 'wss://sockets.bingosync.com', roomCode, passphrase, playerName = 'NodeCG' }) {
+    socketStatusRep.value.status = 'connecting';
     clearInterval(fullUpdateInterval);
     destroyWebsocket();
     const roomUrl = `${siteUrl}/room/${roomCode}`;
@@ -108,12 +127,17 @@ async function joinRoom({ siteUrl = 'https://bingosync.com', socketUrl = 'wss://
         if (fullUpdateInterval !== thisInterval) {
             return;
         }
+        // Bail if nothing has changed.
+        if (equal(boardRep.value, newBoardState)) {
+            return;
+        }
         boardRep.value = newBoardState;
     }
 }
 function createWebsocket(socketUrl, socketKey) {
     return new Promise((resolve, reject) => {
         let settled = false;
+        socketStatusRep.value.status = 'connecting';
         websocket = new WebSocket(`${socketUrl}/broadcast`);
         websocket.onopen = () => {
             log.info('Socket opened.');
@@ -132,6 +156,7 @@ function createWebsocket(socketUrl, socketKey) {
             if (json.type === 'error') {
                 clearInterval(fullUpdateInterval);
                 destroyWebsocket();
+                socketStatusRep.value.status = 'error';
                 log.error('Socket protocol error:', json.error ? json.error : json);
                 if (!settled) {
                     reject(new Error(json.error ? json.error : 'unknown error'));
@@ -141,6 +166,7 @@ function createWebsocket(socketUrl, socketKey) {
             }
             if (!settled) {
                 resolve();
+                socketStatusRep.value.status = 'connected';
                 settled = true;
             }
             if (json.type === 'goal') {
@@ -149,7 +175,8 @@ function createWebsocket(socketUrl, socketKey) {
             }
         };
         websocket.onclose = (event) => {
-            log.info(`'Socket closed (code: ${event.code}, reason: ${event.reason})`);
+            socketStatusRep.value.status = 'disconnected';
+            log.info(`Socket closed (code: ${event.code}, reason: ${event.reason})`);
             destroyWebsocket();
             createWebsocket(socketUrl, socketKey).catch(() => {
                 // Intentionally discard errors raised here.

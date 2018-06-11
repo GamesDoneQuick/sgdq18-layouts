@@ -4,6 +4,7 @@
 import * as RequestPromise from 'request-promise';
 import * as WebSocket from 'ws';
 import * as cheerio from 'cheerio';
+import equal = require('deep-equal');
 
 // Ours
 import * as nodecgApiContext from './util/nodecg-api-context';
@@ -14,6 +15,7 @@ const nodecg = nodecgApiContext.get();
 const log = new nodecg.Logger(`${nodecg.bundleName}:oot-bingo`);
 const request = RequestPromise.defaults({jar: true}); // <= Automatically saves and re-uses cookies.
 const boardRep = nodecg.Replicant('ootBingo:board');
+const socketStatusRep = nodecg.Replicant('ootBingo:socketStatus');
 let fullUpdateInterval: NodeJS.Timer;
 let websocket: WebSocket | null = null;
 
@@ -21,6 +23,10 @@ const noop = () => {}; // tslint:disable-line:no-empty
 
 nodecg.listenFor('ootBingo:joinRoom', async (data: any, callback: Function) => {
 	try {
+		socketStatusRep.value = {
+			...socketStatusRep.value,
+			...data
+		};
 		await joinRoom({
 			siteUrl: data.siteUrl,
 			socketUrl: data.socketUrl,
@@ -30,7 +36,9 @@ nodecg.listenFor('ootBingo:joinRoom', async (data: any, callback: Function) => {
 		log.info(`Successfully joined room ${data.roomCode}.`);
 		callback();
 	} catch (error) {
+		socketStatusRep.value.status = 'error';
 		log.error(`Failed to join room ${data.roomCode}:`, error);
+		callback(error);
 	}
 });
 
@@ -38,15 +46,30 @@ nodecg.listenFor('ootBingo:leaveRoom', (_data: any, callback: Function) => {
 	try {
 		clearInterval(fullUpdateInterval);
 		destroyWebsocket();
+		socketStatusRep.value.status = 'disconnected';
 		callback();
 	} catch (error) {
 		log.error('Failed to leave room:', error);
+		callback(error);
 	}
 });
+
+recover().catch(error => {
+	log.error(`Failed to recover connection to room ${socketStatusRep.value.roomCode}:`, error);
+});
+async function recover() {
+	// Restore previous connection on startup.
+	if (socketStatusRep.value.roomCode && socketStatusRep.value.passphrase) {
+		log.info(`Recovering connection to room ${socketStatusRep.value.roomCode}`);
+		await joinRoom(socketStatusRep.value);
+		log.info(`Successfully recovered connection to room ${socketStatusRep.value.roomCode}`);
+	}
+}
 
 async function joinRoom(
 	{siteUrl = 'https://bingosync.com', socketUrl = 'wss://sockets.bingosync.com', roomCode, passphrase, playerName = 'NodeCG'}:
 	{siteUrl?: string; socketUrl?: string; roomCode: string; passphrase: string; playerName?: string}) {
+	socketStatusRep.value.status = 'connecting';
 	clearInterval(fullUpdateInterval);
 	destroyWebsocket();
 
@@ -125,6 +148,11 @@ async function joinRoom(
 			return;
 		}
 
+		// Bail if nothing has changed.
+		if (equal(boardRep.value, newBoardState)) {
+			return;
+		}
+
 		boardRep.value = newBoardState;
 	}
 }
@@ -133,6 +161,7 @@ function createWebsocket(socketUrl: string, socketKey: string) {
 	return new Promise((resolve, reject) => {
 		let settled = false;
 
+		socketStatusRep.value.status = 'connecting';
 		websocket = new WebSocket(`${socketUrl}/broadcast`);
 
 		websocket.onopen = () => {
@@ -153,6 +182,7 @@ function createWebsocket(socketUrl: string, socketKey: string) {
 			if (json.type === 'error') {
 				clearInterval(fullUpdateInterval);
 				destroyWebsocket();
+				socketStatusRep.value.status = 'error';
 				log.error('Socket protocol error:', json.error ? json.error : json);
 				if (!settled) {
 					reject(new Error(json.error ? json.error : 'unknown error'));
@@ -163,6 +193,7 @@ function createWebsocket(socketUrl: string, socketKey: string) {
 
 			if (!settled) {
 				resolve();
+				socketStatusRep.value.status = 'connected';
 				settled = true;
 			}
 
@@ -173,7 +204,8 @@ function createWebsocket(socketUrl: string, socketKey: string) {
 		};
 
 		websocket.onclose = (event: {wasClean: boolean; code: number; reason: string; target: WebSocket}) => {
-			log.info(`'Socket closed (code: ${event.code}, reason: ${event.reason})`);
+			socketStatusRep.value.status = 'disconnected';
+			log.info(`Socket closed (code: ${event.code}, reason: ${event.reason})`);
 			destroyWebsocket();
 			createWebsocket(socketUrl, socketKey).catch(() => {
 				// Intentionally discard errors raised here.
