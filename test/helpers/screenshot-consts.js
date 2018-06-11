@@ -277,11 +277,11 @@ for (let i = 1; i <= MAX_LOWERTHIRD_NAMES; i++) {
 		selector: 'gdq-lowerthird',
 		entranceMethodName: 'show',
 		entranceMethodArgs: [[
-			'one wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW',
-			'two wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW',
-			'three wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW',
-			'four wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW',
-			'five wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW'
+			{name: 'one wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW', title: 'one title WWWWWwwwwwWWWWWwwwww'},
+			{name: 'two', title: 'two title'},
+			{name: 'three wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW', title: 'three title WWWWWwwwwwWWWWWwwwww'},
+			{name: 'four', title: ''},
+			{name: 'five wwwwwWWWWWwwwwwWWWWWwwwwwWWWWW', title: 'five title WWWWWwwwwwWWWWWwwwww'}
 		].slice(0, i)],
 		additionalDelay: STANDARD_DELAY
 	});
