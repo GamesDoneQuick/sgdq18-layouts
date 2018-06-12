@@ -116,6 +116,11 @@
 				}, null, null, '+=0.03');
 
 				tl.add(this._createEntranceAnim(tweet));
+
+				if (window.__SCREENSHOT_TESTING__) {
+					return tl;
+				}
+
 				tl.add(this._createHold());
 				tl.addLabel('exit');
 

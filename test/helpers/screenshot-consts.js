@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+
 const BUNDLE_NAME = require('../../package.json').name;
 const MAX_LOWERTHIRD_NAMES = 5;
 const STANDARD_DELAY = 375;
@@ -32,6 +34,22 @@ module.exports = {
 		route: `bundles/${BUNDLE_NAME}/graphics/break.html`,
 		additionalDelay: 1000,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/break.html`,
+		nameAppendix: 'fanart',
+		additionalDelay: 2000,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS,
+		before: async page => {
+			const tweet = require(path.resolve(__dirname, '../fixtures/arguments/tweet.json'));
+			await page.evaluate(t => {
+				return new Promise(resolve => {
+					const tl = document.querySelector('gdq-break').$.fanart.playItem(t); // eslint-disable-line no-undef
+					tl.call(() => {
+						resolve();
+					}, null, null, '+=0.03');
+				});
+			}, tweet);
+		}
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/transition.html`,
 		nameAppendix: 'initial',
