@@ -32,10 +32,9 @@
 		}
 
 		enqueue(run, opts) {
-			opts = {
-				priority: 0,
-				...opts
-			};
+			opts = Object.assign({
+				priority: 0
+			}, opts);
 
 			const element = {priority: opts.priority, run};
 
@@ -59,11 +58,10 @@
 
 	class PQueue {
 		constructor(opts) {
-			opts = {
+			opts = Object.assign({
 				concurrency: Infinity,
-				queueClass: PriorityQueue,
-				...opts
-			};
+				queueClass: PriorityQueue
+			}, opts);
 
 			if (opts.concurrency < 1) {
 				throw new TypeError('Expected `concurrency` to be a number from 1 and up');
