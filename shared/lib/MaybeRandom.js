@@ -83,15 +83,12 @@
 	function createMaybeRandomTween({
 		target, propName, duration, ease = Linear.easeNone, delay = 0, start, end, onUpdate
 	}) {
-		const proxy = {
-			...start
-		};
-
-		const tweenProps = {
+		// Can't use spread operator in this method because of https://github.com/Polymer/polymer-cli/issues/888
+		const proxy = Object.assign({}, start);
+		const tweenProps = Object.assign({
 			ease,
-			delay,
-			...end
-		};
+			delay
+		}, end);
 
 		if (Array.isArray(target)) {
 			tweenProps.onUpdate = () => {
