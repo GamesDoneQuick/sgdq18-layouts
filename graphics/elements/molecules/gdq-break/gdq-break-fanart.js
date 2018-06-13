@@ -49,11 +49,15 @@
 			const tl = new TimelineLite();
 
 			let didStartingWork = false; // GSAP likes to run .calls again when you .resume
+			console.log('adding callback');
 			tl.call(() => {
+				console.log('in callback');
 				if (didStartingWork) {
+					console.log('bailing out of callback');
 					return;
 				}
 
+				console.log('continuing callback');
 				didStartingWork = true;
 
 				tl.pause();
@@ -66,7 +70,7 @@
 					tl.clear();
 					tl.resume();
 				});
-			}, null, null, '+=0.03');
+			}, null, null, '+=0.1');
 
 			tl.addLabel('start', '+=0.03');
 
