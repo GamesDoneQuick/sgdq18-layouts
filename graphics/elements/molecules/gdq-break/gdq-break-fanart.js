@@ -46,31 +46,31 @@
 		 * @returns {TimelineLite} - A GSAP animation timeline.
 		 */
 		_createEntranceAnim(tweet) {
-			const tl = new TimelineLite();
-
 			let didStartingWork = false; // GSAP likes to run .calls again when you .resume
-			console.log('adding callback');
-			tl.call(() => {
-				console.log('in callback');
-				if (didStartingWork) {
-					console.log('bailing out of callback');
-					return;
+			const tl = new TimelineLite({
+				callbackScope: this,
+				onStart() {
+					console.log('in callback');
+					if (didStartingWork) {
+						console.log('bailing out of callback');
+						return;
+					}
+
+					console.log('continuing callback');
+					didStartingWork = true;
+
+					tl.pause();
+					console.log('loading', tweet.gdqMedia[0].media_url_https);
+					this.$.image.$svg.image.load(tweet.gdqMedia[0].media_url_https).loaded(() => {
+						console.log('loaded');
+						tl.resume();
+					}).error(error => {
+						nodecg.log.error(error);
+						tl.clear();
+						tl.resume();
+					});
 				}
-
-				console.log('continuing callback');
-				didStartingWork = true;
-
-				tl.pause();
-				console.log('loading', tweet.gdqMedia[0].media_url_https);
-				this.$.image.$svg.image.load(tweet.gdqMedia[0].media_url_https).loaded(() => {
-					console.log('loaded');
-					tl.resume();
-				}).error(error => {
-					nodecg.log.error(error);
-					tl.clear();
-					tl.resume();
-				});
-			}, null, null, '+=0.03');
+			});
 
 			tl.addLabel('start', '+=0.03');
 
