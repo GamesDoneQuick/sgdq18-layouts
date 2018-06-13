@@ -46,8 +46,15 @@
 		 * @returns {TimelineLite} - A GSAP animation timeline.
 		 */
 		_createEntranceAnim(tweet) {
-			let didStartingWork = false; // GSAP likes to run .calls again when you .resume
 			const tl = new TimelineLite({
+				onStart() {
+
+				}
+			});
+
+			let didStartingWork = false; // GSAP likes to run .calls again when you .resume
+			console.log('adding callback');
+			tl.to({}, 0.03, {
 				callbackScope: this,
 				onStart() {
 					console.log('in callback');
@@ -70,7 +77,7 @@
 						tl.resume();
 					});
 				}
-			});
+			}, '+=0.03');
 
 			tl.addLabel('start', '+=0.03');
 
