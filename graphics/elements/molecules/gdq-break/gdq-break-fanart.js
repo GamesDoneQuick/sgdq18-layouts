@@ -70,7 +70,7 @@
 					tl.clear();
 					tl.resume();
 				});
-			}, null, null, '+=0.1');
+			}, null, null, '+=0.03');
 
 			tl.addLabel('start', '+=0.03');
 

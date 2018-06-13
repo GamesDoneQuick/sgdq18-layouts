@@ -115,7 +115,7 @@
 					});
 				}, null, null, '+=0.03');
 
-				tl.add(this._createEntranceAnim(tweet));
+				tl.add(this._createEntranceAnim(tweet), '+=0.03');
 
 				if (window.__SCREENSHOT_TESTING__) {
 					return tl;
