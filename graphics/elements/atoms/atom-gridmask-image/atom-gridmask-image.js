@@ -67,7 +67,14 @@
 		}
 
 		enter() {
-			const tl = new TimelineLite();
+			const tl = new TimelineLite({
+				onStart() {
+					console.log('image entering');
+				},
+				onComplete() {
+					console.log('image done entering');
+				}
+			});
 			const shuffledMaskCells = Random.shuffle(
 				Random.engines.browserCrypto,
 				this.$svg.imageMaskCells.slice(0)

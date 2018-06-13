@@ -57,7 +57,9 @@
 				didStartingWork = true;
 
 				tl.pause();
+				console.log('loading', tweet.gdqMedia[0].media_url_https);
 				this.$.image.$svg.image.load(tweet.gdqMedia[0].media_url_https).loaded(() => {
+					console.log('loaded');
 					tl.resume();
 				}).error(error => {
 					nodecg.log.error(error);
