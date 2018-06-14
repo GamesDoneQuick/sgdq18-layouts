@@ -7,34 +7,19 @@
 <link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../shared/style/gdq-ui-theme.html">
 <link rel="import" href="gdq-timekeeper-coop.html">
 <link rel="import" href="gdq-timekeeper-runner.html">
 
 <dom-module id="gdq-timekeeper">
 	<template>
-		<style include="iron-flex iron-flex-alignment">
+		<style include="iron-flex iron-flex-alignment gdq-ui-theme">
 			:host {
 				@apply --layout-vertical;
 				width: 100%;
 				font-family: 'roboto', sans-serif;
 				white-space: nowrap;
 				height: 447px;
-			}
-
-			.green {
-				--bg-color: #43ac6a;
-			}
-
-			.yellow {
-				--bg-color: #e99002;
-			}
-
-			.purple {
-				--bg-color: #a50074;
-			}
-
-			.gray {
-				--bg-color: #555555;
 			}
 
 			:host([checklist-incomplete]) #timer {
@@ -67,15 +52,11 @@
 			}
 
 			#timer paper-button {
-				@apply --layout-horizontal;
 				@apply --layout-center-center;
-				--paper-button: {
-					color: white;
-					padding: 0;
-					font-size: 16px;
-					font-weight: bold;
-					background-color: var(--bg-color);
-				}
+				@apply --layout-horizontal;
+				font-size: 16px;
+				font-weight: bold;
+				padding: 0;
 			}
 
 			paper-dialog {
