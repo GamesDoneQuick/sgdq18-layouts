@@ -53,7 +53,6 @@
 				if (didStartingWork) {
 					return;
 				}
-
 				didStartingWork = true;
 
 				tl.pause();

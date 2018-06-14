@@ -103,7 +103,7 @@
 						return;
 					}
 
-					tl.pause();
+					tl.pause(null, false);
 
 					const companionExitTl = new TimelineLite();
 					companionElementsArray.forEach(companionElement => {
@@ -111,11 +111,15 @@
 					});
 
 					companionExitTl.call(() => {
-						tl.resume();
+						tl.resume(null, false);
 					});
 				}, null, null, '+=0.03');
 
-				tl.add(this._createEntranceAnim(tweet));
+				if (companionElementsArray.length > 0) {
+					tl.addPause();
+				}
+
+				tl.add(this._createEntranceAnim(tweet), '+=0.03');
 
 				if (window.__SCREENSHOT_TESTING__) {
 					return tl;
