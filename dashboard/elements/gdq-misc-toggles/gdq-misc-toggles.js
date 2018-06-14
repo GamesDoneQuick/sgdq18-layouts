@@ -1,7 +1,6 @@
 (function () {
 	'use strict';
 
-	const autoCycleRecordings = nodecg.Replicant('autoCycleRecordings');
 	const autoUploadRecordings = nodecg.Replicant('autoUploadRecordings');
 	const recordTrackerEnabled = nodecg.Replicant('recordTrackerEnabled');
 
@@ -25,11 +24,6 @@
 					this.$.milestoneToggle.checked = newVal;
 				});
 
-				autoCycleRecordings.on('change', newVal => {
-					this.$.cycleToggle.checked = newVal;
-					this._checkUploadToggleDisable();
-				});
-
 				autoUploadRecordings.on('change', newVal => {
 					this.$.uploadToggle.checked = newVal;
 				});
@@ -39,19 +33,15 @@
 		}
 
 		_checkUploadToggleDisable() {
-			if (!autoCycleRecordings.value || !nodecg.bundleConfig.youtubeUploadScriptPath) {
-				this.$.uploadToggle.setAttribute('disabled', 'true');
-			} else {
+			if (nodecg.bundleConfig.youtubeUploadScriptPath) {
 				this.$.uploadToggle.removeAttribute('disabled');
+			} else {
+				this.$.uploadToggle.setAttribute('disabled', 'true');
 			}
 		}
 
 		_handleMiletoneTrackerToggleChange(e) {
 			recordTrackerEnabled.value = e.target.checked;
-		}
-
-		_handleCycleToggleChange(e) {
-			autoCycleRecordings.value = e.target.checked;
 		}
 
 		_handleUploadToggleChange(e) {

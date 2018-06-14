@@ -13,7 +13,8 @@
 				stageTechDuties: Array,
 				extraContent: Array,
 				audioReady: Boolean,
-				techStationDuties: Array
+				techStationDuties: Array,
+				recordingsCycled: Boolean
 			};
 		}
 
@@ -24,6 +25,7 @@
 				this.techStationDuties = newVal.techStationDuties;
 				this.stageTechDuties = newVal.stageTechDuties;
 				this.audioReady = newVal.audioEngineerDuties.every(task => task.complete);
+				this.recordingsCycled = newVal.special.find(task => task.name === 'Cycle Recordings').complete;
 			});
 
 			this._checkboxChanged = this._checkboxChanged.bind(this);
@@ -33,7 +35,7 @@
 		_checkboxChanged(e) {
 			const target = e.path[0];
 			const category = target.getAttribute('category');
-			const name = target.innerText.trim();
+			const name = target.hasAttribute('name') ? target.getAttribute('name') : target.innerText.trim();
 			checklist.value[category].find(task => {
 				if (task.name === name) {
 					task.complete = target.checked;

@@ -15,7 +15,6 @@ const nodecg = nodecgApiContext.get();
 // Any changes you make will be fully picked up and integrated next time NodeCG starts.
 const checklist = nodecg.Replicant('checklist');
 const checklistDefault = checklist.schema.default as Checklist.List;
-const autoCycleRecordings = nodecg.Replicant('autoCycleRecordings');
 
 // Reconcile differences between persisted value and what we expect the checklistDefault to be.
 const persistedValue = checklist.value;
@@ -46,7 +45,7 @@ if (!equals(persistedValue, checklistDefault)) {
 }
 
 const checklistComplete = nodecg.Replicant('checklistComplete');
-checklist.on('change', (newVal: Checklist.List) => {
+checklist.on('change', (newVal: Checklist.List, oldVal: Checklist.List | null) => {
 	let foundIncompleteTask = false;
 
 	for (const category in newVal) { // tslint:disable-line:no-for-in
@@ -62,18 +61,41 @@ checklist.on('change', (newVal: Checklist.List) => {
 	}
 
 	checklistComplete.value = !foundIncompleteTask;
-});
 
-export function reset() {
-	if (obs.streamingOBSConnected()) {
-		obs.resetCropping();
-		if (autoCycleRecordings.value) {
-			obs.cycleRecordings().catch((error: Error) => {
-				nodecg.log.error('Failed to cycle recordings:', error);
-			});
-		}
+	// Recording Cycling
+	if (!newVal.special) {
+		return;
 	}
 
+	const newCycleRecordingsTask = newVal.special.find(({name}) => name === 'Cycle Recordings');
+	if (!newCycleRecordingsTask) {
+		return;
+	}
+
+	if (!newCycleRecordingsTask.complete) {
+		return;
+	}
+
+	if (!oldVal || !oldVal.special) {
+		return cycleRecordings();
+	}
+
+	const oldCycleRecordingsTask = oldVal.special.find(({name}) => name === 'Cycle Recordings');
+	if (!oldCycleRecordingsTask || !oldCycleRecordingsTask.complete) {
+		return cycleRecordings();
+	}
+});
+
+function cycleRecordings() {
+	if (obs.streamingOBSConnected()) {
+		obs.resetCropping();
+		obs.cycleRecordings().catch((error: Error) => {
+			nodecg.log.error('Failed to cycle recordings:', error);
+		});
+	}
+}
+
+export function reset() {
 	for (const category in checklist.value) { // tslint:disable-line:no-for-in
 		if (!{}.hasOwnProperty.call(checklist.value, category)) {
 			continue;
