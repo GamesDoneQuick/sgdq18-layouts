@@ -47,6 +47,7 @@
 			}
 
 			:host(:not([disabled])) {
+				cursor: pointer;
 				--paper-checkbox-unchecked-background-color: white;
 			}
 
@@ -60,6 +61,7 @@
 
 			#checkbox {
 				align-items: center;
+				pointer-events: none;
 				--paper-checkbox-checked-color: #169b14;
 				--paper-checkbox-label: {
 					user-select: none;

@@ -20,6 +20,7 @@
 				category: String,
 				checked: {
 					type: Boolean,
+					notify: true,
 					reflectToAttribute: true
 				},
 				warning: {
@@ -91,6 +92,10 @@
 				} else {
 					this.$.toast.showSuccessToast('Recordings cycled.');
 				}
+			});
+
+			this.addEventListener('click', () => {
+				this.$.checkbox.click();
 			});
 		}
 
