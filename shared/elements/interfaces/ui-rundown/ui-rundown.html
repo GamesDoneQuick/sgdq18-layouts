@@ -1,13 +1,17 @@
 <link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../../../../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/utils/debounce.html">
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../shared/style/gdq-ui-theme.html">
 <link rel="import" href="ui-rundown-item.html">
 
 <dom-module id="ui-rundown">
 	<template>
-		<style>
+		<style include="gdq-ui-theme">
 			:host {
 				position: relative;
 				@apply --layout-vertical;
@@ -45,6 +49,18 @@
 				height: 1px;
 				background: black;
 				box-sizing: border-box;
+			}
+
+			#scrollToFuture {
+				@apply --layout-center-center;
+				@apply --layout-horizontal;
+				height: 30px;
+				margin: 0 16px 12px;
+				padding: 0;
+			}
+
+			#scrollToFuture iron-icon {
+				margin-right: 6px;
 			}
 
 			#tooltip {
@@ -111,6 +127,16 @@
 				</div>
 			</template>
 		</iron-list>
+
+		<paper-button
+			id="scrollToFuture"
+			class="indigo"
+			hidden="[[!allowScrollback]]"
+			on-tap="scrollToFuture"
+			raised>
+			<iron-icon icon="editor:vertical-align-top"></iron-icon>
+			Scroll To Future
+		</paper-button>
 
 		<div id="tooltip">
 			<div id="tooltip-content"></div>
