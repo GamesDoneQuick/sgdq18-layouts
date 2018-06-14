@@ -21,7 +21,6 @@
 		ready() {
 			super.ready();
 			checklist.on('change', newVal => {
-				console.log(newVal);
 				this.extraContent = newVal.extraContent;
 				this.techStationDuties = newVal.techStationDuties;
 				this.stageTechDuties = newVal.stageTechDuties;
