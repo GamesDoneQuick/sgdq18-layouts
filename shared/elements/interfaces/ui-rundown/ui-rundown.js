@@ -22,7 +22,15 @@
 					type: Number,
 					value: 4,
 					observer: '_maxRunsToShowChanged'
-				}
+				},
+				allowScrollback: {
+					type: Boolean,
+					value: false,
+					reflectToAttribute: true
+				},
+
+				// Private state.
+				_futureStartIndex: Number
 			};
 		}
 
@@ -51,6 +59,10 @@
 					return this._debounceUpdateScheduleSlice();
 				}
 			});
+		}
+
+		scrollToFuture() {
+			this.$.remainderItems.scrollToIndex(this._futureStartIndex);
 		}
 
 		_debounceUpdateScheduleSlice() {
@@ -107,10 +119,17 @@
 				return true;
 			});
 
+			if (this.allowScrollback) {
+				this.remainderItems = schedule.value.slice(0);
+				this._futureStartIndex = startIndex;
+				this.scrollToFuture();
+			} else {
+				this.remainderItems = typeof endIndex === 'number' ?
+					schedule.value.slice(startIndex, startIndex + endIndex + 1) :
+					schedule.value.slice(startIndex);
+			}
+
 			this.currentItems = currentItems;
-			this.remainderItems = typeof endIndex === 'number' ?
-				schedule.value.slice(startIndex, startIndex + endIndex + 1) :
-				schedule.value.slice(startIndex);
 		}
 
 		_maxRunsToShowChanged() {
