@@ -100,7 +100,6 @@
 				tl.call(() => {
 					this._setCanExtend(true);
 					if (companionElementsArray.length <= 0) {
-						tl.resume(null, false);
 						return;
 					}
 
@@ -116,7 +115,10 @@
 					});
 				}, null, null, '+=0.03');
 
-				tl.addPause();
+				if (companionElementsArray.length > 0) {
+					console.log('adding pause');
+					tl.addPause();
+				}
 
 				tl.add(this._createEntranceAnim(tweet), '+=0.03');
 
