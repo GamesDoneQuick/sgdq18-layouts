@@ -38,6 +38,9 @@
 		},
 		"audioEngineerDuties": {
 			"$ref": "#/definitions/checklistGroup"
+		},
+		"other": {
+			"$ref": "#/definitions/checklistGroup"
 		}
 	},
 
@@ -62,6 +65,9 @@
 		"audioEngineerDuties": [
 			{"name": "Runner Game Audio", "complete": false},
 			{"name": "Stream Audio", "complete": false}
+		],
+		"special": [
+			{"name": "Cycle Recordings", "complete": false}
 		]
 	}
 }
