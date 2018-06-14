@@ -116,7 +116,6 @@
 				}, null, null, '+=0.03');
 
 				if (companionElementsArray.length > 0) {
-					console.log('adding pause');
 					tl.addPause();
 				}
 

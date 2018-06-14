@@ -304,5 +304,3 @@ for (let i = 1; i <= MAX_LOWERTHIRD_NAMES; i++) {
 		additionalDelay: STANDARD_DELAY
 	});
 }
-
-module.exports.TEST_CASES = module.exports.TEST_CASES.slice(1, 2);
