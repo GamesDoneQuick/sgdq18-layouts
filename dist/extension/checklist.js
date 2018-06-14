@@ -11,7 +11,6 @@ const nodecg = nodecgApiContext.get();
 // Any changes you make will be fully picked up and integrated next time NodeCG starts.
 const checklist = nodecg.Replicant('checklist');
 const checklistDefault = checklist.schema.default;
-const autoCycleRecordings = nodecg.Replicant('autoCycleRecordings');
 // Reconcile differences between persisted value and what we expect the checklistDefault to be.
 const persistedValue = checklist.value;
 if (!equals(persistedValue, checklistDefault)) {
@@ -35,7 +34,7 @@ if (!equals(persistedValue, checklistDefault)) {
     checklist.value = mergedChecklist;
 }
 const checklistComplete = nodecg.Replicant('checklistComplete');
-checklist.on('change', (newVal) => {
+checklist.on('change', (newVal, oldVal) => {
     let foundIncompleteTask = false;
     for (const category in newVal) { // tslint:disable-line:no-for-in
         if (!{}.hasOwnProperty.call(newVal, category)) {
@@ -47,16 +46,34 @@ checklist.on('change', (newVal) => {
         }
     }
     checklistComplete.value = !foundIncompleteTask;
+    // Recording Cycling
+    if (!newVal.special) {
+        return;
+    }
+    const newCycleRecordingsTask = newVal.special.find(({ name }) => name === 'Cycle Recordings');
+    if (!newCycleRecordingsTask) {
+        return;
+    }
+    if (!newCycleRecordingsTask.complete) {
+        return;
+    }
+    if (!oldVal || !oldVal.special) {
+        return cycleRecordings();
+    }
+    const oldCycleRecordingsTask = oldVal.special.find(({ name }) => name === 'Cycle Recordings');
+    if (!oldCycleRecordingsTask || !oldCycleRecordingsTask.complete) {
+        return cycleRecordings();
+    }
 });
-function reset() {
+function cycleRecordings() {
     if (obs.streamingOBSConnected()) {
         obs.resetCropping();
-        if (autoCycleRecordings.value) {
-            obs.cycleRecordings().catch((error) => {
-                nodecg.log.error('Failed to cycle recordings:', error);
-            });
-        }
+        obs.cycleRecordings().catch((error) => {
+            nodecg.log.error('Failed to cycle recordings:', error);
+        });
     }
+}
+function reset() {
     for (const category in checklist.value) { // tslint:disable-line:no-for-in
         if (!{}.hasOwnProperty.call(checklist.value, category)) {
             continue;
