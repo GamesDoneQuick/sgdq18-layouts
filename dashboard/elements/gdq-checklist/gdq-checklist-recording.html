@@ -1,5 +1,7 @@
-<link rel="import" href="../../../bower_components/html-echo/html-echo.html">
+<link rel="import" href="../../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../../shared/elements/interfaces/ui-toast/ui-toast.html">
 
 <dom-module id="gdq-checklist-recording">
 	<template>
@@ -80,6 +82,20 @@
 				text-align: center;
 				width: 100%;
 			}
+
+			#context-cycling {
+				@apply --layout-horizontal;
+				@apply --layout-center;
+			}
+
+			paper-spinner {
+				margin-left: 0.5em;
+				--paper-spinner-stroke-width: 5px;
+				--paper-spinner-layer-1-color: #645BA6;
+				--paper-spinner-layer-2-color: #A50074;
+				--paper-spinner-layer-3-color: #5BA664;
+				--paper-spinner-layer-4-color: #C9513E;
+			}
 		</style>
 
 		<div id="checkbox-wrapper">
@@ -94,10 +110,29 @@
 
 		<div id="separator"></div>
 
-		<html-echo
+		<iron-pages
 			id="context"
-			html="[[_calcContext(warning, disabled)]]">
-		</html-echo>
+			attr-for-selected="data-name"
+			selected="[[_calcContextPage(warning, disabled, _cyclingRecordings)]]">
+			<div id="context-cycling" data-name="cycling">
+				CYCLING...
+				<paper-spinner active="[[_cyclingRecordings]]"></paper-spinner>
+			</div>
+
+			<div data-name="disabled">
+				RUN IN PROGRESS
+			</div>
+
+			<div data-name="warning">
+				COMPLETE OTHER<br/>CHECKLIST ITEMS FIRST
+			</div>
+
+			<div data-name="all-clear">
+				PERFORM SHORTLY<br/>BEFORE INTRODUCING RUN
+			</div>
+		</iron-pages>
+
+		<ui-toast id="toast"></ui-toast>
 	</template>
 
 	<script src="gdq-checklist-recording.js"></script>

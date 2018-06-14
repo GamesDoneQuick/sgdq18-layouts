@@ -3,6 +3,7 @@
 
 	const checklistRep = nodecg.Replicant('checklist');
 	const stopwatchRep = nodecg.Replicant('stopwatch');
+	const cyclingRecordingsRep = nodecg.Replicant('obs:cyclingRecordings');
 
 	/**
 	 * @customElement
@@ -28,8 +29,18 @@
 				disabled: {
 					type: Boolean,
 					reflectToAttribute: true
-				}
+				},
+
+				// Private state.
+				_stopwatchState: Boolean,
+				_cyclingRecordings: Boolean
 			};
+		}
+
+		static get observers() {
+			return [
+				'_calcDisabled(_stopwatchState, _cyclingRecordings)'
+			];
 		}
 
 		ready() {
@@ -61,20 +72,46 @@
 					return;
 				}
 
-				this.disabled = newVal.state === 'running';
+				this._stopwatchState = newVal.state === 'running';
+			});
+
+			cyclingRecordingsRep.on('change', newVal => {
+				this._cyclingRecordings = newVal;
+			});
+
+			nodecg.listenFor('obs:recordingsCycled', error => {
+				if (error) {
+					let errorString = error;
+					if (error.message) {
+						errorString = error.message;
+					} else if (error.error) {
+						errorString = error.error;
+					}
+					this.$.toast.showErrorToast('Failed to cycle recordings: ' + errorString);
+				} else {
+					this.$.toast.showSuccessToast('Recordings cycled.');
+				}
 			});
 		}
 
-		_calcContext(warning, disabled) {
+		_calcDisabled(stopwatchState, cyclingRecordings) {
+			this.disabled = Boolean(stopwatchState === 'running' || cyclingRecordings);
+		}
+
+		_calcContextPage(warning, disabled, cyclingRecordings) {
+			if (cyclingRecordings) {
+				return 'cycling';
+			}
+
 			if (disabled) {
-				return 'RUN IN PROGRESS';
+				return 'disabled';
 			}
 
 			if (warning) {
-				return 'COMPLETE OTHER<br/>CHECKLIST ITEMS FIRST';
+				return 'warning';
 			}
 
-			return 'PERFORM SHORTLY<br/>BEFORE INTRODUCING RUN';
+			return 'all-clear';
 		}
 	}
 
