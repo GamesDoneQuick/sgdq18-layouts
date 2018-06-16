@@ -39,14 +39,14 @@
 		ready() {
 			super.ready();
 
-			if (!window.__SCREENSHOT_TESTING__) {
-				this.fromClosedToOpen().progress(1);
-			}
-
 			const videos = Array.from(this.shadowRoot.querySelectorAll('video'));
 			const videoLoadPromises = videos.map(this.waitForVideoToLoad);
 			Promise.all(videoLoadPromises).then(() => this.init());
 			this._$videos = videos;
+
+			if (!window.__SCREENSHOT_TESTING__) {
+				this.fromClosedToOpen().progress(1);
+			}
 		}
 
 		init() {
@@ -187,7 +187,7 @@
 			});
 
 			tl.add(this.fromOpenToClosed());
-			tl.add(this.fromClosedToPartial({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
+			tl.add(this.fromClosedToPartial(), `+=${HERO_HOLD_TIME}`);
 			return tl;
 		}
 
@@ -208,18 +208,18 @@
 			});
 
 			tl.add(this.fromPartialToClosed());
-			tl.add(this.fromClosedToOpen({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
+			tl.add(this.fromClosedToOpen(), `+=${HERO_HOLD_TIME}`);
 			return tl;
 		}
 
-		fromOpenToClosed(...args) {
+		fromOpenToClosed() {
 			const tl = new TimelineLite();
-			tl.add(this.fromClosedToOpen(...args).reverse(0));
+			tl.add(this.closeGeometry());
 			return tl;
 		}
 
-		fromClosedToOpen({fadeOutVideos} = {}) {
-			return this.tweenGeometry({
+		fromClosedToOpen() {
+			return this.openGeometry({
 				bottomFrontRect: {x: 26, y: 413},
 				topFrontRect: {x: -10, y: -418},
 				bottomFrontTrapezoid: {x: -667, y: 488},
@@ -227,12 +227,11 @@
 				bottomBackRect: {x: 0, y: 421},
 				topBackRect: {x: -10, y: -437},
 				bottomBackTrapezoid: {x: -666, y: 510},
-				topBackTrapezoid: {x: 0, y: -543},
-				fadeOutVideos
+				topBackTrapezoid: {x: 0, y: -543}
 			});
 		}
 
-		fromPartialToClosed(...args) {
+		fromPartialToClosed() {
 			const tl = new TimelineLite();
 
 			tl.to([
@@ -243,18 +242,15 @@
 				ease: Sine.easeInOut
 			}, 0);
 
-			tl.add(this.fromClosedToPartial({
-				fadeInFrameContent: false,
-				...args
-			}).reverse(0), 0);
+			tl.add(this.closeGeometry(), 0);
 
 			return tl;
 		}
 
-		fromClosedToPartial({fadeOutVideos, fadeInFrameContent = true} = {}) {
+		fromClosedToPartial() {
 			const tl = new TimelineLite();
 
-			tl.add(this.tweenGeometry({
+			tl.add(this.openGeometry({
 				bottomFrontRect: {x: 26, y: 321},
 				topFrontRect: {x: -10, y: -349},
 				bottomFrontTrapezoid: {x: -503, y: 364},
@@ -262,24 +258,21 @@
 				bottomBackRect: {x: 0, y: 323},
 				topBackRect: {x: 0, y: -351},
 				bottomBackTrapezoid: {x: -490, y: 374},
-				topBackTrapezoid: {x: 0, y: -426},
-				fadeOutVideos
+				topBackTrapezoid: {x: 0, y: -426}
 			}));
 
-			if (fadeInFrameContent) {
-				tl.to([
-					this.$.topFrameContent,
-					this.$.bottomFrameContent
-				], 0.333, {
-					opacity: 1,
-					ease: Sine.easeInOut
-				});
-			}
+			tl.to([
+				this.$.topFrameContent,
+				this.$.bottomFrameContent
+			], 0.333, {
+				opacity: 1,
+				ease: Sine.easeInOut
+			});
 
 			return tl;
 		}
 
-		tweenGeometry({
+		openGeometry({
 			bottomFrontRect,
 			topFrontRect,
 			bottomFrontTrapezoid,
@@ -287,8 +280,7 @@
 			bottomBackRect,
 			topBackRect,
 			bottomBackTrapezoid,
-			topBackTrapezoid,
-			fadeOutVideos = false
+			topBackTrapezoid
 		}) {
 			const tl = new TimelineLite();
 
@@ -299,56 +291,106 @@
 			tl.addLabel('backTraps', 'start+=0.2334');
 
 			// Front rects.
-			tl.fromTo(this.$.bottomFrontRect, 0.2167, HOME_POSITION, {
+			tl.to(this.$.bottomFrontRect, 0.2167, {
 				...bottomFrontRect,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontRects');
-			tl.fromTo(this.$.topFrontRect, 0.2167, HOME_POSITION, {
+			tl.to(this.$.topFrontRect, 0.2167, {
 				...topFrontRect,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontRects');
 
 			// Front traps.
-			tl.fromTo(this.$.bottomFrontTrapezoid, 0.2667, HOME_POSITION, {
+			tl.to(this.$.bottomFrontTrapezoid, 0.2667, {
 				...bottomFrontTrapezoid,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontTraps');
-			tl.fromTo(this.$.topFrontTrapezoid, 0.2667, HOME_POSITION, {
+			tl.to(this.$.topFrontTrapezoid, 0.2667, {
 				...topFrontTrapezoid,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'frontTraps');
 
 			// Back rects.
-			tl.fromTo(this.$.bottomBackRect, 0.2334, HOME_POSITION, {
+			tl.to(this.$.bottomBackRect, 0.2334, {
 				...bottomBackRect,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'backRects');
-			tl.fromTo(this.$.topBackRect, 0.2334, HOME_POSITION, {
+			tl.to(this.$.topBackRect, 0.2334, {
 				...topBackRect,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'backRects');
 
 			// Back traps.
-			tl.fromTo(this.$.bottomBackTrapezoid, 0.2334, HOME_POSITION, {
+			tl.to(this.$.bottomBackTrapezoid, 0.2334, {
 				...bottomBackTrapezoid,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'backTraps');
-			tl.fromTo(this.$.topBackTrapezoid, 0.2334, HOME_POSITION, {
+			tl.to(this.$.topBackTrapezoid, 0.2334, {
 				...topBackTrapezoid,
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'backTraps');
 
-			if (fadeOutVideos) {
-				tl.to(this._$videos, 0.25, {
-					opacity: 0,
-					ease: Sine.easeInOut,
-					callbackScope: this,
-					onComplete() {
-						console.log('hide all videos');
-						this.hideVideos(...this._$videos);
-					}
-				}, tl.duration() / 2);
-			}
+			tl.to(this._$videos, 0.25, {
+				opacity: 0,
+				ease: Sine.easeInOut,
+				callbackScope: this,
+				onComplete() {
+					console.log('hide all videos');
+					this.hideVideos(...this._$videos);
+				}
+			}, tl.duration() / 2);
+
+			return tl;
+		}
+
+		closeGeometry() {
+			const tl = new TimelineLite();
+
+			tl.addLabel('start', 0.03);
+			tl.addLabel('backTraps', 'start');
+			tl.addLabel('backRects', 'start+=0.0667');
+			tl.addLabel('frontTraps', 'start+=0.1334');
+			tl.addLabel('frontRects', 'start+=0.2334');
+
+			// Back traps.
+			tl.to(this.$.bottomBackTrapezoid, 0.2334, {
+				...HOME_POSITION,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'backTraps');
+			tl.to(this.$.topBackTrapezoid, 0.2334, {
+				...HOME_POSITION,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'backTraps');
+
+			// Back rects.
+			tl.to(this.$.bottomBackRect, 0.2334, {
+				...HOME_POSITION,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'backRects');
+			tl.to(this.$.topBackRect, 0.2334, {
+				...HOME_POSITION,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'backRects');
+
+			// Front traps.
+			tl.to(this.$.bottomFrontTrapezoid, 0.2667, {
+				...HOME_POSITION,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'frontTraps');
+			tl.to(this.$.topFrontTrapezoid, 0.2667, {
+				...HOME_POSITION,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'frontTraps');
+
+			// Front rects.
+			tl.to(this.$.bottomFrontRect, 0.2167, {
+				...HOME_POSITION,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'frontRects');
+			tl.to(this.$.topFrontRect, 0.2167, {
+				...HOME_POSITION,
+				ease: 'ModifiedPower2EaseInOut'
+			}, 'frontRects');
 
 			return tl;
 		}
