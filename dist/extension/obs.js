@@ -58,8 +58,8 @@ compositingOBS.replicants.previewScene.on('change', (newVal) => {
     if (!newVal || !newVal.name) {
         return;
     }
-    // Show the Transition Graphic if the scene is NOT the Break scene.
-    if (newVal.name !== 'Break' && newVal.name !== 'Crowd Background') {
+    // Hide the transition graphic on gameplay scenes when they are in preview.
+    if (newVal.name !== 'Break' && newVal.name !== 'Interview' && newVal.name !== 'Crowd Background') {
         // Abort if the PVW scene is also the PGM scene.
         if (newVal.name === compositingOBS.replicants.programScene.value.name) {
             return;
