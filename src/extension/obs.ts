@@ -20,6 +20,7 @@ const autoUploadRecordings = nodecg.Replicant('autoUploadRecordings');
 const cyclingRecordingsRep = nodecg.Replicant('obs:cyclingRecordings', {persistent: false});
 const compositingOBS = new OBSUtility(nodecg, {namespace: 'compositingOBS'});
 const recordingOBS = new OBSUtility(nodecg, {namespace: 'recordingOBS'});
+const encodingOBS = new OBSUtility(nodecg, {namespace: 'encodingOBS'});
 const uploadScriptPath = nodecg.bundleConfig.youtubeUploadScriptPath;
 let uploadScriptRunning = false;
 
@@ -195,11 +196,17 @@ export async function cycleRecordings() {
 		if (compositingOBS._connected) {
 			cycleRecordingPromises.push(cycleRecording(compositingOBS));
 		} else {
-			nodecg.log.error('Streaming OBS is disconnected! Not cycling its recording.');
+			nodecg.log.error('Compositing OBS is disconnected! Not cycling its recording.');
+		}
+
+		if (encodingOBS._connected) {
+			cycleRecordingPromises.push(cycleRecording(encodingOBS));
+		} else {
+			nodecg.log.error('Encoding OBS is disconnected! Not cycling its recording.');
 		}
 
 		if (cycleRecordingPromises.length <= 0) {
-			nodecg.log.warn('Neither instance of OBS is connected, aborting cycleRecordings.');
+			nodecg.log.warn('No instances of OBS are connected, aborting cycleRecordings.');
 			return;
 		}
 
