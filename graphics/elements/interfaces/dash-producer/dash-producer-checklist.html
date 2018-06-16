@@ -54,6 +54,15 @@
 						[[item.name]]
 					</paper-checkbox>
 				</template>
+
+				<template is="dom-repeat" items="[[specialDuties]]" mutable-data>
+					<paper-checkbox
+						category="special"
+						checked="[[item.complete]]"
+						class="non-interactive">
+						[[item.name]]
+					</paper-checkbox>
+				</template>
 			</div>
 		</section>
 

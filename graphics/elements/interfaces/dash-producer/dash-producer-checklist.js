@@ -18,7 +18,8 @@
 				extraContent: Array,
 				audioReady: Boolean,
 				techStationDuties: Array,
-				audioEngineerDuties: Array
+				audioEngineerDuties: Array,
+				specialDuties: Array
 			};
 		}
 
@@ -29,6 +30,7 @@
 				this.techStationDuties = newVal.techStationDuties;
 				this.stageTechDuties = newVal.stageTechDuties;
 				this.audioEngineerDuties = newVal.audioEngineerDuties;
+				this.specialDuties = newVal.special;
 			});
 		}
 
