@@ -12,6 +12,7 @@
 <link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/sc-fitted-text/sc-fitted-text.html">
+<link rel="import" href="../../../../shared/elements/interfaces/ui-obs-status/ui-obs-status.html">
 <link rel="import" href="../../../../shared/elements/interfaces/ui-rundown/ui-rundown.html">
 <link rel="import" href="../dash-host/dash-host-bids.html">
 <link rel="import" href="../dash-host/dash-host-currentrun.html">
@@ -74,7 +75,7 @@
 				display: grid;
 				grid-template-columns: 550px auto 550px;
 				grid-template-rows: auto;
-				grid-gap: 22px;
+				grid-gap: 18px;
 				padding: 22px 32px;
 			}
 
@@ -129,6 +130,7 @@
 
 			#rundown {
 				@apply --layout-flex;
+				margin-top: 17px;
 			}
 
 			#rightColumn {
@@ -137,10 +139,21 @@
 				@apply --layout-vertical;
 			}
 
-			#twitchAds {
-				margin-bottom: 17px;
+			#recordingsAndAds {
+				@apply --layout-horizontal;
+				@apply --layout-flex-none;
 				height: 147px;
-				@apply --layout-self-end;
+			}
+
+			#recordings {
+				margin-right: 7px;
+				min-width: 1px;
+				@apply --layout-flex;
+			}
+
+			#twitchAds {
+				margin-left: 7px;
+				@apply --layout-flex;
 			}
 
 			paper-tabs {
@@ -205,7 +218,11 @@
 				</div>
 
 				<div id="rightColumn">
-					<dash-host-twitch-ads id="twitchAds" class="material" hide-controls></dash-host-twitch-ads>
+					<div id="recordingsAndAds">
+						<ui-obs-status id="recordings" class="material"></ui-obs-status>
+						<dash-host-twitch-ads id="twitchAds" class="material" hide-controls></dash-host-twitch-ads>
+					</div>
+
 					<ui-rundown
 						id="rundown"
 						class="material"
