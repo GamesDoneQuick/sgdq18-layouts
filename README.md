@@ -21,7 +21,7 @@ This is a [NodeCG](http://github.com/nodecg/nodecg) v0.9 bundle. You will need t
 We unfortunately do not have time to make a video breakdown for this event's bundle. However, [we did make one for the last year's SGDQ](https://www.youtube.com/watch?v=vBAZXchbI3U&list=PLTEhlYdONYxv1wk2FsIpEz92X3x2E7bSx), which still has a few similarities with this one.
 
 ## Automated Builds
-If you are using an automated build (which includes everything in one zip file with a single exe), skip to [Setting up OBS](#markdown-header-setting-up-obs).
+If you are using an automated build (which includes everything in one zip file with a single exe), skip to [Setting up OBS](#setting-up-obs).
 
 ## Requirements
 - [Node.js v7 or greater (v8 recommended)](https://nodejs.org/)
