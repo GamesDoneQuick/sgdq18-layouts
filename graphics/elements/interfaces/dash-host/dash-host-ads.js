@@ -3,7 +3,7 @@
 
 	const currentIntermission = nodecg.Replicant('currentIntermission');
 	const casparConnected = nodecg.Replicant('caspar:connected');
-	const streamingOBSWebsocket = nodecg.Replicant('streamingOBS:websocket');
+	const compositingOBSWebsocket = nodecg.Replicant('compositingOBS:websocket');
 
 	class DashHostAds extends Polymer.MutableData(Polymer.Element) {
 		static get is() {
@@ -28,7 +28,7 @@
 				this.content = newVal ? newVal.content : [];
 			});
 			casparConnected.on('change', this._checkCover);
-			streamingOBSWebsocket.on('change', this._checkCover);
+			compositingOBSWebsocket.on('change', this._checkCover);
 
 			window.socket.on('disconnect', () => {
 				this._set_connectedToNodeCG(false);
@@ -80,28 +80,28 @@
 		}
 
 		_checkCover() {
-			if (casparConnected.status !== 'declared' || streamingOBSWebsocket.status !== 'declared') {
+			if (casparConnected.status !== 'declared' || compositingOBSWebsocket.status !== 'declared') {
 				return;
 			}
 
 			this.$.cover.hidden = false;
 
 			const casparIsConnected = casparConnected.value;
-			const streamingOBSWebsocketIsConnected = streamingOBSWebsocket.value.status === 'connected';
+			const compositingOBSWebsocketIsConnected = compositingOBSWebsocket.value.status === 'connected';
 			if (!this._connectedToNodeCG) {
 				this.$.cover.innerHTML = 'Disconnected from NodeCG!<br/>' +
 					'Ads cannot be played until we reconnect.' +
 					'<br/><br/>Tell the producer immediately!';
-			} else if (!casparIsConnected && !streamingOBSWebsocketIsConnected) {
-				this.$.cover.innerHTML = 'CasparCG and the streaming OBS are both disconnected!<br/>' +
+			} else if (!casparIsConnected && !compositingOBSWebsocketIsConnected) {
+				this.$.cover.innerHTML = 'CasparCG and the compositing OBS are both disconnected!<br/>' +
 						'Ads cannot be played until both of them are connected.' +
 					'<br/><br/>Tell the producer immediately!';
 			} else if (!casparIsConnected) {
 				this.$.cover.innerHTML = 'CasparCG is disconnected!<br/>' +
 						'Ads cannot be played until it is connected.' +
 					'<br/><br/>Tell the producer immediately!';
-			} else if (!streamingOBSWebsocketIsConnected) { // eslint-disable-line no-negated-condition
-				this.$.cover.innerHTML = 'The streaming OBS is disconnected!<br/>' +
+			} else if (!compositingOBSWebsocketIsConnected) { // eslint-disable-line no-negated-condition
+				this.$.cover.innerHTML = 'The compositing OBS is disconnected!<br/>' +
 					'Ads cannot be played until it is connected.' +
 					'<br/><br/>Tell the producer immediately!';
 			} else {

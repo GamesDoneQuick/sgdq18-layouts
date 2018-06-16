@@ -18,7 +18,7 @@ const nodecg = nodecgApiContext.get();
 const currentLayout = nodecg.Replicant('gdq:currentLayout');
 const autoUploadRecordings = nodecg.Replicant('autoUploadRecordings');
 const cyclingRecordingsRep = nodecg.Replicant('obs:cyclingRecordings', {persistent: false});
-const streamingOBS = new OBSUtility(nodecg, {namespace: 'streamingOBS'});
+const compositingOBS = new OBSUtility(nodecg, {namespace: 'compositingOBS'});
 const recordingOBS = new OBSUtility(nodecg, {namespace: 'recordingOBS'});
 const uploadScriptPath = nodecg.bundleConfig.youtubeUploadScriptPath;
 let uploadScriptRunning = false;
@@ -46,7 +46,7 @@ autoUploadRecordings.on('change', (newVal: boolean) => {
 	nodecg.log.info('Automatic uploading of recordings %s.', newVal ? 'ENABLED' : 'DISABLED');
 });
 
-streamingOBS.replicants.programScene.on('change', (newVal: any) => {
+compositingOBS.replicants.programScene.on('change', (newVal: any) => {
 	if (!newVal) {
 		return;
 	}
@@ -66,7 +66,7 @@ streamingOBS.replicants.programScene.on('change', (newVal: any) => {
 	});
 });
 
-streamingOBS.replicants.previewScene.on('change', (newVal: any) => {
+compositingOBS.replicants.previewScene.on('change', (newVal: any) => {
 	if (!newVal || !newVal.name) {
 		return;
 	}
@@ -74,11 +74,11 @@ streamingOBS.replicants.previewScene.on('change', (newVal: any) => {
 	// Show the Transition Graphic if the scene is NOT the Break scene.
 	if (newVal.name !== 'Break' && newVal.name !== 'Crowd Background') {
 		// Abort if the PVW scene is also the PGM scene.
-		if (newVal.name === streamingOBS.replicants.programScene.value.name) {
+		if (newVal.name === compositingOBS.replicants.programScene.value.name) {
 			return;
 		}
 
-		streamingOBS.setSceneItemRender({
+		compositingOBS.setSceneItemRender({
 			'scene-name': newVal.name,
 			source: 'Transition Graphic',
 			render: false
@@ -88,18 +88,18 @@ streamingOBS.replicants.previewScene.on('change', (newVal: any) => {
 	}
 });
 
-streamingOBS.on('TransitionBegin', (data: {name: string; duration: number}) => {
+compositingOBS.on('TransitionBegin', (data: {name: string; duration: number}) => {
 	if (data.name !== 'Blank Stinger') {
 		return;
 	}
 
-	const pvwSceneName = streamingOBS.replicants.previewScene.value && streamingOBS.replicants.previewScene.value.name;
+	const pvwSceneName = compositingOBS.replicants.previewScene.value && compositingOBS.replicants.previewScene.value.name;
 	if (!pvwSceneName) {
 		return;
 	}
 
 	// Show the Transition Graphic on the scene which is being transitioned to.
-	streamingOBS.setSceneItemRender({
+	compositingOBS.setSceneItemRender({
 		'scene-name': pvwSceneName,
 		source: 'Transition Graphic',
 		render: true
@@ -108,10 +108,10 @@ streamingOBS.on('TransitionBegin', (data: {name: string; duration: number}) => {
 	});
 });
 
-streamingOBS.on('SwitchScenes', (data: any) => {
+compositingOBS.on('SwitchScenes', (data: any) => {
 	const actualPgmSceneName = data['scene-name'];
-	const pvwSceneName = streamingOBS.replicants.previewScene.value && streamingOBS.replicants.previewScene.value.name;
-	const pgmSceneName = streamingOBS.replicants.programScene.value && streamingOBS.replicants.programScene.value.name;
+	const pvwSceneName = compositingOBS.replicants.previewScene.value && compositingOBS.replicants.previewScene.value.name;
+	const pgmSceneName = compositingOBS.replicants.programScene.value && compositingOBS.replicants.programScene.value.name;
 	const actualPvwSceneName = actualPgmSceneName === pvwSceneName ? pgmSceneName : pvwSceneName;
 
 	if (actualPvwSceneName === 'Break') {
@@ -123,7 +123,7 @@ streamingOBS.on('SwitchScenes', (data: any) => {
 		return;
 	}
 
-	streamingOBS.setSceneItemRender({
+	compositingOBS.setSceneItemRender({
 		'scene-name': actualPvwSceneName,
 		source: 'Transition Graphic',
 		render: false
@@ -169,13 +169,13 @@ function cycleRecording(obs: any) {
 }
 
 export function resetCropping() {
-	return streamingOBS.send('ResetCropping').catch((error: Error) => {
+	return compositingOBS.send('ResetCropping').catch((error: Error) => {
 		nodecg.log.error('resetCropping error:', error);
 	});
 }
 
 export function setCurrentScene(sceneName: string) {
-	return streamingOBS.setCurrentScene({
+	return compositingOBS.setCurrentScene({
 		'scene-name': sceneName
 	});
 }
@@ -192,8 +192,8 @@ export async function cycleRecordings() {
 			nodecg.log.error('Recording OBS is disconnected! Not cycling its recording.');
 		}
 
-		if (streamingOBS._connected) {
-			cycleRecordingPromises.push(cycleRecording(streamingOBS));
+		if (compositingOBS._connected) {
+			cycleRecordingPromises.push(cycleRecording(compositingOBS));
 		} else {
 			nodecg.log.error('Streaming OBS is disconnected! Not cycling its recording.');
 		}
@@ -241,6 +241,6 @@ export async function cycleRecordings() {
 	}
 }
 
-export function streamingOBSConnected() {
-	return streamingOBS._connected;
+export function compositingOBSConnected() {
+	return compositingOBS._connected;
 }
