@@ -68,11 +68,11 @@ If you have [nodecg-cli](https://github.com/nodecg/nodecg-cli) installed, you ca
 ## Setting up OBS
 `sgdq18-layouts` has a deep, complex integration with OBS Studio. As such, it expects your OBS to be fairly precisely configured.
 
-1. Install the latest release of [OBS Studio](https://obsproject.com/), which also comes with the latest release of the `obs-browser` plugin.
-2. Insatll the [latest release of the `obs-websocket` plugin](https://github.com/Palakis/obs-websocket/releases).
-3. Go to "Profile > Import", and import the `obs-assets/obs-profile` directory from this repository. Then, ensure that the "SGDQ2018" profile is selected in OBS.  
-4. Go to "Scene Collection > Import", and import the `obs-assets/obs-scenes.json` file from this repository. Then, ensure that the "SGDQ2018 - Localhost" scene collection is selected in OBS.  
-5. Locate the "Scene Transitions" dropdown menu in the main interface of OBS (it will be near the bottom right by default). Select "Blank Stinger". Click the gear icon below the dropdown, and select "Properties". Update the "Video File" path to point to your `sgdq18-layouts/obs-assets/BlankTransition.mov` path. 
+1. Download and extract [this custom build of OBS](https://www.dropbox.com/s/ql8y1ehcvbolzvq/SGDQ-OBS-8d0d90c.zip?dl=1), which includes a custom build of `obs-browser` which uses CEF 3029.  
+   	- Once extracted, OBS can be launched via `bin/64bit/obs64.exe`.  
+2. Go to "Profile > Import", and import the `obs-assets/obs-profile` directory from this repository. Then, ensure that the "SGDQ2018" profile is selected in OBS.  
+3. Go to "Scene Collection > Import", and import the `obs-assets/obs-scenes.json` file from this repository. Then, ensure that the "SGDQ2018 - Localhost" scene collection is selected in OBS.  
+4. Locate the "Scene Transitions" dropdown menu in the main interface of OBS (it will be near the bottom right by default). Select "Blank Stinger". Click the gear icon below the dropdown, and select "Properties". Update the "Video File" path to point to your `sgdq18-layouts/obs-assets/BlankTransition.mov` path. 
 
 ## Usage
 This bundle is not intended to be used verbatim. Some of the assets have been replaced with placeholders, and most of the data sources are hardcoded. We are open-sourcing this bundle in hopes that people will use it as a learning tool and base to build from, rather than just taking and using it wholesale in their own productions.
