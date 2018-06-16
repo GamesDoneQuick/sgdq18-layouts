@@ -66,7 +66,7 @@ checklist.on('change', (newVal, oldVal) => {
     }
 });
 function cycleRecordings() {
-    if (obs.streamingOBSConnected()) {
+    if (obs.compositingOBSConnected()) {
         obs.resetCropping();
         obs.cycleRecordings().catch((error) => {
             nodecg.log.error('Failed to cycle recordings:', error);

@@ -65,8 +65,8 @@
 			// Hide all videos to start.
 			this.hideVideos(...this._$videos);
 
-			nodecg.listenFor('streamingOBS:transitioning', data => {
-				console.log('streamingOBS:transitioning |', data);
+			nodecg.listenFor('compositingOBS:transitioning', data => {
+				console.log('compositingOBS:transitioning |', data);
 				if (!data || !data.fromScene || !data.toScene) {
 					return;
 				}

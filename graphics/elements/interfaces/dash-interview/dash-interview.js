@@ -2,12 +2,12 @@
 	'use strict';
 
 	const lowerthirdTimeRemaining = nodecg.Replicant('interview:lowerthirdTimeRemaining');
-	const programScene = nodecg.Replicant('streamingOBS:programScene');
+	const programScene = nodecg.Replicant('compositingOBS:programScene');
 	const questionShowing = nodecg.Replicant('interview:questionShowing');
 	const questionSortMap = nodecg.Replicant('interview:questionSortMap');
 	const questionTimeRemaining = nodecg.Replicant('interview:questionTimeRemaining');
-	const streamingOBSStatus = nodecg.Replicant('streamingOBS:websocket');
-	const streamingOBSTransitioning = nodecg.Replicant('streamingOBS:transitioning');
+	const compositingOBSStatus = nodecg.Replicant('compositingOBS:websocket');
+	const compositingOBSTransitioning = nodecg.Replicant('compositingOBS:transitioning');
 
 	/**
 	 * @customElement
@@ -70,7 +70,7 @@
 				this.questionTimeRemaining = newVal;
 			});
 
-			streamingOBSTransitioning.on('change', newVal => {
+			compositingOBSTransitioning.on('change', newVal => {
 				this._transitioning = newVal;
 			});
 
@@ -78,7 +78,7 @@
 				this._programSceneName = newVal ? newVal.name : '';
 			});
 
-			streamingOBSStatus.on('change', newVal => {
+			compositingOBSStatus.on('change', newVal => {
 				this._disconnectedFromOBS = Boolean(!newVal || newVal.status !== 'connected');
 			});
 
@@ -127,7 +127,7 @@
 			this._sendingTransitionCommand = true;
 
 			try {
-				await nodecg.sendMessage('streamingOBS:transition', {
+				await nodecg.sendMessage('compositingOBS:transition', {
 					name: transitionName,
 					sceneName
 				});
