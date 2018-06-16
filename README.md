@@ -91,6 +91,8 @@ To reiterate, please don't just download and use this bundle as-is. Build someth
 	- The `1` tab is for the "compositor" OBS, where the graphics are running.
 	- The `2` tab is for the "recording" OBS, where the primary recordings are running.
 		- You do not need to have `2` connected, it is optional.
+	- The `3` tab is for the "encoding" OBS, where the secondary recordings are running.
+		- You do not need to have `3` connected, it is optional.
 
 ## License
 sgdq18-layouts is provided under the Apache v2 license, which is available to read in the [LICENSE](LICENSE) file.
