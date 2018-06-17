@@ -187,7 +187,7 @@
 			});
 
 			tl.add(this.fromOpenToClosed());
-			tl.add(this.fromClosedToPartial(), `+=${HERO_HOLD_TIME}`);
+			tl.add(this.fromClosedToPartial({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
 			return tl;
 		}
 
@@ -208,7 +208,7 @@
 			});
 
 			tl.add(this.fromPartialToClosed());
-			tl.add(this.fromClosedToOpen(), `+=${HERO_HOLD_TIME}`);
+			tl.add(this.fromClosedToOpen({fadeOutVideos: true}), `+=${HERO_HOLD_TIME}`);
 			return tl;
 		}
 
@@ -218,7 +218,7 @@
 			return tl;
 		}
 
-		fromClosedToOpen() {
+		fromClosedToOpen({fadeOutVideos} = {}) {
 			return this.openGeometry({
 				bottomFrontRect: {x: 26, y: 413},
 				topFrontRect: {x: -10, y: -418},
@@ -227,7 +227,8 @@
 				bottomBackRect: {x: 0, y: 421},
 				topBackRect: {x: -10, y: -437},
 				bottomBackTrapezoid: {x: -666, y: 510},
-				topBackTrapezoid: {x: 0, y: -543}
+				topBackTrapezoid: {x: 0, y: -543},
+				fadeOutVideos
 			});
 		}
 
@@ -247,7 +248,7 @@
 			return tl;
 		}
 
-		fromClosedToPartial() {
+		fromClosedToPartial({fadeOutVideos} = {}) {
 			const tl = new TimelineLite();
 
 			tl.add(this.openGeometry({
@@ -258,7 +259,8 @@
 				bottomBackRect: {x: 0, y: 323},
 				topBackRect: {x: 0, y: -351},
 				bottomBackTrapezoid: {x: -490, y: 374},
-				topBackTrapezoid: {x: 0, y: -426}
+				topBackTrapezoid: {x: 0, y: -426},
+				fadeOutVideos
 			}));
 
 			tl.to([
@@ -280,7 +282,8 @@
 			bottomBackRect,
 			topBackRect,
 			bottomBackTrapezoid,
-			topBackTrapezoid
+			topBackTrapezoid,
+			fadeOutVideos
 		}) {
 			const tl = new TimelineLite();
 
@@ -330,15 +333,17 @@
 				ease: 'ModifiedPower2EaseInOut'
 			}, 'backTraps');
 
-			tl.to(this._$videos, 0.25, {
-				opacity: 0,
-				ease: Sine.easeInOut,
-				callbackScope: this,
-				onComplete() {
-					console.log('hide all videos');
-					this.hideVideos(...this._$videos);
-				}
-			}, tl.duration() / 2);
+			if (fadeOutVideos) {
+				tl.to(this._$videos, 0.25, {
+					opacity: 0,
+					ease: Sine.easeInOut,
+					callbackScope: this,
+					onComplete() {
+						console.log('hide all videos');
+						this.hideVideos(...this._$videos);
+					}
+				}, tl.duration() / 2);
+			}
 
 			return tl;
 		}
