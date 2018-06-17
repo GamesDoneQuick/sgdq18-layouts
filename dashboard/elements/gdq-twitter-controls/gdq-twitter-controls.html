@@ -2,6 +2,7 @@
 <link rel="import" href="../../../bower_components/nodecg-replicant/nodecg-replicant.html">
 <link rel="import" href="../../../bower_components/polymer/lib/mixins/mutable-data.html">
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../shared/elements/interfaces/ui-panel-label/ui-panel-label.html">
 <link rel="import" href="tweet-item.html">
 
 <dom-module id="gdq-twitter-controls">
@@ -10,16 +11,6 @@
 			:host {
 				position: relative;
 				@apply --layout-vertical;
-			}
-
-			#label {
-				font-size: 20px;
-				font-weight: bold;
-				text-transform: uppercase;
-				background-color: #C4C4C4;
-				height: 29px;
-				@apply --layout-horizontal;
-				@apply --layout-center-center;
 			}
 
 			#scrollWrapper {
@@ -75,7 +66,7 @@
 			}
 		</style>
 
-		<div id="label">Twitter Overlay</div>
+		<ui-panel-label id="label">Twitter Overlay</ui-panel-label>
 
 		<div id="scrollWrapper">
 			<div id="tweets">
