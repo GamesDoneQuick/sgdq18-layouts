@@ -1,4 +1,5 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../shared/elements/interfaces/ui-panel-label/ui-panel-label.html">
 <link rel="import" href="fanart-item.html">
 <link rel="import" href="gdq-fanart-preview.html">
 
@@ -8,16 +9,6 @@
 			:host {
 				@apply --layout-vertical;
 				position: relative;
-			}
-
-			#label {
-				font-size: 20px;
-				font-weight: bold;
-				text-transform: uppercase;
-				background-color: #C4C4C4;
-				height: 29px;
-				@apply --layout-horizontal;
-				@apply --layout-center-center;
 			}
 
 			#scrollWrapper {
@@ -73,7 +64,7 @@
 			}
 		</style>
 
-		<div id="label">Fan Art</div>
+		<ui-panel-label id="label">Fan Art</ui-panel-label>
 
 		<div id="scrollWrapper">
 			<div id="tweets">

@@ -1,3 +1,4 @@
+<link rel="import" href="../ui-panel-label/ui-panel-label.html">
 <link rel="import" href="ui-obs-status-item.html">
 
 <dom-module id="ui-obs-status">
@@ -5,16 +6,6 @@
 		<style>
 			:host {
 				@apply --layout-vertical;
-			}
-
-			#label {
-				font-size: 20px;
-				font-weight: bold;
-				text-transform: uppercase;
-				background-color: #C4C4C4;
-				height: 29px;
-				@apply --layout-horizontal;
-				@apply --layout-center-center;
 			}
 
 			#body {
@@ -28,7 +19,7 @@
 
 		<nodecg-replicant replicant-name="_obs:namespaces" value="{{_namespaces}}"></nodecg-replicant>
 
-		<div id="label">OBS STATUS</div>
+		<ui-panel-label id="label">OBS STATUS</ui-panel-label>
 
 		<div id="body">
 			<template is="dom-repeat" items="[[_namespaces]]" as="namespace">

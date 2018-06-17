@@ -4,8 +4,9 @@
 <link rel="import" href="../../../../bower_components/paper-styles/element-styles/paper-material-styles.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/mixins/mutable-data.html">
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../../../shared/style/gdq-checkbox-style.html">
+<link rel="import" href="../../../../shared/elements/interfaces/ui-panel-label/ui-panel-label.html">
 <link rel="import" href="../../../../shared/elements/interfaces/ui-rundown/ui-rundown.html">
+<link rel="import" href="../../../../shared/style/gdq-checkbox-style.html">
 
 <dom-module id="dash-audio">
 	<template>
@@ -55,15 +56,7 @@
 			}
 
 			#checklistLabel {
-				background: #c4c4c4;
-				text-transform: uppercase;
-				height: 29px;
 				margin-bottom: 21px;
-				font-weight: bold;
-				font-size: 20px;
-				@apply --layout-horizontal;
-				@apply --layout-center-center;
-				@apply --layout-flex-none;
 			}
 
 			.card {
@@ -93,7 +86,7 @@
 		</div>
 
 		<div class="card" style="padding-top: 16px; padding-bottom: 26px; margin-bottom: 16px;">
-			<div id="checklistLabel">Audio Checklist</div>
+			<ui-panel-label id="checklistLabel">Audio Checklist</ui-panel-label>
 
 			<template is="dom-repeat" items="[[audioEngineerDuties]]" mutable-data>
 				<paper-checkbox
