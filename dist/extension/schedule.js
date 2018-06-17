@@ -148,7 +148,7 @@ function update() {
             'https://private.gamesdonequick.com/tracker/search',
         qs: {
             type: 'runner',
-            event: 22,
+            event: nodecg.bundleConfig.tracker.eventId,
             dl: 1 // For Dropbox only
         },
         json: true
@@ -159,7 +159,7 @@ function update() {
             'https://private.gamesdonequick.com/tracker/search',
         qs: {
             type: 'run',
-            event: 22,
+            event: nodecg.bundleConfig.tracker.eventId,
             dl: 1 // For Dropbox only
         },
         json: true
@@ -167,7 +167,7 @@ function update() {
     const adsPromise = request({
         uri: nodecg.bundleConfig.useMockData ?
             'https://www.dropbox.com/s/p04aoahtx6hv10i/ads.json' :
-            'https://private.gamesdonequick.com/tracker/gdq/ads/22/',
+            `https://private.gamesdonequick.com/tracker/gdq/ads/${nodecg.bundleConfig.tracker.eventId}/`,
         qs: {
             dl: 1 // For Dropbox only
         },
@@ -176,7 +176,7 @@ function update() {
     const interviewsPromise = request({
         uri: nodecg.bundleConfig.useMockData ?
             'https://www.dropbox.com/s/kr8279xxnrzsyp4/interviews.json' :
-            'https://private.gamesdonequick.com/tracker/gdq/interviews/22/',
+            `https://private.gamesdonequick.com/tracker/gdq/interviews/${nodecg.bundleConfig.tracker.eventId}/`,
         qs: {
             dl: 1 // For Dropbox only
         },
