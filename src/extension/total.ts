@@ -1,7 +1,5 @@
 'use strict';
 
-const DONATION_STATS_URL = 'https://private.gamesdonequick.com/tracker/22?json';
-
 // Packages
 import * as request from 'request-promise';
 
@@ -14,6 +12,8 @@ const autoUpdateTotal = nodecg.Replicant('autoUpdateTotal');
 const bitsTotal = nodecg.Replicant('bits:total');
 const recordTrackerEnabled = nodecg.Replicant('recordTrackerEnabled');
 const total = nodecg.Replicant('total');
+
+const DONATION_STATS_URL = `https://private.gamesdonequick.com/tracker/${nodecg.bundleConfig.tracker.eventId}?json`;
 
 autoUpdateTotal.on('change', (newVal: boolean) => {
 	if (newVal) {

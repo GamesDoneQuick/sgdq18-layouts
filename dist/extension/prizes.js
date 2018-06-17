@@ -28,7 +28,7 @@ function update() {
         qs: {
             type: 'prize',
             feed: 'current',
-            event: 22,
+            event: nodecg.bundleConfig.tracker.eventId,
             dl: 1 // For Dropbox only
         },
         json: true
@@ -44,7 +44,7 @@ function update() {
             'https://private.gamesdonequick.com/tracker/search/',
         qs: {
             type: 'prize',
-            event: 22,
+            event: nodecg.bundleConfig.tracker.eventId,
             dl: 1 // For Dropbox only
         },
         json: true

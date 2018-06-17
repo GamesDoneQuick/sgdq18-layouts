@@ -162,18 +162,21 @@
 			"default": null
 		},
 		"tracker": {
-			"type": ["object", "null"],
+			"type": "object",
 			"properties": {
 				"username": {
 					"type": "string"
 				},
 				"password": {
 					"type": "string"
+				},
+				"eventId": {
+					"type": "number",
+					"default": 23
 				}
 			},
 			"description": "Login information for the private areas of the tracker API.",
-			"required": ["username", "password"],
-			"default": null
+			"required": ["username", "password", "eventId"]
 		},
 		"youtubeUploadScriptPath": {
 			"type": "string"

@@ -1,6 +1,5 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-const DONATION_STATS_URL = 'https://private.gamesdonequick.com/tracker/22?json';
 // Packages
 const request = require("request-promise");
 // Ours
@@ -11,6 +10,7 @@ const autoUpdateTotal = nodecg.Replicant('autoUpdateTotal');
 const bitsTotal = nodecg.Replicant('bits:total');
 const recordTrackerEnabled = nodecg.Replicant('recordTrackerEnabled');
 const total = nodecg.Replicant('total');
+const DONATION_STATS_URL = `https://private.gamesdonequick.com/tracker/${nodecg.bundleConfig.tracker.eventId}?json`;
 autoUpdateTotal.on('change', (newVal) => {
     if (newVal) {
         nodecg.log.info('Automatic updating of donation total enabled');
