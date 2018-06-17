@@ -23,6 +23,9 @@ const pubsub = new TwitchPubSub({
 	init_topics: [{ // eslint-disable-line camelcase
 		topic: `channel-bits-events-v1.${nodecg.bundleConfig.twitch.channelId}`,
 		token: nodecg.bundleConfig.twitch.oauthToken
+	}, { // eslint-disable-line camelcase
+		topic: `channel-subscribe-events-v1.${nodecg.bundleConfig.twitch.channelId}`,
+		token: nodecg.bundleConfig.twitch.oauthToken
 	}],
 	reconnect: true,
 	debug: DEBUG
@@ -47,6 +50,15 @@ pubsub.on('bits', (cheer: any) => {
 		log.debug('Received cheer:', cheer);
 	}
 	nodecg.sendMessage('cheer', cheer);
+});
+
+pubsub.on('subscribe', (subscription: any) => {
+	if (DEBUG) {
+		log.info('Received subscription:', subscription);
+	} else {
+		log.debug('Received subscription:', subscription);
+	}
+	nodecg.sendMessage('subscription', subscription);
 });
 
 updateBitsTotal();

@@ -55,7 +55,7 @@ module.exports = (nodecg: any) => {
 
 	if (nodecg.bundleConfig.twitch) {
 		require('./twitch-ads');
-		require('./twitch-bits');
+		require('./twitch-pubsub');
 
 		// If the appropriate config params are present,
 		// automatically update the Twitch game and title when currentRun changes.
