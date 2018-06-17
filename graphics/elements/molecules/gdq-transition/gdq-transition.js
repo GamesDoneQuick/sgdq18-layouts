@@ -13,6 +13,8 @@
 		HAVE_ENOUGH_DATA: 4
 	};
 
+	const currentLayoutRep = nodecg.Replicant('gdq:currentLayout');
+
 	CustomEase.create('ModifiedPower2EaseInOut', 'M0,0 C0.66,0 0.339,1 1,1');
 
 	/**
@@ -44,8 +46,17 @@
 			Promise.all(videoLoadPromises).then(() => this.init());
 			this._$videos = videos;
 
-			if (!window.__SCREENSHOT_TESTING__) {
-				this.fromClosedToOpen().progress(1);
+			if (window.__SCREENSHOT_TESTING__) {
+				TweenLite.set(this, {opacity: 1});
+			} else {
+				currentLayoutRep.once('change', newVal => {
+					if (newVal.toLowerCase() === 'break') {
+						this.fromClosedToPartial().progress(1);
+					} else {
+						this.fromClosedToOpen().progress(1);
+					}
+					TweenLite.set(this, {opacity: 1});
+				});
 			}
 		}
 
