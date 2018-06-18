@@ -39,6 +39,12 @@
 				}).map(transition => {
 					return transition.by;
 				}).join(', ');
+			} else if (incident.currentPhase.toLowerCase() === 'resolved') {
+				targetStr = incident.transitions.filter(transition => {
+					return transition.name.toLowerCase() === 'resolved';
+				}).map(transition => {
+					return transition.by;
+				}).join(', ');
 			}
 
 			return targetStr;
@@ -71,6 +77,10 @@
 		_calcStatusText(currentPhase) {
 			if (currentPhase.toLowerCase() === 'acked') {
 				return 'ACKED BY:';
+			}
+
+			if (currentPhase.toLowerCase() === 'resolved') {
+				return 'RESOLVED BY:';
 			}
 
 			return currentPhase;
