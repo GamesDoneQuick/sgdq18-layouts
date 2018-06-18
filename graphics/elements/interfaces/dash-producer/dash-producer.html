@@ -65,6 +65,7 @@
 			#pagesWrapper {
 				@apply --layout-flex;
 				@apply --layout-vertical;
+				overflow: scroll;
 			}
 
 			#pagesWrapper > * {
@@ -72,10 +73,12 @@
 			}
 
 			#gridWrapper {
+				@apply --layout-self-start;
+				box-sizing: border-box;
 				display: grid;
+				grid-gap: 18px;
 				grid-template-columns: 550px auto 550px;
 				grid-template-rows: auto;
-				grid-gap: 18px;
 				padding: 22px 32px;
 			}
 
