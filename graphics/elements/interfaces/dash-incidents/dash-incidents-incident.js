@@ -53,20 +53,7 @@
 				return incident.pagedUsers.join(', ');
 			}
 
-			if (incident.pagedPolicies && incident.pagedPolicies.length > 0) {
-				const pagedTeams = [];
-				incident.pagedPolicies.forEach(pagedPolicy => {
-					if (pagedPolicy.team) {
-						pagedTeams.push(pagedPolicy.team.name);
-					}
-				});
-
-				if (pagedTeams.length > 0) {
-					return pagedTeams.join(', ');
-				}
-			}
-
-			return 'NOBODY';
+			return 'NOBODY - TRY SLACK';
 		}
 
 		_formatDate(dateString) {
