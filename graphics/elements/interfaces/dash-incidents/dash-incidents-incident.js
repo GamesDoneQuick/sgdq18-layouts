@@ -33,6 +33,12 @@
 			let targetStr = this._parsePageTargets(incident);
 			if (incident.currentPhase.toLowerCase() === 'unacked') {
 				targetStr = `PAGING: ${targetStr}`;
+			} else if (incident.currentPhase.toLowerCase() === 'acked') {
+				targetStr = incident.transitions.filter(transition => {
+					return transition.name.toLowerCase() === 'acked';
+				}).map(transition => {
+					return transition.by;
+				}).join(', ');
 			}
 
 			return targetStr;
@@ -41,6 +47,10 @@
 		_parsePageTargets(incident) {
 			if (!incident) {
 				return '';
+			}
+
+			if (incident.pagedUsers && incident.pagedUsers.length > 0) {
+				return incident.pagedUsers.join(', ');
 			}
 
 			if (incident.pagedPolicies && incident.pagedPolicies.length > 0) {
@@ -56,7 +66,7 @@
 				}
 			}
 
-			return incident.pagedUsers.join(', ');
+			return 'NOBODY';
 		}
 
 		_formatDate(dateString) {
