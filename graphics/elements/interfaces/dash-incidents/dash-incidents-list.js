@@ -16,14 +16,6 @@
 				incidents: Array
 			};
 		}
-
-		_reverse(array) {
-			if (!Array.isArray(array)) {
-				return array;
-			}
-
-			return array.slice(0).reverse();
-		}
 	}
 
 	customElements.define(DashIncidentsList.is, DashIncidentsList);

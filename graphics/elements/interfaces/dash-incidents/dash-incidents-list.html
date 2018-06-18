@@ -42,7 +42,7 @@
 		<div id="title">Incidents</div>
 
 		<div id="list">
-			<template is="dom-repeat" items="[[_reverse(incidents)]]" as="incident" mutable-data>
+			<template is="dom-repeat" items="[[incidents]]" as="incident" mutable-data>
 				<dash-incidents-incident incident="[[incident]]"></dash-incidents-incident>
 			</template>
 		</div>
