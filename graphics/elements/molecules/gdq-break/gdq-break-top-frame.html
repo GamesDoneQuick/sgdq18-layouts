@@ -1,7 +1,7 @@
 <link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../../shared/fonts/gdqpixel/import.html">
-<link rel="import" href="../../../../shared/imports/random.html">
 <link rel="import" href="../../atoms/atom-tweening-number/atom-tweening-number.html">
+<link rel="import" href="../../atoms/atom-tiny-alerts/atom-tiny-alerts.html">
 
 <dom-module id="gdq-break-top-frame">
 	<template>
@@ -23,6 +23,14 @@
 				@apply --layout-center-center;
 			}
 
+			#donationAlerts {
+				height: 100%;
+				left: 0;
+				position: absolute;
+				top: 0;
+				width: 100%;
+			}
+
 			.gradientText {
 				color: transparent;
 				text-shadow: 0 0 12px rgba(121, 241, 234, 0.5);
@@ -33,24 +41,12 @@
 				));
 				-webkit-background-clip: text;
 			}
-
-			.donationText {
-				position: absolute;
-				color: black;
-				font-family: gdqpixel, monospace;
-				font-size: 12px;
-				height: 29px;
-				clip-path: inset(0 50%);
-				will-change: transform, clip-path;
-				padding: 0 12px;
-				@apply --layout-horizontal;
-				@apply --layout-center-center;
-			}
 		</style>
 
 		<div id="totalText">
 			<div id="totalTextDollars" class="gradientText">$</div>
 			<atom-tweening-number id="totalTextAmount" class="gradientText"></atom-tweening-number>
+			<atom-tiny-alerts id="donationAlerts"></atom-tiny-alerts>
 		</div>
 	</template>
 
