@@ -44,7 +44,7 @@ module.exports = (nodecg) => {
     setInterval(loginToTracker, 90 * 60 * 1000);
     if (nodecg.bundleConfig.twitch) {
         require('./twitch-ads');
-        require('./twitch-bits');
+        require('./twitch-pubsub');
         // If the appropriate config params are present,
         // automatically update the Twitch game and title when currentRun changes.
         if (nodecg.bundleConfig.twitch.titleTemplate) {

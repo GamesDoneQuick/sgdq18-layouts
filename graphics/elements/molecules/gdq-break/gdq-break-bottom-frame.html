@@ -1,5 +1,6 @@
 <link rel="import" href="../../../../bower_components/sc-fitted-text/sc-fitted-text.html">
 <link rel="import" href="../../../../shared/fonts/letter-gothic-std/import.html">
+<link rel="import" href="../../atoms/atom-sub-alerts/atom-sub-alerts.html">
 
 <dom-module id="gdq-break-bottom-frame">
 	<template>
@@ -48,6 +49,14 @@
 			#music {
 				left: 684px;
 			}
+
+			#subscriptionAlerts {
+				bottom: 0;
+				height: 64px;
+				left: 0;
+				position: absolute;
+				width: 100%;
+			}
 		</style>
 
 		<img id="gdqLogo" class="logo" src="[[importPath]]img/bottom-bar-gdq-logo.png">
@@ -62,6 +71,8 @@
 			<img id="music-icon" src="[[importPath]]img/music-icon.svg">
 			<sc-fitted-text id="music-text" max-width="810"></sc-fitted-text>
 		</div>
+
+		<atom-sub-alerts id="subscriptionAlerts"></atom-sub-alerts>
 	</template>
 
 	<script src="gdq-break-bottom-frame.js"></script>
