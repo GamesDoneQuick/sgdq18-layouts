@@ -26,9 +26,9 @@
         "sync": 0,
         "volume": 0.0
     },
-    "current_program_scene": "Standard 1",
-    "current_scene": "Widescreen 2",
-    "current_transition": "Blank Stinger",
+    "current_program_scene": "Standard 4",
+    "current_scene": "Crowd Background",
+    "current_transition": "Cut",
     "modules": {
         "auto-scene-switcher": {
             "active": false,
@@ -1477,56 +1477,7 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "flags": 0,
-            "hotkeys": {},
-            "id": "crop_console_filter",
-            "mixers": 0,
-            "monitoring_type": 0,
-            "muted": false,
-            "name": "GDQ Crop",
-            "private_settings": {},
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "settings": {
-                "bottom": 0,
-                "console": "None",
-                "left": 0,
-                "right": 0,
-                "top": 0
-            },
-            "sync": 0,
-            "volume": 1.0
-        },
-        {
-            "deinterlace_field_order": 0,
-            "deinterlace_mode": 0,
-            "enabled": true,
             "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "scale_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Scaling/Aspect Ratio",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "resolution": "4:3",
-                        "sampling": "bicubic"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                },
                 {
                     "deinterlace_field_order": 0,
                     "deinterlace_mode": 0,
@@ -1547,6 +1498,7 @@
                         "bottom": 0,
                         "console": "None",
                         "left": 0,
+                        "resolution": "4:3",
                         "right": 0,
                         "top": 0
                     },
@@ -1592,18 +1544,23 @@
                     "enabled": true,
                     "flags": 0,
                     "hotkeys": {},
-                    "id": "async_delay_filter",
+                    "id": "crop_console_filter",
                     "mixers": 0,
                     "monitoring_type": 0,
                     "muted": false,
-                    "name": "Video Delay (Async)",
+                    "name": "GDQ Crop",
                     "private_settings": {},
                     "push-to-mute": false,
                     "push-to-mute-delay": 0,
                     "push-to-talk": false,
                     "push-to-talk-delay": 0,
                     "settings": {
-                        "delay_ms": 10001
+                        "bottom": 0,
+                        "console": "None",
+                        "left": 0,
+                        "resolution": "4:3",
+                        "right": 0,
+                        "top": 0
                     },
                     "sync": 0,
                     "volume": 1.0
@@ -1642,55 +1599,7 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "flags": 0,
-            "hotkeys": {},
-            "id": "crop_console_filter",
-            "mixers": 0,
-            "monitoring_type": 0,
-            "muted": false,
-            "name": "GDQ Crop",
-            "private_settings": {},
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "settings": {
-                "bottom": 0,
-                "console": "None",
-                "left": 0,
-                "right": 0,
-                "top": 0
-            },
-            "sync": 0,
-            "volume": 1.0
-        },
-        {
-            "deinterlace_field_order": 0,
-            "deinterlace_mode": 0,
-            "enabled": true,
             "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "scale_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Scaling/Aspect Ratio",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "resolution": "4:3"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                },
                 {
                     "deinterlace_field_order": 0,
                     "deinterlace_mode": 0,
@@ -1711,6 +1620,7 @@
                         "bottom": 0,
                         "console": "None",
                         "left": 0,
+                        "resolution": "4:3",
                         "right": 0,
                         "top": 0
                     },
@@ -1750,55 +1660,7 @@
             "deinterlace_field_order": 0,
             "deinterlace_mode": 0,
             "enabled": true,
-            "flags": 0,
-            "hotkeys": {},
-            "id": "crop_console_filter",
-            "mixers": 0,
-            "monitoring_type": 0,
-            "muted": false,
-            "name": "GDQ Crop",
-            "private_settings": {},
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "settings": {
-                "bottom": 0,
-                "console": "None",
-                "left": 0,
-                "right": 0,
-                "top": 0
-            },
-            "sync": 0,
-            "volume": 1.0
-        },
-        {
-            "deinterlace_field_order": 0,
-            "deinterlace_mode": 0,
-            "enabled": true,
             "filters": [
-                {
-                    "deinterlace_field_order": 0,
-                    "deinterlace_mode": 0,
-                    "enabled": true,
-                    "flags": 0,
-                    "hotkeys": {},
-                    "id": "scale_filter",
-                    "mixers": 0,
-                    "monitoring_type": 0,
-                    "muted": false,
-                    "name": "Scaling/Aspect Ratio",
-                    "private_settings": {},
-                    "push-to-mute": false,
-                    "push-to-mute-delay": 0,
-                    "push-to-talk": false,
-                    "push-to-talk-delay": 0,
-                    "settings": {
-                        "resolution": "4:3"
-                    },
-                    "sync": 0,
-                    "volume": 1.0
-                },
                 {
                     "deinterlace_field_order": 0,
                     "deinterlace_mode": 0,
@@ -1819,6 +1681,7 @@
                         "bottom": 0,
                         "console": "None",
                         "left": 0,
+                        "resolution": "4:3",
                         "right": 0,
                         "top": 0
                     },
@@ -4536,7 +4399,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -5304,7 +5167,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": false
+                        "visible": true
                     }
                 ]
             },
@@ -6071,7 +5934,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": false
+                        "visible": true
                     }
                 ]
             },
@@ -7398,7 +7261,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -9028,7 +8891,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -9085,7 +8948,7 @@
             "muted": false,
             "name": "Countdown",
             "private_settings": {
-                "transition": "Fade"
+                "transition": "Blank Stinger"
             },
             "push-to-mute": false,
             "push-to-mute-delay": 0,
@@ -9288,7 +9151,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
