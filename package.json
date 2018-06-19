@@ -328,6 +328,23 @@
           "png"
         ]
       }
+    ],
+    "soundCues": [
+      {
+        "name": "transition-general",
+        "assignable": false,
+        "defaultFile": "sounds/transition_general.ogg"
+      },
+      {
+        "name": "transition-hero-enter",
+        "assignable": false,
+        "defaultFile": "sounds/transition_hero_enter.ogg"
+      },
+      {
+        "name": "transition-hero-exit",
+        "assignable": false,
+        "defaultFile": "sounds/transition_hero_exit.ogg"
+      }
     ]
   },
   "repository": {

@@ -98,6 +98,7 @@ To reiterate, please don't just download and use this bundle as-is. Build someth
 sgdq18-layouts is provided under the Apache v2 license, which is available to read in the [LICENSE](LICENSE) file.
 
 ## Credits
-Designed & developed by [Support Class](http://supportclass.net/)
+Designed & developed by [Support Class](https://supportclass.net/)
  - [Alex "Lange" Van Camp](https://twitter.com/VanCamp/)  
  - [Chris Hanel](https://twitter.com/ChrisHanel)
+ - Audio by [Power Up Audio](http://powerupaudio.com/)
