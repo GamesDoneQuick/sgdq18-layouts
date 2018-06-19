@@ -92,7 +92,7 @@
 						animationTimeline = this.genericBoth();
 					} else if (isGameScene(data.toScene)) {
 						animationTimeline = this.heroExit();
-					} else if (data.toScene === 'Interview') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
 						animationTimeline = this.genericExit();
 					}
 				} else if (isGameScene(data.fromScene)) {
@@ -100,7 +100,7 @@
 						animationTimeline = this.heroEnter();
 					} else if (isGameScene(data.toScene)) {
 						animationTimeline = this.genericNone();
-					} else if (data.toScene === 'Interview') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
 						animationTimeline = this.genericNone();
 					}
 				} else if (data.fromScene === 'Interview') {
@@ -108,7 +108,7 @@
 						this.genericEnter();
 					} else if (isGameScene(data.toScene)) {
 						animationTimeline = this.genericNone();
-					} else if (data.toScene === 'Interview') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
 						animationTimeline = this.genericNone();
 					}
 				} else if (data.fromScene === 'Countdown') {
@@ -116,7 +116,7 @@
 						animationTimeline = this.heroEnter();
 					} else if (isGameScene(data.toScene)) {
 						animationTimeline = this.genericNone();
-					} else if (data.toScene === 'Interview') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
 						animationTimeline = this.genericNone();
 					}
 				} else if (data.fromScene === 'Technical Difficulties') {
@@ -124,7 +124,7 @@
 						animationTimeline = this.genericNone();
 					} else if (isGameScene(data.toScene)) {
 						animationTimeline = this.genericNone();
-					} else if (data.toScene === 'Interview') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
 						animationTimeline = this.genericNone();
 					}
 				}
@@ -168,6 +168,7 @@
 						this.$.topTrapAnimation,
 						this.$.topRectAnimation
 					);
+					nodecg.playSound('transition-general');
 				}
 			});
 
@@ -194,6 +195,7 @@
 				callbackScope: this,
 				onStart() {
 					this.playVideos(...videos);
+					nodecg.playSound('transition-hero-enter');
 				}
 			});
 
@@ -215,6 +217,7 @@
 				callbackScope: this,
 				onStart() {
 					this.playVideos(...videos);
+					nodecg.playSound('transition-hero-exit');
 				}
 			});
 
