@@ -3,6 +3,7 @@
 <link rel="import" href="../../../../shared/fonts/source-code-pro/import.html">
 <link rel="import" href="../../../../shared/imports/MaybeRandom.html">
 <link rel="import" href="../../../../shared/imports/TypeAnims.html">
+<link rel="import" href="../../atoms/atom-sub-alerts/atom-sub-alerts.html">
 
 <dom-module id="gdq-countdown">
 	<template>
@@ -70,6 +71,14 @@
 				word-break: break-word;
 			}
 
+			#subscriptionAlerts {
+				bottom: 0;
+				height: 64px;
+				left: 0;
+				position: absolute;
+				width: 100%;
+			}
+
 			.oscillate {
 				color: white;
 				animation: oscillate 2s alternate infinite ease-in;
@@ -106,6 +115,8 @@
 		</div>
 
 		<div id="nowPlaying"></div>
+
+		<atom-sub-alerts id="subscriptionAlerts"></atom-sub-alerts>
 	</template>
 
 	<script src="gdq-countdown.js"></script>
