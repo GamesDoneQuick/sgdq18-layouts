@@ -67,7 +67,6 @@ checklist.on('change', (newVal, oldVal) => {
 });
 function cycleRecordings() {
     if (obs.compositingOBSConnected()) {
-        obs.resetCropping();
         obs.cycleRecordings().catch((error) => {
             nodecg.log.error('Failed to cycle recordings:', error);
         });
@@ -81,6 +80,9 @@ function reset() {
         checklist.value[category].forEach((task) => {
             task.complete = false;
         });
+    }
+    if (obs.compositingOBSConnected()) {
+        obs.resetCropping();
     }
 }
 exports.reset = reset;
