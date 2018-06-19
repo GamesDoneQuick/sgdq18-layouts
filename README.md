@@ -68,7 +68,7 @@ If you have [nodecg-cli](https://github.com/nodecg/nodecg-cli) installed, you ca
 ## Setting up OBS
 `sgdq18-layouts` has a deep, complex integration with OBS Studio. As such, it expects your OBS to be fairly precisely configured.
 
-1. Download and extract [this custom build of OBS](https://www.dropbox.com/s/e2p2ups2p4lhhto/SGDQ-OBS-bdd384b.zip?dl=1), which includes all the plugins we use.  
+1. Download and extract [this custom build of OBS](https://www.dropbox.com/s/m0yvlkh0zpqpr8b/SGDQ-OBS-bdd384b-gdq-crop.zip?dl=1), which includes all the plugins we use.  
    	- Once extracted, OBS can be launched via `bin/64bit/obs64.exe`.  
 2. Go to "Profile > Import", and import the `obs-assets/obs-profile` directory from this repository. Then, ensure that the "SGDQ2018" profile is selected in OBS.  
 3. Go to "Scene Collection > Import", and import the `obs-assets/obs-scenes.json` file from this repository. Then, ensure that the "SGDQ2018 - Localhost" scene collection is selected in OBS.  
