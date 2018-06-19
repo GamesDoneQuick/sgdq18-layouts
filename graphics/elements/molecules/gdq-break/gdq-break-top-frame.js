@@ -1,4 +1,3 @@
-/* global Random */
 (function () {
 	'use strict';
 
@@ -25,49 +24,25 @@
 			});
 		}
 
-		donationText(formattedAmount, rawAmount) {
-			const div = document.createElement('div');
-			div.classList.add('donationText');
-			div.innerText = formattedAmount;
-
+		addDonationAlert(formattedAmount, rawAmount) {
+			let backgroundColor = 'white';
 			if (rawAmount >= 500) {
-				div.style.backgroundColor = '#FF68B9';
+				backgroundColor = '#FF68B9';
 			} else if (rawAmount >= 100) {
-				div.style.backgroundColor = '#FFFBBD';
+				backgroundColor = '#FFFBBD';
 			} else if (rawAmount >= 20) {
-				div.style.backgroundColor = '#00ffff';
-			} else {
-				div.style.backgroundColor = 'white';
+				backgroundColor = '#00ffff';
 			}
 
-			this.$.totalText.appendChild(div);
-			div.style.left = `${randomInt(0, this.$.totalText.clientWidth - div.clientWidth)}px`;
-			div.style.bottom = `${randomInt(2, 8)}px`;
-
-			const tl = new TimelineLite();
-
-			tl.to(div, 0.1834, {
-				clipPath: 'inset(0 0%)',
-				ease: Power1.easeIn
-			});
-
-			tl.addLabel('exit', rawAmount >= 500 ? 1 : 0.067);
-			tl.to(div, 0.934, {
-				y: -21,
-				ease: Power1.easeIn
-			}, 'exit');
-			tl.to(div, 0.5167, {
-				opacity: 0,
-				ease: Power1.easeIn
-			}, 'exit+=0.4167');
-
-			tl.call(() => {
-				div.remove();
+			this.$.donationAlerts.addAlert({
+				text: formattedAmount,
+				backgroundColor,
+				holdDuration: rawAmount >= 500 ? 1 : 0.067
 			});
 		}
 
 		_handleDonation({amount, rawAmount, rawNewTotal}) {
-			this.donationText(amount, rawAmount);
+			this.addDonationAlert(amount, rawAmount);
 			this.$.totalTextAmount.value = rawNewTotal;
 		}
 
@@ -79,14 +54,4 @@
 	}
 
 	customElements.define(GdqBreakTopFrame.is, GdqBreakTopFrame);
-
-	/**
-	 * Generates a random integer.
-	 * @param {Number} min - The minimum number, inclusive.
-	 * @param {Number} max - The maximmum number, inclusive.
-	 * @returns {Number} - A random number between min and max, inclusive.
-	 */
-	function randomInt(min, max) {
-		return Random.integer(min, max)(Random.engines.browserCrypto);
-	}
 })();
