@@ -119,6 +119,14 @@
 					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
 						animationTimeline = this.genericNone();
 					}
+				} else if (data.fromScene === 'Advertisements') {
+					if (data.toScene === 'Break') {
+						this.genericEnter();
+					} else if (isGameScene(data.toScene)) {
+						animationTimeline = this.genericNone();
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
+						animationTimeline = this.genericNone();
+					}
 				} else if (data.fromScene === 'Technical Difficulties') {
 					if (data.toScene === 'Break') {
 						animationTimeline = this.genericNone();
