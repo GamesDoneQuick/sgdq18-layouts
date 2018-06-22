@@ -129,13 +129,15 @@ function removeTweetById(idToRemove) {
         throw new Error(`[twitter] Must provide a string ID when removing a tweet. ID provided was: ${idToRemove}`);
     }
     let didRemoveTweet = false;
-    [tweets, fanartTweets].value.some((tweet, index) => {
-        if (tweet.id_str === idToRemove || tweet.gdqRetweetId === idToRemove) {
-            tweets.value.splice(index, 1);
-            didRemoveTweet = true;
-            return true;
-        }
-        return false;
+    [tweets, fanartTweets].forEach(tweetReplicant => {
+        tweetReplicant.value.some((tweet, index) => {
+            if (tweet.id_str === idToRemove || tweet.gdqRetweetId === idToRemove) {
+                tweets.value.splice(index, 1);
+                didRemoveTweet = true;
+                return true;
+            }
+            return false;
+        });
     });
     return didRemoveTweet;
 }
