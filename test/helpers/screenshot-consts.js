@@ -149,6 +149,10 @@ const gameplayLayoutTestCases = [{
 	additionalDelay: STANDARD_DELAY,
 	replicantPrefills: STANDARD_REPLICANT_PREFILLS
 }, {
+	route: `bundles/${BUNDLE_NAME}/graphics/gba_4.html`,
+	additionalDelay: STANDARD_DELAY,
+	replicantPrefills: STANDARD_REPLICANT_PREFILLS
+}, {
 	route: `bundles/${BUNDLE_NAME}/graphics/standard_1.html`,
 	additionalDelay: STANDARD_DELAY,
 	replicantPrefills: STANDARD_REPLICANT_PREFILLS
