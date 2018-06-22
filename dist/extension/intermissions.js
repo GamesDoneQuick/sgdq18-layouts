@@ -66,7 +66,7 @@ nodecg.listenFor('intermissions:startAdBreak', async (adBreakId) => {
         checkCanSeek();
         await caspar.clear(false);
         await obs.setCurrentScene('Advertisements');
-        await sleep(1000);
+        await sleep(2000);
         await playAd(adBreak.ads[0]);
         adBreak.state.canStart = false;
         adBreak.state.cantStartReason = GDQTypes.CantStartReasonsEnum.ALREADY_STARTED;
