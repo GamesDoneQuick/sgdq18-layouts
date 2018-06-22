@@ -42,10 +42,10 @@ nodecg.listenFor('victorOps:createIncident', (body: any, cb: Function) => {
 updateIncidentsReplicant();
 updateRoutingKeysReplicant();
 
-// Update incidents once a minute.
+// Update incidents three times a minute.
 setInterval(() => {
 	updateIncidentsReplicant();
-}, 60 * 1000);
+}, 20 * 1000);
 
 // Update routing keys once every 5 minutes.
 setInterval(() => {
