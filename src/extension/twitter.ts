@@ -82,6 +82,11 @@ socket.on('connect', () => {
 					return;
 				}
 
+				// Discard mentions.
+				if (tweetCreateEvent.user.screen_name.toLowerCase() !== 'gamesdonequick') {
+					return;
+				}
+
 				addTweet(tweetCreateEvent);
 			});
 		}

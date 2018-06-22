@@ -13,6 +13,12 @@ export interface Tweet {
         [key: string]: any;
     }[];
 }
+export interface User {
+    id: number;
+    id_str: string;
+    name: string;
+    screen_name: string;
+}
 export interface TweetEntities {
     media?: {
         [key: string]: any;
@@ -28,4 +34,5 @@ export interface TweetFavoriteEvents extends Tweet {
 export interface TweetCreateEvents extends Tweet {
     quoted_status: Tweet;
     retweeted_status: Tweet;
+    user: User;
 }
