@@ -154,14 +154,17 @@ function removeTweetById(idToRemove: string) {
 	}
 
 	let didRemoveTweet = false;
-	([tweets, fanartTweets] as any).value.some((tweet: GDQTypes.Tweet, index: number) => {
-		if (tweet.id_str === idToRemove || tweet.gdqRetweetId === idToRemove) {
-			tweets.value.splice(index, 1);
-			didRemoveTweet = true;
-			return true;
-		}
+	[tweets, fanartTweets].forEach(tweetReplicant => {
+		tweetReplicant.value.some((tweet: GDQTypes.Tweet, index: number) => {
+			if (tweet.id_str === idToRemove || tweet.gdqRetweetId === idToRemove) {
+				tweets.value.splice(index, 1);
+				didRemoveTweet = true;
+				return true;
+			}
 
-		return false;
+			return false;
+		});
 	});
+
 	return didRemoveTweet;
 }
