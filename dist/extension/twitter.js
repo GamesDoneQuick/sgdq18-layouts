@@ -125,7 +125,7 @@ function removeTweetById(idToRemove) {
         throw new Error(`[twitter] Must provide a string ID when removing a tweet. ID provided was: ${idToRemove}`);
     }
     let didRemoveTweet = false;
-    tweets.value.some((tweet, index) => {
+    [tweets, fanartTweets].value.some((tweet, index) => {
         if (tweet.id_str === idToRemove || tweet.gdqRetweetId === idToRemove) {
             tweets.value.splice(index, 1);
             didRemoveTweet = true;
