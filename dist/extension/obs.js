@@ -8,6 +8,8 @@ const child_process_1 = require("child_process");
 const OBSUtility = require("nodecg-utility-obs");
 // Ours
 const nodecgApiContext = require("./util/nodecg-api-context");
+// @ts-ignore
+const gdqUtils = require("../../shared/lib/gdq-utils");
 const nodecg = nodecgApiContext.get();
 // We track what _layout_ is active, not necessarily what _scene_ is active.
 // A given layout can be on multiple scenes.
@@ -59,7 +61,7 @@ compositingOBS.replicants.previewScene.on('change', (newVal) => {
         return;
     }
     // Hide the transition graphic on gameplay scenes when they are in preview.
-    if (newVal.name !== 'Break' && newVal.name !== 'Interview' && newVal.name !== 'Crowd Background') {
+    if (gdqUtils.isGameScene(newVal.name)) {
         // Abort if the PVW scene is also the PGM scene.
         if (newVal.name === compositingOBS.replicants.programScene.value.name) {
             return;

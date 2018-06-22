@@ -10,6 +10,8 @@ import OBSUtility = require('nodecg-utility-obs');
 
 // Ours
 import * as nodecgApiContext from './util/nodecg-api-context';
+// @ts-ignore
+import gdqUtils = require('../../shared/lib/gdq-utils');
 
 const nodecg = nodecgApiContext.get();
 
@@ -73,7 +75,7 @@ compositingOBS.replicants.previewScene.on('change', (newVal: any) => {
 	}
 
 	// Hide the transition graphic on gameplay scenes when they are in preview.
-	if (newVal.name !== 'Break' && newVal.name !== 'Interview' && newVal.name !== 'Crowd Background') {
+	if (gdqUtils.isGameScene(newVal.name)) {
 		// Abort if the PVW scene is also the PGM scene.
 		if (newVal.name === compositingOBS.replicants.programScene.value.name) {
 			return;

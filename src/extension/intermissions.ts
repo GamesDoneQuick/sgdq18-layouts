@@ -81,6 +81,7 @@ nodecg.listenFor('intermissions:startAdBreak', async (adBreakId: number) => {
 
 		await caspar.clear(false);
 		await obs.setCurrentScene('Advertisements');
+		await sleep(1000);
 		await playAd(adBreak.ads[0]);
 
 		adBreak.state.canStart = false;
@@ -517,5 +518,13 @@ function writeAdToLog(ad: GDQTypes.Ad) {
 		if (err) {
 			log.error('Error appending to log:', err.stack);
 		}
+	});
+}
+
+function sleep(milliseconds: number) {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve();
+		}, milliseconds);
 	});
 }
