@@ -1,7 +1,6 @@
 (function () {
 	'use strict';
 
-	const GAME_SCENE_NAME_REGEX = /^(Standard|Widescreen|GBA|Gameboy|3DS|DS|LttP|OoT|Mario)/;
 	const HOME_POSITION = {x: 0, y: 0};
 	const HERO_HOLD_TIME = 1.5;
 	const GENERIC_HOLD_TIME = 0.5;
@@ -90,49 +89,49 @@
 				if (data.fromScene === 'Break') {
 					if (data.toScene === 'Break') {
 						animationTimeline = this.genericBoth();
-					} else if (isGameScene(data.toScene)) {
+					} else if (gdqUtils.isGameScene(data.toScene)) {
 						animationTimeline = this.heroExit();
-					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown' || data.toScene === 'Advertisements') {
 						animationTimeline = this.genericExit();
 					}
-				} else if (isGameScene(data.fromScene)) {
+				} else if (gdqUtils.isGameScene(data.fromScene)) {
 					if (data.toScene === 'Break') {
 						animationTimeline = this.heroEnter();
-					} else if (isGameScene(data.toScene)) {
+					} else if (gdqUtils.isGameScene(data.toScene)) {
 						animationTimeline = this.genericNone();
-					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown' || data.toScene === 'Advertisements') {
 						animationTimeline = this.genericNone();
 					}
 				} else if (data.fromScene === 'Interview') {
 					if (data.toScene === 'Break') {
 						this.genericEnter();
-					} else if (isGameScene(data.toScene)) {
+					} else if (gdqUtils.isGameScene(data.toScene)) {
 						animationTimeline = this.genericNone();
-					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown' || data.toScene === 'Advertisements') {
 						animationTimeline = this.genericNone();
 					}
 				} else if (data.fromScene === 'Countdown') {
 					if (data.toScene === 'Break') {
 						animationTimeline = this.heroEnter();
-					} else if (isGameScene(data.toScene)) {
+					} else if (gdqUtils.isGameScene(data.toScene)) {
 						animationTimeline = this.genericNone();
-					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown' || data.toScene === 'Advertisements') {
 						animationTimeline = this.genericNone();
 					}
 				} else if (data.fromScene === 'Advertisements') {
 					if (data.toScene === 'Break') {
 						this.genericEnter();
-					} else if (isGameScene(data.toScene)) {
+					} else if (gdqUtils.isGameScene(data.toScene)) {
 						animationTimeline = this.genericNone();
-					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown' || data.toScene === 'Advertisements') {
 						animationTimeline = this.genericNone();
 					}
 				} else if (data.fromScene === 'Technical Difficulties') {
 					if (data.toScene === 'Break') {
 						animationTimeline = this.genericNone();
-					} else if (isGameScene(data.toScene)) {
+					} else if (gdqUtils.isGameScene(data.toScene)) {
 						animationTimeline = this.genericNone();
-					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown') {
+					} else if (data.toScene === 'Interview' || data.toScene === 'Countdown' || data.toScene === 'Advertisements') {
 						animationTimeline = this.genericNone();
 					}
 				}
@@ -489,8 +488,4 @@
 	}
 
 	customElements.define(GdqTransition.is, GdqTransition);
-
-	function isGameScene(sceneName) {
-		return Boolean(sceneName.match(GAME_SCENE_NAME_REGEX));
-	}
 })();

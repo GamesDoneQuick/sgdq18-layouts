@@ -1,11 +1,23 @@
 /* eslint-env browser */
-(function () {
+(function (root, factory) { // eslint-disable-line wrap-iife
+	if (typeof module === 'object' && module.exports) {
+		// Node. Does not work with strict CommonJS, but
+		// only CommonJS-like environments that support module.exports,
+		// like Node.
+		module.exports = factory();
+	} else {
+		// Browser globals (root is window)
+		root.returnExports = factory();
+	}
+}(typeof self === 'undefined' ? this : self, () => {
 	'use strict';
+
+	const GAME_SCENE_NAME_REGEX = /^(Standard|Widescreen|GBA|Gameboy|3DS|DS|LttP|OoT|Mario)/;
 
 	const preloadedImages = new Set();
 	const preloaderPromises = new Map();
 
-	window.gdqUtils = {
+	const gdqUtils = {
 		/**
 		 * Preloads an image.
 		 * @param {string} src - The URL of the new image to load.
@@ -60,6 +72,12 @@
 
 			preloaderPromises.set(src, preloadPromise);
 			return preloadPromise;
+		},
+
+		isGameScene(sceneName) {
+			return Boolean(sceneName.match(GAME_SCENE_NAME_REGEX));
 		}
 	};
-})();
+
+	return gdqUtils;
+}));

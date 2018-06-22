@@ -66,6 +66,7 @@ nodecg.listenFor('intermissions:startAdBreak', async (adBreakId) => {
         checkCanSeek();
         await caspar.clear(false);
         await obs.setCurrentScene('Advertisements');
+        await sleep(1000);
         await playAd(adBreak.ads[0]);
         adBreak.state.canStart = false;
         adBreak.state.cantStartReason = GDQTypes.CantStartReasonsEnum.ALREADY_STARTED;
@@ -439,6 +440,13 @@ function writeAdToLog(ad) {
         if (err) {
             log.error('Error appending to log:', err.stack);
         }
+    });
+}
+function sleep(milliseconds) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve();
+        }, milliseconds);
     });
 }
 //# sourceMappingURL=intermissions.js.map
