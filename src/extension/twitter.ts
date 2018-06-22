@@ -149,7 +149,7 @@ function removeTweetById(idToRemove: string) {
 	}
 
 	let didRemoveTweet = false;
-	tweets.value.some((tweet: GDQTypes.Tweet, index: number) => {
+	([tweets, fanartTweets] as any).value.some((tweet: GDQTypes.Tweet, index: number) => {
 		if (tweet.id_str === idToRemove || tweet.gdqRetweetId === idToRemove) {
 			tweets.value.splice(index, 1);
 			didRemoveTweet = true;
