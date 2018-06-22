@@ -62,7 +62,7 @@ socket.on('connect', () => {
                     return;
                 }
                 // We discard @ replies because we don't want to show them.
-                if (tweetCreateEvent.text.charAt(0) === '@') {
+                if (tweetCreateEvent.in_reply_to_user_id) {
                     return;
                 }
                 // Discard mentions.

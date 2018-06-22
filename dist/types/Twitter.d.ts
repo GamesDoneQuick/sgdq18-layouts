@@ -8,6 +8,7 @@ export interface Tweet {
         full_text: string;
         extended_entities: TweetEntities;
     };
+    in_reply_to_user_id: string;
     gdqRetweetId?: string;
     gdqMedia?: {
         [key: string]: any;
