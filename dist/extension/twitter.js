@@ -132,7 +132,7 @@ function removeTweetById(idToRemove) {
     [tweets, fanartTweets].forEach(tweetReplicant => {
         tweetReplicant.value.some((tweet, index) => {
             if (tweet.id_str === idToRemove || tweet.gdqRetweetId === idToRemove) {
-                tweets.value.splice(index, 1);
+                tweetReplicant.value.splice(index, 1);
                 didRemoveTweet = true;
                 return true;
             }
