@@ -44,6 +44,10 @@ socket.on('connect', () => {
         }
         if (payload.favorite_events) {
             payload.favorite_events.forEach(favoriteEvent => {
+                // Discard favorites not made by us.
+                if (favoriteEvent.user.screen_name.toLowerCase() !== 'gamesdonequick') {
+                    return;
+                }
                 if (favoriteEvent.favorited_status) {
                     addTweet(favoriteEvent.favorited_status);
                 }
@@ -51,7 +55,11 @@ socket.on('connect', () => {
         }
         if (payload.tweet_create_events) {
             payload.tweet_create_events.forEach(tweetCreateEvent => {
-                // We discard quoted statuses because we can't show them.
+                // Discard tweets not made by us.
+                if (tweetCreateEvent.user.screen_name.toLowerCase() !== 'gamesdonequick') {
+                    return;
+                }
+                // Discard quoted statuses because we can't show them.
                 if (tweetCreateEvent.quoted_status) {
                     return;
                 }
@@ -61,12 +69,8 @@ socket.on('connect', () => {
                     addTweet(retweetedStatus);
                     return;
                 }
-                // We discard @ replies because we don't want to show them.
+                // Discard @ replies because we don't want to show them.
                 if (tweetCreateEvent.in_reply_to_user_id) {
-                    return;
-                }
-                // Discard mentions.
-                if (tweetCreateEvent.user.screen_name.toLowerCase() !== 'gamesdonequick') {
                     return;
                 }
                 addTweet(tweetCreateEvent);
