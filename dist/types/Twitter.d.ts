@@ -31,6 +31,7 @@ export interface TwitterAccountActivityPayload {
 }
 export interface TweetFavoriteEvents extends Tweet {
     favorited_status: Tweet;
+    user: User;
 }
 export interface TweetCreateEvents extends Tweet {
     quoted_status: Tweet;
