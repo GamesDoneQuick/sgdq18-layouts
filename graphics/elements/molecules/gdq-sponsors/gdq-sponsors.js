@@ -111,11 +111,17 @@
 					tl.pause();
 					this.$.image.$svg.image.load(newSrc).loaded(() => {
 						tl.resume();
+					}).error(error => {
+						nodecg.log.error('Failed to load sponsor image:', error);
+						TweenLite.set(this.$.image, {opacity: 0});
+						tl.clear();
+						this._loop();
 					});
 				}
 			}), 'exit');
 
 			tl.addLabel('enter');
+			tl.set(this.$.image, {opacity: 1});
 			tl.add(this.$.image.enter(), 'enter+=0.1');
 
 			// Give the prize some time to show.
