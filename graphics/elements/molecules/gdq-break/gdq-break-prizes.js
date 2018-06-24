@@ -216,7 +216,7 @@
 				this.$.provider.innerText = prize.provided;
 				TypeAnims.type(this.$.provider);
 				TweenLite.set(this.$.provider, {opacity: 1});
-			}, null, null, 'enter');
+			}, null, null, 'enter+=0.03');
 
 			tl.add(this.$['photo-actual'].enter(), 'enter+=0.1');
 
