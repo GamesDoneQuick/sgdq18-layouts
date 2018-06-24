@@ -79,18 +79,16 @@ compositingOBS.on('TransitionBegin', (data) => {
     if (data.name !== 'Blank Stinger') {
         return;
     }
-    const pvwSceneName = compositingOBS.replicants.previewScene.value && compositingOBS.replicants.previewScene.value.name;
-    if (!pvwSceneName) {
-        return;
+    if (data.toScene) {
+        // Show the Transition Graphic on the scene which is being transitioned to.
+        compositingOBS.setSceneItemRender({
+            'scene-name': data.toScene,
+            source: 'Transition Graphic',
+            render: true
+        }).catch((error) => {
+            nodecg.log.error(`Failed to show Transition Graphic on scene "${data.toScene}":`, error);
+        });
     }
-    // Show the Transition Graphic on the scene which is being transitioned to.
-    compositingOBS.setSceneItemRender({
-        'scene-name': pvwSceneName,
-        source: 'Transition Graphic',
-        render: true
-    }).catch((error) => {
-        nodecg.log.error(`Failed to show Transition Graphic on scene "${pvwSceneName}":`, error);
-    });
 });
 compositingOBS.on('SwitchScenes', (data) => {
     const actualPgmSceneName = data['scene-name'];
