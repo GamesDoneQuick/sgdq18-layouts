@@ -5,3 +5,4 @@ coverage
 /shared/lib/vendor
 countdown-foreground-anim.html
 countdown-foreground-anim.js
+createjs-2015.11.26.min.js
