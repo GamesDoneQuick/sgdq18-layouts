@@ -126,13 +126,16 @@ compositingOBS.on('SwitchScenes', (data: any) => {
 		return;
 	}
 
-	compositingOBS.setSceneItemRender({
-		'scene-name': actualPvwSceneName,
-		source: 'Transition Graphic',
-		render: false
-	}).catch((error: Error) => {
-		nodecg.log.error(`Failed to hide Transition Graphic on scene "${actualPvwSceneName}":`, error);
-	});
+	// Hide the transition graphic on gameplay scenes when they are in preview.
+	if (gdqUtils.isGameScene(actualPvwSceneName)) {
+		compositingOBS.setSceneItemRender({
+			'scene-name': actualPvwSceneName,
+			source: 'Transition Graphic',
+			render: false
+		}).catch((error: Error) => {
+			nodecg.log.error(`Failed to hide Transition Graphic on scene "${actualPvwSceneName}":`, error);
+		});
+	}
 });
 
 function cycleRecording(obs: any) {
