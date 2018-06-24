@@ -91,24 +91,28 @@ compositingOBS.replicants.previewScene.on('change', (newVal: any) => {
 	}
 });
 
-compositingOBS.on('TransitionBegin', (data: {name: string; duration: number}) => {
+compositingOBS.on('TransitionBegin', (
+	data: {
+		duration: number;
+		name: string;
+		fromScene: string;
+		toScene: string;
+	}
+) => {
 	if (data.name !== 'Blank Stinger') {
 		return;
 	}
 
-	const pvwSceneName = compositingOBS.replicants.previewScene.value && compositingOBS.replicants.previewScene.value.name;
-	if (!pvwSceneName) {
-		return;
+	if (data.toScene) {
+		// Show the Transition Graphic on the scene which is being transitioned to.
+		compositingOBS.setSceneItemRender({
+			'scene-name': data.toScene,
+			source: 'Transition Graphic',
+			render: true
+		}).catch((error: Error) => {
+			nodecg.log.error(`Failed to show Transition Graphic on scene "${data.toScene}":`, error);
+		});
 	}
-
-	// Show the Transition Graphic on the scene which is being transitioned to.
-	compositingOBS.setSceneItemRender({
-		'scene-name': pvwSceneName,
-		source: 'Transition Graphic',
-		render: true
-	}).catch((error: Error) => {
-		nodecg.log.error(`Failed to show Transition Graphic on scene "${pvwSceneName}":`, error);
-	});
 });
 
 compositingOBS.on('SwitchScenes', (data: any) => {
