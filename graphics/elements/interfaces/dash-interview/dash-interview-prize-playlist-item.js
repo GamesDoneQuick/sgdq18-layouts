@@ -77,7 +77,7 @@
 			}
 
 			const playlistEntry = prizePlaylist.find(entry => entry.id === this.prize.id);
-			return playlistEntry.complete;
+			return Boolean(playlistEntry && playlistEntry.complete);
 		}
 
 		_completeChanged(newVal) {
