@@ -153,6 +153,9 @@
 					tl.pause();
 					this.$.image.$svg.image.load(newSrc).loaded(() => {
 						tl.resume();
+					}).error(error => {
+						nodecg.log.error(error);
+						tl.resume();
 					});
 				}
 			}));
