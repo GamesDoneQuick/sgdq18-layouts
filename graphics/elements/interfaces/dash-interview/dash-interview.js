@@ -146,7 +146,17 @@
 		}
 
 		_computeTransitionToBreakDisabled(_sendingTransitionCommand, _transitioning, _disconnectedFromOBS, _programSceneName) {
-			return false;
+			console.log(
+				'_computeTransitionToBreakDisabled',
+				_sendingTransitionCommand,
+				_transitioning,
+				_disconnectedFromOBS,
+				_programSceneName
+			);
+			return _sendingTransitionCommand ||
+				_transitioning ||
+				_disconnectedFromOBS ||
+				_programSceneName === 'Break';
 		}
 
 		_any(...args) {
