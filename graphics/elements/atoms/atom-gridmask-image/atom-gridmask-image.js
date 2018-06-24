@@ -190,6 +190,7 @@
 				}
 			}
 
+			image.front();
 			image.maskWith(mask);
 		}
 	}
