@@ -146,13 +146,6 @@
 		}
 
 		_computeTransitionToBreakDisabled(_sendingTransitionCommand, _transitioning, _disconnectedFromOBS, _programSceneName) {
-			console.log(
-				'_computeTransitionToBreakDisabled',
-				_sendingTransitionCommand,
-				_transitioning,
-				_disconnectedFromOBS,
-				_programSceneName
-			);
 			return _sendingTransitionCommand ||
 				_transitioning ||
 				_disconnectedFromOBS ||

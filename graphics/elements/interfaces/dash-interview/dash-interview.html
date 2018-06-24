@@ -135,7 +135,6 @@
 			<paper-button
 				class="green"
 				on-tap="transitionToInterview"
-				disabled="[[_any(_sendingTransitionCommand, _transitioning, _disconnectedFromOBS)]]"
 				hidden="[[!_equal(_programSceneName, 'Break')]]"
 				raised>
 				TRANSITION TO INTERVIEW
@@ -144,7 +143,6 @@
 			<paper-button
 				class="yellow"
 				on-tap="openInterviewTransitionConfirmation"
-				disabled="[[_any(_sendingTransitionCommand, _transitioning, _disconnectedFromOBS)]]"
 				hidden="[[_equal(_programSceneName, 'Break')]]"
 				raised>
 				TRANSITION TO INTERVIEW (WARNING)
@@ -153,7 +151,6 @@
 			<paper-button
 				class="red"
 				on-tap="transitionToBreak"
-				disabled="[[_transitionToBreakDisabled]]"
 				raised>
 				BACK TO BREAK SCENE
 			</paper-button>
