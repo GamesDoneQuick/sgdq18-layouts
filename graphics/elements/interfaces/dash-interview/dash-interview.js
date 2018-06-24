@@ -146,10 +146,7 @@
 		}
 
 		_computeTransitionToBreakDisabled(_sendingTransitionCommand, _transitioning, _disconnectedFromOBS, _programSceneName) {
-			return _sendingTransitionCommand ||
-				_transitioning ||
-				_disconnectedFromOBS ||
-				_programSceneName === 'Break';
+			return false;
 		}
 
 		_any(...args) {
