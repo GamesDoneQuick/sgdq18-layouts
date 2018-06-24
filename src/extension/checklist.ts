@@ -44,6 +44,7 @@ if (!equals(persistedValue, checklistDefault)) {
 	checklist.value = mergedChecklist;
 }
 
+let initializedRecordingTask = false;
 const checklistComplete = nodecg.Replicant('checklistComplete');
 checklist.on('change', (newVal: Checklist.List, oldVal: Checklist.List | null) => {
 	let foundIncompleteTask = false;
@@ -63,6 +64,11 @@ checklist.on('change', (newVal: Checklist.List, oldVal: Checklist.List | null) =
 	checklistComplete.value = !foundIncompleteTask;
 
 	// Recording Cycling
+	if (!initializedRecordingTask) {
+		initializedRecordingTask = true;
+		return;
+	}
+
 	if (!newVal.special) {
 		return;
 	}
