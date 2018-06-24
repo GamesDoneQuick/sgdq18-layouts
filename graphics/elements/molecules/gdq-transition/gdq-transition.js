@@ -249,7 +249,8 @@
 				topBackRect: {x: -10, y: -437},
 				bottomBackTrapezoid: {x: -666, y: 510},
 				topBackTrapezoid: {x: 0, y: -543},
-				fadeOutVideos
+				fadeOutVideos,
+				fadeOutAll: true
 			});
 		}
 
@@ -304,7 +305,8 @@
 			topBackRect,
 			bottomBackTrapezoid,
 			topBackTrapezoid,
-			fadeOutVideos
+			fadeOutVideos,
+			fadeOutAll
 		}) {
 			const tl = new TimelineLite();
 
@@ -365,6 +367,12 @@
 					}
 				}, tl.duration() / 2);
 			}
+			if (fadeOutAll) {
+				tl.to(this, 0.25, {
+					opacity: 0,
+					ease: Sine.easeInOut
+				});
+			}
 
 			return tl;
 		}
@@ -377,6 +385,8 @@
 			tl.addLabel('backRects', 'start+=0.0667');
 			tl.addLabel('frontTraps', 'start+=0.1334');
 			tl.addLabel('frontRects', 'start+=0.2334');
+
+			tl.set(this, {opacity: 1}, 'start');
 
 			// Back traps.
 			tl.to(this.$.bottomBackTrapezoid, 0.2334, {
