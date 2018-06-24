@@ -172,6 +172,10 @@
 					tl.pause();
 					this.$['photo-actual'].$svg.image.load(newSrc).loaded(() => {
 						tl.resume();
+					}).error(error => {
+						nodecg.log.error(error);
+						this.$['photo-actual'].$svg.image.load(this.$['photo-actual'].fallbackSrc);
+						tl.resume();
 					});
 				}
 			}), 'exit');
