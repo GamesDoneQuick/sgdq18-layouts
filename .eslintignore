@@ -3,3 +3,5 @@ bower_components
 coverage
 /dist
 /shared/lib/vendor
+countdown-foreground-anim.html
+countdown-foreground-anim.js
