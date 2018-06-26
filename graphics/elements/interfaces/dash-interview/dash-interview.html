@@ -12,6 +12,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/sc-data-binding-helpers/sc-data-binding-helpers.html">
 <link rel="import" href="../../../../shared/elements/interfaces/ui-toast/ui-toast.html">
+<link rel="import" href="../../../../shared/style/gdq-text-styles.html">
 <link rel="import" href="../../../../shared/style/gdq-ui-theme.html">
 <link rel="import" href="dash-interview-lightning-round.html">
 <link rel="import" href="dash-interview-lowerthird.html">
@@ -19,7 +20,7 @@
 
 <dom-module id="dash-interview">
 	<template>
-		<style include="gdq-ui-theme">
+		<style include="gdq-ui-theme gdq-text-style">
 			:host {
 				display: grid;
 				font-family: Roboto, sans-serif;
@@ -69,6 +70,17 @@
 			#prizes {
 				grid-column: 2;
 				grid-row: 3 / 5;
+			}
+
+			#timeElapsed {
+				@apply --layout-center-center;
+				@apply --layout-horizontal;
+				color: white;
+				font-size: 28px;
+				font-weight: 700;
+				grid-column: 3;
+				grid-row: 1;
+				text-align: center;
 			}
 
 			#lightningRound {
@@ -157,6 +169,8 @@
 		</div>
 
 		<dash-interview-prizes id="prizes" class="panel"></dash-interview-prizes>
+
+		<div id="timeElapsed" class="tabular-nums">[[_timeElapsed]]</div>
 
 		<div id="questionToggle">
 			<paper-button
