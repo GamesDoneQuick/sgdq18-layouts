@@ -1,13 +1,14 @@
 (function () {
 	'use strict';
 
+	const compositingOBSStatus = nodecg.Replicant('compositingOBS:websocket');
+	const compositingOBSTransitioning = nodecg.Replicant('compositingOBS:transitioning');
+	const interviewStopwatch = nodecg.Replicant('interview:stopwatch');
 	const lowerthirdTimeRemaining = nodecg.Replicant('interview:lowerthirdTimeRemaining');
 	const programScene = nodecg.Replicant('compositingOBS:programScene');
 	const questionShowing = nodecg.Replicant('interview:questionShowing');
 	const questionSortMap = nodecg.Replicant('interview:questionSortMap');
 	const questionTimeRemaining = nodecg.Replicant('interview:questionTimeRemaining');
-	const compositingOBSStatus = nodecg.Replicant('compositingOBS:websocket');
-	const compositingOBSTransitioning = nodecg.Replicant('compositingOBS:transitioning');
 
 	/**
 	 * @customElement
@@ -55,7 +56,8 @@
 				_transitionToBreakDisabled: {
 					type: Boolean,
 					computed: '_computeTransitionToBreakDisabled(_sendingTransitionCommand, _transitioning, _disconnectedFromOBS, _programSceneName)'
-				}
+				},
+				_timeElapsed: String
 			};
 		}
 
@@ -80,6 +82,10 @@
 
 			compositingOBSStatus.on('change', newVal => {
 				this._disconnectedFromOBS = Boolean(!newVal || newVal.status !== 'connected');
+			});
+
+			interviewStopwatch.on('change', newVal => {
+				this._timeElapsed = newVal.time.formatted.split('.')[0];
 			});
 
 			this.addEventListener('error-toast', event => {
