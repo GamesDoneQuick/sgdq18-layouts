@@ -7,7 +7,7 @@ const nodecgApiContext = require("./util/nodecg-api-context");
 const nodecg = nodecgApiContext.get();
 const DEBUG = nodecg.bundleConfig.twitch.debug;
 const BITS_TOTAL_UPDATE_INTERVAL = 10 * 1000;
-const log = new nodecg.Logger(`${nodecg.bundleName}:twitch-bits`);
+const log = new nodecg.Logger(`${nodecg.bundleName}:twitch-pubsub`);
 const autoUpdateTotal = nodecg.Replicant('autoUpdateTotal');
 const bitsTotal = nodecg.Replicant('bits:total');
 autoUpdateTotal.on('change', (newVal) => {
@@ -41,17 +41,11 @@ pubsub.on('bits', (cheer) => {
     if (DEBUG) {
         log.info('Received cheer:', cheer);
     }
-    else {
-        log.debug('Received cheer:', cheer);
-    }
     nodecg.sendMessage('cheer', cheer);
 });
 pubsub.on('subscribe', (subscription) => {
     if (DEBUG) {
         log.info('Received subscription:', subscription);
-    }
-    else {
-        log.debug('Received subscription:', subscription);
     }
     nodecg.sendMessage('subscription', subscription);
 });
