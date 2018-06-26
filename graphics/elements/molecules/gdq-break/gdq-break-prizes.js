@@ -120,6 +120,10 @@
 
 			tl.addLabel('start', '+=0.5');
 
+			tl.call(() => {
+				this.currentItem = null;
+			}, null, null, 'start');
+
 			tl.to(this.$['photo-actual'].$svg.bgRect.node, 0.5, {
 				'fill-opacity': 0,
 				ease: Sine.easeIn
