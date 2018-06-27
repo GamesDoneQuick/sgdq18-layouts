@@ -238,10 +238,15 @@ function destroyWebsocket() {
     if (!websocket) {
         return;
     }
-    websocket.onopen = noop;
-    websocket.onmessage = noop;
-    websocket.onclose = noop;
-    websocket.close();
+    try {
+        websocket.onopen = noop;
+        websocket.onmessage = noop;
+        websocket.onclose = noop;
+        websocket.close();
+    }
+    catch (_error) { // tslint:disable-line:no-unused
+        // Intentionally discard error.
+    }
     websocket = null;
 }
 //# sourceMappingURL=oot-bingo.js.map
