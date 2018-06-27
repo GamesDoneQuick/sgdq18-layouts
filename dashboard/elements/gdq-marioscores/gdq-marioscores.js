@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	const scores = nodecg.Replicant('scores');
+	const scoresRep = nodecg.Replicant('scores');
 
 	class GdqMarioScores extends Polymer.Element {
 		static get is() {
@@ -18,13 +18,16 @@
 
 		ready() {
 			super.ready();
+			scoresRep.on('change', newVal => {
+				this.scores = newVal;
+			});
 		}
 
 		_scoreInputChanged(e) {
-			const teamNumber = parseInt(e.target.getAttribute('data-team-number'), 10);
+			const teamIndex = parseInt(e.target.getAttribute('data-team-index'), 10);
 			const val = parseInt(e.target.value, 10);
 			if (typeof val === 'number' && !isNaN(val)) {
-				scores.value[`entrant${teamNumber}Score`] = val;
+				scoresRep.value[teamIndex] = val;
 			}
 		}
 	}

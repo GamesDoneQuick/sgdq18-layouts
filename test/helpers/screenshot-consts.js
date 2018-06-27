@@ -15,6 +15,7 @@ const STANDARD_REPLICANT_PREFILLS = {
 	currentRun: undefined,
 	'interview:names': undefined,
 	recordTrackerEnabled: undefined,
+	scores: undefined,
 	stopwatch: undefined,
 	total: undefined,
 	tweets: undefined
@@ -107,6 +108,10 @@ module.exports = {
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}, {
 		route: `bundles/${BUNDLE_NAME}/graphics/omnibar.html`,
+		additionalDelay: STANDARD_DELAY,
+		replicantPrefills: STANDARD_REPLICANT_PREFILLS
+	}, {
+		route: `bundles/${BUNDLE_NAME}/graphics/widescreen_2_mario.html`,
 		additionalDelay: STANDARD_DELAY,
 		replicantPrefills: STANDARD_REPLICANT_PREFILLS
 	}]

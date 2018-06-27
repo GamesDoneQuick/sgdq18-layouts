@@ -1,12 +1,8 @@
-<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../../../bower_components/iron-icons/av-icons.html">
-<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
 
 <dom-module id="gdq-marioscores">
 	<template>
-		<style include="iron-flex iron-flex-alignment">
+		<style>
 			:host {
 				@apply --layout-around-justified;
 				@apply --layout-center;
@@ -16,9 +12,9 @@
 
 			#label {
 				font-size: 18px;
-				text-transform: uppercase;
 				margin-left: 32px;
 				margin-right: auto;
+				text-transform: uppercase;
 			}
 
 			.score-input {
@@ -32,18 +28,23 @@
 			id="leftScore"
 			class="score-input"
 			label="Left Score"
-			data-team-number="1"
-			value="[[scores.entrant1Score]]"
+			data-team-index="0"
+			value="[[scores.0]]"
 			on-value-changed="_scoreInputChanged"
+			min="0"
+			max="9"
 			type="number">
 		</paper-input>
+
 		<paper-input
 			id="rightScore"
 			class="score-input"
 			label="Right Score"
-			data-team-number="2"
-			value="[[scores.entrant2Score]]"
+			data-team-index="1"
+			value="[[scores.1]]"
 			on-value-changed="_scoreInputChanged"
+			min="0"
+			max="9"
 			type="number">
 		</paper-input>
 	</template>

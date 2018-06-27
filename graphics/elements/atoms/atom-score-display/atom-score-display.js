@@ -3,7 +3,7 @@
 
 	const SCORE_FADE_IN_EASE = Power1.easeOut;
 	const SCORE_FADE_OUT_EASE = Power1.easeIn;
-	const scores = nodecg.Replicant('scores');
+	const scoresRep = nodecg.Replicant('scores');
 
 	class AtomScoreDisplay extends Polymer.Element {
 		static get is() {
@@ -13,12 +13,11 @@
 		static get properties() {
 			return {
 				score: {
-					type: Number,
-					value: 0
+					type: Number
 				},
 
-				team: {
-					type: String
+				teamIndex: {
+					type: Number
 				},
 
 				/**
@@ -41,19 +40,28 @@
 			this.shadowRoot.querySelectorAll('sc-fitted-text').forEach(node => {
 				node.$.fittedContent.style.webkitBackgroundClip = 'text';
 			});
+
 			Polymer.RenderStatus.afterNextRender(this, () => {
-				scores.on('change', this.updateScore.bind(this));
+				scoresRep.on('change', this.updateScore.bind(this));
 			});
 		}
 
-		updateScore(scores) {
-			TweenLite.to(this.$.score, this.scoreFadeDuration, {
+		updateScore(newScores) {
+			if (!newScores || typeof newScores[this.teamIndex] !== 'number') {
+				return;
+			}
+
+			if (newScores[this.teamIndex] === this.score) {
+				return;
+			}
+
+			TweenLite.to(this.$.scoreText, this.scoreFadeDuration, {
 				opacity: 0,
 				ease: SCORE_FADE_OUT_EASE,
 				callbackScope: this,
 				onComplete() {
-					this.score = scores.value[this.team];
-					TweenLite.to(this.$.score, this.nameFadeDuration, {opacity: 1, ease: SCORE_FADE_IN_EASE});
+					this.score = newScores[this.teamIndex];
+					TweenLite.to(this.$.scoreText, this.scoreFadeDuration, {opacity: 1, ease: SCORE_FADE_IN_EASE});
 				}
 			});
 		}
