@@ -116,6 +116,7 @@ async function joinRoom(
 	clearInterval(fullUpdateInterval);
 	destroyWebsocket();
 
+	log.info('Attempting to load room page.');
 	const roomUrl = `${siteUrl}/room/${roomCode}`;
 	let $ = await request({
 		uri: roomUrl,
@@ -128,6 +129,8 @@ async function joinRoom(
 	// Else, we must be in the actual game room.
 	const csrfTokenInput = $('input[name="csrfmiddlewaretoken"]');
 	if (csrfTokenInput) {
+		log.info('Joining room...');
+
 		// POST to join the room.
 		await request({
 			method: 'POST',
@@ -148,6 +151,9 @@ async function joinRoom(
 			simple: false
 		});
 
+		log.info('Joined room.');
+		log.info('Loading room page...');
+
 		// Request the room page again, so that we can extract the socket token from it.
 		$ = await request({
 			uri: roomUrl,
@@ -156,6 +162,8 @@ async function joinRoom(
 			}
 		});
 	}
+
+	log.info('Loaded room page.');
 
 	// Socket stuff
 	const matches = $.html().match(SOCKET_KEY_REGEX);
@@ -204,6 +212,7 @@ function createWebsocket(socketUrl: string, socketKey: string) {
 	return new Promise((resolve, reject) => {
 		let settled = false;
 
+		log.info('Opening socket...');
 		socketRep.value.status = 'connecting';
 		websocket = new WebSocket(`${socketUrl}/broadcast`);
 

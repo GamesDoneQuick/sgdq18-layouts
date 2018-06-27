@@ -104,6 +104,7 @@ async function joinRoom({ siteUrl = 'https://bingosync.com', socketUrl = 'wss://
     socketRep.value.status = 'connecting';
     clearInterval(fullUpdateInterval);
     destroyWebsocket();
+    log.info('Attempting to load room page.');
     const roomUrl = `${siteUrl}/room/${roomCode}`;
     let $ = await request({
         uri: roomUrl,
@@ -115,6 +116,7 @@ async function joinRoom({ siteUrl = 'https://bingosync.com', socketUrl = 'wss://
     // Else, we must be in the actual game room.
     const csrfTokenInput = $('input[name="csrfmiddlewaretoken"]');
     if (csrfTokenInput) {
+        log.info('Joining room...');
         // POST to join the room.
         await request({
             method: 'POST',
@@ -134,6 +136,8 @@ async function joinRoom({ siteUrl = 'https://bingosync.com', socketUrl = 'wss://
             resolveWithFullResponse: true,
             simple: false
         });
+        log.info('Joined room.');
+        log.info('Loading room page...');
         // Request the room page again, so that we can extract the socket token from it.
         $ = await request({
             uri: roomUrl,
@@ -142,6 +146,7 @@ async function joinRoom({ siteUrl = 'https://bingosync.com', socketUrl = 'wss://
             }
         });
     }
+    log.info('Loaded room page.');
     // Socket stuff
     const matches = $.html().match(SOCKET_KEY_REGEX);
     if (!matches) {
@@ -180,6 +185,7 @@ async function joinRoom({ siteUrl = 'https://bingosync.com', socketUrl = 'wss://
 function createWebsocket(socketUrl, socketKey) {
     return new Promise((resolve, reject) => {
         let settled = false;
+        log.info('Opening socket...');
         socketRep.value.status = 'connecting';
         websocket = new WebSocket(`${socketUrl}/broadcast`);
         websocket.onopen = () => {
