@@ -70,11 +70,15 @@
 		 * If this.companionElement is defined, this method will run this.companionElement.hide()
 		 * before playing the entrance animation for this element.
 		 *
-		 * @param {Object} tweet - The tweet to show.
+		 * @param {Object} item - The item to show.
 		 * @returns {TimelineLite} - A GSAP TimelineLite instance.
 		 */
-		playItem(tweet) {
+		playItem(item) {
 			const tl = this.timeline;
+
+			if (!item) {
+				return tl;
+			}
 
 			let companionElementsArray;
 			if (Array.isArray(this.companionElement)) {
@@ -89,7 +93,7 @@
 
 			if (this.canExtend) {
 				const newAnim = new TimelineLite();
-				newAnim.add(this._createChangeAnim(tweet));
+				newAnim.add(this._createChangeAnim(item));
 				newAnim.add(this._createHold());
 				tl.add(newAnim, 'exit-=0.01');
 				tl.shiftChildren(newAnim.duration(), true, tl.getLabelTime('exit'));
@@ -119,7 +123,7 @@
 					tl.addPause();
 				}
 
-				tl.add(this._createEntranceAnim(tweet), '+=0.03');
+				tl.add(this._createEntranceAnim(item), '+=0.03');
 
 				if (window.__SCREENSHOT_TESTING__) {
 					return tl;
