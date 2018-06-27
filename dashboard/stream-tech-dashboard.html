@@ -12,6 +12,7 @@
 	<link rel="import" href="elements/gdq-schedule/gdq-schedule.html">
 	<link rel="import" href="elements/gdq-timekeeper/gdq-timekeeper.html">
 	<link rel="import" href="elements/gdq-totals/gdq-totals.html">
+	<link rel="import" href="elements/gdq-marioscores/gdq-marioscores.html">
 	<link rel="import" href="elements/gdq-twitter-controls/gdq-twitter-controls.html">
 
 	<custom-style>
@@ -87,6 +88,10 @@
 				grid-row: 1 / 3;
 			}
 
+			gdq-marioscores {
+				grid-column: 4;
+			}
+
 			gdq-schedule {
 				/*@apply --layout-flex;*/
 			}
@@ -111,7 +116,9 @@
 			<div id="totalsAndSchedule">
 				<gdq-totals></gdq-totals>
 				<gdq-schedule class="bordered"></gdq-schedule>
+
 			</div>
+			<gdq-marioscores class="bordered"></gdq-marioscores>
 		</div>
 	</div>
 </body>

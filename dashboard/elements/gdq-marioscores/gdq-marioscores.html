@@ -1,0 +1,52 @@
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="gdq-marioscores">
+	<template>
+		<style include="iron-flex iron-flex-alignment">
+			:host {
+				@apply --layout-around-justified;
+				@apply --layout-center;
+				@apply --layout-flex-none;
+				@apply --layout-horizontal;
+			}
+
+			#label {
+				font-size: 18px;
+				text-transform: uppercase;
+				margin-left: 32px;
+				margin-right: auto;
+			}
+
+			.score-input {
+				padding: 0 10px;
+			}
+		</style>
+
+		<div id="label">Mario Maker</div>
+
+		<paper-input
+			id="leftScore"
+			class="score-input"
+			label="Left Score"
+			data-team-number="1"
+			value="[[scores.entrant1Score]]"
+			on-value-changed="_scoreInputChanged"
+			type="number">
+		</paper-input>
+		<paper-input
+			id="rightScore"
+			class="score-input"
+			label="Right Score"
+			data-team-number="2"
+			value="[[scores.entrant2Score]]"
+			on-value-changed="_scoreInputChanged"
+			type="number">
+		</paper-input>
+	</template>
+
+	<script src="gdq-marioscores.js"></script>
+</dom-module>
