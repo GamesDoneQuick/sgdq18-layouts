@@ -189,7 +189,23 @@ const gameplayLayoutTestCases = [{
 gameplayLayoutTestCases.forEach(testCase => {
 	module.exports.TEST_CASES.push({
 		...testCase,
-		nameAppendix: 'not_started'
+		nameAppendix: 'not_started',
+		replicantPrefills: {
+			...STANDARD_REPLICANT_PREFILLS,
+			gameAudioChannels: [{
+				sd: {muted: false, fadedBelowThreshold: false},
+				hd: {muted: false, fadedBelowThreshold: false}
+			}, {
+				sd: {muted: false, fadedBelowThreshold: false},
+				hd: {muted: false, fadedBelowThreshold: false}
+			}, {
+				sd: {muted: false, fadedBelowThreshold: false},
+				hd: {muted: false, fadedBelowThreshold: false}
+			}, {
+				sd: {muted: false, fadedBelowThreshold: false},
+				hd: {muted: false, fadedBelowThreshold: false}
+			}]
+		}
 	}, {
 		...testCase,
 		nameAppendix: 'running',
