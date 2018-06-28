@@ -27,6 +27,10 @@ class GdqNameplateResult extends Polymer.Element {
 				type: Boolean,
 				reflectToAttribute: true
 			},
+			forfeit: {
+				type: Boolean,
+				reflectToAttribute: true
+			},
 			_tl: {
 				type: TimelineLite,
 				value() {
@@ -86,6 +90,10 @@ class GdqNameplateResult extends Polymer.Element {
 	_showingChanged(newVal) {
 		const anim = newVal ? this.show() : this.hide();
 		this._tl.add(anim);
+	}
+
+	_calcPlaceText(place, forfeit) {
+		return forfeit ? 'X' : place;
 	}
 }
 
