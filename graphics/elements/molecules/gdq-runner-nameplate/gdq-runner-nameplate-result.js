@@ -91,6 +91,10 @@ class GdqNameplateResult extends Polymer.Element {
 		const anim = newVal ? this.show() : this.hide();
 		this._tl.add(anim);
 	}
+
+	_calcPlaceText(place, forfeit) {
+		return forfeit ? 'X' : place;
+	}
 }
 
 customElements.define(GdqNameplateResult.is, GdqNameplateResult);
