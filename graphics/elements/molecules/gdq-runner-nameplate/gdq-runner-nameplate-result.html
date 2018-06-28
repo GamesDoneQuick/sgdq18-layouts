@@ -68,6 +68,22 @@
 				));
 			}
 
+			:host([forfeit]) #time {
+				background-image: var(--atom-gradient-text-gradient, linear-gradient(
+					180deg,
+					#FF0000 0%,
+					#FF6666 100%
+				));
+			}
+
+			:host([forfeit]) #place {
+				background-color: #ff0000;
+			}
+
+			:host([forfeit]) #place-text {
+				color: #ffffff;
+			}
+
 			:host([side="left"]) {
 				left: 1px;
 			}

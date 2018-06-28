@@ -27,6 +27,10 @@ class GdqNameplateResult extends Polymer.Element {
 				type: Boolean,
 				reflectToAttribute: true
 			},
+			forfeit: {
+				type: Boolean,
+				reflectToAttribute: true
+			},
 			_tl: {
 				type: TimelineLite,
 				value() {
