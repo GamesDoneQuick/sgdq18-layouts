@@ -3,7 +3,6 @@
 
 	const allPrizesRep = nodecg.Replicant('allPrizes');
 	const prizePlaylistRep = nodecg.Replicant('interview:prizePlaylist');
-	const showPrizesOnMonitorRep = nodecg.Replicant('interview:showPrizesOnMonitor');
 
 	/**
 	 * @customElement
@@ -19,10 +18,6 @@
 			return {
 				allPrizes: Array,
 				prizePlaylist: Array,
-				prizesShowingOnMonitor: {
-					type: Boolean,
-					value: false
-				},
 				searchString: {
 					type: String,
 					value: ''
@@ -39,10 +34,6 @@
 
 			prizePlaylistRep.on('change', newVal => {
 				this.prizePlaylist = newVal;
-			});
-
-			showPrizesOnMonitorRep.on('change', newVal => {
-				this.prizesShowingOnMonitor = newVal;
 			});
 		}
 
@@ -62,14 +53,6 @@
 
 		clearPlaylist() {
 			nodecg.sendMessage('interview:clearPrizePlaylist');
-		}
-
-		showPlaylist() {
-			nodecg.sendMessage('interview:showPrizePlaylistOnMonitor');
-		}
-
-		hidePlaylist() {
-			nodecg.sendMessage('interview:hidePrizePlaylistOnMonitor');
 		}
 
 		_calcClearIconHidden(searchString) {

@@ -9,6 +9,7 @@
 	const questionShowing = nodecg.Replicant('interview:questionShowing');
 	const questionSortMap = nodecg.Replicant('interview:questionSortMap');
 	const questionTimeRemaining = nodecg.Replicant('interview:questionTimeRemaining');
+	const showPrizesOnMonitorRep = nodecg.Replicant('interview:showPrizesOnMonitor');
 
 	/**
 	 * @customElement
@@ -57,7 +58,8 @@
 					type: Boolean,
 					computed: '_computeTransitionToBreakDisabled(_sendingTransitionCommand, _transitioning, _disconnectedFromOBS, _programSceneName)'
 				},
-				_timeElapsed: String
+				_timeElapsed: String,
+				_modeToggleChecked: Boolean
 			};
 		}
 
@@ -86,6 +88,10 @@
 
 			interviewStopwatch.on('change', newVal => {
 				this._timeElapsed = newVal.time.formatted.split('.')[0];
+			});
+
+			showPrizesOnMonitorRep.on('change', newVal => {
+				this._modeToggleChecked = !newVal;
 			});
 
 			this.addEventListener('error-toast', event => {
@@ -160,6 +166,10 @@
 
 		_any(...args) {
 			return args.find(arg => Boolean(arg));
+		}
+
+		_handleModeToggleChange(e) {
+			showPrizesOnMonitorRep.value = !e.target.checked;
 		}
 	}
 

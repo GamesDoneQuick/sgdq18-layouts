@@ -3,7 +3,6 @@
 
 	const questions = nodecg.Replicant('interview:questionTweets');
 	const questionShowing = nodecg.Replicant('interview:questionShowing');
-	const showPrizesOnMonitorRep = nodecg.Replicant('interview:showPrizesOnMonitor');
 
 	/**
 	 * @customElement
@@ -17,10 +16,6 @@
 
 		static get properties() {
 			return {
-				prizesShowingOnMonitor: {
-					type: Boolean,
-					value: false
-				},
 				questionShowing: {
 					type: Boolean,
 					value: false,
@@ -43,18 +38,6 @@
 			questionShowing.on('change', newVal => {
 				this.questionShowing = newVal;
 			});
-
-			showPrizesOnMonitorRep.on('change', newVal => {
-				this.prizesShowingOnMonitor = newVal;
-			});
-		}
-
-		showQuestionsOnMonitor() {
-			nodecg.sendMessage('interview:hidePrizePlaylistOnMonitor');
-		}
-
-		hideQuestionsOnMonitor() {
-			nodecg.sendMessage('interview:showPrizePlaylistOnMonitor');
 		}
 
 		openEndInterviewDialog() {
