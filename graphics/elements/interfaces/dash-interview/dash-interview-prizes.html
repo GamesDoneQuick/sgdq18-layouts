@@ -86,18 +86,7 @@
 			}
 
 			#clearPlaylist {
-				margin-right: 0;
-				max-width: 180px;
-				@apply --layout-flex;
-			}
-
-			#showPlaylist {
-				margin-left: 0;
-				@apply --layout-flex;
-			}
-
-			#hidePlaylist {
-				margin-left: 0;
+				margin: 0;
 				@apply --layout-flex;
 			}
 
@@ -208,24 +197,6 @@
 
 		<div id="rightColumn" class="column">
 			<div id="rightColumn-buttons">
-				<paper-button
-					id="showPlaylist"
-					class="indigo"
-					on-tap="showPlaylist"
-					hidden="[[prizesShowingOnMonitor]]"
-					raised>
-					Show Prizes On Monitor
-				</paper-button>
-
-				<paper-button
-					id="hidePlaylist"
-					class="indigo"
-					on-tap="hidePlaylist"
-					hidden="[[!prizesShowingOnMonitor]]"
-					raised>
-					Hide Prizes On Monitor
-				</paper-button>
-
 				<paper-button
 					id="clearPlaylist"
 					class="indigo"
