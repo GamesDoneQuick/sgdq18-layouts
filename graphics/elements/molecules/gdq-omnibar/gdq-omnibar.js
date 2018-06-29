@@ -54,6 +54,16 @@
 					type: Array,
 					readOnly: true,
 					value: MILESTONES
+				},
+				noAutoLoop: {
+					type: Boolean,
+					reflectToAttribute: true,
+					value: false
+				},
+				skipLabelAnims: {
+					type: Boolean,
+					reflectToAttribute: true,
+					value: false
 				}
 			};
 		}
@@ -87,6 +97,10 @@
 
 		run() {
 			const self = this;
+
+			if (this.noAutoLoop) {
+				return;
+			}
 
 			// For development, comment out whichever parts you don't want to see right now.
 			const parts = [
@@ -128,11 +142,17 @@
 		 */
 		showLabel(text, options = {}) {
 			const tl = new TimelineLite();
+
 			options.flagHoldDuration = Math.max(DISPLAY_DURATION / 2, 5);
 			if (this.$.label._showing) {
 				tl.add(this.$.label.change(text, options));
 			} else {
 				tl.add(this.$.label.show(text, options));
+			}
+
+			if (this.skipLabelAnims) {
+				tl.progress(1);
+				return new TimelineLite();
 			}
 
 			return tl;
@@ -143,7 +163,14 @@
 		 * @returns {TimelineLite} - An animation timeline.
 		 */
 		hideLabel() {
-			return this.$.label.hide();
+			const hideAnim = this.$.label.hide();
+
+			if (this.skipLabelAnims) {
+				hideAnim.progress(1);
+				return new TimelineLite();
+			}
+
+			return hideAnim;
 		}
 
 		setContent(tl, element) {
@@ -241,19 +268,20 @@
 			return tl;
 		}
 
-		showChallenges() {
+		showChallenges(overrideBids, {showClosed = false} = {}) {
+			const bids = overrideBids || currentBids.value;
 			const tl = new TimelineLite();
 
 			// If there's no bids whatsoever, bail out.
-			if (currentBids.value.length < 0) {
+			if (bids.length <= 0) {
 				return tl;
 			}
 
 			// Figure out what bids to display in this batch
 			const bidsToDisplay = [];
-			currentBids.value.forEach(bid => {
+			bids.forEach(bid => {
 				// Don't show closed bids in the automatic rotation.
-				if (bid.state.toLowerCase() === 'closed') {
+				if (!showClosed && bid.state.toLowerCase() === 'closed') {
 					return;
 				}
 
@@ -294,20 +322,21 @@
 			return tl;
 		}
 
-		showChoices() {
+		showChoices(overrideBids, {showClosed = false} = {}) {
+			const bids = overrideBids || currentBids.value;
 			const tl = new TimelineLite();
 
 			// If there's no bids whatsoever, bail out.
-			if (currentBids.value.length < 0) {
+			if (bids.length <= 0) {
 				return tl;
 			}
 
 			// Figure out what bids to display in this batch
 			const bidsToDisplay = [];
 
-			currentBids.value.forEach(bid => {
+			bids.forEach(bid => {
 				// Don't show closed bids in the automatic rotation.
-				if (bid.state.toLowerCase() === 'closed') {
+				if (!showClosed && bid.state.toLowerCase() === 'closed') {
 					return;
 				}
 
@@ -348,16 +377,17 @@
 			return tl;
 		}
 
-		showCurrentPrizes() {
+		showCurrentPrizes(overridePrizes) {
+			const prizes = overridePrizes || currentPrizes.value;
 			const tl = new TimelineLite();
 
 			// No prizes to show? Bail out.
-			if (currentPrizes.value.length <= 0) {
+			if (prizes.length <= 0) {
 				return tl;
 			}
 
 			const specialPrizesToDisplayLast = [];
-			const prizesToDisplay = currentPrizes.value.filter(prize => {
+			const prizesToDisplay = prizes.filter(prize => {
 				if (prize.id === 1892) {
 					specialPrizesToDisplayLast.push(prize);
 					return false;
