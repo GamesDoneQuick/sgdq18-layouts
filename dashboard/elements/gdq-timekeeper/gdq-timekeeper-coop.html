@@ -3,7 +3,7 @@
 
 <dom-module id="gdq-timekeeper-coop">
 	<template>
-		<style>
+		<style include="gdq-ui-theme">
 			:host {
 				width: 100%;
 				@apply --layout-vertical;
@@ -16,22 +16,6 @@
 				height: 61px;
 				@apply --layout-vertical;
 				@apply --layout-center-center;
-			}
-
-			.green {
-				--bg-color: #43ac6a;
-			}
-
-			.yellow {
-				--bg-color: #e99002;
-			}
-
-			.purple {
-				--bg-color: #a50074;
-			}
-
-			.gray {
-				--bg-color: #555555;
 			}
 
 			#info {
@@ -82,8 +66,7 @@
 					padding: 0;
 					font-size: 16px;
 					font-weight: bold;
-					background-color: var(--bg-color);
-				}
+					background-color: var(--bg-color);				}
 			}
 		</style>
 
