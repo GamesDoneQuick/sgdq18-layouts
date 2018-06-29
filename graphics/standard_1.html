@@ -90,9 +90,8 @@
 				}
 
 				gdq-tweet {
-					height: 220px;
-					width: 451px;
-
+					width: 100%;
+					height: 100%;
 					--gdq-tweet-name-font-size: 16px;
 					--gdq-tweet-body: {
 						font-size: 17px;
@@ -160,7 +159,7 @@
 				<gdq-timer></gdq-timer>
 				<div id="sponsorsAndTwitter">
 					<gdq-sponsors id="sponsors"></gdq-sponsors>
-					<gdq-tweet></gdq-tweet>
+					<gdq-tweet id="tweet"></gdq-tweet>
 				</div>
 			</div>
 		</template>
@@ -188,6 +187,7 @@
 						if (newVal.runners.length !== 3 && newVal.runners.length <= 4) {
 							this.numRunners = newVal.runners.length;
 							this.$.sponsors.resize();
+							this.$.tweet.resize();
 						}
 					});
 				}

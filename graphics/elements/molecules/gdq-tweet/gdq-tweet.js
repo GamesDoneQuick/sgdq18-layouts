@@ -59,7 +59,7 @@
 				this.$['body-actual'].innerHTML = '';
 				this.$.name.innerHTML = '';
 			}, null, null, '+=0.03');
-			tl.set(this._bgRect.node, {drawSVG: '0%', 'fill-opacity': 0});
+			tl.set(this.$svg.bgRect.node, {drawSVG: '0%', 'fill-opacity': 0});
 			tl.set([this.$.label, this.$.name], {scaleX: 0, color: 'transparent', clipPath: ''});
 			tl.set(this.$['body-actual'], {opacity: 1});
 		}
@@ -79,7 +79,7 @@
 				this.$.name.innerText = `@${tweet.user.screen_name}`;
 			}, null, null, 'start');
 
-			tl.to(this._bgRect.node, 0.75, {
+			tl.to(this.$svg.bgRect.node, 0.75, {
 				drawSVG: '100%',
 				ease: Linear.easeNone
 			}, 'start');
@@ -104,7 +104,7 @@
 				}
 			}, 'start+=0.4');
 
-			tl.to(this._bgRect.node, 0.5, {
+			tl.to(this.$svg.bgRect.node, 0.5, {
 				'fill-opacity': this.backgroundOpacity,
 				ease: Sine.easeOut
 			}, 'start+=1');
@@ -174,12 +174,12 @@
 				end: {probability: 0, normalValue: 0}
 			}), 'exit');
 
-			tl.to(this._bgRect.node, 0.5, {
+			tl.to(this.$svg.bgRect.node, 0.5, {
 				'fill-opacity': 0,
 				ease: Sine.easeOut
 			}, 'exit');
 
-			tl.to(this._bgRect.node, 1.5, {
+			tl.to(this.$svg.bgRect.node, 1.5, {
 				drawSVG: '0%',
 				ease: Power2.easeIn
 			}, 'exit');
@@ -202,19 +202,22 @@
 		}
 
 		_initBackgroundSVG() {
+			if (this._initialized) {
+				throw new Error('this element has already been initialized');
+			}
+
+			this._initialized = true;
+
 			const STROKE_SIZE = 1;
-			const ELEMENT_WIDTH = this.$.background.clientWidth;
-			const ELEMENT_HEIGHT = this.$.background.clientHeight;
+			this.$svg = {};
 
 			const svgDoc = SVG(this.$.background);
 			const bgRect = svgDoc.rect();
-			this._bgRect = bgRect;
-
-			svgDoc.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+			this.$svg.svgDoc = svgDoc;
+			this.$svg.bgRect = bgRect;
 
 			// Intentionally flip the width and height.
 			// This is part of how we get the drawSVG anim to go in the direction we want.
-			bgRect.size(ELEMENT_HEIGHT, ELEMENT_WIDTH);
 			bgRect.stroke({
 				color: 'white',
 
@@ -224,9 +227,23 @@
 			});
 			bgRect.fill({color: 'black', opacity: this.backgroundOpacity});
 
+			this.resize();
+		}
+
+		resize() {
+			if (!this._initialized) {
+				return;
+			}
+
+			const ELEMENT_WIDTH = this.$.background.clientWidth;
+			const ELEMENT_HEIGHT = this.$.background.clientHeight;
+
+			this.$svg.svgDoc.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+			this.$svg.bgRect.size(ELEMENT_HEIGHT, ELEMENT_WIDTH);
+
 			// Rotate and translate such that drawSVG anims start from the top right
 			// and move clockwise to un-draw, counter-clockwise to un-draw.
-			bgRect.style({transform: `rotate(90deg) translateY(${-ELEMENT_WIDTH}px)`});
+			this.$svg.bgRect.style({transform: `rotate(90deg) translateY(${-ELEMENT_WIDTH}px)`});
 		}
 
 		_falsey(value) {
