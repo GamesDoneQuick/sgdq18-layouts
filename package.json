@@ -272,6 +272,11 @@
         "file": "test_tronlines.html",
         "width": 1280,
         "height": 720
+      },
+      {
+        "file": "test_omnibar.html",
+        "width": 1280,
+        "height": 720
       }
     ],
     "assetCategories": [
