@@ -67,8 +67,8 @@
 				onStart() {
 					this._svgDoc.style({transform: `rotate(${ROTATION_FACTOR}turn)`});
 
-					this.$.winningOptionName.innerText = this.bid.options[0].name || this.bid.options[0].description;
-					this.$.losingOptionName.innerText = this.bid.options[1].name || this.bid.options[1].description;
+					this.$.winningOptionName.innerText = this.bid.options[0].description || this.bid.options[0].name;
+					this.$.losingOptionName.innerText = this.bid.options[1].description || this.bid.options[1].name;
 					TypeAnims.type(this.$.winningOptionName);
 					TypeAnims.type(this.$.losingOptionName);
 				},
