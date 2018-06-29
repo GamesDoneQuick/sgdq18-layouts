@@ -100,6 +100,10 @@
 			return tl;
 		}
 
+		resize() {
+			this.$.image.resize();
+		}
+
 		_showItem(sponsorAsset) {
 			const tl = new TimelineLite();
 
