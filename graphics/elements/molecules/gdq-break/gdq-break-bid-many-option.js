@@ -55,7 +55,7 @@ class GdqBreakBidManyOption extends Polymer.Element {
 			return '';
 		}
 
-		return option.name || option.description;
+		return option.description || option.name;
 	}
 }
 
