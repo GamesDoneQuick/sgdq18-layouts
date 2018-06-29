@@ -145,19 +145,17 @@
 			const svgDoc = SVG(this);
 			const mask = svgDoc.mask();
 			const image = svgDoc.image(this.fallbackSrc);
+			this.$svg.svgDoc = svgDoc;
 			this.$svg.image = image;
 			this.$svg.imageMaskCells = [];
 
-			svgDoc.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
-			image.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
 			image.attr({preserveAspectRatio: this.preserveAspectRatio});
 
 			if (this.withBackground) {
 				const bgRect = svgDoc.rect();
-				this.$svg.bgRect = bgRect;
-
-				bgRect.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
 				bgRect.fill({color: 'black', opacity: 0.25});
+
+				this.$svg.bgRect = bgRect;
 
 				if (STROKE_SIZE > 0) {
 					bgRect.stroke({
@@ -168,11 +166,6 @@
 						width: STROKE_SIZE * 2
 					});
 
-					// Mirror such that drawSVG anims start from the top right
-					// and move clockwise to un-draw, counter-clockwise to draw.
-					bgRect.transform({scaleX: -1, x: ELEMENT_WIDTH});
-
-					image.size(ELEMENT_WIDTH - (STROKE_SIZE * 2), ELEMENT_HEIGHT - (STROKE_SIZE * 2));
 					image.move(STROKE_SIZE, STROKE_SIZE);
 				}
 			}
@@ -192,6 +185,33 @@
 
 			image.front();
 			image.maskWith(mask);
+
+			this.resize();
+		}
+
+		resize() {
+			if (!this._initialized) {
+				return;
+			}
+
+			const STROKE_SIZE = this.strokeSize;
+			const ELEMENT_WIDTH = this.clientWidth;
+			const ELEMENT_HEIGHT = this.clientHeight;
+
+			this.$svg.svgDoc.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+			this.$svg.image.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+
+			if (this.withBackground) {
+				this.$svg.bgRect.size(ELEMENT_WIDTH, ELEMENT_HEIGHT);
+
+				if (STROKE_SIZE > 0) {
+					// Mirror such that drawSVG anims start from the top right
+					// and move clockwise to un-draw, counter-clockwise to draw.
+					this.$svg.bgRect.transform({scaleX: -1, x: ELEMENT_WIDTH});
+
+					this.$svg.image.size(ELEMENT_WIDTH - (STROKE_SIZE * 2), ELEMENT_HEIGHT - (STROKE_SIZE * 2));
+				}
+			}
 		}
 	}
 
