@@ -92,7 +92,6 @@ class AtomChevron extends CSSReflectionMixin(Polymer.Element) {
 
 		width = typeof width === 'number' ? width : this.scrollWidth;
 		height = typeof height === 'number' ? height : this.clientHeight;
-		console.log(width, height);
 		const strokeSize = parseInt(this.readCSSCustomProperty(
 			'--atom-chevron-stroke-size',
 			AtomChevron.DEFAULT_STROKE_SIZE
