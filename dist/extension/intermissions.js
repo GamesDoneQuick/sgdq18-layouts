@@ -330,14 +330,18 @@ function _updateCurrentIntermissionState() {
         if (!item.state.completed) {
             allPriorAdBreaksAreComplete = false;
         }
+        let oneOrMoreAdsMissingFile = false;
         item.ads.forEach(ad => {
             const casparFile = caspar.replicants.files.value.find((file) => {
                 return file.nameWithExt.toLowerCase() === ad.filename.toLowerCase();
             });
             if (!casparFile) {
                 log.error(`Ad points to file that does not exist in CasparCG: ${ad.filename}`);
+                ad.state.hasFile = false;
+                oneOrMoreAdsMissingFile = true;
                 return;
             }
+            ad.state.hasFile = true;
             if (casparFile.type.toLowerCase() === 'video') {
                 ad.state.durationFrames = casparFile.frames;
                 ad.state.fps = casparFile.frameRate;
@@ -350,6 +354,10 @@ function _updateCurrentIntermissionState() {
                 log.error('Unexpected file type from CasparCG:', casparFile);
             }
         });
+        if (oneOrMoreAdsMissingFile) {
+            item.state.canStart = false;
+            item.state.cantStartReason = GDQTypes.CantStartReasonsEnum.MISSING_FILES;
+        }
     });
 }
 /**

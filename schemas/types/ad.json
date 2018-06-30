@@ -67,6 +67,10 @@
 				"fps": {
 					"type": "number",
 					"default": 60
+				},
+				"hasFile": {
+					"type": "boolean",
+					"default": false
 				}
 			}
 		}
