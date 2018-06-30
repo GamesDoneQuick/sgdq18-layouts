@@ -14,7 +14,12 @@ class DashHostAdbreakAd extends Polymer.MutableData(Polymer.Element) {
 			completed: {
 				type: Boolean,
 				reflectToAttribute: true,
-				computed: '_computeCompleted(ad.state.completed)'
+				computed: '_booleanReflect(ad.state.completed)'
+			},
+			hasFile: {
+				type: Boolean,
+				reflectToAttribute: true,
+				computed: '_booleanReflect(ad.state.hasFile)'
 			}
 		};
 	}
@@ -37,8 +42,8 @@ class DashHostAdbreakAd extends Polymer.MutableData(Polymer.Element) {
 		nodecg.sendMessage('intermissions:completeImageAd', this.ad.id);
 	}
 
-	_computeCompleted(adStateCompleted) {
-		return adStateCompleted;
+	_booleanReflect(bool) {
+		return bool;
 	}
 
 	_updateProgressBar() {

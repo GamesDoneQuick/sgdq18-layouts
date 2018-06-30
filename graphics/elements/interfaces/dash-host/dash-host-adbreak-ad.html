@@ -23,6 +23,11 @@
 				@apply --shadow-none;
 			}
 
+			:host(:not([has-file])) {
+				background-color: #ff6d69;
+				color: white;
+			}
+
 			#filename {
 				font-size: 30px;
 				font-weight: bold;
@@ -67,12 +72,20 @@
 				}
 			}
 
+			#noFile {
+				font-weight: bold;
+			}
+
 			paper-button {
 				height: 64px;
 				width: 100%;
 				margin-left: 0;
 				margin-right: 0;
 				box-sizing: border-box;
+			}
+
+			[hidden] {
+				display: none !important;
 			}
 		</style>
 
@@ -81,7 +94,7 @@
 			<div id="type">&ensp;[[ad.adType]]</div>
 		</div>
 
-		<div class="layout horizontal center">
+		<div class="layout horizontal center" hidden="[[!hasFile]]">
 			<div id="time">
 				[[frameNumberToTimeString(ad.state.fps, ad.state.frameNumber)]] / [[frameNumberToTimeString(ad.state.fps, ad.state.durationFrames)]]&ensp;
 			</div>
@@ -90,6 +103,8 @@
 				<div id="progress-fill"></div>
 			</div>
 		</div>
+
+		<div id="noFile" hidden="[[hasFile]]">FILE IS MISSING! CANNOT PLAY AD!</div>
 
 		<paper-button
 			id="advance"

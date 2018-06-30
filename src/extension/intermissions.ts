@@ -393,6 +393,7 @@ function _updateCurrentIntermissionState() {
 			allPriorAdBreaksAreComplete = false;
 		}
 
+		let oneOrMoreAdsMissingFile = false;
 		item.ads.forEach(ad => {
 			const casparFile = caspar.replicants.files.value.find((file: GDQTypes.CasparFile) => {
 				return file.nameWithExt.toLowerCase() === ad.filename.toLowerCase();
@@ -400,8 +401,12 @@ function _updateCurrentIntermissionState() {
 
 			if (!casparFile) {
 				log.error(`Ad points to file that does not exist in CasparCG: ${ad.filename}`);
+				ad.state.hasFile = false;
+				oneOrMoreAdsMissingFile = true;
 				return;
 			}
+
+			ad.state.hasFile = true;
 
 			if (casparFile.type.toLowerCase() === 'video') {
 				ad.state.durationFrames = casparFile.frames;
@@ -413,6 +418,11 @@ function _updateCurrentIntermissionState() {
 				log.error('Unexpected file type from CasparCG:', casparFile);
 			}
 		});
+
+		if (oneOrMoreAdsMissingFile) {
+			item.state.canStart = false;
+			item.state.cantStartReason = GDQTypes.CantStartReasonsEnum.MISSING_FILES;
+		}
 	});
 }
 

@@ -30,7 +30,7 @@ const connection = new CasparCG.CasparCG({
         log.info('Connected.');
         clearInterval(updateFilesInterval);
         updateFiles();
-        updateFilesInterval = setInterval(updateFiles, 60000);
+        updateFilesInterval = setInterval(updateFiles, 30000);
         if (nodecg.bundleConfig.casparcg.lockSecret) {
             connection.lock(1, CasparCG.Enum.Lock.ACQUIRE, nodecg.bundleConfig.casparcg.lockSecret).then(() => {
                 log.info('Lock acquired.');

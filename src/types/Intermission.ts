@@ -19,6 +19,7 @@ export interface Ad {
 		framesLeft: number;
 		frameNumber: number;
 		fps: number;
+		hasFile: boolean;
 	};
 }
 
@@ -54,5 +55,6 @@ export enum CantStartReasonsEnum {
 	ALREADY_COMPLETED = 'already completed',
 	RUN_ACTIVE = 'run in progress',
 	PRIOR_BREAK_INCOMPLETE = 'a prior ad break is not complete',
-	MUST_ADVANCE_SCHEDULE = 'stream tech must go to next run'
+	MUST_ADVANCE_SCHEDULE = 'stream tech must go to next run',
+	MISSING_FILES = 'one or more ad files are missing'
 }
