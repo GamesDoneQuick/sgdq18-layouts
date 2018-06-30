@@ -161,8 +161,8 @@
 				tl.pause();
 				gdqUtils.preloadImage(prize.image).then(() => {
 					tl.resume();
-				}).catch(error => {
-					nodecg.log.error(error);
+				}).catch(() => {
+					nodecg.log.error(`Image "${prize.image}" failed to load for prize #${prize.id}.`);
 					useFallbackImage = true;
 					tl.resume();
 				});
