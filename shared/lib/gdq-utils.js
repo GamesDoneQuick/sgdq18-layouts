@@ -75,6 +75,10 @@
 		},
 
 		isGameScene(sceneName) {
+			if (!sceneName) {
+				return false;
+			}
+
 			return Boolean(sceneName.match(GAME_SCENE_NAME_REGEX));
 		}
 	};
