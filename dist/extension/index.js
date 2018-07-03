@@ -20,7 +20,9 @@ module.exports = (nodecg) => {
 };
 async function init() {
     const nodecg = nodecgApiContext.get();
-    const trackerCredentialsConfiguired = nodecg.bundleConfig.tracker.username && nodecg.bundleConfig.tracker.password;
+    const TRACKER_CREDENTIALS_CONFIGURED = nodecg.bundleConfig.tracker.username &&
+        nodecg.bundleConfig.tracker.password &&
+        !nodecg.bundleConfig.useMockData;
     if (nodecg.bundleConfig.useMockData) {
         nodecg.log.warn('WARNING! useMockData is true, you will not receive real data from the tracker!');
     }
@@ -34,7 +36,7 @@ async function init() {
     require('./oot-bingo');
     require('./caspar');
     require('./intermissions');
-    if (trackerCredentialsConfiguired) {
+    if (TRACKER_CREDENTIALS_CONFIGURED) {
         await loginToTracker();
         // Tracker logins expire every 2 hours. Re-login every 90 minutes.
         setInterval(loginToTracker, 90 * 60 * 1000);
@@ -43,7 +45,7 @@ async function init() {
         nodecg.log.warn('Tracker credentials not defined in cfg/sgdq18-layouts.json; will be unable to access privileged data.');
     }
     const schedule = require('./schedule');
-    if (trackerCredentialsConfiguired) {
+    if (TRACKER_CREDENTIALS_CONFIGURED) {
         schedule.on('permissionDenied', () => {
             loginToTracker().then(schedule.update);
         });

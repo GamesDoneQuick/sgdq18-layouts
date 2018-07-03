@@ -25,7 +25,9 @@ module.exports = (nodecg: any) => {
 
 async function init() {
 	const nodecg = nodecgApiContext.get();
-	const trackerCredentialsConfiguired = nodecg.bundleConfig.tracker.username && nodecg.bundleConfig.tracker.password;
+	const TRACKER_CREDENTIALS_CONFIGURED = nodecg.bundleConfig.tracker.username &&
+		nodecg.bundleConfig.tracker.password &&
+		!nodecg.bundleConfig.useMockData;
 
 	if (nodecg.bundleConfig.useMockData) {
 		nodecg.log.warn('WARNING! useMockData is true, you will not receive real data from the tracker!');
@@ -42,7 +44,7 @@ async function init() {
 	require('./caspar');
 	require('./intermissions');
 
-	if (trackerCredentialsConfiguired) {
+	if (TRACKER_CREDENTIALS_CONFIGURED) {
 		await loginToTracker();
 
 		// Tracker logins expire every 2 hours. Re-login every 90 minutes.
@@ -52,7 +54,7 @@ async function init() {
 	}
 
 	const schedule = require('./schedule');
-	if (trackerCredentialsConfiguired) {
+	if (TRACKER_CREDENTIALS_CONFIGURED) {
 		schedule.on('permissionDenied', () => {
 			loginToTracker().then(schedule.update);
 		});

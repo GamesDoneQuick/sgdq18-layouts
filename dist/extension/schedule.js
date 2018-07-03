@@ -23,7 +23,9 @@ const scheduleRep = nodecg.Replicant('schedule', { defaultValue: [], persistent:
 const emitter = new events_1.EventEmitter();
 module.exports = emitter;
 module.exports.update = update;
-const TRACKER_CREDENTIALS_CONFIGURED = nodecg.bundleConfig.tracker.username && nodecg.bundleConfig.tracker.password;
+const TRACKER_CREDENTIALS_CONFIGURED = nodecg.bundleConfig.tracker.username &&
+    nodecg.bundleConfig.tracker.password &&
+    !nodecg.bundleConfig.useMockData;
 const POLL_INTERVAL = 60 * 1000;
 let updateInterval;
 update();

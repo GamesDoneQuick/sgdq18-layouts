@@ -27,7 +27,9 @@ const emitter = new EventEmitter();
 module.exports = emitter;
 module.exports.update = update;
 
-const TRACKER_CREDENTIALS_CONFIGURED = nodecg.bundleConfig.tracker.username && nodecg.bundleConfig.tracker.password;
+const TRACKER_CREDENTIALS_CONFIGURED = nodecg.bundleConfig.tracker.username &&
+	nodecg.bundleConfig.tracker.password &&
+	!nodecg.bundleConfig.useMockData;
 const POLL_INTERVAL = 60 * 1000;
 let updateInterval: NodeJS.Timer;
 
