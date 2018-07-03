@@ -15,9 +15,6 @@ import * as GDQTypes from '../types';
 import {GDQUrls} from './urls';
 import {calcOriginalValues, mergeChangesFromTracker} from './lib/diff-run';
 
-const POLL_INTERVAL = 60 * 1000;
-let updateInterval: NodeJS.Timer;
-
 const nodecg = nodecgApiContext.get();
 const request = RequestPromise.defaults({jar: true}); // <= Automatically saves and re-uses cookies.
 const canSeekScheduleRep = nodecg.Replicant('canSeekSchedule');
@@ -29,6 +26,10 @@ const scheduleRep = nodecg.Replicant('schedule', {defaultValue: [], persistent: 
 const emitter = new EventEmitter();
 module.exports = emitter;
 module.exports.update = update;
+
+const TRACKER_CREDENTIALS_CONFIGURED = nodecg.bundleConfig.tracker.username && nodecg.bundleConfig.tracker.password;
+const POLL_INTERVAL = 60 * 1000;
+let updateInterval: NodeJS.Timer;
 
 update();
 
@@ -176,15 +177,17 @@ function update() {
 		json: true
 	});
 
-	const adsPromise = request({
-		uri: GDQUrls.ads,
-		json: true
-	});
+	const adsPromise = TRACKER_CREDENTIALS_CONFIGURED ?
+		request({
+			uri: GDQUrls.ads,
+			json: true
+		}) : Promise.resolve([]);
 
-	const interviewsPromise = request({
-		uri: GDQUrls.interviews,
-		json: true
-	});
+	const interviewsPromise = TRACKER_CREDENTIALS_CONFIGURED ?
+		request({
+			uri: GDQUrls.interviews,
+			json: true
+		}) : Promise.resolve([]);
 
 	return Promise.all([
 		runnersPromise, runsPromise, adsPromise, interviewsPromise

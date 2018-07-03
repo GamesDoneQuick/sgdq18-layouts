@@ -45,7 +45,7 @@ build_script:
     - 'move %APPVEYOR_BUILD_FOLDER% bundles\%APPVEYOR_PROJECT_SLUG%'
     - pkg . --targets node8-win-x64 --public
     - if not exist cfg mkdir cfg
-    - ps: Start-FileDownload 'https://www.dropbox.com/s/f119p2bfy0iv42s/sgdq18-layouts.json?dl=1' -FileName 'cfg/sgdq18-layouts.json'
+    #- ps: Start-FileDownload 'https://www.dropbox.com/s/REDACTED/sgdq18-layouts.json?dl=1' -FileName 'cfg/sgdq18-layouts.json'
 
 after_build:
   - ps: '$env:PKG_ZIP_NAME = "$env:APPVEYOR_PROJECT_SLUG-$(-join $env:APPVEYOR_REPO_COMMIT[0..7]).zip"'

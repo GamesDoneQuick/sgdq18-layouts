@@ -12,8 +12,6 @@ const timer = require("./timekeeping");
 const checklist = require("./checklist");
 const urls_1 = require("./urls");
 const diff_run_1 = require("./lib/diff-run");
-const POLL_INTERVAL = 60 * 1000;
-let updateInterval;
 const nodecg = nodecgApiContext.get();
 const request = RequestPromise.defaults({ jar: true }); // <= Automatically saves and re-uses cookies.
 const canSeekScheduleRep = nodecg.Replicant('canSeekSchedule');
@@ -25,6 +23,9 @@ const scheduleRep = nodecg.Replicant('schedule', { defaultValue: [], persistent:
 const emitter = new events_1.EventEmitter();
 module.exports = emitter;
 module.exports.update = update;
+const TRACKER_CREDENTIALS_CONFIGURED = nodecg.bundleConfig.tracker.username && nodecg.bundleConfig.tracker.password;
+const POLL_INTERVAL = 60 * 1000;
+let updateInterval;
 update();
 // Get latest schedule data every POLL_INTERVAL milliseconds
 updateInterval = setInterval(update, POLL_INTERVAL);
@@ -151,14 +152,16 @@ function update() {
         uri: urls_1.GDQUrls.runs,
         json: true
     });
-    const adsPromise = request({
-        uri: urls_1.GDQUrls.ads,
-        json: true
-    });
-    const interviewsPromise = request({
-        uri: urls_1.GDQUrls.interviews,
-        json: true
-    });
+    const adsPromise = TRACKER_CREDENTIALS_CONFIGURED ?
+        request({
+            uri: urls_1.GDQUrls.ads,
+            json: true
+        }) : Promise.resolve([]);
+    const interviewsPromise = TRACKER_CREDENTIALS_CONFIGURED ?
+        request({
+            uri: urls_1.GDQUrls.interviews,
+            json: true
+        }) : Promise.resolve([]);
     return Promise.all([
         runnersPromise, runsPromise, adsPromise, interviewsPromise
     ]).then(([runnersJSON, runsJSON, adsJSON, interviewsJSON]) => {
