@@ -14,6 +14,7 @@ This is a [NodeCG](http://github.com/nodecg/nodecg) v0.9 bundle. You will need t
 - [Usage](#usage)
   - [Running a mock donation server](#running-a-mock-donation-server)
   - [Lightning Round](#lightning-round)
+- [Interviews](#interviews)
 - [License](#license)
 - [Credits](#credits)
 
@@ -93,6 +94,11 @@ To reiterate, please don't just download and use this bundle as-is. Build someth
 		- You do not need to have `2` connected, it is optional.
 	- The `3` tab is for the "encoding" OBS, where the secondary recordings are running.
 		- You do not need to have `3` connected, it is optional.
+		
+## Interviews
+Interviews at GDQ events are pre-composited on a [Blackmagic ATEM 2 M/E Production Studio 4K](https://www.blackmagicdesign.com/products/atem). The final program out from this ATEM is then sent into OBS as a single SDI capture input. Interviews are run by a separate team from the rest of the stream, so that setup can continue uninterrupted while the interview is ongoing.
+
+Our ATEM operators sometimes use [`atem-compositor`](https://github.com/TipoftheHats/atem-compositor) to help them more rapidly create compositions of multiple sources on an ATEM, which is notoriously difficult to do quickly and accurately without the use of programs such as [`atem-compositor`](https://github.com/TipoftheHats/atem-compositor). 
 
 ## License
 sgdq18-layouts is provided under the Apache v2 license, which is available to read in the [LICENSE](LICENSE) file.
