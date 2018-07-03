@@ -12,10 +12,8 @@ import * as nodecgApiContext from './util/nodecg-api-context';
 import * as timer from './timekeeping';
 import * as checklist from './checklist';
 import * as GDQTypes from '../types';
+import {GDQUrls} from './urls';
 import {calcOriginalValues, mergeChangesFromTracker} from './lib/diff-run';
-
-const POLL_INTERVAL = 60 * 1000;
-let updateInterval: NodeJS.Timer;
 
 const nodecg = nodecgApiContext.get();
 const request = RequestPromise.defaults({jar: true}); // <= Automatically saves and re-uses cookies.
@@ -28,6 +26,12 @@ const scheduleRep = nodecg.Replicant('schedule', {defaultValue: [], persistent: 
 const emitter = new EventEmitter();
 module.exports = emitter;
 module.exports.update = update;
+
+const TRACKER_CREDENTIALS_CONFIGURED = nodecg.bundleConfig.tracker.username &&
+	nodecg.bundleConfig.tracker.password &&
+	!nodecg.bundleConfig.useMockData;
+const POLL_INTERVAL = 60 * 1000;
+let updateInterval: NodeJS.Timer;
 
 update();
 
@@ -166,48 +170,26 @@ nodecg.listenFor('resetRun', (pk: number, cb: Function) => {
  */
 function update() {
 	const runnersPromise = request({
-		uri: nodecg.bundleConfig.useMockData ?
-			'https://www.dropbox.com/s/lmhh2tctyrvipdr/runners.json' :
-			'https://private.gamesdonequick.com/tracker/search',
-		qs: {
-			type: 'runner',
-			event: nodecg.bundleConfig.tracker.eventId,
-			dl: 1 // For Dropbox only
-		},
+		uri: GDQUrls.runners,
 		json: true
 	});
 
 	const runsPromise = request({
-		uri: nodecg.bundleConfig.useMockData ?
-			'https://www.dropbox.com/s/7njvyl80m34b46s/schedule.json' :
-			'https://private.gamesdonequick.com/tracker/search',
-		qs: {
-			type: 'run',
-			event: nodecg.bundleConfig.tracker.eventId,
-			dl: 1 // For Dropbox only
-		},
+		uri: GDQUrls.runs,
 		json: true
 	});
 
-	const adsPromise = request({
-		uri: nodecg.bundleConfig.useMockData ?
-			'https://www.dropbox.com/s/p04aoahtx6hv10i/ads.json' :
-			`https://private.gamesdonequick.com/tracker/gdq/ads/${nodecg.bundleConfig.tracker.eventId}/`,
-		qs: {
-			dl: 1 // For Dropbox only
-		},
-		json: true
-	});
+	const adsPromise = TRACKER_CREDENTIALS_CONFIGURED ?
+		request({
+			uri: GDQUrls.ads,
+			json: true
+		}) : Promise.resolve([]);
 
-	const interviewsPromise = request({
-		uri: nodecg.bundleConfig.useMockData ?
-			'https://www.dropbox.com/s/kr8279xxnrzsyp4/interviews.json' :
-			`https://private.gamesdonequick.com/tracker/gdq/interviews/${nodecg.bundleConfig.tracker.eventId}/`,
-		qs: {
-			dl: 1 // For Dropbox only
-		},
-		json: true
-	});
+	const interviewsPromise = TRACKER_CREDENTIALS_CONFIGURED ?
+		request({
+			uri: GDQUrls.interviews,
+			json: true
+		}) : Promise.resolve([]);
 
 	return Promise.all([
 		runnersPromise, runsPromise, adsPromise, interviewsPromise

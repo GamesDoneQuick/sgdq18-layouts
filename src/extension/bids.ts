@@ -8,16 +8,11 @@ import * as BB from 'bluebird';
 
 // Ours
 import * as nodecgApiContext from './util/nodecg-api-context';
+import {GDQUrls} from './urls';
 import {TrackerObject, ChildBid, ParentBid} from '../types';
 
 const nodecg = nodecgApiContext.get();
 const POLL_INTERVAL = 60 * 1000;
-const BIDS_URL = nodecg.bundleConfig.useMockData ?
-	'https://www.dropbox.com/s/1gysv511t97sab5/allBids.json?dl=1' :
-	`https://private.gamesdonequick.com/tracker/search/?type=allbids&event=${nodecg.bundleConfig.tracker.eventId}`;
-const CURRENT_BIDS_URL = nodecg.bundleConfig.useMockData ?
-	'https://www.dropbox.com/s/87n9tdh4qp72yps/currentBids.json?dl=1' :
-	`https://private.gamesdonequick.com/tracker/search/?type=allbids&feed=current&event=${nodecg.bundleConfig.tracker.eventId}`;
 const currentBidsRep = nodecg.Replicant('currentBids', {defaultValue: []});
 const allBidsRep = nodecg.Replicant('allBids', {defaultValue: []});
 const bitsTotal = nodecg.Replicant('bits:total');
@@ -32,12 +27,12 @@ function update() {
 	nodecg.sendMessage('bids:updating');
 
 	const currentPromise = request({
-		uri: CURRENT_BIDS_URL,
+		uri: GDQUrls.currentBids,
 		json: true
 	});
 
 	const allPromise = request({
-		uri: BIDS_URL,
+		uri: GDQUrls.allBids,
 		json: true
 	});
 
