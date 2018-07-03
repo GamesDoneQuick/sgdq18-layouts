@@ -12,6 +12,7 @@ This is a [NodeCG](http://github.com/nodecg/nodecg) v0.9 bundle. You will need t
 - [Configuration](#configuration)
   - [Setting up OBS](#setting-up-obs)
   - [Tweets and Fan art](#tweets-and-fan-art)
+  - [Tracker Credentials](#tracker-credentials)
 - [Usage](#usage)
   - [Running a mock donation server](#running-a-mock-donation-server)
   - [Lightning Round](#lightning-round)
@@ -78,6 +79,23 @@ Once you have a deployment of `twitter-socket.io-adapter` up and running on Hero
 		"websocketUrl": "https://YOUR_HEROKU_APP_NAME.herokuapp.com/",
 		"preSharedKey": "YOUR_SECRET_KEY_FROM_YOUR_DEPLOYMENT_ON_HEROKU",
 		"debug": false
+	}
+}
+```
+
+### Tracker Credentials
+Some of the data that `sgdq18-layouts` fetches from the tracker is private, privileged data. An authorized account is required to access this data. Private data includes:
+- Ad schedule
+- Interview schedule
+- Per-run tech notes
+
+If you wish to access private data on your deployment of the tracker, you'll need to configure your `tracker` object in `nodecg/cfg/sgdq18-layouts.json` like this example:
+```json
+{
+	"tracker": {
+		"username": "YOUR_USERNAME",
+		"password": "YOUR_PASSWORD",
+		"eventId": 23
 	}
 }
 ```
