@@ -61,6 +61,8 @@ If you have [nodecg-cli](https://github.com/nodecg/nodecg-cli) installed, you ca
 3. Go to "Scene Collection > Import", and import the `obs-assets/obs-scenes.json` file from this repository. Then, ensure that the "SGDQ2018 - Localhost" scene collection is selected in OBS.  
 4. Locate the "Scene Transitions" dropdown menu in the main interface of OBS (it will be near the bottom right by default). Select "Blank Stinger". Click the gear icon below the dropdown, and select "Properties". Update the "Video File" path to point to your `sgdq18-layouts/obs-assets/BlankTransition.mov` path. 
 
+You may notice that we use a custom plugin called GDQ Crop. This plugin's source can be viewed [here](https://github.com/TestRunnerSRL/gdqcrop).
+
 ### Tweets and Fan art
 > ❗ This does not cover the system for interview question tweets, which is a separate system called [_Lightning Round_](#lightning-round). This only covers the system for showing Tweets and Fan art on the break and gameplay scenes.
 
