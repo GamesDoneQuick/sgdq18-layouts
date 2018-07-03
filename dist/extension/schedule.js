@@ -10,6 +10,7 @@ const RequestPromise = require("request-promise");
 const nodecgApiContext = require("./util/nodecg-api-context");
 const timer = require("./timekeeping");
 const checklist = require("./checklist");
+const urls_1 = require("./urls");
 const diff_run_1 = require("./lib/diff-run");
 const POLL_INTERVAL = 60 * 1000;
 let updateInterval;
@@ -143,43 +144,19 @@ nodecg.listenFor('resetRun', (pk, cb) => {
  */
 function update() {
     const runnersPromise = request({
-        uri: nodecg.bundleConfig.useMockData ?
-            'https://www.dropbox.com/s/lmhh2tctyrvipdr/runners.json' :
-            'https://private.gamesdonequick.com/tracker/search',
-        qs: {
-            type: 'runner',
-            event: nodecg.bundleConfig.tracker.eventId,
-            dl: 1 // For Dropbox only
-        },
+        uri: urls_1.GDQUrls.runners,
         json: true
     });
     const runsPromise = request({
-        uri: nodecg.bundleConfig.useMockData ?
-            'https://www.dropbox.com/s/7njvyl80m34b46s/schedule.json' :
-            'https://private.gamesdonequick.com/tracker/search',
-        qs: {
-            type: 'run',
-            event: nodecg.bundleConfig.tracker.eventId,
-            dl: 1 // For Dropbox only
-        },
+        uri: urls_1.GDQUrls.runs,
         json: true
     });
     const adsPromise = request({
-        uri: nodecg.bundleConfig.useMockData ?
-            'https://www.dropbox.com/s/p04aoahtx6hv10i/ads.json' :
-            `https://private.gamesdonequick.com/tracker/gdq/ads/${nodecg.bundleConfig.tracker.eventId}/`,
-        qs: {
-            dl: 1 // For Dropbox only
-        },
+        uri: urls_1.GDQUrls.ads,
         json: true
     });
     const interviewsPromise = request({
-        uri: nodecg.bundleConfig.useMockData ?
-            'https://www.dropbox.com/s/kr8279xxnrzsyp4/interviews.json' :
-            `https://private.gamesdonequick.com/tracker/gdq/interviews/${nodecg.bundleConfig.tracker.eventId}/`,
-        qs: {
-            dl: 1 // For Dropbox only
-        },
+        uri: urls_1.GDQUrls.interviews,
         json: true
     });
     return Promise.all([

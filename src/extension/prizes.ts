@@ -8,6 +8,7 @@ import * as request from 'request-promise';
 // Ours
 import * as nodecgApiContext from './util/nodecg-api-context';
 import * as GDQTypes from '../types';
+import {GDQUrls} from './urls';
 
 const nodecg = nodecgApiContext.get();
 const POLL_INTERVAL = 60 * 1000;
@@ -30,15 +31,7 @@ function update() {
 	nodecg.sendMessage('prizes:updating');
 
 	const currentPromise = request({
-		uri: nodecg.bundleConfig.useMockData ?
-			'https://www.dropbox.com/s/rpiisscgszwhguc/currentPrizes.json?dl=1' :
-			'https://private.gamesdonequick.com/tracker/search/',
-		qs: {
-			type: 'prize',
-			feed: 'current',
-			event: nodecg.bundleConfig.tracker.eventId,
-			dl: 1 // For Dropbox only
-		},
+		uri: GDQUrls.currentPrizes,
 		json: true
 	}).then(prizes => {
 		const formattedPrizes = prizes.map(formatPrize);
@@ -48,14 +41,7 @@ function update() {
 	});
 
 	const allPromise = request({
-		uri: nodecg.bundleConfig.useMockData ?
-			'https://www.dropbox.com/s/rpiisscgszwhguc/allPrizes.json?dl=1' :
-			'https://private.gamesdonequick.com/tracker/search/',
-		qs: {
-			type: 'prize',
-			event: nodecg.bundleConfig.tracker.eventId,
-			dl: 1 // For Dropbox only
-		},
+		uri: GDQUrls.allPrizes,
 		json: true
 	}).then(prizes => {
 		const formattedPrizes = prizes.map(formatPrize);

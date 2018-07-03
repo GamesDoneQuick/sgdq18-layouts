@@ -6,6 +6,7 @@ const numeral = require("numeral");
 const request = require("request-promise");
 // Ours
 const nodecgApiContext = require("./util/nodecg-api-context");
+const urls_1 = require("./urls");
 const nodecg = nodecgApiContext.get();
 const POLL_INTERVAL = 60 * 1000;
 const currentPrizesRep = nodecg.Replicant('currentPrizes', { defaultValue: [] });
@@ -22,15 +23,7 @@ setInterval(() => {
 function update() {
     nodecg.sendMessage('prizes:updating');
     const currentPromise = request({
-        uri: nodecg.bundleConfig.useMockData ?
-            'https://www.dropbox.com/s/rpiisscgszwhguc/currentPrizes.json?dl=1' :
-            'https://private.gamesdonequick.com/tracker/search/',
-        qs: {
-            type: 'prize',
-            feed: 'current',
-            event: nodecg.bundleConfig.tracker.eventId,
-            dl: 1 // For Dropbox only
-        },
+        uri: urls_1.GDQUrls.currentPrizes,
         json: true
     }).then(prizes => {
         const formattedPrizes = prizes.map(formatPrize);
@@ -39,14 +32,7 @@ function update() {
         }
     });
     const allPromise = request({
-        uri: nodecg.bundleConfig.useMockData ?
-            'https://www.dropbox.com/s/rpiisscgszwhguc/allPrizes.json?dl=1' :
-            'https://private.gamesdonequick.com/tracker/search/',
-        qs: {
-            type: 'prize',
-            event: nodecg.bundleConfig.tracker.eventId,
-            dl: 1 // For Dropbox only
-        },
+        uri: urls_1.GDQUrls.allPrizes,
         json: true
     }).then(prizes => {
         const formattedPrizes = prizes.map(formatPrize);

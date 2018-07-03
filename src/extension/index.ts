@@ -10,16 +10,22 @@ import * as nodecgApiContext from './util/nodecg-api-context';
 const request = RequestPromise.defaults({jar: true}); // <= Automatically saves and re-uses cookies.
 const LOGIN_URL = 'https://private.gamesdonequick.com/tracker/admin/login/';
 
+let isFirstLogin = true;
+
 module.exports = (nodecg: any) => {
 	// Store a reference to this nodecg API context in a place where other libs can easily access it.
 	// This must be done before any other files are `require`d.
 	nodecgApiContext.set(nodecg);
-	const loginLog = new nodecg.Logger(`${nodecg.bundleName}:tracker`);
-	let isFirstLogin = true;
+	init().then(() => {
+		nodecg.log.info('Initialization successful.');
+	}).catch(error => {
+		nodecg.log.error('Failed to initialize:', error);
+	});
+};
 
-	if (!nodecg.bundleConfig.tracker) {
-		throw new Error(`You must populate the "tracker" configuration object in cfg/${nodecg.bundleName}.json`);
-	}
+async function init() {
+	const nodecg = nodecgApiContext.get();
+	const trackerCredentialsConfiguired = nodecg.bundleConfig.tracker.username && nodecg.bundleConfig.tracker.password;
 
 	if (nodecg.bundleConfig.useMockData) {
 		nodecg.log.warn('WARNING! useMockData is true, you will not receive real data from the tracker!');
@@ -33,25 +39,28 @@ module.exports = (nodecg: any) => {
 	require('./countdown');
 	require('./sortable-list');
 	require('./oot-bingo');
+	require('./caspar');
+	require('./intermissions');
 
-	// This is a hack.
-	require('./caspar').oscEvents.once('initialized', () => {
-		require('./intermissions');
-	});
+	if (trackerCredentialsConfiguired) {
+		await loginToTracker();
 
-	loginToTracker().then(() => {
-		const schedule = require('./schedule');
+		// Tracker logins expire every 2 hours. Re-login every 90 minutes.
+		setInterval(loginToTracker, 90 * 60 * 1000);
+	} else {
+		nodecg.log.warn('Tracker credentials not defined in cfg/sgdq18-layouts.json; will be unable to access privileged data.');
+	}
+
+	const schedule = require('./schedule');
+	if (trackerCredentialsConfiguired) {
 		schedule.on('permissionDenied', () => {
 			loginToTracker().then(schedule.update);
 		});
+	}
 
-		require('./bids');
-		require('./prizes');
-		require('./total');
-	});
-
-	// Tracker logins expire every 2 hours. Re-login every 90 minutes.
-	setInterval(loginToTracker, 90 * 60 * 1000);
+	require('./bids');
+	require('./prizes');
+	require('./total');
 
 	if (nodecg.bundleConfig.twitch) {
 		require('./twitch-ads');
@@ -96,44 +105,47 @@ module.exports = (nodecg: any) => {
 		nodecg.log.warn('"firebase" is not defined in cfg/sgdq18-layouts.json! ' +
 			'The interview question system (Lightning Round) will be disabled.');
 	}
+}
 
-	// Fetch the login page, and run the response body through cheerio
-	// so we can extract the CSRF token from the hidden input field.
-	// Then, POST with our username, password, and the csrfmiddlewaretoken.
-	function loginToTracker() {
-		if (isFirstLogin) {
-			loginLog.info('Logging in as %s...', nodecg.bundleConfig.tracker.username);
-		} else {
-			loginLog.info('Refreshing tracker login session as %s...', nodecg.bundleConfig.tracker.username);
-		}
+// Fetch the login page, and run the response body through cheerio
+// so we can extract the CSRF token from the hidden input field.
+// Then, POST with our username, password, and the csrfmiddlewaretoken.
+function loginToTracker() {
+	const nodecg = nodecgApiContext.get();
+	const loginLog = new nodecg.Logger(`${nodecg.bundleName}:tracker`);
 
-		return request({
-			uri: LOGIN_URL,
-			transform(body) {
-				return cheerio.load(body);
-			}
-		}).then($ => request({
-			method: 'POST',
-			uri: LOGIN_URL,
-			form: {
-				username: nodecg.bundleConfig.tracker.username,
-				password: nodecg.bundleConfig.tracker.password,
-				csrfmiddlewaretoken: $('#login-form > input[name="csrfmiddlewaretoken"]').val()
-			},
-			headers: {
-				Referer: LOGIN_URL
-			},
-			resolveWithFullResponse: true,
-			simple: false
-		})).then(() => {
-			if (isFirstLogin) {
-				isFirstLogin = false;
-				loginLog.info('Logged in as %s.', nodecg.bundleConfig.tracker.username);
-			} else {
-				loginLog.info('Refreshed session as %s.', nodecg.bundleConfig.tracker.username);
-			}
-		}).catch(err => {
-			loginLog.error('Error authenticating!\n', err);
-		});
+	if (isFirstLogin) {
+		loginLog.info('Logging in as %s...', nodecg.bundleConfig.tracker.username);
+	} else {
+		loginLog.info('Refreshing tracker login session as %s...', nodecg.bundleConfig.tracker.username);
 	}
-};
+
+	return request({
+		uri: LOGIN_URL,
+		transform(body) {
+			return cheerio.load(body);
+		}
+	}).then($ => request({
+		method: 'POST',
+		uri: LOGIN_URL,
+		form: {
+			username: nodecg.bundleConfig.tracker.username,
+			password: nodecg.bundleConfig.tracker.password,
+			csrfmiddlewaretoken: $('#login-form > input[name="csrfmiddlewaretoken"]').val()
+		},
+		headers: {
+			Referer: LOGIN_URL
+		},
+		resolveWithFullResponse: true,
+		simple: false
+	})).then(() => {
+		if (isFirstLogin) {
+			isFirstLogin = false;
+			loginLog.info('Logged in as %s.', nodecg.bundleConfig.tracker.username);
+		} else {
+			loginLog.info('Refreshed session as %s.', nodecg.bundleConfig.tracker.username);
+		}
+	}).catch(err => {
+		loginLog.error('Error authenticating!\n', err);
+	});
+}

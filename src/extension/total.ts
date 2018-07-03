@@ -6,14 +6,13 @@ import * as request from 'request-promise';
 // Ours
 import {formatDollars} from './util';
 import * as nodecgApiContext from './util/nodecg-api-context';
+import {GDQUrls} from './urls';
 
 const nodecg = nodecgApiContext.get();
 const autoUpdateTotal = nodecg.Replicant('autoUpdateTotal');
 const bitsTotal = nodecg.Replicant('bits:total');
 const recordTrackerEnabled = nodecg.Replicant('recordTrackerEnabled');
 const total = nodecg.Replicant('total');
-
-const DONATION_STATS_URL = `https://private.gamesdonequick.com/tracker/${nodecg.bundleConfig.tracker.eventId}?json`;
 
 autoUpdateTotal.on('change', (newVal: boolean) => {
 	if (newVal) {
@@ -137,7 +136,7 @@ function manuallyUpdateTotal(silent: boolean, cb?: Function) {
 async function updateTotal() {
 	try {
 		const stats = await request({
-			uri: DONATION_STATS_URL,
+			uri: GDQUrls.total,
 			json: true
 		});
 
