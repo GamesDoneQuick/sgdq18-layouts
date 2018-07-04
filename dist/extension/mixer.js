@@ -27,6 +27,9 @@ const gameAudioChannels = nodecg.Replicant('gameAudioChannels', {
 });
 const channelToReplicantMap = {};
 nodecg.bundleConfig.osc.gameAudioChannels.forEach((item, index) => {
+    if (!gameAudioChannels.value[index]) {
+        return;
+    }
     if (typeof item.sd === 'number') {
         channelToReplicantMap[item.sd] = gameAudioChannels.value[index].sd;
     }
