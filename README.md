@@ -45,7 +45,7 @@ If you just want a direct link to a build that works and don't mind it maybe bei
 	- This is optional, but a lot of functionality requires it. Many systems will be unavailable unless you configure them.
 5. Run the nodecg server: `node index.js` (or `nodecg start` if you have [`nodecg-cli`](https://github.com/nodecg/nodecg-cli) installed) from the `nodecg` root directory.
 
-**Please note that by default, not all graphics will not work.** This is because `sgdq18-layouts` makes use of several non-free plugins for [GSAP](https://greensock.com), which we cannot redistribute. If you wish to use all graphics in their current implementations, you will need to pay for access to [Club GreenSock](https://greensock.com/club) and save the following plugins to the following directories:
+**Please note that by default, not all graphics will work.** This is because `sgdq18-layouts` makes use of several non-free plugins for [GSAP](https://greensock.com), which we cannot redistribute. If you wish to use all graphics in their current implementations, you will need to pay for access to [Club GreenSock](https://greensock.com/club) and save the following plugins to the following directories:
 - [SplitText](https://greensock.com/SplitText): `shared/lib/vendor/SplitText.min.js`
 - [CustomEase](https://greensock.com/customease): `shared/lib/vendor/CustomEase.min.js`
 - [DrawSVGPlugin](https://greensock.com/drawSVG): `shared/lib/vendor/DrawSVGPlugin.min.js`
