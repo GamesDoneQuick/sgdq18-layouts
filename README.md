@@ -60,7 +60,8 @@ If you have [nodecg-cli](https://github.com/nodecg/nodecg-cli) installed, you ca
 `sgdq18-layouts` has a deep, complex integration with OBS Studio. As such, it expects your OBS to be fairly precisely configured.
 
 1. Download and extract [this custom build of OBS](https://www.dropbox.com/s/zemdmloh2yvwh0t/SGDQ-OBS-02050b7-websocket-events.zip?dl=1), which includes all the plugins we use.  
-   	- Once extracted, OBS can be launched via `bin/64bit/obs64.exe`.  
+   	- Once extracted, OBS can be launched via `bin/64bit/obs64.exe`.
+	- The source code for this build can be viewed [here](https://github.com/GamesDoneQuick/obs-studio/tree/sgdq2018).
 2. Go to "Profile > Import", and import the `obs-assets/obs-profile` directory from this repository. Then, ensure that the "SGDQ2018" profile is selected in OBS.  
 3. Go to "Scene Collection > Import", and import the `obs-assets/obs-scenes.json` file from this repository. Then, ensure that the "SGDQ2018 - Localhost" scene collection is selected in OBS.  
 4. Locate the "Scene Transitions" dropdown menu in the main interface of OBS (it will be near the bottom right by default). Select "Blank Stinger". Click the gear icon below the dropdown, and select "Properties". Update the "Video File" path to point to your `sgdq18-layouts/obs-assets/BlankTransition.mov` path.
