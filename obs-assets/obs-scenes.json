@@ -48,7 +48,7 @@
             "streamTimerSeconds": 0
         }
     },
-    "name": "SGDQ2018 - 10.1.250.3",
+    "name": "SGDQ2018 - Localhost",
     "preview_locked": false,
     "quick_transitions": [
         {
@@ -206,7 +206,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/widescreen_2_mario.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/widescreen_2_mario.html",
                 "width": 1600
             },
             "sync": 0,
@@ -264,7 +264,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/gba_4.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/gba_4.html",
                 "width": 1600
             },
             "sync": 0,
@@ -672,7 +672,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/oot_bingo.html?embiggen=true",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/oot_bingo.html?embiggen=true",
                 "width": 1125
             },
             "sync": 0,
@@ -698,7 +698,7 @@
                 "css": "",
                 "fps": 60,
                 "height": 900,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/transition.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/transition.html",
                 "width": 1600
             },
             "sync": 0,
@@ -725,7 +725,7 @@
                 "fps": 60,
                 "height": 458,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/lttp_tracker.html?mirrored=true&game_id=test9i8285487658934923",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/lttp_tracker.html?mirrored=true&game_id=test9i8285487658934923",
                 "width": 204
             },
             "sync": 0,
@@ -752,7 +752,7 @@
                 "fps": 60,
                 "height": 458,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/lttp_tracker.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/lttp_tracker.html",
                 "width": 204
             },
             "sync": 0,
@@ -1224,7 +1224,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/widescreen_4.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/widescreen_4.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -1856,7 +1856,7 @@
                 "fps": 60,
                 "height": 900,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/countdown.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/countdown.html",
                 "width": 1600
             },
             "sync": 0,
@@ -3700,7 +3700,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/gameboy_2.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/gameboy_2.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -3927,7 +3927,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/interview.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/interview.html",
                 "width": 1600
             },
             "sync": 0,
@@ -4206,7 +4206,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/gameboy_4.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/gameboy_4.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -4614,7 +4614,7 @@
                 "fps": 60,
                 "height": 900,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/break.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/break.html",
                 "width": 1600
             },
             "sync": 0,
@@ -4925,7 +4925,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/gba_1.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/gba_1.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -5332,7 +5332,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/standard_4.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/standard_4.html",
                 "width": 1600
             },
             "sync": 0,
@@ -5739,7 +5739,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/standard_3.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/standard_3.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -6145,7 +6145,7 @@
             "settings": {
                 "fps": 120,
                 "height": 55,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/omnibar.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/omnibar.html",
                 "width": 1600
             },
             "sync": 0,
@@ -6616,7 +6616,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/widescreen_2.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/widescreen_2.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -7023,7 +7023,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/widescreen_1.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/widescreen_1.html",
                 "width": 1600
             },
             "sync": 0,
@@ -7430,7 +7430,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/standard_1.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/standard_1.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -7838,7 +7838,7 @@
                 "height": 845,
                 "is_local_file": false,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/standard_2.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/standard_2.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -8245,7 +8245,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/gba_2.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/gba_2.html",
                 "width": 1600
             },
             "sync": 0,
@@ -8652,7 +8652,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/gameboy_1.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/gameboy_1.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -9059,7 +9059,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/3ds.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/3ds.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -9466,7 +9466,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/ds.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/ds.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -9873,7 +9873,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/gameboy_3.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/gameboy_3.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -10876,7 +10876,7 @@
                 "fps": 60,
                 "height": 845,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/ds_vertical.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/ds_vertical.html?key=5406d56c-ab5e-4587-8e72-89a955a32bbf",
                 "width": 1600
             },
             "sync": 0,
@@ -11532,7 +11532,7 @@
                 "fps": 60,
                 "height": 356,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/oot_bingo.html?embiggen=false",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/oot_bingo.html?embiggen=false",
                 "width": 475
             },
             "sync": 0,
@@ -11673,7 +11673,7 @@
                 "height": 900,
                 "restart_when_active": true,
                 "shutdown": true,
-                "url": "http://10.1.250.3:9090/bundles/sgdq18-layouts/graphics/countdown-foreground-anim.html",
+                "url": "http://localhost:9090/bundles/sgdq18-layouts/graphics/countdown-foreground-anim.html",
                 "width": 1600
             },
             "sync": 0,
