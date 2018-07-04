@@ -21,7 +21,7 @@ This is a [NodeCG](http://github.com/nodecg/nodecg) v0.9 bundle. You will need t
 - [Credits](#credits)
 
 ## Video Breakdown
-We unfortunately do not have time to make a video breakdown for this event's bundle. However, [we did make one AGDQ 2017's graphics package](https://www.youtube.com/watch?v=vBAZXchbI3U&list=PLTEhlYdONYxv1wk2FsIpEz92X3x2E7bSx), which still has a few similarities with this one.
+We unfortunately do not have time to make a video breakdown for this event's bundle. However, [we did make one for AGDQ 2017's graphics package](https://www.youtube.com/watch?v=vBAZXchbI3U&list=PLTEhlYdONYxv1wk2FsIpEz92X3x2E7bSx), which still has a few similarities with this one.
 
 ## Automated Builds
 If you are using an automated build (which includes everything in one zip file with a single exe), skip to [configuration](#configuration).
