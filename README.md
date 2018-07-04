@@ -63,7 +63,10 @@ If you have [nodecg-cli](https://github.com/nodecg/nodecg-cli) installed, you ca
    	- Once extracted, OBS can be launched via `bin/64bit/obs64.exe`.  
 2. Go to "Profile > Import", and import the `obs-assets/obs-profile` directory from this repository. Then, ensure that the "SGDQ2018" profile is selected in OBS.  
 3. Go to "Scene Collection > Import", and import the `obs-assets/obs-scenes.json` file from this repository. Then, ensure that the "SGDQ2018 - Localhost" scene collection is selected in OBS.  
-4. Locate the "Scene Transitions" dropdown menu in the main interface of OBS (it will be near the bottom right by default). Select "Blank Stinger". Click the gear icon below the dropdown, and select "Properties". Update the "Video File" path to point to your `sgdq18-layouts/obs-assets/BlankTransition.mov` path. 
+4. Locate the "Scene Transitions" dropdown menu in the main interface of OBS (it will be near the bottom right by default). Select "Blank Stinger". Click the gear icon below the dropdown, and select "Properties". Update the "Video File" path to point to your `sgdq18-layouts/obs-assets/BlankTransition.mov` path.
+5. Ensure OBS is in Studio Mode.
+6. Click the gear icon to the right of the center "Transition" button.
+7. Ensure that "Duplicate Scene" is unchecked.
 
 You may notice that we use a custom plugin called GDQ Crop. This plugin's source can be viewed [here](https://github.com/TestRunnerSRL/gdqcrop).
 
