@@ -28,7 +28,7 @@ If you are using an automated build (which includes everything in one zip file w
 
 Automated builds are made on AppVeyor CI. You can view the list of builds [here](https://ci.appveyor.com/project/supportclass/sgdq18-layouts/history). To download a build, click the "Artifacts" link in the top right, above that build's log output. Then, download the `sdgq18-layouts-${HASH}.zip` for that build.
 
-If you just want a direct link to a build that works and don't mind it maybe being slightly out-of-date, [here you go]().
+If you just want a direct link to a build that works and don't mind it maybe being slightly out-of-date, [here you go](https://ci.appveyor.com/api/buildjobs/stwuq2v5fnu602yw/artifacts/sgdq18-layouts-d932f951.zip).
 
 ## Requirements
 - [Node.js 8 or greater (8 recommended, newer versions not tested)](https://nodejs.org/)
