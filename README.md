@@ -21,10 +21,14 @@ This is a [NodeCG](http://github.com/nodecg/nodecg) v0.9 bundle. You will need t
 - [Credits](#credits)
 
 ## Video Breakdown
-We unfortunately do not have time to make a video breakdown for this event's bundle. However, [we did make one for the last year's SGDQ](https://www.youtube.com/watch?v=vBAZXchbI3U&list=PLTEhlYdONYxv1wk2FsIpEz92X3x2E7bSx), which still has a few similarities with this one.
+We unfortunately do not have time to make a video breakdown for this event's bundle. However, [we did make one AGDQ 2017's graphics package](https://www.youtube.com/watch?v=vBAZXchbI3U&list=PLTEhlYdONYxv1wk2FsIpEz92X3x2E7bSx), which still has a few similarities with this one.
 
 ## Automated Builds
 If you are using an automated build (which includes everything in one zip file with a single exe), skip to [configuration](#configuration).
+
+Automated builds are made on AppVeyor CI. You can view the list of builds [here](https://ci.appveyor.com/project/supportclass/sgdq18-layouts/history). To download a build, click the "Artifacts" link in the top right, above that build's log output. Then, download the `sdgq18-layouts-${HASH}.zip` for that build.
+
+If you just want a direct link to a build that works and don't mind it maybe being slightly out-of-date, [here you go]().
 
 ## Requirements
 - [Node.js 8 or greater (8 recommended, newer versions not tested)](https://nodejs.org/)
