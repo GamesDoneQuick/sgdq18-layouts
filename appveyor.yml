@@ -1,0 +1,87 @@
+image: Visual Studio 2017
+
+platform:
+  - x64
+
+environment:
+  PKG_CACHE_PATH: '%USERPROFILE%\pkg-cache'
+  TEST_SCREENSHOT_DIR: '%USERPROFILE%\test-screenshots'
+  APPVEYOR_BUILD_ARTIFACT_STORAGE: gce-artifacts-us
+
+cache:
+  - '%APPDATA%\npm'
+  - '%APPDATA%\npm-cache'
+  - '%LOCALAPPDATA%\bower'
+  - '%USERPROFILE%\pkg-cache'
+
+install:
+  - ps: Install-Product node 8 x64
+  - npm install -g npm@5.7.1 # remove once Node ships with npm@5.7.1 or greater. Though, npm 5.8.0 breaks these builds...
+  - npm install -g bower polymer-cli pkg
+  - npm ci # http://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable
+  - bower install
+
+before_build:
+  - node --version
+  - npm --version
+  - npm test
+
+build_script:
+    - npm ci --production
+    - cd ..
+    - git clone https://github.com/nodecg/nodecg.git
+    - cd nodecg
+    - git checkout v0.9.11
+    - npm ci --production && bower install
+
+    # Delete .git files, so that they aren't added to the package.
+    - del /f/s/q .git %APPVEYOR_BUILD_FOLDER%\.git > nul
+    - rmdir /s/q .git %APPVEYOR_BUILD_FOLDER%\.git
+
+    # Delete test files, so that they aren't added to the package.
+    - del /f/s/q test %APPVEYOR_BUILD_FOLDER%\test > nul
+    - rmdir /s/q test %APPVEYOR_BUILD_FOLDER%\test
+
+    - 'move %APPVEYOR_BUILD_FOLDER% bundles\%APPVEYOR_PROJECT_SLUG%'
+    - pkg . --targets node8-win-x64 --public
+    - if not exist cfg mkdir cfg
+    #- ps: Start-FileDownload 'https://www.dropbox.com/s/REDACTED/sgdq18-layouts.json?dl=1' -FileName 'cfg/sgdq18-layouts.json'
+
+after_build:
+  - ps: '$env:PKG_ZIP_NAME = "$env:APPVEYOR_PROJECT_SLUG-$(-join $env:APPVEYOR_REPO_COMMIT[0..7]).zip"'
+
+  # Create a URL shortcut to the repo's page on GitHub
+  - 'echo [InternetShortcut] > "GitHub Repo.URL"'
+  - 'echo URL=https://github.com/gamesdonequick/%APPVEYOR_PROJECT_SLUG% >> "GitHub Repo.URL"'
+  - 'echo IconFile=https://github.com/favicon.ico >> "GitHub Repo.URL"'
+  - 'echo IconIndex=0 >> "GitHub Repo.URL"'
+
+  # Add the main files to the zip.
+  - 7z a %PKG_ZIP_NAME% nodecg.exe cfg
+
+  # Make the README available in the root of the archive, for easy access.
+  - 7z a %PKG_ZIP_NAME% .\bundles\%APPVEYOR_PROJECT_SLUG%\README.md "GitHub Repo.URL"
+
+  # Make the obs-assets folder available in the root of the archive as well.
+  - 7z a %PKG_ZIP_NAME% .\bundles\%APPVEYOR_PROJECT_SLUG%\obs-assets
+
+  # Add any compiled native dependency files to the archive.
+  - ps: 'Get-ChildItem -Recurse -ErrorAction SilentlyContinue bundles\$env:APPVEYOR_PROJECT_SLUG\node_modules\*.node | % { 7z a $env:PKG_ZIP_NAME $_.FullName }'
+  - ps: 'Get-ChildItem -Recurse -ErrorAction SilentlyContinue bundles\$env:APPVEYOR_PROJECT_SLUG\node_modules\*.dll | % { 7z a $env:PKG_ZIP_NAME $_.FullName }'
+
+  # Move the archive to the root of the build folder, to make it a bit easier to find and upload.
+  - 'if not exist %APPVEYOR_BUILD_FOLDER% mkdir %APPVEYOR_BUILD_FOLDER%'
+  - 'move %PKG_ZIP_NAME% %APPVEYOR_BUILD_FOLDER%'
+
+test: off
+
+# Always upload test screenshots even if tests failed.
+on_finish:
+  - 'if not exist %TEST_SCREENSHOT_DIR% mkdir %TEST_SCREENSHOT_DIR%'
+  - 7z a test-screenshots.zip %TEST_SCREENSHOT_DIR%\*.png
+  - 7z a test-screenshots.zip %TEST_SCREENSHOT_DIR%\*.log
+  - ps: Push-AppveyorArtifact test-screenshots.zip
+
+artifacts:
+  - path: '%PKG_ZIP_NAME%'
+    name: pkg-sgdq18-layouts

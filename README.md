@@ -152,4 +152,3 @@ sgdq18-layouts is provided under the Apache v2 license, which is available to re
 Designed & developed by [Support Class](https://supportclass.net/)
  - [Alex "Lange" Van Camp](https://twitter.com/VanCamp/)  
  - [Chris Hanel](https://twitter.com/ChrisHanel)
- - Audio by [Power Up Audio](http://powerupaudio.com/)
