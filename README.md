@@ -1,4 +1,4 @@
-# sgdq18-layouts [![Build status](https://ci.appveyor.com/api/projects/status/dvcth5b511s4ksob/branch/master?svg=true)](https://ci.appveyor.com/project/supportclass/sgdq18-layouts/branch/master)
+# sgdq18-layouts [![Build status](https://ci.appveyor.com/api/projects/status/2xo5260jpcg1ghug/branch/master?svg=true)](https://ci.appveyor.com/project/supportclass/sgdq18-layouts/branch/master)
 
 > The on-stream graphics used during Summer Games Done Quick 2018.
 
