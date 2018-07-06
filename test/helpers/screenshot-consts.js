@@ -29,8 +29,6 @@ const transitionBefore = function (page) {
 
 module.exports = {
 	BUNDLE_CONFIG: {},
-	WIDTH: 1600,
-	HEIGHT: 900,
 	TEST_CASES: [{
 		route: `bundles/${BUNDLE_NAME}/graphics/break.html`,
 		additionalDelay: 1000,
